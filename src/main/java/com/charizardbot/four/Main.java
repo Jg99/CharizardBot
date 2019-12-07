@@ -98,6 +98,7 @@ public class Main {
 		//	discordtoken = args[0]; // set token for future use.
 		//	logger.info("Using token from launch arguments.");
      //   } else {
+		 	logger.info("CharizardBot, version " + VERSION);
 			File tokenFile = new File("token.txt");
 			if (tokenFile.exists()) {
 			Scanner fileScan = new Scanner(tokenFile);
@@ -135,10 +136,8 @@ public class Main {
 				Scanner fileScan = new Scanner(tenorToken);
 					TENOR_TOKEN = fileScan.nextLine();
 					logger.info("Using Tenor token from tenor_token.txt.");
-					imgur.authenticate();
 				fileScan.close();
 				} else {
-					imgur.isError = true; //force an error for imgur since no token provided
 					logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
 				}
 		//}
