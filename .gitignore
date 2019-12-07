@@ -23,7 +23,7 @@
 hs_err_pid*
 
 #Logs
-**logs/
+**log/
 #target
 **target/
 #Config files, they'll be automatically created anyways. Exclude pom.xml.
