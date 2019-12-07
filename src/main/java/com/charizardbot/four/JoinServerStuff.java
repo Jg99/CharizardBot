@@ -1,11 +1,11 @@
 package com.charizardbot.four;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+//import java.io.InputStreamReader;
+//import java.io.OutputStream;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
 import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
