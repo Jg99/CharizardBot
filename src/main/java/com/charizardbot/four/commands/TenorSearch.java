@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import com.charizardbot.four.Main;
+/**
+ * Tenor Search Commands
+ */
 public class TenorSearch extends ListenerAdapter {
     private static final String API_KEY = Main.TENOR_TOKEN; //Tenor API Key
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

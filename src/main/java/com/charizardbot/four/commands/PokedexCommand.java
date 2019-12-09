@@ -10,6 +10,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.MiniDex;
+/**
+ * Pokédex commands
+ */
 public class PokedexCommand extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
     	String prefix = Main.config.getProperty(event.getGuild().getId());
