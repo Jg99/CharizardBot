@@ -5,6 +5,14 @@ public class Pet {
 	private String stats = ""; //final built string part 1
 	private String continued = ""; // part 2
 	private DecimalFormat df = new DecimalFormat("#.##"); //format to 2 decimals
+	/**
+	 * Wizard101 petstats calculator
+	 * @param strength
+	 * @param intellect
+	 * @param agility
+	 * @param will
+	 * @param power
+	 */
 	public Pet(double strength, double intellect, double agility, double will, double power)
 	{
 		//setup the pet object

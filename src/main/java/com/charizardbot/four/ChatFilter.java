@@ -11,6 +11,11 @@ public class ChatFilter {
 	private String filter = "";
 	private String filterFile = "chatfilter.txt";
 	private boolean isFiltered = false;
+	/**
+	 * ChatizardBot's chat filter word checker
+	 * @param content
+	 * @param filter
+	 */
 	public ChatFilter (String content, String filter)
 	{
 		this.content = content;

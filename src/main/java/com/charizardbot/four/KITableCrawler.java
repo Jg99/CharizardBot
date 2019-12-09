@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class KITableCrawler {
 	private String contents = "";
 	private String table = "";
+	/**
+	 * Crawls Kingsisle's website and returns the data in a list.
+	 * @throws IOException
+	 */
 	public void crawlWebsite() throws IOException
 	{
 		contents = "";

@@ -4,7 +4,7 @@ public class pokeQuotes {
 	private String[] quotes = new String[36];
 	public pokeQuotes()
 	{
-		// Quote DB
+		// Pokémon quote DB
 		quotes[0] = "\"Even If we don’t understand each other, that’s not a reason to reject each other. There are two sides to any argument. Is there one point of view that has all the answers? Give it some thought.\" – Alder";
 		quotes[1] = "\"Everybody makes a wrong turn once in a while\"– Ash Ketchum";
 		quotes[2] = "\"A Caterpie may change into a Butterfree, but the heart that beats inside remains the same.\" – Brock";

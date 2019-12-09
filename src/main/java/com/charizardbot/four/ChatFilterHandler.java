@@ -11,6 +11,9 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class ChatFilterHandler extends ListenerAdapter {
+    /**
+     * Checks all guilds for any words against the chat filter, if it's enabled in a server.
+     */
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
                 try {
                     {

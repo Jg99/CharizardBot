@@ -18,6 +18,11 @@ private File statusdbFile;
 private String sugID;
 private  Properties suggestionDB = new Properties(); //Suggestion DB is using Properties.
 private  Properties statusDB = new Properties();
+/**
+ * Suggestions function for CharizardBot suggestions system.
+ * Uses text files for each server as the database.
+ * @param serverID
+ */
 	public Suggestions (String serverID)
 	{
 	this.dbFile = new File(serverID + "_suggestiondb.txt");

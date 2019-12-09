@@ -1,6 +1,8 @@
 package com.charizardbot.four;
 import java.text.DecimalFormat;
-// PET STATS TRANSLATED INTO GERMAN, THanks to Victoria#4139 from Spiralwander community for translation
+/**  Wizard101 PET STATS TRANSLATED INTO GERMAN.
+ *  Thanks to Victoria#4139 from Spiralwander community for translation
+ */
 public class dePet {
 	private double strength, intellect, agility, will, power; //values for the calculations
 	private String stats = ""; //final built string part 1

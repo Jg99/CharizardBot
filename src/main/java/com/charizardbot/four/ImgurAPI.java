@@ -6,6 +6,9 @@ import com.github.kskelm.baringo.model.TagGallery;
 import com.github.kskelm.baringo.model.gallery.*;
 import com.github.kskelm.baringo.model.gallery.GalleryItem.Sort;
 import com.github.kskelm.baringo.model.gallery.GalleryItem.Window;
+/**
+ * Imgur API login and search functions
+ */
 public class ImgurAPI {
 	private BaringoClient mClient;
 	private GalleryItem image;

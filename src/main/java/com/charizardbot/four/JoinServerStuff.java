@@ -10,8 +10,10 @@ import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class JoinServerStuff extends ListenerAdapter{
+	/**
+	 * Performs actions when CharizardBot joins a guild, such as adding default configurations.
+	 */
 	public void onGuildJoin(GuildJoinEvent event) {
-		// this class is for when charizardbot first joins a server.
 		String serverID = event.getGuild().getId();
 		Main.logger.info("Joined server " + event.getGuild().getName() + ", ID: " + serverID);
 		//set chat filter to off by default
