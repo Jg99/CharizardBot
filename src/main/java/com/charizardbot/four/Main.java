@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.io.OutputStream;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.EnumSet;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.TimeZone;
@@ -41,6 +43,8 @@ import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
 	public static final String VERSION = "4.0.3";
 	public static String filterDB = "";
@@ -236,6 +240,8 @@ public class Main {
             activity = config.getProperty("gamestatus");
             }
 			JDA api = new JDABuilder(discordtoken)
+			.setChunkingFilter(ChunkingFilter.NONE)
+			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE))
             .setActivity(Activity.playing(activity))
             .build();
             //listeners for commands, chat filter, join, etc
