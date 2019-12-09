@@ -241,7 +241,7 @@ public class Main {
             }
 			JDA api = new JDABuilder(discordtoken)
 			.setChunkingFilter(ChunkingFilter.NONE)
-			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE))
+			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE))
             .setActivity(Activity.playing(activity))
             .build();
             //listeners for commands, chat filter, join, etc
