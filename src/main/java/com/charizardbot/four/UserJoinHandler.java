@@ -27,11 +27,8 @@ public class UserJoinHandler extends ListenerAdapter {
 			else
 				logChan = "468447207448772620"; //GTP Bot logs		
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
-		System.out.print("Join time: " + userJoinTimestamp);
     	long banDuration = 3600; //seconds
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
-		System.out.print("Creation: " + userCreationDate);
-		System.out.println("Age: " + (userJoinTimestamp - userCreationDate));
     	if (((userJoinTimestamp - userCreationDate) < banDuration) && isEnabled && !event.getUser().isBot()) {
     		Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
     		EmbedBuilder embed = new EmbedBuilder();
