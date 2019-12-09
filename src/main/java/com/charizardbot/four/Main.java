@@ -42,7 +42,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 public class Main {
-	public static final String VERSION = "4.0.2-1";
+	public static final String VERSION = "4.0.3";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -91,9 +91,11 @@ public class Main {
 		 * CharizardBot version 4 
 		 * Copyright 2019 James, Meme Man 2019#0820 aka charmander / bakugo
 		 * This is a super dank bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
-		 * If this is ever open sourced, will probably use GPL.
+		 * license: GNU GPL version 2
 		 * Credit: Dewey (website design), Ultra Blue (hosting, email)
 		 */
+
+		 //Uncomment this out if you want to use a token based off args. NOTE: TOKEN ARGS GO FIRST!
        // if (args.length > 0) {
 		//	discordtoken = args[0]; // set token for future use.
 		//	logger.info("Using token from launch arguments.");
@@ -108,6 +110,8 @@ public class Main {
 			}
 			fileScan.close();
 			}
+			/**Clash of Clans token. You can get this from https://developer.clashofclans.com/
+			Note: Tokens are IP address limited.*/
 			File cocToken = new File("coc_token.txt");
 			if (cocToken.exists()) {
 			Scanner fileScan = new Scanner(cocToken);
@@ -119,6 +123,11 @@ public class Main {
 			} else {
 				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
 			}
+			/**
+			 * Imgur token. https://api.imgur.com
+			 * Free rate limit: 500 per hour
+			 * Client ID goes on first line, secret on 2nd line
+			 */
 			File imgurToken = new File("imgur_token.txt");
 			if (imgurToken.exists()) {
 			Scanner fileScan = new Scanner(imgurToken);
@@ -131,6 +140,11 @@ public class Main {
 				imgur.isError = true; //force an error for imgur since no token provided
 				logger.info("Please provide a valid imgur client id and secret (client ID on first line, secret on second) and place it in imgur_token.txt.");
 			}
+			/**
+			 * Tenor GIF token
+			 * Very high ratelimit, very few limits to API. 
+			 * https://tenor.com/developer/
+			 */
 			File tenorToken = new File("tenor_token.txt");
 			if (tenorToken.exists()) {
 				Scanner fileScan = new Scanner(tenorToken);
@@ -145,12 +159,11 @@ public class Main {
 			System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
 			System.exit(0);
 		}
-        KITableCrawler crawler = new KITableCrawler(); //scrapes the wiz pvp tournament website
-       		//Files
+        KITableCrawler crawler = new KITableCrawler(); //scrapes the Wizard101 PvP tournament website
+       	//Chat Filter & Config File
 		chatFilter = new File(filterFile);
 		File configFile = new File("server_config.cfg");
-		// databases	
-		//Check if db files exist
+		// Check files & load contents
 		if (!configFile.exists())
 		{
 			logger.info("Config file does not exist, creating server_config.cfg");
@@ -186,7 +199,7 @@ public class Main {
 				}
 			}
         }
-        		//Crawl KI Wiz PVP every 30 minutes.
+        //Crawl KI Wizard101 PvP every 30 minutes.
    	 	Timer crawltimer = new Timer();
    	 	crawltimer.schedule(new TimerTask() {
         public void run() {
@@ -209,10 +222,14 @@ public class Main {
 					run();
 				}
             }
-        }, 5000, 1800000); //30 minute crawls because we can cache it and use less resources.
-		//END WEB CRAWLER TIMER
+        }, 5000, 1800000); //We crawl every 30 minutes because we don't need to update it very frequently.
+		//JDA API setup
         try {
-            String activity = "";
+			String activity = "";
+			/**
+			 * Check game if a game activity is set in Config, and if so, load. Otherwise, use the default.
+			 * I think "Battling Team Rocket" is a good default.
+			 */
             if (config.getProperty("gamestatus") == null || config.getProperty("gamestatus").equals("")) {
                 activity = "Battling Team Rocket";
             } else {
@@ -221,7 +238,7 @@ public class Main {
 			JDA api = new JDABuilder(discordtoken)
             .setActivity(Activity.playing(activity))
             .build();
-            //listeners
+            //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());
             api.addEventListener(new CommandsList());
@@ -245,9 +262,11 @@ public class Main {
             api.addEventListener(new ChatFilterHandler());
             api.addEventListener(new MainCommands());
             api.addEventListener(new MiscCommands());
-            // join server stuff
+            // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
-            //join listener for that sweet autoban stuff
+			/**join listener for that sweet autoban stuff. GTP only (my server). 
+			* May add user Join options in the future such as a welcome message.
+			*/
             api.addEventListener(new UserJoinHandler());
         } catch (LoginException e) {
             e.printStackTrace();

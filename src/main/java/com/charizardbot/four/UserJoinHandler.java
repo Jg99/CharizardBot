@@ -22,25 +22,26 @@ public class UserJoinHandler extends ListenerAdapter {
     	else
     		isEnabled = false;
 		if (isEnabled && verificationToggle.equals("1")) {
-		//	System.out.println("New user autobanning is ON");
 			if (event.getGuild().getId().equals(emporiumID)) 
 				logChan = "561397906570084364";
 			else
 				logChan = "468447207448772620"; //GTP Bot logs		
-    	long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
+		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
+		System.out.print("Join time: " + userJoinTimestamp);
     	long banDuration = 3600; //seconds
-    	long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
+		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
+		System.out.print("Creation: " + userCreationDate);
+		System.out.println("Age: " + (userJoinTimestamp - userCreationDate));
     	if (((userJoinTimestamp - userCreationDate) < banDuration) && isEnabled && !event.getUser().isBot()) {
-    		System.out.println("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
+    		Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
     		EmbedBuilder embed = new EmbedBuilder();
          	embed.setTitle("New account detected");
          	embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " is a new account, created less than an hour ago."), true);
          	Random rand = new Random();
          	embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-         	event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
-      //   	event.getUser().sendMessage("You have been automatically banned due to your account being under 1 hour old.");
-			 event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.");
+			event.getMember().ban(0, "Auto-banned for account age.").queue();
+			event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
     	} else {
     	}
     	if (isEnabled)

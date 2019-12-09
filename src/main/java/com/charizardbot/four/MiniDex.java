@@ -13,14 +13,27 @@ public class MiniDex {
 private static String pokeurl = "https://charizardbot.com:8443/api/v2/pokemon/";
 private static String pkName = "";
 private static String sprURL = "";
+    /**
+     * Returns Pokémon name
+     * @return
+     */
     public static String getPokemonName()
     {
         return pkName;
     }
+    /**
+     * Returns the sprite URL. Used for thumbnail in the embeds.
+     * @return
+     */
     public static String getSprite() 
     {
         return sprURL;
     }
+    /**
+     * Get formatted Pokémon info, already setup for Embeds.
+     * @param pokemon_name
+     * @return
+     */
     public static String getPokemonInfo(String pokemon_name)
     {
         JSONObject pokeResult = getPokemon(pokemon_name);
@@ -31,21 +44,26 @@ private static String sprURL = "";
         pkTyp = slot.toString();
         String upper = pkTyp.substring(0, 1).toUpperCase();
         pkTyp = upper + pkTyp.substring(1, pkTyp.length());
-     // 2nd type if applicable
+     // 2nd type if applicable, otherwise display "N/A"
         try {
         typeArr = pokeResult.getJSONArray("types").getJSONObject(1).getJSONObject("type");
         slot = typeArr.get("name").toString();
         pkTyp2 = slot.toString();
         upper = pkTyp2.substring(0, 1).toUpperCase();
         pkTyp2 = upper + pkTyp2.substring(1, pkTyp2.length());
-        } catch (Exception e) {}
-        //weight and height
+        } catch (Exception e) {} //Do nothing, because 2nd type is null.
+        /**Weight, Height, Base XP, Pokémon Number 
+         * 
+        */
         String weight = pokeResult.get("weight").toString();
         double pkWeight = (double) Integer.parseInt(weight) / 10;
         String height = pokeResult.get("height").toString();
         double pkHeight = (double) Integer.parseInt(height) / 10;
         String baseXP = pokeResult.get("base_experience").toString();
         String id = pokeResult.get("id").toString();
+        /**
+         * Put it in a nice string to output
+         */
         String stats = "Main Type: " + pkTyp + "\nSecondary Type: " + pkTyp2 + "\nBase XP: " + baseXP + "\nHeight: " + pkHeight + " m\nWeight: " + pkWeight + 
                         "kg\nNumber: " + id;
         pkName = pokeResult.get("name").toString();
