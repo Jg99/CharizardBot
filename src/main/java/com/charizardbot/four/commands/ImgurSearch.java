@@ -20,7 +20,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         		}	else {
         			event.getChannel().sendMessage("Error 404: Image not found").queue();
         		}
-        		}
+        	}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "randimgur") && !event.getAuthor().isBot() && imgurCmd.equals("1")) {// && event.getGuild().getId().equals("468440854886088714")) {
     		Main.imgur.searchRandImage(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()));
     		String imagelink = Main.imgur.returnImageInfo();
@@ -30,6 +30,5 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
     			event.getChannel().sendMessage("Error 404: Image not found.").queue(); }
         	}
 		} catch (Exception e) { Main.logger.info("WARN: Exception in the Imgur Search command.\n" + e);}
-	
 	}
 }

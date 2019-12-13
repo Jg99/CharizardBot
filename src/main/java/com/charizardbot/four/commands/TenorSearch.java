@@ -1,7 +1,5 @@
 package com.charizardbot.four.commands;
-
 import java.io.FileOutputStream;
-
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -97,7 +95,6 @@ public class TenorSearch extends ListenerAdapter {
 		} catch (Exception e){
 			event.getChannel().sendMessage("Error in searching. Either the rate limit was reached or no results were found.").queue();
 		}
-	
 	}
 	/*JSON Functions */
     public static JSONObject getSearchResults(String searchTerm, int limit) {

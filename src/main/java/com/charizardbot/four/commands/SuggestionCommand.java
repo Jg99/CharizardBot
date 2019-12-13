@@ -1,5 +1,4 @@
 package com.charizardbot.four.commands;
-
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
@@ -129,6 +128,5 @@ public class SuggestionCommand extends ListenerAdapter{
         	}
         	}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in Suggestions Toggle. Insufficient permissions?\n" + e);};
-	
 	}
 }

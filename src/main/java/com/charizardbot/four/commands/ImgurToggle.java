@@ -1,5 +1,4 @@
 package com.charizardbot.four.commands;
-
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

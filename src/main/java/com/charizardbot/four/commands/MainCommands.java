@@ -1,5 +1,4 @@
 package com.charizardbot.four.commands;
-
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -298,7 +297,5 @@ public class MainCommands extends ListenerAdapter {
             }
         }
     } catch (Exception e) {Main.logger.info("Error in the Main message listener: Insufficient permissions?\n" + e);}
-
-
 }
 }

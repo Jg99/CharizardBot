@@ -93,6 +93,5 @@ public class PokedexCommand extends ListenerAdapter {
 		    	   embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 		    	   event.getChannel().sendMessage(embed.build()).queue();		
     		}
-		
 	}
 }

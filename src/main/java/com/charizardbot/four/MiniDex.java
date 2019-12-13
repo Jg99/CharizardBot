@@ -7,8 +7,9 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.JSONObject;
-//MiniDex aka "Midoriya Dex" - Simple PokeAPI Query for basic information, mainly used for CharizardBot.
-//Copyleft 2019 James, Meme Man 2019#0820
+/**MiniDex aka "Midoriya Dex" - Simple PokeAPI Query for basic information, mainly used for CharizardBot.
+*Copyleft 2019 James, Meme Man 2019#0820
+*/
 public class MiniDex {
 private static String pokeurl = "https://charizardbot.com:8443/api/v2/pokemon/";
 private static String pkName = "";

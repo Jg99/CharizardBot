@@ -1,5 +1,4 @@
 package com.charizardbot.four;
-
 import java.awt.Color;
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.Permission;
@@ -79,7 +78,6 @@ public class ChatFilterHandler extends ListenerAdapter {
                      }
                     }
                     }
-                    } catch (Exception e) {Main.logger.info("WARN: Exception in ChatFilterHandler:\n" + e);e.printStackTrace();}
-        
+                    } catch (Exception e) {Main.logger.info("WARN: Exception in ChatFilterHandler:\n" + e);}
     }
 }

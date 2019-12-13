@@ -1,9 +1,7 @@
 package com.charizardbot.four.commands;
-
 import java.awt.Color;
 import java.util.Random;
 import com.charizardbot.four.Main;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -64,6 +62,5 @@ public class CommandsList extends ListenerAdapter {
 				});
 			}
 		} catch (Exception e) {Main.logger.info("Exception in CommandsList. Insufficient permissions?\n" + e);}
-        
     }
 }

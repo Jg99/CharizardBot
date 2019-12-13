@@ -1,10 +1,8 @@
 package com.charizardbot.four.commands;
-
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

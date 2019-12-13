@@ -13,9 +13,9 @@ public class PingCommand extends ListenerAdapter {
             long time = System.currentTimeMillis();
             channel.sendMessage("Pong!") /* => RestAction<Message> */
                     .queue(response /* => Message */ -> {
-                        response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
+                        response.editMessageFormat("Latency: %d ms. CharizardBot version %s", System.currentTimeMillis() - time, Main.VERSION).queue();
                     });
         }
-    } catch (Exception e){Main.logger.info("WARN: Exception in Petstats command: Insufficient permissions?\n" + e);}
+    } catch (Exception e){Main.logger.info("WARN: Exception in Ping command: Insufficient permissions?\n" + e);}
     }
     }

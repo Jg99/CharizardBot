@@ -1,5 +1,4 @@
 package com.charizardbot.four;
-
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -81,6 +80,6 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                        }
                     }
                         }
-                   } catch (Exception e) {Main.logger.info("WARN: Exception in MessageEditListener: Insufficient permissions?\n" + e); e.printStackTrace();}
+                   } catch (Exception e) {Main.logger.info("WARN: Exception in MessageEditListener: \n" + e);}
         }
 }

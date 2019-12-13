@@ -15,7 +15,6 @@ import java.util.Iterator;
 public class ServersCommand extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-
     	String prefix = Main.config.getProperty(event.getGuild().getId());
     	if (prefix == null)
     		prefix = "!";
@@ -65,6 +64,5 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		event.getChannel().sendMessage("name: " + serverName + "\nsize: " + size).queue();
 	}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in Servers command: Insufficient permissions?\n" + e);}
-	
 	}
 }
