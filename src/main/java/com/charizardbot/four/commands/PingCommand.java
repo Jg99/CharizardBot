@@ -1,17 +1,18 @@
 package com.charizardbot.four.commands;
 import com.charizardbot.four.Main;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class PingCommand extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        String prefix = Main.config.getProperty(event.getGuild().getId());
+    	if (prefix == null)
+    		prefix = "!";
         try {
-        Message msg = event.getMessage();
-        if (msg.getContentRaw().equals("!ping")) {
+        if (event.getMessage().getContentRaw().toLowerCase().equals(prefix + "ping")) {
             MessageChannel channel = event.getChannel();
             long time = System.currentTimeMillis();
-            channel.sendMessage("Pong!") /* => RestAction<Message> */
+            channel.sendMessage("Pong! Charizardbot version " + Main.VERSION) /* => RestAction<Message> */
                     .queue(response /* => Message */ -> {
                         response.editMessageFormat("Latency: %d ms. CharizardBot version %s", System.currentTimeMillis() - time, Main.VERSION).queue();
                     });
