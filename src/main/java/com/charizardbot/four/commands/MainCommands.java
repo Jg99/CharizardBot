@@ -283,8 +283,8 @@ public class MainCommands extends ListenerAdapter {
             		Main.config.store(Main.output, null);
             		event.getChannel().sendMessage("Set server prefix to " + Main.config.getProperty(event.getGuild().getId())).queue();
             		}
-            	} catch (IOException io) {
-            		io.printStackTrace();
+            	} catch (Exception e) {
+            		//do nothing as it's probably an invaldi length or something.
             	} finally {
             		if (Main.output != null) {
             			try {
