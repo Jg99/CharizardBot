@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +31,7 @@ import com.charizardbot.four.commands.PetStats;
 import com.charizardbot.four.commands.PingCommand;
 import com.charizardbot.four.commands.PokedexCommand;
 import com.charizardbot.four.commands.PokemonQuoteCommand;
+import com.charizardbot.four.commands.RandomJoke;
 import com.charizardbot.four.commands.RngCommand;
 import com.charizardbot.four.commands.RpsCommand;
 import com.charizardbot.four.commands.ServersCommand;
@@ -45,7 +47,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.0.3";
+	public static final String VERSION = "4.0.4";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -266,7 +268,8 @@ public class Main {
             api.addEventListener(new WizSchedule());
             api.addEventListener(new ChatFilterHandler());
             api.addEventListener(new MainCommands());
-            api.addEventListener(new MiscCommands());
+			api.addEventListener(new MiscCommands());
+			api.addEventListener(new RandomJoke());
             // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
 			/**join listener for that sweet autoban stuff. GTP only (my server). 
