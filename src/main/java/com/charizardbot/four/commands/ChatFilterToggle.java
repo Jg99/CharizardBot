@@ -123,6 +123,38 @@ public class ChatFilterToggle extends ListenerAdapter {
         		}		
         	}
         	Main.config.setProperty("isLoggingEnabled" + event.getGuild().getId(), toggle);
+		}
+		//toggle message logging
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "msglogs") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
+        	Main.output = new FileOutputStream("server_config.cfg");
+        	boolean wasNull = false;
+        	boolean wasChanged = false;
+        	String toggle = Main.config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
+        	if (toggle == null) {
+        		toggle = "1";
+        		Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+        		Main.config.store(Main.output, null);
+        		wasNull = true;
+        		wasChanged = true;
+        		event.getChannel().sendMessage("No toggle was set for logging. Set to off by default. Please run again to turn off. MAKE SURE TO SET A CHANNEL TO LOG TO.").queue();
+        		}
+        	if (!wasNull ) {
+        		if (toggle.equals("0") && !wasChanged) {
+        			toggle = "1";
+        			wasChanged = true;
+            		Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Turned on logging.").queue();
+        		}
+        		if (toggle.equals("1") && !wasChanged) {
+        			toggle = "0";
+        			wasChanged = false;
+            		Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Turned off logging.").queue();
+        		}		
+        	}
+        	Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
         }
 		//set logging channel
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "logchannel") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {

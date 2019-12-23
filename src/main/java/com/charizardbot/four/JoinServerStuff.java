@@ -106,6 +106,15 @@ public class JoinServerStuff extends ListenerAdapter{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			try {
+				if (Main.config.getProperty("isMsgLoggingEnabled" + serverID)== null) {
+					Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), "1");
+					Main.output = new FileOutputStream("server_config.cfg");
+					Main.config.store(Main.output, null);
+				}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 /*		try {
     	URL url = new URL("https://discordbotlist.com/api/bots/428634701771702282/stats");
     	String token = "";

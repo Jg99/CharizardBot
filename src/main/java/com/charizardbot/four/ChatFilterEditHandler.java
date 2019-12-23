@@ -58,7 +58,7 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                          EmbedBuilder embed = new EmbedBuilder();
                          embed.setTitle("Inappropriate language detected from: " + event.getAuthor().getAsTag());
                          embed.addField("Watch your language!", "The filter has deleted the " +
-                         "message containing the bad word. Do not try to bypass the Main.filter", true);
+                         "message containing the bad word. Do not try to bypass the filter", true);
                          embed.setFooter("User ID: " +
                          event.getAuthor().getId(), "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                          Random rand = new Random();
@@ -66,7 +66,8 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                          event.getChannel().sendMessage(embed.build()).queue(response -> {
                             response.delete().queueAfter(5, TimeUnit.SECONDS);
                         });                
-                        event.getMessage().delete().reason("bad language").queue();          
+                        Main.isChatFilterDeleted = true;
+                        event.getMessage().delete().reason("bad language").queue();       
                         //Log to channel
                         if (svrLogging.equals("1") && logChannel != ""){
                             if (event.getJDA().getTextChannelById(logChannel).canTalk()) {

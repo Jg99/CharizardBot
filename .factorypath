@@ -1,5 +1,5 @@
 <factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/net/dv8tion/JDA/4.0.0_78/JDA-4.0.0_78.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/net/dv8tion/JDA/4.1.0_81/JDA-4.1.0_81.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jetbrains/annotations/16.0.1/annotations-16.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" enabled="true" runInBatchMode="false"/>

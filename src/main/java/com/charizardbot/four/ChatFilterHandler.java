@@ -53,11 +53,12 @@ public class ChatFilterHandler extends ListenerAdapter {
                      if (Main.filter.isFilteredWord() == true && !event.getAuthor().isBot() && svrfilter.equals("1") && chfilter.equals("1"))
                      {
                         if (event.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE)) {
-                            event.getMessage().delete().reason("bad language").queue();          
+                            Main.isChatFilterDeleted = true;
+                            event.getMessage().delete().reason("bad language").queue();        
                          EmbedBuilder embed = new EmbedBuilder();
                          embed.setTitle("Inappropriate language detected from: " + event.getAuthor().getAsTag());
                          embed.addField("Watch your language!", "The filter has deleted the " +
-                         "message containing the bad word. Do not try to bypass the Main.filter", true);
+                         "message containing the bad word. Do not try to bypass the filter", true);
                          embed.setFooter("User ID: " +
                          event.getMember().getId(), "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                          Random rand = new Random();

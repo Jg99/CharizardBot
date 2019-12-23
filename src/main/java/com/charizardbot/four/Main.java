@@ -1,5 +1,4 @@
 package com.charizardbot.four;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,6 +67,8 @@ public class Main {
 	public static String IMGUR_ID = "";
 	public static String IMGUR_SECRET = "";
 	public static String TENOR_TOKEN = "";
+	public static MessageCache msgCache;
+	public static boolean isChatFilterDeleted = false;
     public static void main(String[] args) {
         try {
 			File logFileConfig = new File("log4j2.xml");
@@ -244,7 +245,16 @@ public class Main {
 			.setChunkingFilter(ChunkingFilter.NONE)
 			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE))
             .setActivity(Activity.playing(activity))
-            .build();
+			.build();
+			msgCache = new MessageCache(api, false);
+			//Clear cache every day so we don't get too much cache.
+			Timer clearCache = new Timer();
+			clearCache.schedule(new TimerTask(){
+				public void run() {
+					msgCache.clear();
+					logger.info("Message cache cleared!");
+				}
+			}, 0, 172800000);
             //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());
@@ -275,7 +285,10 @@ public class Main {
 			/**join listener for that sweet autoban stuff. GTP only (my server). 
 			* May add user Join options in the future such as a welcome message.
 			*/
-            api.addEventListener(new UserJoinHandler());
+			api.addEventListener(new UserJoinHandler());
+			
+			api.addEventListener(new MessageLogger());
+
         } catch (LoginException e) {
             e.printStackTrace();
         }
