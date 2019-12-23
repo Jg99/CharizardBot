@@ -104,7 +104,7 @@ public class ChatFilterToggle extends ListenerAdapter {
         		Main.config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
-        		event.getChannel().sendMessage("No toggle was set for logging. Set to off by default. Please run again to turn off. MAKE SURE TO SET A CHANNEL TO LOG TO.").queue();
+        		event.getChannel().sendMessage("No toggle was set for logging. Set to on Please run again to turn off. MAKE SURE TO SET A CHANNEL TO LOG TO.").queue();
         		}
         	if (!wasNull ) {
         		if (toggle.equals("0") && !wasChanged) {
@@ -136,7 +136,7 @@ public class ChatFilterToggle extends ListenerAdapter {
         		Main.config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
-        		event.getChannel().sendMessage("No toggle was set for logging. Set to off by default. Please run again to turn off. MAKE SURE TO SET A CHANNEL TO LOG TO.").queue();
+        		event.getChannel().sendMessage("No toggle was set for logging. Set to on Please run again to turn off. MAKE SURE TO SET A CHANNEL TO LOG TO.").queue();
         		}
         	if (!wasNull ) {
         		if (toggle.equals("0") && !wasChanged) {
