@@ -46,7 +46,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.0.4";
+	public static final String VERSION = "4.1.0";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
