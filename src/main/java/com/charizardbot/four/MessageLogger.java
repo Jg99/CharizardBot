@@ -18,14 +18,14 @@ public class MessageLogger extends ListenerAdapter {
         String logChan = "";
         svrLogging = Main.config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId()); 
         logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
-        try {
-        isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
-        } catch (Exception e){
+          if (Main.config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
             isChannelIgnored = "0";
             Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
             Main.output = new FileOutputStream("server_config.cfg");
-			Main.config.store(Main.output, null);
-        }
+            Main.config.store(Main.output, null);
+          } else {
+            isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
+          }
         if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1")) {
         String msgId = event.getMessageId();
         Message msg = Main.msgCache.getMessage(msgId);
@@ -58,14 +58,14 @@ public class MessageLogger extends ListenerAdapter {
             String isChannelIgnored = "0";
             String svrLogging = "0"; //disabled by default
             String logChan = "";
-            try {
+            if (Main.config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
+                isChannelIgnored = "0";
+                Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
+                Main.output = new FileOutputStream("server_config.cfg");
+                Main.config.store(Main.output, null);
+              } else {
                 isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
-                } catch (Exception e){
-                    isChannelIgnored = "0";
-                    Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
-                    Main.output = new FileOutputStream("server_config.cfg");
-                    Main.config.store(Main.output, null);
-            }
+              }
             svrLogging = Main.config.getProperty("isLoggingEnabled" + event.getGuild().getId());
             logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
             if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
