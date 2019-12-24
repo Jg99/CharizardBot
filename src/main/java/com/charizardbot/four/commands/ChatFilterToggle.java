@@ -155,6 +155,37 @@ public class ChatFilterToggle extends ListenerAdapter {
         		}		
         	}
         	Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+		}
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "ignorechannel") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
+        	Main.output = new FileOutputStream("server_config.cfg");
+        	boolean wasNull = false;
+        	boolean wasChanged = false;
+        	String toggle = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
+        	if (toggle == null) {
+        		toggle = "1";
+        		Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), toggle);
+        		Main.config.store(Main.output, null);
+        		wasNull = true;
+        		wasChanged = true;
+        		event.getChannel().sendMessage("Ignoring message logging for this channel.").queue();
+        		}
+        	if (!wasNull ) {
+        		if (toggle.equals("0") && !wasChanged) {
+        			toggle = "1";
+        			wasChanged = true;
+            		Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Ignoring message logging for this channel.").queue();
+        		}
+        		if (toggle.equals("1") && !wasChanged) {
+        			toggle = "0";
+        			wasChanged = false;
+            		Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Message Logging for this channel is on.").queue();
+        		}		
+        	}
+        	Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), toggle);
         }
 		//set logging channel
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "logchannel") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {

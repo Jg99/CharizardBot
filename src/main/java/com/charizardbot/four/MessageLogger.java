@@ -13,13 +13,17 @@ public class MessageLogger extends ListenerAdapter {
     public void onGuildMessageDelete(GuildMessageDeleteEvent event) {
         try {
         String svrLogging = "0"; //disabled by default
+        String isChannelIgnored = "0";
         String logChan = "";
         svrLogging = Main.config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
         logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
+        try {
+        isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
+        } catch (Exception e){isChannelIgnored = "0";}
         if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1")) {
         String msgId = event.getMessageId();
         Message msg = Main.msgCache.getMessage(msgId);
-        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg != null && !msg.getAuthor().isBot() && !Main.isChatFilterDeleted) {
+        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg != null && !msg.getAuthor().isBot() && !Main.isChatFilterDeleted && isChannelIgnored.equals("0")) {
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("from: " + msg.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nMessage:", msg.getContentRaw(), false);
@@ -31,6 +35,7 @@ public class MessageLogger extends ListenerAdapter {
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("A deleted message has been detected in " + event.getChannel().getName(), "Message is not in cache.", false);
             event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
+        
         }
         if (Main.isChatFilterDeleted)
         {
@@ -44,11 +49,15 @@ public class MessageLogger extends ListenerAdapter {
     public void onGuildMessageUpdate(GuildMessageUpdateEvent event)
     {
         try {
+            String isChannelIgnored = "0";
             String svrLogging = "0"; //disabled by default
             String logChan = "";
+            try {
+                isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
+                } catch (Exception e){isChannelIgnored = "0";}
             svrLogging = Main.config.getProperty("isLoggingEnabled" + event.getGuild().getId());
             logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
-            if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1")) {
+            if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
                 EmbedBuilder logEmbed = new EmbedBuilder();
                 logEmbed.setTitle("Edited Message");
                 logEmbed.addField("from: " + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nNew content:", event.getMessage().getContentRaw(), false);
