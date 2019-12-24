@@ -23,7 +23,7 @@ public class MessageCache implements EventListener {
     private final JDA api;
     private final Map<String, Message> messageMap;
 /**
- * Message Caching for JDA. Adapted from https://gist.github.com/Almighty-Alpaca/32629893e9cd305f1165652c80726b41
+ * Message Caching for JDA v4. Adapted from https://gist.github.com/Almighty-Alpaca/32629893e9cd305f1165652c80726b41
  * Used for deleted message caching :)
  * @param api
  * @param weak
