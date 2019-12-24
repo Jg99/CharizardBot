@@ -247,14 +247,14 @@ public class Main {
             .setActivity(Activity.playing(activity))
 			.build();
 			msgCache = new MessageCache(api, false);
-			//Clear cache every day so we don't get too much cache.
+			//Clear cache every 4 days so we don't get too much cache.
 			Timer clearCache = new Timer();
 			clearCache.schedule(new TimerTask(){
 				public void run() {
 					msgCache.clear();
 					logger.info("Message cache cleared!");
 				}
-			}, 0, 172800000);
+			}, 0, 345600000);
             //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());
