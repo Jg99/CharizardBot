@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+import java.io.FileOutputStream;
 import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -15,11 +16,16 @@ public class MessageLogger extends ListenerAdapter {
         String svrLogging = "0"; //disabled by default
         String isChannelIgnored = "0";
         String logChan = "";
-        svrLogging = Main.config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
+        svrLogging = Main.config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId()); 
         logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
         try {
         isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
-        } catch (Exception e){isChannelIgnored = "0";}
+        } catch (Exception e){
+            isChannelIgnored = "0";
+            Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
+            Main.output = new FileOutputStream("server_config.cfg");
+			Main.config.store(Main.output, null);
+        }
         if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1")) {
         String msgId = event.getMessageId();
         Message msg = Main.msgCache.getMessage(msgId);
@@ -30,7 +36,7 @@ public class MessageLogger extends ListenerAdapter {
             logEmbed.setFooter("User ID: " + msg.getAuthor().getId());
             event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
         }
-        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg == null && !Main.isChatFilterDeleted){
+        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg == null && !Main.isChatFilterDeleted && isChannelIgnored.equals("0")){
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("A deleted message has been detected in " + event.getChannel().getName(), "Message is not in cache.", false);
@@ -54,7 +60,12 @@ public class MessageLogger extends ListenerAdapter {
             String logChan = "";
             try {
                 isChannelIgnored = Main.config.getProperty("isChannelIgnored" + event.getChannel().getId());
-                } catch (Exception e){isChannelIgnored = "0";}
+                } catch (Exception e){
+                    isChannelIgnored = "0";
+                    Main.config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
+                    Main.output = new FileOutputStream("server_config.cfg");
+                    Main.config.store(Main.output, null);
+            }
             svrLogging = Main.config.getProperty("isLoggingEnabled" + event.getGuild().getId());
             logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
             if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
