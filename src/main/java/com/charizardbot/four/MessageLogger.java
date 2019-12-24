@@ -49,7 +49,7 @@ public class MessageLogger extends ListenerAdapter {
         }
     }
     } catch (Exception e) {
-            Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
+          //  Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
         }
     }
     public void onGuildMessageUpdate(GuildMessageUpdateEvent event)
@@ -75,6 +75,6 @@ public class MessageLogger extends ListenerAdapter {
                 logEmbed.setFooter("User ID: " + event.getAuthor().getId());
                 event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue(); 
             }
-        } catch(Exception e) { Main.logger.info("Exception in MessageLogger (Edited message event). Insufficient permissions or no cache?" + e);}
+        } catch(Exception e) { /*Main.logger.info("Exception in MessageLogger (Edited message event). Insufficient permissions or no cache?" + e);*/}
 }
 }
