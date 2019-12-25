@@ -42,6 +42,18 @@ public class MessageCache implements EventListener {
     {
         return this.messageMap.values();
     }
+    public void clearOldMessages(int age) {
+        Collection<Message> a = messageMap.values();
+        Message[] b = a.toArray(new Message[a.size()]);
+        for (int i = 0; i < a.size(); i++) {
+            long time = b[i].getTimeCreated().toEpochSecond();
+            long now = System.currentTimeMillis();
+            String msgId = b[i].getId();
+            if (now - time > age) { //clear messages older than specified age.
+                messageMap.remove(msgId);
+            }
+        }
+    }
     public RestAction<Message> getMessage(final MessageChannel channel, final String Id)
     {
         final Message message = this.getMessage(Id);

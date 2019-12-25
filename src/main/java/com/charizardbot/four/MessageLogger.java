@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 public class MessageLogger extends ListenerAdapter {
     /**
      * CharizardBot's Message Logger. Logs deleted messages (if they are in the cache) and edited messages.
@@ -49,7 +48,6 @@ public class MessageLogger extends ListenerAdapter {
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("A deleted message has been detected in " + event.getChannel().getName(), "Message is not in cache.", false);
             event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
-        
         }
         if (Main.isChatFilterDeleted)
         {

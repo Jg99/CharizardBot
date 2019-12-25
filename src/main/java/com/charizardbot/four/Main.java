@@ -46,7 +46,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.1.0";
+	public static final String VERSION = "4.1.1";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -247,14 +247,14 @@ public class Main {
             .setActivity(Activity.playing(activity))
 			.build();
 			msgCache = new MessageCache(api, false);
-			//Clear cache every 4 days so we don't get too much cache.
+			//Checks the cache
 			Timer clearCache = new Timer();
 			clearCache.schedule(new TimerTask(){
 				public void run() {
-					msgCache.clear();
+					msgCache.clearOldMessages(345600000); //clears messages older than 4 days.
 					logger.info("Message cache cleared!");
 				}
-			}, 0, 345600000);
+			}, 0, 3600000); //runs every hour, checks if there's messages older than 4 days
             //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());
