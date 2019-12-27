@@ -63,8 +63,8 @@ public class MessageLogger extends ListenerAdapter {
         }
     }
     } catch (Exception e) {
-            Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
-            e.printStackTrace();
+          //  Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
+          //  e.printStackTrace();
         }
     }
     public void onGuildMessageUpdate(GuildMessageUpdateEvent event)
