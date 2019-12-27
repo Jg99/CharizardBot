@@ -40,6 +40,14 @@ public class MessageLogger extends ListenerAdapter {
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("from: " + msg.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nMessage:", msg.getContentRaw(), false);
+            String attUrls = "";
+            if (!msg.getAttachments().isEmpty()) {
+                for (int i = 0; i < msg.getAttachments().size(); i++)
+                {
+                    attUrls += msg.getAttachments().get(i).getProxyUrl() + "\n";
+                }
+                logEmbed.addField("Attachments:", attUrls, true);
+            }
             logEmbed.setFooter("User ID: " + msg.getAuthor().getId());
             event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
         }
@@ -55,7 +63,8 @@ public class MessageLogger extends ListenerAdapter {
         }
     }
     } catch (Exception e) {
-          //  Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
+            Main.logger.info("Exception in MessageLogger (Deleted message event). Insufficient permissions or no cache?" + e);
+            e.printStackTrace();
         }
     }
     public void onGuildMessageUpdate(GuildMessageUpdateEvent event)

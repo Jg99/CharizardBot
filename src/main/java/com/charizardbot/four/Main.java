@@ -46,7 +46,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.1.1";
+	public static final String VERSION = "4.1.2";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -61,7 +61,7 @@ public class Main {
 	public static Properties config = new Properties();
 	public static ImgurAPI imgur = new ImgurAPI();
 	public static String messageID_deletehandler = "";
-	private static String discordtoken = ""; //blank so we can specify if live or test bot, or specify a token in args.
+	private static String discordtoken = ""; //Tokens are blank so we can read from tokenfile, or specify in args.
 	public static Logger logger;
 	public static String COC_TOKEN = "";
 	public static String IMGUR_ID = "";
@@ -89,7 +89,7 @@ public class Main {
 			   } catch (IOException ioe2) {
 				   System.out.println("Error, could not write to file log4j2.xml");
 			   }
-				} // end try/catch/finally
+				}
             }
         System.setProperty("log4j2.configurationFile", logFileConfig.toPath().toString());
         logger = LogManager.getLogger(Main.class);
@@ -100,7 +100,6 @@ public class Main {
 		 * license: GNU GPL version 2
 		 * Credit: Dewey (website design), Ultra Blue (hosting, email)
 		 */
-
 		 //Uncomment this out if you want to use a token based off args. NOTE: TOKEN ARGS GO FIRST!
        // if (args.length > 0) {
 		//	discordtoken = args[0]; // set token for future use.
@@ -160,7 +159,6 @@ public class Main {
 				} else {
 					logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
 				}
-		//}
 		if (discordtoken.equals("")) {
 			System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
 			System.exit(0);
@@ -210,12 +208,9 @@ public class Main {
    	 	crawltimer.schedule(new TimerTask() {
         public void run() {
             try {
-			 //   System.out.println("Attempting to crawl Wizard101 Tournament table...");
 				logger.info("Attempting to crawl Wizard101 Tournament Table");
 				crawler.crawlWebsite();
 				if (!crawler.returnContents().isEmpty()) {
-					//System.out.println(crawler.returnContents());
-					//System.out.println("Successfully crawled Wizard101 Tournament table!");
 					logger.info("Successfully crawled Wizard101 Tournament Table");
 					table = crawler.returnContents();
 					Date date = new Date(System.currentTimeMillis());
@@ -246,15 +241,11 @@ public class Main {
 			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE))
             .setActivity(Activity.playing(activity))
 			.build();
-			msgCache = new MessageCache(api, false);
-			//Checks the cache
-			Timer clearCache = new Timer();
-			clearCache.schedule(new TimerTask(){
-				public void run() {
-					msgCache.clearOldMessages(345600000); //clears messages older than 4 days.
-					logger.info("Message cache cleared!");
-				}
-			}, 0, 3600000); //runs every hour, checks if there's messages older than 4 days
+			/**
+			 * Message Cache for CharizardBot. Used for logging deleted messages unless
+			 * the messages are older than 4 days, or the bot has been restarted since the message was posted.
+			 */
+			msgCache = new MessageCache(api, false); 
             //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());

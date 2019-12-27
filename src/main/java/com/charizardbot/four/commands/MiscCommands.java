@@ -24,7 +24,7 @@ public class MiscCommands extends ListenerAdapter {
        	 if (event.getMessage().getMentionedMembers().get(0).getId().equals(BOT_ID)) {
        	 	event.getChannel().sendMessage("u can't no u me!").queue(); 
        	 	}
-        }
+		}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith("send nudes") && !event.getAuthor().isBot())
         {
         	sendNudes nude = new sendNudes();
@@ -74,6 +74,6 @@ public class MiscCommands extends ListenerAdapter {
 			}
 			Main.config.setProperty("miscCmds" + event.getGuild().getId(), toggle);
 		}
-		} catch (Exception e) { Main.logger.info("WARN: Exception in Misc Commands: Insufficient permissions?\n" + e); } 
+		} catch (Exception e) { Main.logger.info("WARN: Exception in Misc Commands: Insufficient permissions?\n" + e);e.printStackTrace(); } 
 	} 	
 }

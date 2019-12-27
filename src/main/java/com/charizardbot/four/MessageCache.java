@@ -1,11 +1,6 @@
 package com.charizardbot.four;
-
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
-
+import java.util.concurrent.TimeUnit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -18,41 +13,33 @@ import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
-
-public class MessageCache implements EventListener {
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+public class MessageCache implements EventListener{
     private final JDA api;
-    private final Map<String, Message> messageMap;
-/**
- * Message Caching for JDA v4. Adapted from https://gist.github.com/Almighty-Alpaca/32629893e9cd305f1165652c80726b41
- * Used for deleted message caching :)
- * @param api
- * @param weak
- */
-    public MessageCache(final JDA api, final boolean weak)
-    {
+    //private final Map<String, Message> messageMap;
+    private final Cache<String, Message> messageMap;
+    /**
+     * Message Caching for JDA v4. Adapted from
+     * https://gist.github.com/Almighty-Alpaca/32629893e9cd305f1165652c80726b41 Used
+     * for deleted message caching :)
+     * 
+     * @param api
+     * @param weak
+     */
+    public MessageCache(final JDA api, final boolean weak) {
         this.api = api;
-        this.messageMap = Collections.synchronizedMap(weak ? new WeakHashMap<String, Message>() : new HashMap<String, Message>());
-        this.api.addEventListener(this);
+       this.messageMap = Caffeine.newBuilder()
+       .maximumSize(10000)
+       .expireAfterWrite(4, TimeUnit.DAYS) //auto expire, thanks to Caffeine :)
+       .build();
+       this.api.addEventListener(this);
     }
-    public void clear()
-    {
-        this.messageMap.clear();
+    public void clear() {
+        this.messageMap.invalidateAll();
     }
-    public Collection<Message> getCachedMessages()
-    {
-        return this.messageMap.values();
-    }
-    public void clearOldMessages(int age) {
-        Collection<Message> a = messageMap.values();
-        Message[] b = a.toArray(new Message[a.size()]);
-        for (int i = 0; i < a.size(); i++) {
-            long time = b[i].getTimeCreated().toEpochSecond();
-            long now = System.currentTimeMillis();
-            String msgId = b[i].getId();
-            if (now - time > age) { //clear messages older than specified age.
-                messageMap.remove(msgId);
-            }
-        }
+    public Collection<Message> getCachedMessages() {
+        return this.messageMap.asMap().values();
     }
     public RestAction<Message> getMessage(final MessageChannel channel, final String Id)
     {
@@ -65,7 +52,7 @@ public class MessageCache implements EventListener {
         }
     public Message getMessage(final String Id)
     {
-        return this.messageMap.get(Id);
+        return this.messageMap.asMap().get(Id);
     }
     public RestAction<Message> getMessage(final String channelId, final String Id)
     {
@@ -82,9 +69,7 @@ public class MessageCache implements EventListener {
                 return channel.retrieveMessageById(Id);
 
         }
-
         return new EmptyRestAction<Message>(api, message);
-
     }
     @Override
     @SubscribeEvent
@@ -97,10 +82,10 @@ public class MessageCache implements EventListener {
         }
 
         if (event instanceof MessageDeleteEvent)
-            this.messageMap.remove(((MessageDeleteEvent) event).getMessageId());
+            this.messageMap.asMap().remove(((MessageDeleteEvent) event).getMessageId());
 
         if (event instanceof MessageBulkDeleteEvent)
-            this.messageMap.keySet().removeAll(((MessageBulkDeleteEvent) event).getMessageIds());
+            this.messageMap.asMap().keySet().removeAll(((MessageBulkDeleteEvent) event).getMessageIds());
 
         if (event instanceof MessageUpdateEvent)
         {
