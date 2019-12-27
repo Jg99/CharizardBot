@@ -245,7 +245,7 @@ public class Main {
 			 * Message Cache for CharizardBot. Used for logging deleted messages unless
 			 * the messages are older than 4 days, or the bot has been restarted since the message was posted.
 			 */
-			msgCache = new MessageCache(api, false); 
+			msgCache = new MessageCache(api); 
             //listeners for commands, chat filter, join, etc
             api.addEventListener(new ChatFilterEditHandler());
             api.addEventListener(new ReconnectListener());

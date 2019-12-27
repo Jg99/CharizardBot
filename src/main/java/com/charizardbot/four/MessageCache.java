@@ -23,11 +23,10 @@ public class MessageCache implements EventListener{
      * Message Caching for JDA v4. Adapted from
      * https://gist.github.com/Almighty-Alpaca/32629893e9cd305f1165652c80726b41 Used
      * for deleted message caching :)
-     * 
+     * My version, however, uses Caffeine now, which automatically handles limits and cache expiration.
      * @param api
-     * @param weak
      */
-    public MessageCache(final JDA api, final boolean weak) {
+    public MessageCache(final JDA api) {
         this.api = api;
        this.messageMap = Caffeine.newBuilder()
        .maximumSize(10000)
