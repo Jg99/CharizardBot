@@ -37,6 +37,9 @@ public class MessageCache implements EventListener{
     public void clear() {
         this.messageMap.invalidateAll();
     }
+    public int getCacheSize() {
+        return this.messageMap.asMap().size();
+    }
     public Collection<Message> getCachedMessages() {
         return this.messageMap.asMap().values();
     }

@@ -25,6 +25,9 @@ public class MiscCommands extends ListenerAdapter {
        	 	event.getChannel().sendMessage("u can't no u me!").queue(); 
        	 	}
 		}
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith("!cachesize") && event.getMember().getId().equals(Main.OWNER_ID)) {
+			event.getChannel().sendMessage("Message cache size: " + Main.msgCache.getCacheSize()).queue();
+		}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith("send nudes") && !event.getAuthor().isBot())
         {
         	sendNudes nude = new sendNudes();
