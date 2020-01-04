@@ -21,10 +21,15 @@ public class AnimeList extends ListenerAdapter {
      */
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         try {
+            String miscToggle = "1";
+            if (Main.config.getProperty("miscCmds" + event.getGuild().getId()) != null) {
+            miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
+            }
             String prefix = Main.config.getProperty(event.getGuild().getId());
+            
             if (prefix == null)
                 prefix = "!";
-            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime")) {
+            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime") && miscToggle.equals("1")) {
                 String query = event.getMessage().getContentRaw().substring(7, event.getMessage().getContentRaw().length());
                 AnimeSearch search = new AnimeSearch();
                 search.setQuery(query).setLimit(2);
