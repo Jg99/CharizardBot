@@ -58,7 +58,8 @@ public class AnimeList extends ListenerAdapter {
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                 embed.setTitle("Results for your Anime search");
                 embed.setThumbnail(completableFuture.get().imageURL);
-                embed.addField("Title:", completableFuture.get().title_english, false);
+               try {embed.addField("Title:", completableFuture.get().title_english, false);} catch (Exception e){embed.addField("Title:", completableFuture.get().title, false);}
+                
                 embed.addField("Description:", desc, false);
                 embed.addField("Number of episodes:", "" + completableFuture.get().episodes, true);
                 try {embed.addField("Premiered:", completableFuture.get().premiered, true);}catch (Exception e){embed.addField("Year:", "Unknown", true);}
