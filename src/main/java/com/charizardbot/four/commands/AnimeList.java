@@ -67,7 +67,14 @@ public class AnimeList extends ListenerAdapter {
                 embed.addField("Studios", studiolist, false);
                 embed.addField("Source:", completableFuture.get().url, false);
                 embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                event.getChannel().sendMessage(embed.build()).queue();
+                if (event.getGuild().getTextChannelById(event.getChannel().getId()).canTalk()) {
+                    String d = genre.toLowerCase();
+                if (!d.contains("hentai")) {
+                     event.getChannel().sendMessage(embed.build()).queue();
+                  }  else {
+                     event.getChannel().sendMessage("Contains NSFW content. Please try searching for something else you naughty person ;)").queue();
+                }
+            }
         }
     } catch (Exception e) {
         Main.logger.info("WARN: Exception in AnimeList command." + e);
