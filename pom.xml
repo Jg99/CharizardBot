@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.charizardbot.four</groupId>
   <artifactId>CharizardBotFour</artifactId>
-  <version>4.1.2</version>
+  <version>4.2</version>
 
   <name>CharizardBotFour</name>
   <url>http://www.charizardbot.com</url>
@@ -29,7 +29,7 @@
       <dependency>
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>
-          <version>4.1.0_87</version>
+          <version>4.1.0_95</version>
           <exclusions>
             <exclusion>
                 <groupId>club.minnced</groupId>
@@ -52,7 +52,28 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.12.1</version>
-		</dependency>
+    </dependency>
+  <dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-core</artifactId>
+  <version>2.10.1</version>
+</dependency>
+<dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-annotations</artifactId>
+  <version>2.10.1</version>
+</dependency>
+<dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-databind</artifactId>
+  <version>2.10.1</version>
+</dependency>
+<dependency>
+  <groupId>com.googlecode.json-simple</groupId>
+  <artifactId>json-simple</artifactId>
+  <version>1.1.1</version>
+  <scope>compile</scope>
+</dependency>
 	<dependency>
        	<groupId>com.github.kskelm</groupId>
         <artifactId>baringo</artifactId>

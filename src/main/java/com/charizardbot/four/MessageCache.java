@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.hooks.SubscribeEvent;
 import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.internal.requests.EmptyRestAction;
+import net.dv8tion.jda.internal.requests.CompletedRestAction;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
 import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
@@ -50,7 +50,7 @@ public class MessageCache implements EventListener{
         if (message == null)
             return channel.retrieveMessageById(Id);
         else 
-        return new EmptyRestAction<Message>(api, message);
+        return new CompletedRestAction<Message>(api, message);
         }
     public Message getMessage(final String Id)
     {
@@ -69,9 +69,8 @@ public class MessageCache implements EventListener{
 
             if (channel != null)
                 return channel.retrieveMessageById(Id);
-
         }
-        return new EmptyRestAction<Message>(api, message);
+		return new CompletedRestAction<Message>(api, message);
     }
     @Override
     @SubscribeEvent

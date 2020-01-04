@@ -17,6 +17,7 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.security.auth.login.LoginException;
+import com.charizardbot.four.commands.AnimeList;
 import com.charizardbot.four.commands.AutobanToggle;
 import com.charizardbot.four.commands.ChatFilterToggle;
 import com.charizardbot.four.commands.CoCCmds;
@@ -46,7 +47,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.1.2";
+	public static final String VERSION = "4.2";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -271,6 +272,7 @@ public class Main {
             api.addEventListener(new MainCommands());
 			api.addEventListener(new MiscCommands());
 			api.addEventListener(new RandomJoke());
+			api.addEventListener(new AnimeList());
             // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
 			/**join listener for that sweet autoban stuff. GTP only (my server). 
