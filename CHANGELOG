@@ -18,3 +18,4 @@ VERSION 4.0.0 ** DEC 4, 2019 **
 - Update JDA to 4.1.0_95
 - update MessageCache (change EmptyRestAction to CompletedRestAction due to JDA changes)
 - Various changes
+4.2.1 - Update JDA to 4.1.0_100, add purge command (!msgclr), various fixes

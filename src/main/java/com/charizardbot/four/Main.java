@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,7 @@ import java.util.TimerTask;
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.AnimeList;
 import com.charizardbot.four.commands.AutobanToggle;
+import com.charizardbot.four.commands.BulkDelete;
 import com.charizardbot.four.commands.ChatFilterToggle;
 import com.charizardbot.four.commands.CoCCmds;
 import com.charizardbot.four.commands.CommandsList;
@@ -47,7 +49,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 public class Main {
-	public static final String VERSION = "4.2";
+	public static final String VERSION = "4.2.1";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -70,6 +72,9 @@ public class Main {
 	public static String TENOR_TOKEN = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
+	public static boolean isBulkDeleted = false;
+	public static int bulkCount = 0;
+	public static int curMsgLog = 0;
     public static void main(String[] args) {
         try {
 			File logFileConfig = new File("log4j2.xml");
@@ -100,6 +105,9 @@ public class Main {
 		 * This is a super dank bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
 		 * license: GNU GPL version 2
 		 * Credit: Dewey (website design), Ultra Blue (hosting, email)
+		 * Jikan4Java project - MyAnimeList Jikan (https://github.com/Doomsdayrs/Jikan4java)
+		 * Snubiss - ClashOfJava project (https://github.com/Snubiss/Snubs-Clash-of-Java)
+		 * Various other open source projects used in this bot
 		 */
 		 //Uncomment this out if you want to use a token based off args. NOTE: TOKEN ARGS GO FIRST!
        // if (args.length > 0) {
@@ -240,7 +248,7 @@ public class Main {
 			JDA api = new JDABuilder(discordtoken)
 			.setChunkingFilter(ChunkingFilter.NONE)
 			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE))
-            .setActivity(Activity.playing(activity))
+			.setActivity(Activity.playing(activity))
 			.build();
 			/**
 			 * Message Cache for CharizardBot. Used for logging deleted messages unless
@@ -273,6 +281,7 @@ public class Main {
 			api.addEventListener(new MiscCommands());
 			api.addEventListener(new RandomJoke());
 			api.addEventListener(new AnimeList());
+			api.addEventListener(new BulkDelete());
             // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
 			/**join listener for that sweet autoban stuff. GTP only (my server). 

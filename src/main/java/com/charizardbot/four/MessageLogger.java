@@ -10,7 +10,7 @@ public class MessageLogger extends ListenerAdapter {
     /**
      * CharizardBot's Message Logger. Logs deleted messages (if they are in the cache) and edited messages.
      */
-    public void onGuildMessageDelete(GuildMessageDeleteEvent event) {
+    public void onGuildMessageDelete(GuildMessageDeleteEvent event) { 
         try {
         String svrLogging = "0"; //disabled by default
         String isChannelIgnored = "0";
@@ -36,7 +36,7 @@ public class MessageLogger extends ListenerAdapter {
         if (logChan != null && !logChan.isEmpty() && svrLogging.equals("1")) {
         String msgId = event.getMessageId();
         Message msg = Main.msgCache.getMessage(msgId);
-        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg != null && !msg.getAuthor().isBot() && !Main.isChatFilterDeleted && isChannelIgnored.equals("0")) {
+        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg != null && !msg.getAuthor().isBot() && !Main.isChatFilterDeleted && !Main.isBulkDeleted && isChannelIgnored.equals("0")) {
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("from: " + msg.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nMessage:", msg.getContentRaw(), false);
@@ -51,7 +51,7 @@ public class MessageLogger extends ListenerAdapter {
             logEmbed.setFooter("User ID: " + msg.getAuthor().getId());
             event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
         }
-        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg == null && !Main.isChatFilterDeleted && isChannelIgnored.equals("0")){
+        if (event.getJDA().getTextChannelById(logChan).canTalk() && msg == null && !Main.isChatFilterDeleted && !Main.isBulkDeleted && isChannelIgnored.equals("0")){
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("A deleted message has been detected in " + event.getChannel().getName(), "Message is not in cache.", false);
@@ -60,6 +60,15 @@ public class MessageLogger extends ListenerAdapter {
         if (Main.isChatFilterDeleted)
         {
             Main.isChatFilterDeleted = false;  
+        }
+        if (Main.bulkCount > Main.curMsgLog) {
+            Main.curMsgLog++;
+        }
+        if (Main.bulkCount == Main.curMsgLog && Main.bulkCount > 0)
+        {
+            Main.isBulkDeleted = false;
+            Main.bulkCount = 0;
+            Main.curMsgLog = 0;
         }
     }
     } catch (Exception e) {

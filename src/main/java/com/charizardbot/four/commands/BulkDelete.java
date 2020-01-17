@@ -1,0 +1,63 @@
+package com.charizardbot.four.commands;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import com.charizardbot.four.Main;
+
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+public class BulkDelete extends ListenerAdapter {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        String prefix = Main.config.getProperty(event.getGuild().getId());
+        if (prefix == null)
+            prefix = "!";
+        try {
+        if (event.getMessage().getContentRaw().startsWith(prefix + "msgclr") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
+            String[] arguments = event.getMessage().getContentRaw().split("\\s+");
+            //0 = command, 1 = # of messages, up to 100, 2 = User filter if any
+            CompletableFuture<List<Message>> toDelete;
+            if (arguments.length == 2) {
+                if (Integer.parseInt(arguments[1]) > 100) {
+                    arguments[1] = "100";
+                }
+                toDelete = event.getChannel().getIterableHistory().takeAsync(Integer.parseInt(arguments[1]))
+                    .thenApply(list -> list.stream().collect(Collectors.toList()));
+                    Collection<Message> td;
+                    td = toDelete.get();
+                    Main.bulkCount = td.size();
+                    Main.isBulkDeleted = true;
+                    event.getChannel().deleteMessages(td).queue();
+                    event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
+                        response.delete().queueAfter(5, TimeUnit.SECONDS);
+                    }); 
+            } else if (arguments.length == 3) {
+                if (Integer.parseInt(arguments[1]) > 100) {
+                    arguments[1] = "100";
+                }
+                String id = arguments[2].replaceAll("[^\\d.]", "");
+                toDelete = event.getChannel().getIterableHistory().takeAsync(Integer.parseInt(arguments[1]))
+                .thenApply(list -> list.stream()
+                .filter(m -> m.getAuthor().getId().equals(id))
+                .collect(Collectors.toList()));
+                Collection<Message> td;
+                td = toDelete.get();
+                Main.isBulkDeleted = true;
+                Main.bulkCount = td.size();
+                event.getChannel().deleteMessages(td).queue();
+                event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
+                    response.delete().queueAfter(5, TimeUnit.SECONDS);
+                }); 
+            } else {
+                event.getChannel().sendMessage("Invalid arguments. Please specify a number of messages and a user if possible.").queue();
+            }
+        }
+    } catch (Exception e) {}
+    }
+}

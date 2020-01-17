@@ -18,6 +18,7 @@ public class AnimeList extends ListenerAdapter {
     /**
      * CharizardBot's Anime Search command. Searches MyAnimeList based on the query
      * from the user and returns some information about the anime.
+     * Uses Jikan4Java library, modified to use CharizardBot server.
      */
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         try {
@@ -26,7 +27,6 @@ public class AnimeList extends ListenerAdapter {
             miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
             }
             String prefix = Main.config.getProperty(event.getGuild().getId());
-            
             if (prefix == null)
                 prefix = "!";
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime") && miscToggle.equals("1")) {
@@ -80,5 +80,4 @@ public class AnimeList extends ListenerAdapter {
         Main.logger.info("WARN: Exception in AnimeList command." + e);
     }
     }
-    
 }
