@@ -40,7 +40,7 @@ public class CommandsList extends ListenerAdapter {
             //	}
             	if (event.getMember().hasPermission(Permission.ADMINISTRATOR))
             	{
-            		 cmdListStrB = prefix + "setprefix prefix: sets the server prefix, such as &, $, !" + 
+            		 cmdListStrB = prefix + "setprefix prefix: sets the server prefix. Available: ~, !, $, %, ^, &, *, -" + 
             				",\n" + prefix + "chatfilter <on> <off> - turns the chat filter on or off." + 
             				",\n" + prefix + "channelfilter <on> <off> - turns channel specific chat filter on or off. MUST HAVE SERVER FILTER ON AS WELL." +
             				",\n" + prefix + "togglemisc, togglewiz, toggleimgur, togglegif, togglesuggestions, togglecoc - Toggles each function on or off on your server.";

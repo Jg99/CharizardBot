@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.charizardbot.four</groupId>
   <artifactId>CharizardBotFour</artifactId>
-  <version>4.2.1</version>
+  <version>4.3.0</version>
 
   <name>CharizardBotFour</name>
   <url>http://www.charizardbot.com</url>
@@ -26,6 +26,11 @@
 </repository>
   </repositories>
   <dependencies>
+    <dependency>
+      <groupId>net.dean.jraw</groupId>
+      <artifactId>JRAW</artifactId>
+      <version>1.1.0</version>
+    </dependency>
       <dependency>
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>

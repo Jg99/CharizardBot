@@ -17,6 +17,8 @@ import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
+
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.AnimeList;
 import com.charizardbot.four.commands.AutobanToggle;
@@ -34,6 +36,7 @@ import com.charizardbot.four.commands.PingCommand;
 import com.charizardbot.four.commands.PokedexCommand;
 import com.charizardbot.four.commands.PokemonQuoteCommand;
 import com.charizardbot.four.commands.RandomJoke;
+import com.charizardbot.four.commands.RedditCommands;
 import com.charizardbot.four.commands.RngCommand;
 import com.charizardbot.four.commands.RpsCommand;
 import com.charizardbot.four.commands.ServersCommand;
@@ -48,8 +51,14 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import net.dean.jraw.RedditClient;
+import net.dean.jraw.http.NetworkAdapter;
+import net.dean.jraw.http.OkHttpNetworkAdapter;
+import net.dean.jraw.http.UserAgent;
+import net.dean.jraw.oauth.Credentials;
+import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "4.2.1";
+	public static final String VERSION = "4.3.0";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -70,11 +79,14 @@ public class Main {
 	public static String IMGUR_ID = "";
 	public static String IMGUR_SECRET = "";
 	public static String TENOR_TOKEN = "";
+	public static String REDDIT_ID = "";
+	public static  String REDDIT_SECRET = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
 	public static boolean isBulkDeleted = false;
 	public static int bulkCount = 0;
 	public static int curMsgLog = 0;
+	public static RedditClient reddit;
     public static void main(String[] args) {
         try {
 			File logFileConfig = new File("log4j2.xml");
@@ -155,6 +167,28 @@ public class Main {
 				logger.info("Please provide a valid imgur client id and secret (client ID on first line, secret on second) and place it in imgur_token.txt.");
 			}
 			/**
+			 * Reddit API token. https://reddit.com
+			 * rate limit: 60 per minute
+			 * Client ID goes on first line, secret on 2nd line
+			 */
+			File redditToken = new File("reddit_token.txt");
+			if (redditToken.exists()) {
+				Scanner fileScan = new Scanner(redditToken);
+				REDDIT_ID = fileScan.nextLine();
+				REDDIT_SECRET = fileScan.nextLine();
+				logger.info("Using Reddit token from reddit_token.txt.");
+				fileScan.close();
+				/**
+				 * Reddit client setup
+				 */
+				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
+				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
+				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
+				reddit = OAuthHelper.automatic(networkAdapter, credentials);
+			} else {
+				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
+			}
+			/**
 			 * Tenor GIF token
 			 * Very high ratelimit, very few limits to API. 
 			 * https://tenor.com/developer/
@@ -232,7 +266,7 @@ public class Main {
 					run();
 				}
             }
-        }, 5000, 1800000); //We crawl every 30 minutes because we don't need to update it very frequently.
+		}, 5000, 1800000); //We crawl every 30 minutes because we don't need to update it very frequently.
 		//JDA API setup
         try {
 			String activity = "";
@@ -282,6 +316,7 @@ public class Main {
 			api.addEventListener(new RandomJoke());
 			api.addEventListener(new AnimeList());
 			api.addEventListener(new BulkDelete());
+			api.addEventListener(new RedditCommands());
             // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
 			/**join listener for that sweet autoban stuff. GTP only (my server). 

@@ -19,3 +19,9 @@ VERSION 4.0.0 ** DEC 4, 2019 **
 - update MessageCache (change EmptyRestAction to CompletedRestAction due to JDA changes)
 - Various changes
 4.2.1 - Update JDA to 4.1.0_100, add purge command (!msgclr), various fixes
+** 4.3 - January 20, 2020 **
+- Reddit commands. Do !randpost <subreddit> to find a random top post from a subreddit. 
+- Use reddit_token.txt (client id first line, secret 2nd line. Use "Script" option for reddit oauth.)
+- Coming soon: Subreddit sort <will be !randpost subreddit sort (top, hot, new, etc)>
+- Coming soon: random memes!
+- various small changes & fixes.

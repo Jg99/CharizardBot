@@ -17,7 +17,6 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 public class MessageCache implements EventListener{
     private final JDA api;
-    //private final Map<String, Message> messageMap;
     private final Cache<String, Message> messageMap;
     /**
      * Message Caching for JDA v4. Adapted from

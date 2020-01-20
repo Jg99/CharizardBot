@@ -1,13 +1,11 @@
 package com.charizardbot.four.commands;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 import com.charizardbot.four.Main;
-
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -19,6 +17,10 @@ public class BulkDelete extends ListenerAdapter {
         if (prefix == null)
             prefix = "!";
         try {
+        String logChan = "";
+        try {
+            logChan = Main.config.getProperty("logchannel" + event.getGuild().getId());
+        } catch(Exception e) {};
         if (event.getMessage().getContentRaw().startsWith(prefix + "msgclr") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
             String[] arguments = event.getMessage().getContentRaw().split("\\s+");
             //0 = command, 1 = # of messages, up to 100, 2 = User filter if any
@@ -37,6 +39,12 @@ public class BulkDelete extends ListenerAdapter {
                     event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
                         response.delete().queueAfter(5, TimeUnit.SECONDS);
                     }); 
+                    if (!logChan.equals("") && logChan != null) {
+                        EmbedBuilder logEmbed = new EmbedBuilder();
+                        logEmbed.setTitle("Bulk Delete Event");
+                        logEmbed.addField("A bulk delete message has been detected in " + event.getChannel().getName(), "Admin: " + event.getMessage().getAuthor().getAsMention(), false);
+                        event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
+                    }
             } else if (arguments.length == 3) {
                 if (Integer.parseInt(arguments[1]) > 100) {
                     arguments[1] = "100";
