@@ -269,6 +269,6 @@ public class RedditCommands extends ListenerAdapter {
                     }  
                     Main.config.setProperty("redditNsfw" + event.getGuild().getId(), toggle);
                     }
-        } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java"); e.printStackTrace();}
+        } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java");}
     }
 }
