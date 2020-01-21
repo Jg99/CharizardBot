@@ -145,9 +145,9 @@ public class RedditCommands extends ListenerAdapter {
                 SubredditSort subSort = SubredditSort.TOP;
                 String sortMsg = "Random top meme from r/";
                 //Subreddit sorting, if possible
-            if (arguments.length > 2)
+            if (arguments.length > 1)
             {
-                String sort = arguments[2].toLowerCase();
+                String sort = arguments[1].toLowerCase();
                 switch (sort) {
                     case "top":
                         subSort = SubredditSort.TOP;
