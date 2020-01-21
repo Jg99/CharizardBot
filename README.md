@@ -9,6 +9,7 @@ Imgur API (place client id on the first line, and client secret on the 2nd in im
 Clash of Clans API (place token in coc_token.txt
 Discord Token (token.txt) (Note: if you want to use a token specified by arguments, uncomment the code in Main.java).
 Tenor Token (tenor_token.txt)
+Reddit Token (reddit_token.txt). Client id on first line, client secret on 2nd. Type of account: script.
 Config files:
 server_config.cfg (created automatically
 *ServerID*_suggestionsdb.txt -- Suggestions DB
