@@ -22,6 +22,7 @@ VERSION 4.0.0 ** DEC 4, 2019 **
 ** 4.3 - January 20, 2020 **
 - Reddit commands. Do !randpost <subreddit> to find a random top post from a subreddit. 
 - Use reddit_token.txt (client id first line, secret 2nd line. Use "Script" option for reddit oauth.)
-- Coming soon: Subreddit sort <will be !randpost subreddit sort (top, hot, new, etc)>
-- Coming soon: random memes!
+Reddit sorting options (for both randmeme and randpost are live.) Specify sort such as "top", "hot", "new", etc
+after the subreddit on the randpost command. On the meme command, specify right after the command.
+- Meme command is now live. Use !randmeme <optional: sort by "top", "hot", "new", etc> to get a random out of the top 200 memes from 5 different subreddits. 
 - various small changes & fixes.

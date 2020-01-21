@@ -44,6 +44,37 @@ public class RedditCommands extends ListenerAdapter {
                 time = TimePeriod.DAY;
                 sortMsg = "Random hot post from r/";
             }
+            //Subreddit sorting, if possible
+            if (arguments.length > 2)
+            {
+                String sort = arguments[2].toLowerCase();
+                switch (sort) {
+                    case "top":
+                        subSort = SubredditSort.TOP;
+                        sortMsg = "Random top post from r/";
+                        break;
+                    case "hot":
+                        subSort = SubredditSort.HOT;
+                        sortMsg = "Random hot post from r/";
+                        break;
+                    case "new":
+                        subSort = SubredditSort.NEW;
+                        sortMsg = "Random new post from r/";
+                        break;
+                    case "rising":
+                        subSort = SubredditSort.RISING;
+                        sortMsg = "Random rising post from r/";
+                        break;
+                    case "controversial":
+                        subSort = SubredditSort.CONTROVERSIAL;
+                        sortMsg = "Random controversial post from r/";
+                        break;
+                    case "best":
+                        subSort = SubredditSort.BEST;
+                        sortMsg = "Random best post from r/";
+                        break;
+                }
+            }
 		    DefaultPaginator<Submission> paginator = Main.reddit.subreddit(subreddit)
 		    .posts()
 	    	.limit(100)
@@ -51,8 +82,8 @@ public class RedditCommands extends ListenerAdapter {
             .timePeriod(time) // of all time
 	    	.build();
 	    	Random rand = new Random();
-	    	int rPost = rand.nextInt(100);
             Listing<Submission> posts = paginator.next();
+            int rPost = rand.nextInt(posts.size());
             if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle(sortMsg + subreddit, posts.get(rPost).getUrl());
@@ -108,8 +139,73 @@ public class RedditCommands extends ListenerAdapter {
              /**
             * Randomly pick a meme from Reddit - to do
             */
-//            if (event.getMessage().getContentRaw().startsWith(prefix + "randmeme") && redditCommands.equals("1")) {
-//            }
+            if (event.getMessage().getContentRaw().startsWith(prefix + "randmeme") && redditCommands.equals("1")) {
+                String[] memeSubs = {"memes", "dankmemes", "dank_meme", "animemes", "memes_of_the_dank"};
+                String[] arguments = event.getMessage().getContentRaw().split("\\s+");
+                SubredditSort subSort = SubredditSort.TOP;
+                String sortMsg = "Random top meme from r/";
+                //Subreddit sorting, if possible
+            if (arguments.length > 2)
+            {
+                String sort = arguments[2].toLowerCase();
+                switch (sort) {
+                    case "top":
+                        subSort = SubredditSort.TOP;
+                        sortMsg = "Random top meme from r/";
+                        break;
+                    case "hot":
+                        subSort = SubredditSort.HOT;
+                        sortMsg = "Random hot meme from r/";
+                        break;
+                    case "new":
+                        subSort = SubredditSort.NEW;
+                        sortMsg = "Random new meme from r/";
+                        break;
+                    case "rising":
+                        subSort = SubredditSort.RISING;
+                        sortMsg = "Random rising meme from r/";
+                        break;
+                    case "controversial":
+                        subSort = SubredditSort.CONTROVERSIAL;
+                        sortMsg = "Random controversial meme from r/";
+                        break;
+                    case "best":
+                        subSort = SubredditSort.BEST;
+                        sortMsg = "Random best meme from r/";
+                        break;
+                }
+            }
+                DefaultPaginator<Submission> paginator = Main.reddit.subreddits(memeSubs[0], memeSubs[1], memeSubs[2], memeSubs[3], memeSubs[4])
+                .posts()
+                .limit(200)
+                .sorting(subSort) // top posts
+                .timePeriod(TimePeriod.ALL) // of all time
+                .build();
+                Random rand = new Random();
+                Listing<Submission> posts = paginator.next();
+                int rPost = rand.nextInt(posts.size());
+                if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
+                    embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
+                    embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
+                    embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
+                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+                    event.getChannel().sendMessage(embed.build()).queue();
+                } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
+                    event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
+                } else {
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
+                    embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
+                    embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
+                    embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
+                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+                    event.getChannel().sendMessage(embed.build()).queue();
+                }
+            }
         	//TOGGLE CMDS
             if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "togglereddit") && !event.getAuthor().isBot() && (event.getAuthor().equals(event.getJDA().getUserById(Main.OWNER_ID)) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
                 Main.output = new FileOutputStream("server_config.cfg");
