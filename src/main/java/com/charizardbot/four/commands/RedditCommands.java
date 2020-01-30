@@ -1,5 +1,4 @@
 package com.charizardbot.four.commands;
-
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.SubredditSort;
