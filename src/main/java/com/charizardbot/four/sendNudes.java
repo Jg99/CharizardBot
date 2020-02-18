@@ -36,6 +36,7 @@ public class sendNudes {
 		nudes[28] = "https://pics.me.me/today-3-10-pm-send-nudes-ere-is-donkey-kong-without-35244107.png";
 		nudes[29] = "https://i.pinimg.com/originals/36/87/60/36876066a2c90907f3d5b40577985210.jpg";	
 		nudes[30] = "https://i.imgur.com/2x1YuH4.jpg";
+		nudes[31] = "https://i.redd.it/ga9b7o2e21g41.jpg";
 	}
 	public String getNude()
 	{
