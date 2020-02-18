@@ -19,7 +19,7 @@ public class sendNudes {
 		nudes[11] = "https://i.imgur.com/Gktbnwa.jpg";
 		nudes[12] = "https://i.imgur.com/do4Vt90.jpg";
 		nudes[13] = "https://i.imgur.com/YVFQoZ9.jpg";
-		nudes[14] = "https://pics.onsizzle.com/send-nudes-jiraiya-last-message%F0%9F%98%A2-credits-to-the-owner-12932598.png";
+		nudes[14] = "https://pics.onsizzle.com/send-nudes-jiraiya-last-message-credits-to-the-owner-12932598.png";
 		nudes[15] = "https://i.pinimg.com/originals/38/75/7e/38757e83886fabf15250bc6567bdd0e6.jpg";
 		nudes[16] = "https://cdn.totalfratmove.com/wp-content/uploads/2016/12/93cd2583164da85b660f6ed7a3a962e8.jpg";
 		nudes[17] = "https://i.imgur.com/DwV1dj2.jpg";
