@@ -31,7 +31,8 @@ public class MiscCommands extends ListenerAdapter {
         if (event.getMessage().getContentRaw().toLowerCase().startsWith("send nudes") && !event.getAuthor().isBot())
         {
         	sendNudes nude = new sendNudes();
-        	String nudeURL = nude.getNude();
+			String nudeURL = nude.getNude();
+			//System.out.println("URL: " + nudeURL);
         	EmbedBuilder embed = new EmbedBuilder();
         	embed.setTitle("Here's a nude for you!");
         	//embed.addField("", nudeURL, true);
