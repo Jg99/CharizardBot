@@ -9,7 +9,7 @@ public class UserJoinHandler extends ListenerAdapter {
 		String logChan;
 		try {
 		String serverID = "468440854886088714"; //GTP
-		String emporiumID = "458451155522027521"; //Wizard101 Emporium
+		String pigswick_ID = "682657889613250570"; // Pigswick trading academy
     	String verificationToggle = "1"; //default value if getting property fails
     	try {
         	 verificationToggle = Main.config.getProperty("verification" + event.getGuild().getId());
@@ -17,15 +17,15 @@ public class UserJoinHandler extends ListenerAdapter {
     	{
     	}
     	boolean isEnabled;
-    	if (event.getGuild().getId().equals(serverID) || event.getGuild().getId().equals(emporiumID))
+    	if (event.getGuild().getId().equals(serverID) || event.getGuild().getId().equals(pigswick_ID))
     		isEnabled = true;
     	else
     		isEnabled = false;
 		if (isEnabled && verificationToggle.equals("1")) {
-			if (event.getGuild().getId().equals(emporiumID)) 
-				logChan = "561397906570084364";
-			else
-				logChan = "468447207448772620"; //GTP Bot logs		
+				logChan = "468447207448772620"; //GTP Bot logs	
+				if (event.getGuild().getId().equals(pigswick_ID)) {
+					logChan = "683836751588229201"; //pigswick bot logs
+				}
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
     	long banDuration = 3600; //seconds
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();

@@ -9,12 +9,12 @@ public class AutobanToggle extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		try {
 		String serverID = "468440854886088714"; //GTP
-		String emporiumID = "458451155522027521"; //Wizard101 Emporium
+		String pigswickID = "682657889613250570"; //pigswick 
     	String prefix = Main.config.getProperty(event.getGuild().getId());
     	if (prefix == null)
     		prefix = "!";
     	boolean isEnabled = false;
-    	if (event.getGuild().getId().equals(serverID) || event.getGuild().getId().equals(emporiumID)) {
+    	if (event.getGuild().getId().equals(serverID) || event.getGuild().getId().equals(pigswickID)) {
     		isEnabled = true;
 		}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "autoban on") && !event.getAuthor().isBot() && isEnabled && ( event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
