@@ -26,3 +26,12 @@ Reddit sorting options (for both randmeme and randpost are live.) Specify sort s
 after the subreddit on the randpost command. On the meme command, specify right after the command.
 - Meme command is now live. Use !randmeme <optional: sort by "top", "hot", "new", etc> to get a random out of the top 200 memes from 5 different subreddits. 
 - various small changes & fixes.
+** 4.4.0 - March X, 2020 **
+- Cross ban! Add servers to the list first, but you'll be able to ban accounts across multiple servers with this ability.
+!addcsv - Add your server to the cross ban list
+!remcsv - Remove your server to the cross ban list
+!cban - Cross ban a user.
+!cunban - Unban a user across the servers.
+!addcadmin - BOT OWNER - add an admin that can use cban/unban commands
+!remcadmin - REMOVE, BOT OWNER ONLY
+!listcadmins - list cross-ban admins, BOT OWNER ONLY

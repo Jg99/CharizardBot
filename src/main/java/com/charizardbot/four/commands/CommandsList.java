@@ -13,8 +13,6 @@ public class CommandsList extends ListenerAdapter {
             String prefix = Main.config.getProperty(event.getGuild().getId());
             if (prefix == null)
 				prefix = "!";
-				String a = event.getMessage().getContentRaw();
-				System.out.println(a);
             if ((event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "charizard") || event.getMessage().getContentRaw().startsWith(prefix + "help")) && !event.getAuthor().isBot())
             {
             	EmbedBuilder embed = new EmbedBuilder();

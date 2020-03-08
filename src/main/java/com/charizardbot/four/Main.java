@@ -26,6 +26,7 @@ import com.charizardbot.four.commands.BulkDelete;
 import com.charizardbot.four.commands.ChatFilterToggle;
 import com.charizardbot.four.commands.CoCCmds;
 import com.charizardbot.four.commands.CommandsList;
+import com.charizardbot.four.commands.CrossBan;
 import com.charizardbot.four.commands.ImgurSearch;
 import com.charizardbot.four.commands.ImgurToggle;
 import com.charizardbot.four.commands.JoinDate;
@@ -80,7 +81,9 @@ public class Main {
 	public static String IMGUR_SECRET = "";
 	public static String TENOR_TOKEN = "";
 	public static String REDDIT_ID = "";
-	public static  String REDDIT_SECRET = "";
+	public static String REDDIT_SECRET = "";
+	public static String XBAN_SERVERS = "";
+	public static String XBAN_ADMINS = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
 	public static boolean isBulkDeleted = false;
@@ -135,6 +138,32 @@ public class Main {
 				logger.info("Using Discord token from token.txt.");
 			}
 			fileScan.close();
+			}
+			/**Cross ban server ID file. One server ID per line. */
+			File xbanserver = new File("xbanservers.txt");
+			if (xbanserver.exists()) {
+			Scanner fileScan = new Scanner(xbanserver);
+			while (fileScan.hasNextLine()) {
+				XBAN_SERVERS += fileScan.nextLine() + "\n";
+				logger.info("Loading Server IDs for cross ban utility.");
+			}	
+			//XBAN_SERVERS += "\n";
+			fileScan.close();
+			} else {
+				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
+			}
+			/**Cross ban admin list. People who can ban/unban members from servers in the system. */
+			File xbanadmins = new File("xbanadmins.txt");
+			if (xbanadmins.exists()) {
+			Scanner fileScan = new Scanner(xbanadmins);
+			while (fileScan.hasNextLine()) {
+				XBAN_ADMINS += fileScan.nextLine() + "\n";
+				logger.info("Loading admins for cross ban utility.");
+			}
+			//XBAN_ADMINS += "\n";
+			fileScan.close();
+			} else {
+				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
 			}
 			/**Clash of Clans token. You can get this from https://developer.clashofclans.com/
 			Note: Tokens are IP address limited.*/
@@ -317,6 +346,7 @@ public class Main {
 			api.addEventListener(new AnimeList());
 			api.addEventListener(new BulkDelete());
 			api.addEventListener(new RedditCommands());
+			api.addEventListener(new CrossBan());
             // join server listener. Listens for when the bot joins a new server.
             api.addEventListener(new JoinServerStuff());
 			/**join listener for that sweet autoban stuff. GTP only (my server). 
