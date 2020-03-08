@@ -77,7 +77,7 @@ public class CrossBan extends ListenerAdapter {
                             } catch (Exception e){Main.logger.info("Invalid ban");}
                         }
                     }
-                    Main.logger.info(userID + " unbanned in the x-ban system.");
+                    Main.logger.info(userID + " banned in the x-ban system.");
                     scan.close();
                     event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system.").queue();
                 }
