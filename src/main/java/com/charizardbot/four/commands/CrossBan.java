@@ -72,7 +72,9 @@ public class CrossBan extends ListenerAdapter {
                     while (scan.hasNextLine()) {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
-                            event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").complete();
+                            try {
+                            event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                            } catch (Exception e){Main.logger.info("Invalid ban");}
                         }
                     }
                     Main.logger.info(userID + " unbanned in the x-ban system.");
@@ -88,7 +90,9 @@ public class CrossBan extends ListenerAdapter {
                     while (scan.hasNextLine()) {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
-                            event.getJDA().getGuildById(svID).unban(userID).complete();
+                            try {
+                            event.getJDA().getGuildById(svID).unban(userID).queue();
+                        } catch (Exception e){Main.logger.info("Invalid unban");}
                         }
                     }
                     Main.logger.info(userID + " unbanned in the x-ban system.");
