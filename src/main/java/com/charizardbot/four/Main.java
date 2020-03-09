@@ -145,9 +145,8 @@ public class Main {
 			Scanner fileScan = new Scanner(xbanserver);
 			while (fileScan.hasNextLine()) {
 				XBAN_SERVERS += fileScan.nextLine() + "\n";
-				logger.info("Loading Server IDs for cross ban utility.");
 			}	
-			//XBAN_SERVERS += "\n";
+			logger.info("Loading Server IDs for cross ban utility.");
 			fileScan.close();
 			} else {
 				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
@@ -158,9 +157,8 @@ public class Main {
 			Scanner fileScan = new Scanner(xbanadmins);
 			while (fileScan.hasNextLine()) {
 				XBAN_ADMINS += fileScan.nextLine() + "\n";
-				logger.info("Loading admins for cross ban utility.");
 			}
-			//XBAN_ADMINS += "\n";
+			logger.info("Loading admins for cross ban utility.");
 			fileScan.close();
 			} else {
 				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
