@@ -28,7 +28,7 @@ public class MessageCache implements EventListener{
     public MessageCache(final JDA api) {
         this.api = api;
        this.messageMap = Caffeine.newBuilder()
-       .maximumSize(100000)
+       .maximumSize(200000)
        .expireAfterWrite(4, TimeUnit.DAYS) //auto expire, thanks to Caffeine :)
        .build();
        this.api.addEventListener(this);
