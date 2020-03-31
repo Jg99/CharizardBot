@@ -20,6 +20,7 @@ chatfilter.txt - blank file created, specify words one per line. Use "," instead
 Log location: log/charbotlogs.log It is a rotating logfile by default (editable in log4j2.xml).
 
 Uses Maven for sources.
+Note: This project requires Lombok to compile. There will be errors if you don't have it installed.
 Once dependencies are satisfied, you can compile the bot by doing "mvn clean install" and it will spit out a jar in target/.
 
 If you have any questions, feel free to join the CharizardBot discord found on the CharizardBot website!
