@@ -1,6 +1,5 @@
 package com.charizardbot.four;
 import java.io.FileOutputStream;
-import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
