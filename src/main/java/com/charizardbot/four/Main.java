@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.EnumSet;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.TimeZone;
@@ -51,7 +50,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
-import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.NetworkAdapter;
 import net.dean.jraw.http.OkHttpNetworkAdapter;
@@ -59,7 +57,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "4.4.0";
+	public static final String VERSION = "4.4.1";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -306,9 +304,8 @@ public class Main {
             } else {
             activity = config.getProperty("gamestatus");
             }
-			JDA api = new JDABuilder(discordtoken)
+			JDA api = JDABuilder.createDefault(discordtoken)
 			.setChunkingFilter(ChunkingFilter.NONE)
-			.setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE))
 			.setActivity(Activity.playing(activity))
 			.build();
 			/**
