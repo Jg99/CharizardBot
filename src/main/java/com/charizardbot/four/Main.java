@@ -49,6 +49,7 @@ import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.NetworkAdapter;
@@ -305,6 +306,7 @@ public class Main {
             activity = config.getProperty("gamestatus");
             }
 			JDA api = JDABuilder.createDefault(discordtoken)
+			.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS)
 			.setChunkingFilter(ChunkingFilter.NONE)
 			.setActivity(Activity.playing(activity))
 			.build();
