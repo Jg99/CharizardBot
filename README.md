@@ -24,3 +24,7 @@ Note: This project requires Lombok to compile. There will be errors if you don't
 Once dependencies are satisfied, you can compile the bot by doing "mvn clean install" and it will spit out a jar in target/.
 
 If you have any questions, feel free to join the CharizardBot discord found on the CharizardBot website!
+
+**NOTE:**
+Only the bot source code is provided under the GNU GPL Licence version 2.0.
+Any images, avatars, etc are protected by copyright law and may not be used to impersonate the main bot.
