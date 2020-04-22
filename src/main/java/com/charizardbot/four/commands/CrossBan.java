@@ -101,7 +101,7 @@ public class CrossBan extends ListenerAdapter {
                 }
             }
             //adds/removes admins to cross ban system so anyone can't just ban.
-            if (event.getMessage().getContentRaw().startsWith(prefix + "addcadmin") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
+            if (event.getMessage().getContentRaw().startsWith(prefix + "addcadmin") && Main.XBAN_ADMINS.contains(event.getAuthor().getId())) {
                 String msg = event.getMessage().getContentRaw();
                 String admins = Main.XBAN_ADMINS;
                 String adminID = msg.substring(11, msg.length());
@@ -115,7 +115,7 @@ public class CrossBan extends ListenerAdapter {
                 Main.XBAN_ADMINS = admins;
                 event.getChannel().sendMessage("Added admin <@" + adminID + "> to the cross-ban system.").queue();
             }
-            if (event.getMessage().getContentRaw().startsWith(prefix + "remcadmin") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
+            if (event.getMessage().getContentRaw().startsWith(prefix + "remcadmin") && Main.XBAN_ADMINS.contains(event.getAuthor().getId())) {
                 String msg = event.getMessage().getContentRaw();
                 String adminID = msg.substring(11, msg.length());
                 if (!event.getMessage().getMentionedUsers().isEmpty()) {

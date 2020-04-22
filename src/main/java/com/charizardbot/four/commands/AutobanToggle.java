@@ -24,7 +24,7 @@ public class AutobanToggle extends ListenerAdapter {
         		// set the properties value
         		Main.config.setProperty("verification" + event.getGuild().getId(), "1");
         		Main.config.store(Main.output, null);
-        		event.getChannel().sendMessage("Verification for server is on.").queue();
+        		event.getChannel().sendMessage("Auto-ban for server is on.").queue();
         	} catch (IOException io) {
         		io.printStackTrace();
         	} finally {
@@ -44,7 +44,7 @@ public class AutobanToggle extends ListenerAdapter {
         		// set the properties value	
         		Main.config.setProperty("verification" + event.getGuild().getId(), "0");
         		Main.config.store(Main.output, null);
-        		event.getChannel().sendMessage("Autoban for server is off.").queue();
+        		event.getChannel().sendMessage("Auto-ban for server is off.").queue();
         		
         	} catch (IOException io) {
         		io.printStackTrace();
