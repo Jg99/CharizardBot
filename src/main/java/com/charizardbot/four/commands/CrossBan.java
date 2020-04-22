@@ -108,12 +108,16 @@ public class CrossBan extends ListenerAdapter {
                 if (!event.getMessage().getMentionedUsers().isEmpty()) {
                     adminID = event.getMessage().getMentionedUsers().get(0).getId();
                 }
+                if (!admins.contains(adminID)) {
                 admins += adminID + "\n";
                 BufferedWriter writer = new BufferedWriter(new FileWriter("xbanadmins.txt"));
                 writer.write(admins);
                 writer.close();
                 Main.XBAN_ADMINS = admins;
                 event.getChannel().sendMessage("Added admin <@" + adminID + "> to the cross-ban system.").queue();
+            } else {
+                event.getChannel().sendMessage("Admin <@" + adminID + "> was already in the cross-ban system.").queue();
+                }
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "remcadmin") && Main.XBAN_ADMINS.contains(event.getAuthor().getId())) {
                 String msg = event.getMessage().getContentRaw();
@@ -140,7 +144,7 @@ public class CrossBan extends ListenerAdapter {
                 writer.write(admins);
                 writer.close();
                 Main.XBAN_ADMINS = admins;
-                event.getChannel().sendMessage("Removed admin <@" + adminID + "> from the cross-ban system.").queue();
+                event.getChannel().sendMessage("Removed admin <@" + adminID + "> from the cross-ban system. if they were in it.").queue();
             }
             if (event.getMessage().getContentRaw().equals(prefix + "listcadmins") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
                 event.getChannel().sendMessage(Main.XBAN_ADMINS).queue();
