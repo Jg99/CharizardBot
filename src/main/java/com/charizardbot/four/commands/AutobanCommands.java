@@ -11,8 +11,6 @@ import java.io.IOException;
 public class AutobanCommands extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		try {
-//		String serverID = "468440854886088714"; //GTP
-//		String pigswickID = "682657889613250570"; //pigswick 
     	String prefix = Main.config.getProperty(event.getGuild().getId());
     	if (prefix == null)
     		prefix = "!";
