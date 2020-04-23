@@ -109,6 +109,16 @@ public class JoinServerStuff extends ListenerAdapter{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+		//set autoban to disabled by default
+		try {
+			if (Main.config.getProperty("verification" + serverID) == null) {
+				Main.config.setProperty("verification" + event.getGuild().getId(), "0");
+				Main.output = new FileOutputStream("server_config.cfg");
+				Main.config.store(Main.output, null);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 /*		try {
     	URL url = new URL("https://discordbotlist.com/api/bots/428634701771702282/stats");
     	String token = "";

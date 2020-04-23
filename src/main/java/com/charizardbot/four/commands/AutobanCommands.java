@@ -39,7 +39,8 @@ public class AutobanCommands extends ListenerAdapter {
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");
         		// set the properties value	
-        		Main.config.setProperty("verification" + event.getGuild().getId(), "0");
+				Main.config.setProperty("verification" + event.getGuild().getId(), "0");
+				Main.output = new FileOutputStream("server_config.cfg");
         		Main.config.store(Main.output, null);
         		event.getChannel().sendMessage("Auto-ban for server is off.").queue();
         		

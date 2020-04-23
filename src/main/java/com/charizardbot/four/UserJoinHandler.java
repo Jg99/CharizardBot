@@ -1,5 +1,6 @@
 package com.charizardbot.four;
 import java.awt.Color;
+import java.io.FileOutputStream;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -13,7 +14,12 @@ public class UserJoinHandler extends ListenerAdapter {
 		try {
     	String verificationToggle = "0"; //default value if getting property fails
     	try {
-        	 verificationToggle = Main.config.getProperty("verification" + event.getGuild().getId());
+			 verificationToggle = Main.config.getProperty("verification" + event.getGuild().getId());
+			 if (Main.config.getProperty("verification" + event.getGuild().getId()) == null) {
+				Main.config.setProperty("verification" + event.getGuild().getId(), "0");
+				Main.output = new FileOutputStream("server_config.cfg");
+				Main.config.store(Main.output, null);
+			 }
     	} catch (Exception e)
     	{
     	}
