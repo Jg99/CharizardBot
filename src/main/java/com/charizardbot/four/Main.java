@@ -1,5 +1,4 @@
 package com.charizardbot.four;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,10 +16,9 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.AnimeList;
-import com.charizardbot.four.commands.AutobanToggle;
+import com.charizardbot.four.commands.AutobanCommands;
 import com.charizardbot.four.commands.BulkDelete;
 import com.charizardbot.four.commands.ChatFilterToggle;
 import com.charizardbot.four.commands.CoCCmds;
@@ -58,7 +56,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "4.4.1";
+	public static final String VERSION = "4.4.2";
 	public static String filterDB = "";
 	public static File chatFilter;
     public static String filterFile = "chatfilter.txt";
@@ -327,7 +325,7 @@ public class Main {
             api.addEventListener(new RngCommand());
             api.addEventListener(new RpsCommand());
             api.addEventListener(new JoinDate());
-            api.addEventListener(new AutobanToggle());
+            api.addEventListener(new AutobanCommands());
             api.addEventListener(new PokedexCommand());
             api.addEventListener(new PokemonQuoteCommand());
             api.addEventListener(new ImgurSearch());
@@ -350,9 +348,7 @@ public class Main {
 			* May add user Join options in the future such as a welcome message.
 			*/
 			api.addEventListener(new UserJoinHandler());
-			
 			api.addEventListener(new MessageLogger());
-
         } catch (LoginException e) {
             e.printStackTrace();
         }
