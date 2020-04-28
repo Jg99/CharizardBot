@@ -73,11 +73,12 @@ public class CrossBan extends ListenerAdapter {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
                             try {
-                            event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
-                            } catch (Exception e){Main.logger.info("Invalid ban");}
+                                event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                            Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                            } catch (Exception e){Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());}
                         }
                     }
-                    Main.logger.info(userID + " banned in the x-ban system.");
+                    Main.logger.info(userID + " banned in the x-ban system done.");
                     scan.close();
                     event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system.").queue();
                 }
