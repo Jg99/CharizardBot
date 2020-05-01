@@ -6,7 +6,6 @@
 
 # BlueJ files
 *.ctxt
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -34,3 +33,6 @@ hs_err_pid*
 *.DS_STORE
 #vscode dirs
 **.vscode/
+#IntelliJ
+**.idea/
+*.iml
