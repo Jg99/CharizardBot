@@ -8,7 +8,7 @@
 //  This class is called directly from the warMember class.
 //
 //********************************************************************/
-
+//testing commit
 package com.charizardbot.clashofjava;
 
 import org.json.JSONObject;
