@@ -76,7 +76,7 @@ public class RedditCommands extends ListenerAdapter {
             }
 		    DefaultPaginator<Submission> paginator = Main.reddit.subreddit(subreddit)
 		    .posts()
-	    	.limit(100)
+	    	.limit(200)
          	.sorting(subSort) // top posts
             .timePeriod(time) // of all time
 	    	.build();
