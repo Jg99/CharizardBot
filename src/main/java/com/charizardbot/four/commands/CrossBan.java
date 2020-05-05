@@ -20,6 +20,7 @@ public class CrossBan extends ListenerAdapter {
           */
           try {
             String prefix = Main.config.getProperty(event.getGuild().getId());
+            String admins = Main.XBAN_ADMINS;
             if (prefix == null)
                 prefix = "!";
                 /**!addcsv - Add your server to the cross ban list
@@ -61,9 +62,8 @@ public class CrossBan extends ListenerAdapter {
                 Main.XBAN_SERVERS = svrs;
                 event.getChannel().sendMessage("Removed your server from the cross-ban system if it was in.").queue();
             }
-            if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && ( event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                String admins = Main.XBAN_ADMINS;
-                if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS) && admins.contains(event.getAuthor().getId())) {
+            if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && ( admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
+                if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
                     String userID = event.getMessage().getContentRaw().substring(6, event.getMessage().getContentRaw().length());
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
@@ -83,9 +83,9 @@ public class CrossBan extends ListenerAdapter {
                     event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system.").queue();
                 }
             }
-            if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && ( event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                String admins = Main.XBAN_ADMINS;
-                if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS) && admins.contains(event.getAuthor().getId())) {
+            if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && ( admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
+                admins = Main.XBAN_ADMINS;
+                if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
                     String userID = event.getMessage().getContentRaw().substring(8, event.getMessage().getContentRaw().length());
                     Scanner scan = new Scanner(Main.XBAN_SERVERS);
                     while (scan.hasNextLine()) {
@@ -104,7 +104,7 @@ public class CrossBan extends ListenerAdapter {
             //adds/removes admins to cross ban system so anyone can't just ban.
             if (event.getMessage().getContentRaw().startsWith(prefix + "addcadmin") && Main.XBAN_ADMINS.contains(event.getAuthor().getId())) {
                 String msg = event.getMessage().getContentRaw();
-                String admins = Main.XBAN_ADMINS;
+                admins = Main.XBAN_ADMINS;
                 String adminID = msg.substring(11, msg.length());
                 if (!event.getMessage().getMentionedUsers().isEmpty()) {
                     adminID = event.getMessage().getMentionedUsers().get(0).getId();
@@ -126,7 +126,7 @@ public class CrossBan extends ListenerAdapter {
                 if (!event.getMessage().getMentionedUsers().isEmpty()) {
                     adminID = event.getMessage().getMentionedUsers().get(0).getId();
                 }
-                String admins = Main.XBAN_ADMINS;
+                admins = Main.XBAN_ADMINS;
                // String[] lines = admins.split(System.getProperty("line.separator"));
                String[] lines = admins.split("\n");
                 for(int i=0;i<lines.length;i++){
