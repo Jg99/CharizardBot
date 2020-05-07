@@ -177,7 +177,77 @@ public class RedditCommands extends ListenerAdapter {
                 DefaultPaginator<Submission> paginator = Main.reddit.subreddits(memeSubs[0], memeSubs[1], memeSubs[2], memeSubs[3], memeSubs[4])
                 .posts()
                 .limit(200)
-                .sorting(subSort) // top posts
+                .sorting(subSort) // sorted posts
+                .timePeriod(TimePeriod.ALL) // of all time
+                .build();
+                Random rand = new Random();
+                Listing<Submission> posts = paginator.next();
+                int rPost = rand.nextInt(posts.size());
+                if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
+                    embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
+                    embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
+                    embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
+                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+                    event.getChannel().sendMessage(embed.build()).queue();
+                } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
+                    event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
+                } else {
+                    EmbedBuilder embed = new EmbedBuilder();
+                    embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
+                    embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
+                    embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
+                    embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
+                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+                    event.getChannel().sendMessage(embed.build()).queue();
+                }
+            }
+            /**
+            * Randomly pick some totally not nsfw stuff.
+            */
+            if (event.getMessage().getContentRaw().startsWith(prefix + "hentai") && redditCommands.equals("1")) {
+                String[] nsfwSubs = {"hentai", "HENTAI_GIF", "hentai_paradise", "pokeporn", "waifusgonewild"};
+                String[] arguments = event.getMessage().getContentRaw().split("\\s+");
+                SubredditSort subSort = SubredditSort.TOP;
+                String sortMsg = "Random top hentai post from from r/";
+                //Subreddit sorting, if possible
+            if (arguments.length > 1)
+            {
+                String sort = arguments[1].toLowerCase();
+                switch (sort) {
+                    case "top":
+                        subSort = SubredditSort.TOP;
+                        sortMsg = "Random top hentai post from r/";
+                        break;
+                    case "hot":
+                        subSort = SubredditSort.HOT;
+                        sortMsg = "Random hot meme from r/";
+                        break;
+                    case "new":
+                        subSort = SubredditSort.NEW;
+                        sortMsg = "Random new hentai post from r/";
+                        break;
+                    case "rising":
+                        subSort = SubredditSort.RISING;
+                        sortMsg = "Random rising hentai post from r/";
+                        break;
+                    case "controversial":
+                        subSort = SubredditSort.CONTROVERSIAL;
+                        sortMsg = "Random controversial hentai post from r/";
+                        break;
+                    case "best":
+                        subSort = SubredditSort.BEST;
+                        sortMsg = "Random best hentai post from r/";
+                        break;
+                }
+            }
+                DefaultPaginator<Submission> paginator = Main.reddit.subreddits(nsfwSubs[0], nsfwSubs[1], nsfwSubs[2], nsfwSubs[3], nsfwSubs[4])
+                .posts()
+                .limit(200)
+                .sorting(subSort) // sorted posts
                 .timePeriod(TimePeriod.ALL) // of all time
                 .build();
                 Random rand = new Random();
