@@ -318,7 +318,7 @@ public class RedditCommands extends ListenerAdapter {
                         Main.config.store(Main.output, null);
                         wasNull = true;
                         wasChanged = true;
-                        event.getChannel().sendMessage("No toggle was set for Reddit NSFW. Set to on by default. Only works in NSFW-enabled channels. Please run again to turn off.").queue();
+                        event.getChannel().sendMessage("No toggle was set for Reddit NSFW. Set to on. Only works in NSFW-enabled channels. Please run again to turn off.").queue();
                         }
                     if (!wasNull ) {
                         if (toggle.equals("0") && !wasChanged) {
