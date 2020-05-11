@@ -17,7 +17,7 @@ public class KITableCrawler {
         @SuppressWarnings("deprecation")
 		org.jsoup.nodes.Document doc = Jsoup.connect("http://www.wizard101.com/pvp/schedule")
         		.userAgent(userAgent)
-        		.timeout(6000)
+        		.timeout(20000)
         		.validateTLSCertificates(false)
         		.get();
         org.jsoup.select.Elements rows = doc.select("tr");
@@ -26,7 +26,7 @@ public class KITableCrawler {
             org.jsoup.select.Elements columns = row.select("td");
             for (org.jsoup.nodes.Element column:columns)
             {
-                contents += column.text() + " ";
+				contents += column.text() + " ";
             }
             contents += "\n";
         }
