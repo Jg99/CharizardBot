@@ -27,6 +27,7 @@ public class KITableCrawler {
             for (org.jsoup.nodes.Element column:columns)
             {
 				contents += column.text() + " ";
+				System.out.println(column.text());
             }
             contents += "\n";
         }
