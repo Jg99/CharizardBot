@@ -286,7 +286,6 @@ public class Main {
 					lastUpdated = formatter.format(date) + " UTC";
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
 					// just keep trying again every 30 seconds. If it's down, it'll eventually succeed when it's back up.
 					run();
 				}
