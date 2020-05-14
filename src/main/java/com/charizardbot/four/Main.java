@@ -15,7 +15,6 @@ import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.UUID;
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.AnimeList;
 import com.charizardbot.four.commands.AutobanCommands;
@@ -50,11 +49,6 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dean.jraw.RedditClient;
-import net.dean.jraw.http.NetworkAdapter;
-import net.dean.jraw.http.OkHttpNetworkAdapter;
-import net.dean.jraw.http.UserAgent;
-import net.dean.jraw.oauth.Credentials;
-import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
 	public static final String VERSION = "4.4.4";
 	public static String filterDB = "";
@@ -81,7 +75,7 @@ public class Main {
 	public static String REDDIT_SECRET = "";
 	public static String XBAN_SERVERS = "";
 	public static String XBAN_ADMINS = "";
-	public static String PASTBANNED = "";
+	public static String XBAN_BANSDB = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
 	public static boolean isBulkDeleted = false;
@@ -148,7 +142,7 @@ public class Main {
 			logger.info("Loading Server IDs for cross ban utility.");
 			fileScan.close();
 			} else {
-				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
+				logger.info("xbanservers.txt does not exist");
 			}
 			/**Cross ban admin list. People who can ban/unban members from servers in the system. */
 			File xbanadmins = new File("xbanadmins.txt");
@@ -160,8 +154,20 @@ public class Main {
 			logger.info("Loading admins for cross ban utility.");
 			fileScan.close();
 			} else {
-				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
+				logger.info("xbanadmins.txt does not exist");
 			}
+			/**Cross ban list. saving all of the previous bans and reloading */
+			File pastbans = new File("pastBans.txt");
+				if (pastbans.exists()) {
+					Scanner fileScan = new Scanner(pastbans);
+					while (fileScan.hasNextLine()) {
+						XBAN_BANSDB += fileScan.nextLine() + "\n";
+					}
+					logger.info("Loading banned database for cross ban utility.");
+					fileScan.close();
+				} else {
+					logger.info("pastBans.txt does not exist");
+				}
 			/**Clash of Clans token. You can get this from https://developer.clashofclans.com/
 			Note: Tokens are IP address limited.*/
 			File cocToken = new File("coc_token.txt");
@@ -293,18 +299,6 @@ public class Main {
 				}
 			}, 5000, 1800000); //We crawl every 30 minutes because we don't need to update it very frequently.
 
-			/**Cross ban list. saving all of the previous bans and reloading */
-			File pastbans = new File("pastBans.txt");
-			if (pastbans.exists()) {
-				Scanner fileScan = new Scanner(pastbans);
-				while (fileScan.hasNextLine()) {
-					PASTBANNED += fileScan.nextLine() + "\n";
-				}
-				logger.info("Loading Passed bans for cross ban utility.");
-				fileScan.close();
-			} else {
-				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
-			}
 			//JDA API setup
 			try {
 				String activity = "";

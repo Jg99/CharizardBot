@@ -1,9 +1,6 @@
 package com.charizardbot.four.commands;
-
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 import com.charizardbot.four.Main;
@@ -72,8 +69,7 @@ public class CrossBan extends ListenerAdapter {
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
                     }
-                    String banned = Main.PASTBANNED;
-                    String[] lines = banned.split("\n");
+                    String banned = Main.XBAN_BANSDB;
                     if (banned.contains(userID)) {
                         event.getChannel().sendMessage("<@" + userID + ">  is already in ban list").queue();
                         return;
@@ -81,25 +77,24 @@ public class CrossBan extends ListenerAdapter {
                         banned += userID + "\n";
                         BufferedWriter writer = new BufferedWriter(new FileWriter("pastBans.txt"));
                         writer.write(banned);
-                        Main.PASTBANNED = banned;
+                        Main.XBAN_BANSDB = banned;
                         writer.close();
-                        //event.getChannel().sendMessage("<@" + userID + "> has been added to ban list").queue();
-                    }
-                    Scanner scan = new Scanner(Main.XBAN_SERVERS);
-                    while (scan.hasNextLine()) {
-                        String svID = scan.nextLine();
-                        if (!svID.equals("")) {
-                            try {
-                                event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
-                                Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
-                            } catch (Exception e) {
-                                Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
+                        Scanner scan = new Scanner(Main.XBAN_SERVERS);
+                        while (scan.hasNextLine()) {
+                            String svID = scan.nextLine();
+                            if (!svID.equals("")) {
+                                try {
+                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                                    Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                                } catch (Exception e) {
+                                     Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
+                                }
                             }
                         }
-                    }
-                    Main.logger.info(userID + " banned in the x-ban system done.");
-                    scan.close();
-                    event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queue();
+                        Main.logger.info(userID + " banned in the x-ban system done.");
+                        scan.close();
+                        event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queue();
+                }
                 }
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
@@ -118,7 +113,7 @@ public class CrossBan extends ListenerAdapter {
                         }
                     }
                     //Remove from file
-                    String banned = Main.PASTBANNED;
+                    String banned = Main.XBAN_BANSDB;
                     String[] lines = banned.split("\n");
                     for (int i = 0; i < lines.length; i++) {
                         if (lines[i].contains(userID)) {
@@ -135,7 +130,7 @@ public class CrossBan extends ListenerAdapter {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("pastBans.txt"));
                     writer.write(banned);
                     writer.close();
-                    Main.PASTBANNED = banned;
+                    Main.XBAN_BANSDB = banned;
                     Main.logger.info(userID + " unbanned in the x-ban system.");
                     scan.close();
                     event.getChannel().sendMessage("Unbanned <@" + userID + "> from servers in the cross-ban system and removed from banned list.").queue();
@@ -191,9 +186,8 @@ public class CrossBan extends ListenerAdapter {
                 event.getChannel().sendMessage(Main.XBAN_ADMINS).queue();
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cpastban") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                Scanner scanp = new Scanner("pastBans.txt");
                 String svID = event.getGuild().getId();
-                String banned = Main.PASTBANNED;
+                String banned = Main.XBAN_BANSDB;
                 String[] lines = banned.split("\n");
                 for (int i = 0; i < lines.length; i++) {
                     String userID = lines[i];
@@ -204,8 +198,8 @@ public class CrossBan extends ListenerAdapter {
                     } catch (Exception e) {
                         Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
                     }
-                    Main.logger.info(userID + " banned in the x-ban system done.");
-                    event.getChannel().sendMessage("Banned <@" + userID + "> from this server.").queue();
+                    Main.logger.info(userID + " ban in the x-ban system done.");
+                    event.getChannel().sendMessage("Banned users in the database retroactively. in this server.").queue();
                 }
             }
 
