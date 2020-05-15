@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.AnimeList;
 import com.charizardbot.four.commands.AutobanCommands;
@@ -49,6 +51,11 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dean.jraw.RedditClient;
+import net.dean.jraw.http.NetworkAdapter;
+import net.dean.jraw.http.OkHttpNetworkAdapter;
+import net.dean.jraw.http.UserAgent;
+import net.dean.jraw.oauth.Credentials;
+import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
 	public static final String VERSION = "4.4.4";
 	public static String filterDB = "";
@@ -213,11 +220,11 @@ public class Main {
 				/**
 				 * Reddit client setup
 				 */
-				/*UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
+				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
 				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
 				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
 				reddit = OAuthHelper.automatic(networkAdapter, credentials);
-			*/
+			
 			} else {
 				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
 			}
