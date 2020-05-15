@@ -1,5 +1,4 @@
 package com.charizardbot.four;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -89,7 +88,6 @@ public class Main {
 	public static int bulkCount = 0;
 	public static int curMsgLog = 0;
 	public static RedditClient reddit;
-
 	public static void main(String[] args) {
 		try {
 			File logFileConfig = new File("log4j2.xml");
