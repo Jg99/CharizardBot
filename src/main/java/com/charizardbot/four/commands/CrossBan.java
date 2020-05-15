@@ -199,7 +199,7 @@ public class CrossBan extends ListenerAdapter {
                         Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
                     }
                     Main.logger.info(userID + " ban in the x-ban system done.");
-                    event.getChannel().sendMessage("Banned users in the database retroactively. in this server.").queue();
+                    event.getChannel().sendMessage("Banned users in the database retroactively, in this server.").queue();
                 }
             }
 
