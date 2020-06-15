@@ -41,6 +41,7 @@ import com.charizardbot.four.commands.ServersCommand;
 import com.charizardbot.four.commands.SuggestionCommand;
 import com.charizardbot.four.commands.TenorSearch;
 import com.charizardbot.four.commands.WizSchedule;
+import com.charizardbot.four.commands.enlargeEmote;
 import com.charizardbot.four.commands.listSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -355,6 +356,7 @@ public class Main {
 				api.addEventListener(new BulkDelete());
 				api.addEventListener(new RedditCommands());
 				api.addEventListener(new CrossBan());
+				api.addEventListener(new enlargeEmote());
 				// join server listener. Listens for when the bot joins a new server.
 				api.addEventListener(new JoinServerStuff());
 				/**join listener for that sweet autoban stuff. GTP only (my server).
