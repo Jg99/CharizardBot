@@ -11,7 +11,6 @@ public class enlargeEmote extends ListenerAdapter {
             prefix = "!";  
         if (!event.getMessage().getEmotes().isEmpty() && event.getMessage().getContentRaw().startsWith(prefix + "enlarge")) {
             List<Emote> emotes = event.getMessage().getEmotes();
-            System.out.println("Emote enlarger");
             String urls = "";
             for (Emote a : emotes) {
              urls += a.getImageUrl() + "\n";
