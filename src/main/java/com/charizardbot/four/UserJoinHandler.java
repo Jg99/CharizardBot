@@ -9,7 +9,7 @@ public class UserJoinHandler extends ListenerAdapter {
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		String serverID = event.getGuild().getId().toString();
 		String logChan = "";
-		String svrLogging = "";
+		String svrLogging = "0";
 		String banDur = "";
 		long banDuration = 3600; //seconds, default
 		try {
@@ -29,7 +29,6 @@ public class UserJoinHandler extends ListenerAdapter {
 		try {
 		logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());	
 		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
-		System.out.println(svrLogging);
 		banDur = Main.config.getProperty("banDuration" + serverID);
 		banDuration = Long.parseLong(banDur);
 		} catch (Exception e) {e.printStackTrace();}
