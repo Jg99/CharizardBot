@@ -38,6 +38,7 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                                 Main.config.store(Main.output, null);
                             }
                         } catch (IOException e) {e.printStackTrace();}
+                        if (Main.filter.isFilteredWord() == true && !event.getAuthor().isBot()) {
                             //check for logging enabled/set channel
                             String logChannel = "";
                             //get config defaults
@@ -45,16 +46,15 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             String svrLogging = "0"; //disabled by default
                             String svrfilter = "1"; //enabled by default
                             try {
-                            chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
-                            svrfilter = Main.config.getProperty("filter" + event.getGuild().getId());
-                            logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
-                            svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
-                            
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                     if (Main.filter.isFilteredWord() == true && !event.getAuthor().isBot() && svrfilter.equals("1") && chfilter.equals("1"))
-                     {
+                                  chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
+                                  svrfilter = Main.config.getProperty("filter" + event.getGuild().getId());
+                                  logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
+                                  System.out.println(logChannel);
+                                  svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+                                  } catch (Exception e) { 
+                                      e.printStackTrace();
+                              }
+                              if (svrfilter.equals("1") && chfilter.equals("1")) {
                         if (event.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE)) {
                          EmbedBuilder embed = new EmbedBuilder();
                          embed.setTitle("Inappropriate language detected from: " + event.getAuthor().getAsTag());
@@ -80,6 +80,7 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             event.getJDA().getTextChannelById(logChannel).sendMessage(logEmbed.build()).queue();                            
                         }
                        }
+                    }
                     }
                         }
                    } catch (Exception e) {Main.logger.info("WARN: Exception in MessageEditListener: \n" + e);}
