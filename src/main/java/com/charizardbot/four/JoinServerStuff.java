@@ -101,8 +101,8 @@ public class JoinServerStuff extends ListenerAdapter{
 				e.printStackTrace();
 			}
 			try {
-				if (Main.config.getProperty("isMsgLoggingEnabled" + serverID)== null) {
-					Main.config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), "1");
+				if (Main.logging_config.getProperty("isMsgLoggingEnabled" + serverID)== null) {
+					Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), "1");
 					Main.output = new FileOutputStream("server_config.cfg");
 					Main.config.store(Main.output, null);
 				}

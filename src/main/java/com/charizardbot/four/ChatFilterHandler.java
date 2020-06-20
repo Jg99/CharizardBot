@@ -45,9 +45,9 @@ public class ChatFilterHandler extends ListenerAdapter {
                              try {
                              chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
                              svrfilter = Main.config.getProperty("filter" + event.getGuild().getId());
-                             logChannel = Main.config.getProperty("logchannel" + event.getGuild().getId());
-                             svrLogging = Main.config.getProperty("isLoggingEnabled" + event.getGuild().getId());
-                             } catch (Exception e) {
+                             logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+                             svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+                             } catch (Exception e) { 
                                  e.printStackTrace();
                              }
                      if (Main.filter.isFilteredWord() == true && !event.getAuthor().isBot() && svrfilter.equals("1") && chfilter.equals("1"))

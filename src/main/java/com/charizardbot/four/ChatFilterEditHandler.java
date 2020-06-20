@@ -47,8 +47,9 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             try {
                             chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
                             svrfilter = Main.config.getProperty("filter" + event.getGuild().getId());
-                            logChannel = Main.config.getProperty("logchannel" + event.getGuild().getId());
-                            svrLogging = Main.config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+                            logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+                            svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+                            
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

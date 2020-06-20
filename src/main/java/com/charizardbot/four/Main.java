@@ -70,6 +70,7 @@ public class Main {
 	public static InputStream input = null;
 	public static OutputStream output = null;
 	public static Properties config = new Properties();
+	public static Properties logging_config = new Properties();
 	public static ImgurAPI imgur = new ImgurAPI();
 	public static String messageID_deletehandler = "";
 	private static String discordtoken = ""; //Tokens are blank so we can read from tokenfile, or specify in args.
@@ -83,6 +84,7 @@ public class Main {
 	public static String XBAN_SERVERS = "";
 	public static String XBAN_ADMINS = "";
 	public static String XBAN_BANSDB = "";
+	public static String LOGGING_CFG = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
 	public static boolean isBulkDeleted = false;
@@ -255,6 +257,12 @@ public class Main {
 			logger.info("Config file does not exist, creating server_config.cfg");
 			new FileOutputStream("server_config.cfg", false).close();
 		}
+		File loggingConfig = new File("logConfig.cfg");
+		if (!loggingConfig.exists())
+		{
+			logger.info("Config file does not exist, creating server_config.cfg");
+			new FileOutputStream("logConfig.cfg", false).close();
+		}
 		if (chatFilter.exists()) {
 			logger.info("Chat Filter Exists!");
 			Scanner fileScan = new Scanner(chatFilter);
@@ -272,6 +280,9 @@ public class Main {
 				input = new FileInputStream("server_config.cfg");
 				// load a properties file
 				config.load(input);
+				//load logging config
+				input = new FileInputStream("logConfig.cfg");
+				logging_config.load(input);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			} finally {
