@@ -62,7 +62,7 @@ public class Main {
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static String filterFile = "chatfilter.txt";
-	public static final String OWNER_ID = "184534810369196032";
+	public static final String OWNER_ID = "372906993519689728";
 	public static ChatFilter filter;
 	public static String ownerNick = "James, Meme Man 2020#0820";
 	public static String table = "";
@@ -105,7 +105,7 @@ public class Main {
 					bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<Configuration name=\"CharizardBot Logging\" status=\"INFO\" strict=\"true\">\r\n        <Appenders>\r\n        <Console name=\"LogToConsole\" target=\"SYSTEM_OUT\">\r\n            <PatternLayout pattern=\"%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n\"/>\r\n        </Console>\r\n        <RollingFile name=\"LogToRollingFile\" fileName=\"log/charbotlogs.log\"\r\n                    filePattern=\"log/$${date:yyyy-MM}/charbotlogs-%d{MM-dd-yyyy}-%i.log.gz\">\r\n        <PatternLayout>\r\n            <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>\r\n        </PatternLayout>\r\n        <Policies>\r\n            <TimeBasedTriggeringPolicy />\r\n            <SizeBasedTriggeringPolicy size=\"10 MB\"/>\r\n        </Policies>\r\n    </RollingFile>\r\n    </Appenders>\r\n    <Loggers>\r\n        <Root level=\"INFO\">\r\n           <AppenderRef ref=\"LogToRollingFile\"/>\r\n            <AppenderRef ref=\"LogToConsole\"/>\r\n        </Root>\r\n    </Loggers>\r\n</Configuration>");
 					bw.flush();
 				} catch (IOException ioe) {
-			   ioe.printStackTrace();
+					ioe.printStackTrace();
 				} finally {                       // always close the file
 					if (bw != null) try {
 						bw.close();
@@ -136,57 +136,57 @@ public class Main {
 			if (tokenFile.exists()) {
 				Scanner fileScan = new Scanner(tokenFile);
 				while (fileScan.hasNextLine()) {
-				discordtoken = fileScan.nextLine();
-				logger.info("Using Discord token from token.txt.");
-			}
-			fileScan.close();
+					discordtoken = fileScan.nextLine();
+					logger.info("Using Discord token from token.txt.");
+				}
+				fileScan.close();
 			}
 			/**Cross ban server ID file. One server ID per line. */
 			File xbanserver = new File("xbanservers.txt");
 			if (xbanserver.exists()) {
-			Scanner fileScan = new Scanner(xbanserver);
-			while (fileScan.hasNextLine()) {
-				XBAN_SERVERS += fileScan.nextLine() + "\n";
-			}
-			logger.info("Loading Server IDs for cross ban utility.");
-			fileScan.close();
+				Scanner fileScan = new Scanner(xbanserver);
+				while (fileScan.hasNextLine()) {
+					XBAN_SERVERS += fileScan.nextLine() + "\n";
+				}
+				logger.info("Loading Server IDs for cross ban utility.");
+				fileScan.close();
 			} else {
 				logger.info("xbanservers.txt does not exist");
 			}
 			/**Cross ban admin list. People who can ban/unban members from servers in the system. */
 			File xbanadmins = new File("xbanadmins.txt");
 			if (xbanadmins.exists()) {
-			Scanner fileScan = new Scanner(xbanadmins);
-			while (fileScan.hasNextLine()) {
-				XBAN_ADMINS += fileScan.nextLine() + "\n";
-			}
-			logger.info("Loading admins for cross ban utility.");
-			fileScan.close();
+				Scanner fileScan = new Scanner(xbanadmins);
+				while (fileScan.hasNextLine()) {
+					XBAN_ADMINS += fileScan.nextLine() + "\n";
+				}
+				logger.info("Loading admins for cross ban utility.");
+				fileScan.close();
 			} else {
 				logger.info("xbanadmins.txt does not exist");
 			}
 			/**Cross ban list. saving all of the previous bans and reloading */
 			File pastbans = new File("pastBans.txt");
-				if (pastbans.exists()) {
-					Scanner fileScan = new Scanner(pastbans);
-					while (fileScan.hasNextLine()) {
-						XBAN_BANSDB += fileScan.nextLine() + "\n";
-					}
-					logger.info("Loading banned database for cross ban utility.");
-					fileScan.close();
-				} else {
-					logger.info("pastBans.txt does not exist");
+			if (pastbans.exists()) {
+				Scanner fileScan = new Scanner(pastbans);
+				while (fileScan.hasNextLine()) {
+					XBAN_BANSDB += fileScan.nextLine() + "\n";
 				}
+				logger.info("Loading banned database for cross ban utility.");
+				fileScan.close();
+			} else {
+				logger.info("pastBans.txt does not exist");
+			}
 			/**Clash of Clans token. You can get this from https://developer.clashofclans.com/
-			Note: Tokens are IP address limited.*/
+			 Note: Tokens are IP address limited.*/
 			File cocToken = new File("coc_token.txt");
 			if (cocToken.exists()) {
-			Scanner fileScan = new Scanner(cocToken);
-			while (fileScan.hasNextLine()) {
-				COC_TOKEN = fileScan.nextLine();
-				logger.info("Using Clash of Clans token from coc_token.txt.");
-			}
-			fileScan.close();
+				Scanner fileScan = new Scanner(cocToken);
+				while (fileScan.hasNextLine()) {
+					COC_TOKEN = fileScan.nextLine();
+					logger.info("Using Clash of Clans token from coc_token.txt.");
+				}
+				fileScan.close();
 			} else {
 				logger.info("Please provide a valid Clash of Clans token and place it in coc_token.txt.");
 			}
@@ -197,12 +197,12 @@ public class Main {
 			 */
 			File imgurToken = new File("imgur_token.txt");
 			if (imgurToken.exists()) {
-			Scanner fileScan = new Scanner(imgurToken);
+				Scanner fileScan = new Scanner(imgurToken);
 				IMGUR_ID = fileScan.nextLine();
 				IMGUR_SECRET = fileScan.nextLine();
 				logger.info("Using Imgur token from imgur_token.txt.");
 				imgur.authenticate();
-			fileScan.close();
+				fileScan.close();
 			} else {
 				imgur.isError = true; //force an error for imgur since no token provided
 				logger.info("Please provide a valid imgur client id and secret (client ID on first line, secret on second) and place it in imgur_token.txt.");
@@ -225,57 +225,57 @@ public class Main {
 				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
 				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
 				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
-				reddit = OAuthHelper.automatic(networkAdapter, credentials);
-			
+				//reddit = OAuthHelper.automatic(networkAdapter, credentials);
+
 			} else {
 				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
 			}
 			/**
 			 * Tenor GIF token
-			 * Very high ratelimit, very few limits to API. 
+			 * Very high ratelimit, very few limits to API.
 			 * https://tenor.com/developer/
 			 */
 			File tenorToken = new File("tenor_token.txt");
 			if (tenorToken.exists()) {
 				Scanner fileScan = new Scanner(tenorToken);
-					TENOR_TOKEN = fileScan.nextLine();
-					logger.info("Using Tenor token from tenor_token.txt.");
+				TENOR_TOKEN = fileScan.nextLine();
+				logger.info("Using Tenor token from tenor_token.txt.");
 				fileScan.close();
-				} else {
-					logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
-				}
-		if (discordtoken.equals("")) {
-			System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
-			System.exit(0);
-		}
-        KITableCrawler crawler = new KITableCrawler(); //scrapes the Wizard101 PvP tournament website
-       	//Chat Filter & Config File
-		chatFilter = new File(filterFile);
-		File configFile = new File("server_config.cfg");
-		// Check files & load contents
-		if (!configFile.exists())
-		{
-			logger.info("Config file does not exist, creating server_config.cfg");
-			new FileOutputStream("server_config.cfg", false).close();
-		}
-		File loggingConfig = new File("logConfig.cfg");
-		if (!loggingConfig.exists())
-		{
-			logger.info("Config file does not exist, creating server_config.cfg");
-			new FileOutputStream("logConfig.cfg", false).close();
-		}
-		if (chatFilter.exists()) {
-			logger.info("Chat Filter Exists!");
-			Scanner fileScan = new Scanner(chatFilter);
-			filterDB = "";
-			while (fileScan.hasNextLine()) {
-				filterDB += "\n" + fileScan.nextLine();
+			} else {
+				logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
 			}
-			fileScan.close();
-		} else {
-			logger.info("Chat Filter does not exist! Creating chatfilter.txt");
-			new FileOutputStream(filterFile, false).close();
-		}
+			if (discordtoken.equals("")) {
+				System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
+				System.exit(0);
+			}
+			KITableCrawler crawler = new KITableCrawler(); //scrapes the Wizard101 PvP tournament website
+			//Chat Filter & Config File
+			chatFilter = new File(filterFile);
+			File configFile = new File("server_config.cfg");
+			// Check files & load contents
+			if (!configFile.exists())
+			{
+				logger.info("Config file does not exist, creating server_config.cfg");
+				new FileOutputStream("server_config.cfg", false).close();
+			}
+			File loggingConfig = new File("logConfig.cfg");
+			if (!loggingConfig.exists())
+			{
+				logger.info("Config file does not exist, creating server_config.cfg");
+				new FileOutputStream("logConfig.cfg", false).close();
+			}
+			if (chatFilter.exists()) {
+				logger.info("Chat Filter Exists!");
+				Scanner fileScan = new Scanner(chatFilter);
+				filterDB = "";
+				while (fileScan.hasNextLine()) {
+					filterDB += "\n" + fileScan.nextLine();
+				}
+				fileScan.close();
+			} else {
+				logger.info("Chat Filter does not exist! Creating chatfilter.txt");
+				new FileOutputStream(filterFile, false).close();
+			}
 			//PROPERTIES - Load Server configuration
 			try {
 				input = new FileInputStream("server_config.cfg");
@@ -378,6 +378,6 @@ public class Main {
 			} catch (LoginException e) {
 				e.printStackTrace();
 			}
-    } catch (Exception e) {logger.info("Exception in Main");}
-    }
+		} catch (Exception e) {logger.info("Exception in Main");}
+	}
 }

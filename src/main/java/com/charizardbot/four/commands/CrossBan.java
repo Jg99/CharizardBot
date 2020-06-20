@@ -87,12 +87,21 @@ public class CrossBan extends ListenerAdapter {
                         while (scan.hasNextLine()) {
                             String svID = scan.nextLine();
                             if (!svID.equals("")) {
-                                try {
-                                            event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
-                                            Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
-                                } catch (Exception e) {
-                                     Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
+                                if(event.getJDA().getGuildById(svID) != null) {
+                                    try {
+                                        event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                                        Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                                    } catch (Exception e) {
+                                        String invalidBan = svID;
+                                        System.out.println("Invalid ban. Server: " + event.getJDA().getGuildById(invalidBan).getName());
+                                        continue;
+                                    }
                                 }
+                                else
+                                    {
+                                        Main.logger.info("Invalid Server: " +userID + " could not be banned in " + svID + ".");
+                                        continue;
+                                    }
                             }
                         }
                         Main.logger.info(userID + " banned in the x-ban system done.");
@@ -108,10 +117,19 @@ public class CrossBan extends ListenerAdapter {
                     while (scan.hasNextLine()) {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
+                            if(event.getJDA().getGuildById(svID)!= null){
                             try {
                                 event.getJDA().getGuildById(svID).unban(userID).queue();
+                                Main.logger.info(userID + " unbanned in " + event.getJDA().getGuildById(svID).getName() + ".");
                             } catch (Exception e) {
-                                Main.logger.info("Invalid unban");
+                                Main.logger.info("Invalid unban. Server: " + event.getJDA().getGuildById(svID).getName());
+                                continue;
+                            }
+                            }
+                            else
+                            {
+                                Main.logger.info("Invalid Server: " + userID + " could not be unbanned in " + svID + ".");
+                                continue;
                             }
                         }
                     }
