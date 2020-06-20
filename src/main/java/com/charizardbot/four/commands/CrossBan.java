@@ -1,7 +1,10 @@
 package com.charizardbot.four.commands;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import com.charizardbot.four.Main;
@@ -11,6 +14,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CrossBan extends ListenerAdapter {
+    public static String userID = "";
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         /**
          * This is a command that lets someone ban an account across multiple servers,
@@ -66,7 +70,7 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
-                    String userID = event.getMessage().getContentRaw().substring(6);
+                     userID = event.getMessage().getContentRaw().substring(6);
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
                     }
@@ -82,17 +86,18 @@ public class CrossBan extends ListenerAdapter {
                         writer.close();
                         Scanner scan = new Scanner(Main.XBAN_SERVERS);
                         event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queueAfter(5, TimeUnit.SECONDS);
-                        int banCount = 0;
                         while (scan.hasNextLine()) {
                             String svID = scan.nextLine();
                             if (!svID.equals("")) {
                                 try {
-                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queueAfter(banCount, TimeUnit.SECONDS);
-                                    Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
-                                    banCount++;
-                                    if (banCount > 5) {
-                                        banCount = 1;
-                                    }
+                                    Timer banDelay = new Timer();
+                                    banDelay.schedule(new TimerTask() {
+                                        public void run() {
+                                            event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                                            Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                                        }
+                                    }, 1000, 1800000);
+                                    banDelay.cancel();
                                 } catch (Exception e) {
                                      Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
                                 }
@@ -106,7 +111,7 @@ public class CrossBan extends ListenerAdapter {
             if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 admins = Main.XBAN_ADMINS;
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
-                    String userID = event.getMessage().getContentRaw().substring(8);
+                     userID = event.getMessage().getContentRaw().substring(8);
                     Scanner scan = new Scanner(Main.XBAN_SERVERS);
                     while (scan.hasNextLine()) {
                         String svID = scan.nextLine();
@@ -196,7 +201,7 @@ public class CrossBan extends ListenerAdapter {
                 String banned = Main.XBAN_BANSDB;
                 String[] lines = banned.split("\n");
                 for (int i = 0; i < lines.length; i++) {
-                    String userID = lines[i];
+                     userID = lines[i];
                     System.out.println(userID);
                     try {
                         event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
