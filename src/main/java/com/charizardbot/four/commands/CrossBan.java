@@ -66,7 +66,6 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
-                    boolean isBanned = false;
                     String userID = event.getMessage().getContentRaw().substring(6);
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
@@ -82,12 +81,18 @@ public class CrossBan extends ListenerAdapter {
                         Main.XBAN_BANSDB = banned;
                         writer.close();
                         Scanner scan = new Scanner(Main.XBAN_SERVERS);
+                        event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queueAfter(5, TimeUnit.SECONDS);
+                        int banCount = 0;
                         while (scan.hasNextLine()) {
                             String svID = scan.nextLine();
                             if (!svID.equals("")) {
                                 try {
-                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").complete();
+                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queueAfter(banCount, TimeUnit.SECONDS);
                                     Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                                    banCount++;
+                                    if (banCount > 5) {
+                                        banCount = 1;
+                                    }
                                 } catch (Exception e) {
                                      Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
                                 }
@@ -95,10 +100,6 @@ public class CrossBan extends ListenerAdapter {
                         }
                         Main.logger.info(userID + " banned in the x-ban system done.");
                         scan.close();
-                        isBanned = true;
-                }
-                if (isBanned) {
-                    event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queueAfter(5, TimeUnit.SECONDS);
                 }
                 }
             }
