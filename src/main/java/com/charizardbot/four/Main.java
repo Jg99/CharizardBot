@@ -283,7 +283,6 @@ public class Main {
 				config.load(input);
 				//load logging config
 				logging_config.load(new FileInputStream("logConfig.cfg"));
-				logging_config.list(System.out);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			} finally {
