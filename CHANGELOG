@@ -39,3 +39,4 @@ after the subreddit on the randpost command. On the meme command, specify right 
 4.4.2 - JDA: 4.1.1_137, make autoban toggleable in any server and time-configurable.
 4.4.4 - JDA: 4.1.1_145, cpastban for storing banned IDs for future bans (Arr)
 4.4.5 - JDA: 4.1.1_165, !enlarge - Enlarge your emotes!
+4.5.0 - Update dependencies to newer versions, more coming.
