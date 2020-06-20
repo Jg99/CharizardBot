@@ -107,6 +107,6 @@ public class AutobanCommands extends ListenerAdapter {
 				event.getChannel().sendMessage("No auto-ban time is set; default is 3600s (1 hour).").queue();
 			}
 		}
-		} catch (Exception e) { Main.logger.info("WARN: Exception in AutoBanToggle command.\n" + e);}
+		} catch (Exception e) { Main.logger.info("WARN: Exception in AutoBanToggle command.\n" + e);e.printStackTrace();}
 	}
 }

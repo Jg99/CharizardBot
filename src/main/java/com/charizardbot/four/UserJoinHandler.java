@@ -22,6 +22,7 @@ public class UserJoinHandler extends ListenerAdapter {
 			 }
     	} catch (Exception e)
     	{
+			e.printStackTrace();
     	}
 		if (verificationToggle.equals("1")) {
 		try {
@@ -29,28 +30,26 @@ public class UserJoinHandler extends ListenerAdapter {
 		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());	
 		banDur = Main.config.getProperty("banDuration" + event.getGuild().getId());
 		banDuration = Long.parseLong(banDur);
-		} catch (Exception e) {}
+		} catch (Exception e) {e.printStackTrace();}
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
 		if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
     	//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
 		
-		if (svrLogging.equals("1") && logChan != ""){
+		if (event.getGuild().getGuildChannelById(logChan) != null){
 		try {
-				if (event.getJDA().getTextChannelById(logChan).canTalk()) {
+				if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
 			EmbedBuilder embed = new EmbedBuilder();
          	embed.setTitle("New account detected");
          	embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " is a new account, created less than an hour ago."), true);
          	Random rand = new Random();
          	embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-			event.getMember().ban(0, "Auto-banned for account age.").queue();
 			event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
 				}
 			} catch (Exception e) {e.printStackTrace();}
-			try {
 				event.getMember().ban(0, "Auto-banned for account age.").queue();
-			} catch (Exception e) {e.printStackTrace();}
+
 		}
     	} else {
 		}
