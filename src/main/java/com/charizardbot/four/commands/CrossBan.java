@@ -65,6 +65,7 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
+                    boolean isBanned = false;
                     String userID = event.getMessage().getContentRaw().substring(6);
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
@@ -93,7 +94,10 @@ public class CrossBan extends ListenerAdapter {
                         }
                         Main.logger.info(userID + " banned in the x-ban system done.");
                         scan.close();
-                        event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queue();
+                        isBanned = true;
+                }
+                if (isBanned) {
+                    event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queue();
                 }
                 }
             }
