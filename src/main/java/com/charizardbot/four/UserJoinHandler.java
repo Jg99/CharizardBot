@@ -28,8 +28,8 @@ public class UserJoinHandler extends ListenerAdapter {
 		if (verificationToggle.equals("1")) {
 		try {
 		logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());	
-		System.out.println(logChan);
 		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
+		System.out.println(svrLogging);
 		banDur = Main.config.getProperty("banDuration" + serverID);
 		banDuration = Long.parseLong(banDur);
 		} catch (Exception e) {e.printStackTrace();}

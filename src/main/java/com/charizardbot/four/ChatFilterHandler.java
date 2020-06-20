@@ -48,8 +48,8 @@ public class ChatFilterHandler extends ListenerAdapter {
                             chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
                             svrfilter = Main.config.getProperty("filter" + serverID);
                             logChannel = Main.logging_config.getProperty("logchannel" + serverID.toString());
-                            System.out.println(logChannel);
                             svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);
+                            System.out.println(svrLogging);
                             } catch (Exception e) { 
                                 e.printStackTrace();
                         }
