@@ -34,7 +34,8 @@ public class UserJoinHandler extends ListenerAdapter {
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
     	if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
     	//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
-			if (svrLogging.equals("1") && logChan != ""){
+		try {
+		if (svrLogging.equals("1") && logChan != ""){
 				if (event.getJDA().getTextChannelById(logChan).canTalk()) {
 			EmbedBuilder embed = new EmbedBuilder();
          	embed.setTitle("New account detected");
@@ -45,9 +46,9 @@ public class UserJoinHandler extends ListenerAdapter {
 			event.getMember().ban(0, "Auto-banned for account age.").queue();
 			event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
 				}
-			}
     	} else {
 		}
+	} catch (Exception e) {e.printStackTrace();}
 	}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in the user join handler:\n" + e);
 		e.printStackTrace();
