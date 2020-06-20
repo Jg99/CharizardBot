@@ -2,6 +2,7 @@ package com.charizardbot.four.commands;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import com.charizardbot.four.Main;
 
@@ -85,7 +86,7 @@ public class CrossBan extends ListenerAdapter {
                             String svID = scan.nextLine();
                             if (!svID.equals("")) {
                                 try {
-                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                                    event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").complete();
                                     Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
                                 } catch (Exception e) {
                                      Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
@@ -97,7 +98,7 @@ public class CrossBan extends ListenerAdapter {
                         isBanned = true;
                 }
                 if (isBanned) {
-                    event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queue();
+                    event.getChannel().sendMessage("Banned <@" + userID + "> from servers in the cross-ban system and added to ban list.").queueAfter(5, TimeUnit.SECONDS);
                 }
                 }
             }
@@ -110,7 +111,7 @@ public class CrossBan extends ListenerAdapter {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
                             try {
-                                event.getJDA().getGuildById(svID).unban(userID).queue();
+                                event.getJDA().getGuildById(svID).unban(userID).complete();
                             } catch (Exception e) {
                                 Main.logger.info("Invalid unban");
                             }
