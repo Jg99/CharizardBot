@@ -48,7 +48,6 @@ public class ChatFilterHandler extends ListenerAdapter {
                              logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
                              System.out.println(logChannel);
                              svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
-                             System.out.println(svrLogging);
                              } catch (Exception e) { 
                                  e.printStackTrace();
                              }
