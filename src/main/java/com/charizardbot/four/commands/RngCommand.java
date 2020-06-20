@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class RngCommand extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
     	String DELIMITERS_RNG = "[" + prefix + "rng\\W]+";

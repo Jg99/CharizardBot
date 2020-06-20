@@ -9,7 +9,7 @@ import com.charizardbot.four.pokeQuotes;
 public class PokemonQuoteCommand extends ListenerAdapter{
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "pokequote") && !event.getAuthor().isBot()) {
 			Random rand = new Random();
 			pokeQuotes quote = new pokeQuotes();

@@ -9,7 +9,7 @@ import java.util.Random;
 public class JoinDate extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "joindate") && !event.getAuthor().isBot()) {

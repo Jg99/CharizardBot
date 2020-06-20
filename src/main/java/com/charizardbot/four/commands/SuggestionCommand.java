@@ -10,13 +10,13 @@ import com.charizardbot.four.Main;
 import com.charizardbot.four.Suggestions;
 public class SuggestionCommand extends ListenerAdapter{
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
-		String serverID = event.getGuild().getId();
+		String serverID = event.getGuild().getId().toString();
     	String suggCmd = "1";
-    	if (Main.config.getProperty("suggCmd" + event.getGuild().getId()) != null) {
-    		suggCmd = Main.config.getProperty("suggCmd" + event.getGuild().getId());
+    	if (Main.config.getProperty("suggCmd" + event.getGuild().getId().toString()) != null) {
+    		suggCmd = Main.config.getProperty("suggCmd" + event.getGuild().getId().toString());
     	}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "suggest ") && suggCmd.equals("1") && !event.getAuthor().isBot())
 		{
@@ -101,10 +101,10 @@ public class SuggestionCommand extends ListenerAdapter{
         	Main.output = new FileOutputStream("server_config.cfg");
         	boolean wasNull = false;
         	boolean wasChanged = false;
-        	String toggle = Main.config.getProperty("suggCmd" + event.getGuild().getId());
+        	String toggle = Main.config.getProperty("suggCmd" + event.getGuild().getId().toString());
         	if (toggle == null) {
         		toggle = "1";
-        		Main.config.setProperty("suggCmd" + event.getGuild().getId(), toggle);
+        		Main.config.setProperty("suggCmd" + event.getGuild().getId().toString(), toggle);
         		Main.config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
@@ -114,14 +114,14 @@ public class SuggestionCommand extends ListenerAdapter{
         		if (toggle.equals("0") && !wasChanged) {
         			toggle = "1";
         			wasChanged = true;
-            		Main.config.setProperty("suggCmd" + event.getGuild().getId(), toggle);
+            		Main.config.setProperty("suggCmd" + event.getGuild().getId().toString(), toggle);
             		Main.config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned on Suggestion commands.").queue();
         		}
         		if (toggle.equals("1") && !wasChanged) {
         			toggle = "0";
         			wasChanged = false;
-            		Main.config.setProperty("suggCmd" + event.getGuild().getId(), toggle);
+            		Main.config.setProperty("suggCmd" + event.getGuild().getId().toString(), toggle);
             		Main.config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned off Suggestion commands.").queue();
         		}

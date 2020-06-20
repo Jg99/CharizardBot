@@ -7,7 +7,7 @@ import com.charizardbot.four.Main;
 public class RpsCommand extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "rps") && !event.getAuthor().isBot()) {

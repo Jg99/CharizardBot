@@ -25,17 +25,17 @@ public class TenorSearch extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 	// TOGGLE COMMANDS
 		try {
-	    	String prefix = Main.config.getProperty(event.getGuild().getId());
+	    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 	    	if (prefix == null)
 	    		prefix = "!";
 	        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "togglegif") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
 	        	Main.output = new FileOutputStream("server_config.cfg");
 	        	boolean wasNull = false;
 	        	boolean wasChanged = false;
-	        	String toggle = Main.config.getProperty("tenorCmd" + event.getGuild().getId());
+	        	String toggle = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
 	        	if (toggle == null) {
 	        		toggle = "1";
-	        		Main.config.setProperty("tenorCmd" + event.getGuild().getId(), toggle);
+	        		Main.config.setProperty("tenorCmd" + event.getGuild().getId().toString(), toggle);
 	        		Main.config.store(Main.output, null);
 	        		wasNull = true;
 	        		wasChanged = true;
@@ -45,24 +45,24 @@ public class TenorSearch extends ListenerAdapter {
 	        		if (toggle.equals("0") && !wasChanged) {
 	        			toggle = "1";
 	        			wasChanged = true;
-	            		Main.config.setProperty("tenorCmd" + event.getGuild().getId(), toggle);
+	            		Main.config.setProperty("tenorCmd" + event.getGuild().getId().toString(), toggle);
 	            		Main.config.store(Main.output, null);
 	        			event.getChannel().sendMessage("Turned on Tenor search commands.").queue();
 	        		}
 	        		if (toggle.equals("1") && !wasChanged) {
 	        			toggle = "0";
 	        			wasChanged = false;
-	            		Main.config.setProperty("tenorCmd" + event.getGuild().getId(), toggle);
+	            		Main.config.setProperty("tenorCmd" + event.getGuild().getId().toString(), toggle);
 	            		Main.config.store(Main.output, null);
 	        			event.getChannel().sendMessage("Turned off Tenor search commands.").queue();
 	        		}
 	        	}
-	        	Main.config.setProperty("tenorCmd" + event.getGuild().getId(), toggle);
+	        	Main.config.setProperty("tenorCmd" + event.getGuild().getId().toString(), toggle);
 	        }
 		// TENOR SEARCH API
 		String tenorCmd = "1";
-    	if (Main.config.getProperty("tenorCmd" + event.getGuild().getId()) != null) {
-    	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId());
+    	if (Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString()) != null) {
+    	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
     	}
     	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "gif") && tenorCmd.equals("1") && !event.getAuthor().isBot()) {
     		String searchTerm = event.getMessage().getContentRaw().substring(5, event.getMessage().getContentRaw().length()).replace(" ", "%20");
@@ -76,8 +76,8 @@ public class TenorSearch extends ListenerAdapter {
     	      }
     	      event.getChannel().sendMessage("GIF Search powered by Tenor\n" + url).queue();
     	}
-    	if (Main.config.getProperty("tenorCmd" + event.getGuild().getId()) != null) {
-    	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId());
+    	if (Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString()) != null) {
+    	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
     	}
     	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "randgif") && tenorCmd.equals("1") && !event.getAuthor().isBot()) {
     		String searchTerm = event.getMessage().getContentRaw().substring(9, event.getMessage().getContentRaw().length()).replace(" ", "%20");

@@ -13,13 +13,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BulkDelete extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        String prefix = Main.config.getProperty(event.getGuild().getId());
+        String prefix = Main.config.getProperty(event.getGuild().getId().toString());
         if (prefix == null)
             prefix = "!";
         try {
         String logChan = "";
         try {
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
+            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
         } catch(Exception e) {};
         if (event.getMessage().getContentRaw().startsWith(prefix + "msgclr") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
             String[] arguments = event.getMessage().getContentRaw().split("\\s+");

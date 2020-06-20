@@ -34,7 +34,7 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             if (Main.config.getProperty("chatfilter" + event.getChannel().getId()) == null)
                             {
                                  Main.output = new FileOutputStream("server_config.cfg");
-                                Main.config.setProperty("chatfilter" + event.getGuild().getId(), "1");
+                                Main.config.setProperty("chatfilter" + event.getGuild().getId().toString(), "1");
                                 Main.config.store(Main.output, null);
                             }
                         } catch (IOException e) {e.printStackTrace();}
@@ -47,10 +47,10 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             String svrfilter = "1"; //enabled by default
                             try {
                                   chfilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
-                                  svrfilter = Main.config.getProperty("filter" + event.getGuild().getId());
-                                  logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
+                                  svrfilter = Main.config.getProperty("filter" + event.getGuild().getId().toString());
+                                  logChannel = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
                                   System.out.println(logChannel);
-                                  svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+                                  svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId().toString());
                                   } catch (Exception e) { 
                                       e.printStackTrace();
                               }

@@ -23,10 +23,10 @@ public class AnimeList extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         try {
             String miscToggle = "1";
-            if (Main.config.getProperty("miscCmds" + event.getGuild().getId()) != null) {
-            miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
+            if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
+            miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
             }
-            String prefix = Main.config.getProperty(event.getGuild().getId());
+            String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
                 prefix = "!";
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime") && miscToggle.equals("1")) {

@@ -10,16 +10,16 @@ import java.util.Random;
 public class PetStats extends ListenerAdapter {
 	final String DELIMITERS_PETCALC = "[" + Main.PREFIX + "petstats\\W]+"; //delimiters for petstats - digits only
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	String wizCmd = "1";
-    	if (Main.config.getProperty("wizCmds" + event.getGuild().getId()) != null) {
-    	wizCmd = Main.config.getProperty("wizCmds" + event.getGuild().getId());
+    	if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+    	wizCmd = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
     	}
     	if (prefix == null)
     		prefix = "!";
 		try {
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "petstats") && !event.getAuthor().isBot() && wizCmd.equals("1")) { 
-        	if (!event.getGuild().getId().equals("370132368163340289")) { //block german server from english cmd 	because it'll use a translated cmd
+        	if (!event.getGuild().getId().toString().equals("370132368163340289")) { //block german server from english cmd 	because it'll use a translated cmd
     		String[] contentSplit = event.getMessage().getContentRaw().split("\\W+");
     		String[] stats = new String[5];
     		if (contentSplit.length != 7)

@@ -10,7 +10,7 @@ public class CommandsList extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 			try {
             Random rand = new Random();
-            String prefix = Main.config.getProperty(event.getGuild().getId());
+            String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
 				prefix = "!";
             if ((event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "charizard") || event.getMessage().getContentRaw().startsWith(prefix + "help")) && !event.getAuthor().isBot())
@@ -28,8 +28,8 @@ public class CommandsList extends ListenerAdapter {
         				", " + prefix + "randgif - Searches Tenor and returns a random image from the top 50 results." +
         				", " + prefix + "suggest/ - Adds a suggestion for the Discord server if enabled.";
             	String wizCmd = "1";
-            	if (Main.config.getProperty("wizCmds" + event.getGuild().getId()) != null) {
-            	wizCmd = Main.config.getProperty("wizCmds" + event.getGuild().getId());
+            	if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+            	wizCmd = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
             	}
             //	if (event.getAuthor().getId().equals(Main.OWNER_ID))
             //	{

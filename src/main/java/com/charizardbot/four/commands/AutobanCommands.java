@@ -11,15 +11,15 @@ import java.io.IOException;
 public class AutobanCommands extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "autoban on") && !event.getAuthor().isBot() && ( event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("verification" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("verification" + event.getGuild().getId().toString(), "1");
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");
         		// set the properties value
-        		Main.config.setProperty("verification" + event.getGuild().getId(), "1");
+        		Main.config.setProperty("verification" + event.getGuild().getId().toString(), "1");
         		Main.config.store(Main.output, null);
         		event.getChannel().sendMessage("Auto-ban for server is on.").queue();
         	} catch (IOException io) {
@@ -35,11 +35,11 @@ public class AutobanCommands extends ListenerAdapter {
         	}
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "autoban off") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");
         		// set the properties value	
-				Main.config.setProperty("verification" + event.getGuild().getId(), "0");
+				Main.config.setProperty("verification" + event.getGuild().getId().toString(), "0");
 				Main.output = new FileOutputStream("server_config.cfg");
         		Main.config.store(Main.output, null);
         		event.getChannel().sendMessage("Auto-ban for server is off.").queue();
@@ -67,22 +67,22 @@ public class AutobanCommands extends ListenerAdapter {
 				case "":
 				unitSeconds = Integer.toString(timevalue * 60);
 				unitString = "minute(s)";
-				Main.config.setProperty("banDuration" + event.getGuild().getId(), unitSeconds);
+				Main.config.setProperty("banDuration" + event.getGuild().getId().toString(), unitSeconds);
 				break;
 				case "h":
 				unitSeconds = Integer.toString(timevalue * 60 * 60);
 				unitString = "hour(s)";
-				Main.config.setProperty("banDuration" + event.getGuild().getId(), unitSeconds);
+				Main.config.setProperty("banDuration" + event.getGuild().getId().toString(), unitSeconds);
 				break;
 				case "m":
 				unitSeconds = Integer.toString(timevalue * 60);
 				unitString = "minute(s)";
-				Main.config.setProperty("banDuration" + event.getGuild().getId(), unitSeconds);
+				Main.config.setProperty("banDuration" + event.getGuild().getId().toString(), unitSeconds);
 				break;
 				case "d":
 				unitSeconds = Integer.toString(timevalue * 60 * 60 * 24);
 				unitString = "day(s)";
-				Main.config.setProperty("banDuration" + event.getGuild().getId(), unitSeconds);
+				Main.config.setProperty("banDuration" + event.getGuild().getId().toString(), unitSeconds);
 				break;
 			}
 			EmbedBuilder embed = new EmbedBuilder();
@@ -100,7 +100,7 @@ public class AutobanCommands extends ListenerAdapter {
 			Random rand = new Random();
 			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 			embed.setTitle("Auto-ban duration on your server");
-			embed.addField("The bot will ban any account younger than:", Main.config.getProperty("banDuration" + event.getGuild().getId()) + " seconds.", false);
+			embed.addField("The bot will ban any account younger than:", Main.config.getProperty("banDuration" + event.getGuild().getId().toString()) + " seconds.", false);
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			event.getChannel().sendMessage(embed.build()).queue();
 			} catch (Exception e) {

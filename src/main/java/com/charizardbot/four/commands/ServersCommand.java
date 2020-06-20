@@ -15,7 +15,7 @@ import java.util.Iterator;
 public class ServersCommand extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "servers") && event.getAuthor().getId().equals(Main.OWNER_ID)) {

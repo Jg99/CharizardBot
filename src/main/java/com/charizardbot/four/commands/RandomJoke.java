@@ -19,10 +19,10 @@ import org.json.JSONObject;
 public class RandomJoke extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         String miscToggle = "1";
-    	if (Main.config.getProperty("miscCmds" + event.getGuild().getId()) != null) {
-		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
+    	if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
+		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
     	}
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
     	try {

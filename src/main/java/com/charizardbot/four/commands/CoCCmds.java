@@ -16,14 +16,14 @@ public class CoCCmds extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String cocCmd = "1";
 		String API_TOKEN = Main.COC_TOKEN;
-		if (Main.config.getProperty("cocCmd" + event.getGuild().getId()) != null) {
-    		cocCmd = Main.config.getProperty("cocCmd" + event.getGuild().getId());
+		if (Main.config.getProperty("cocCmd" + event.getGuild().getId().toString()) != null) {
+    		cocCmd = Main.config.getProperty("cocCmd" + event.getGuild().getId().toString());
     	}
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "claninfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().equals("468440854886088714")) { 
+        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "claninfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
         	if (event.getMessage().getContentRaw().charAt(10) != '#') {
         		API.setToken(API_TOKEN);
         		String clanName = event.getMessage().getContentRaw().substring(10, event.getMessage().getContentRaw().length());
@@ -62,7 +62,7 @@ public class CoCCmds extends ListenerAdapter {
             	event.getChannel().sendMessage(embed.build()).queue();
             }
         }
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "searchclans") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().equals("468440854886088714")) { 
+        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "searchclans") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
         	API.setToken(API_TOKEN);
         	String clanName = event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length());
         	ArrayList<Clan> clan = new ArrayList<Clan>(ClanQuery.queryName(clanName));
@@ -79,7 +79,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	event.getChannel().sendMessage(embed.build()).queue();
         		}
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "clanplayers") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().equals("468440854886088714")) {
+        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "clanplayers") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
         	API.setToken(API_TOKEN);
 			String clanTag = event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length());
         	Clan clan1 = new Clan(clanTag);
@@ -98,7 +98,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	event.getChannel().sendMessage(embed.build()).queue();
         	}
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "playerinfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().equals("468440854886088714")) {
+        if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "playerinfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
 			API.setToken(API_TOKEN);
 			String memberTag = event.getMessage().getContentRaw().substring(12, event.getMessage().getContentRaw().length());
         	Player member = new Player(memberTag);
@@ -120,10 +120,10 @@ public class CoCCmds extends ListenerAdapter {
         	Main.output = new FileOutputStream("server_config.cfg");
         	boolean wasNull = false;
         	boolean wasChanged = false;
-        	String toggle = Main.config.getProperty("cocCmd" + event.getGuild().getId());
+        	String toggle = Main.config.getProperty("cocCmd" + event.getGuild().getId().toString());
         	if (toggle == null) {
         		toggle = "1";
-        		Main.config.setProperty("cocCmd" + event.getGuild().getId(), toggle);
+        		Main.config.setProperty("cocCmd" + event.getGuild().getId().toString(), toggle);
         		Main.config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
@@ -133,19 +133,19 @@ public class CoCCmds extends ListenerAdapter {
         		if (toggle.equals("0") && !wasChanged) {
         			toggle = "1";
         			wasChanged = true;
-            		Main.config.setProperty("cocCmd" + event.getGuild().getId(), toggle);
+            		Main.config.setProperty("cocCmd" + event.getGuild().getId().toString(), toggle);
             		Main.config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned on Clash of Clans commands.").queue();
         		}
         		if (toggle.equals("1") && !wasChanged) {
         			toggle = "0";
         			wasChanged = false;
-            		Main.config.setProperty("cocCmd" + event.getGuild().getId(), toggle);
+            		Main.config.setProperty("cocCmd" + event.getGuild().getId().toString(), toggle);
             		Main.config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned off Clash of Clans commands.").queue();
         		}  			
         	}  
-        	Main.config.setProperty("cocCmd" + event.getGuild().getId(), toggle);
+        	Main.config.setProperty("cocCmd" + event.getGuild().getId().toString(), toggle);
         }
 		} catch (Exception e) {Main.logger.info("Warn: Exception in CoC Commands\n" + e);}
 	

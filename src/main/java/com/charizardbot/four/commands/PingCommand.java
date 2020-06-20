@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class PingCommand extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        String prefix = Main.config.getProperty(event.getGuild().getId());
+        String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         try {

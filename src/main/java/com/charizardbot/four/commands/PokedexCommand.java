@@ -15,7 +15,7 @@ import com.charizardbot.four.MiniDex;
  */
 public class PokedexCommand extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
     	try {

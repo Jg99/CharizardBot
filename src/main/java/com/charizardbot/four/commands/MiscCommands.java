@@ -12,11 +12,11 @@ public class MiscCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String miscToggle = "1";
-    	if (Main.config.getProperty("miscCmds" + event.getGuild().getId()) != null) {
-		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
+    	if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
+		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
     	}
 		try {
-	    	String prefix = Main.config.getProperty(event.getGuild().getId());
+	    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 	    	if (prefix == null)
 	    		prefix = "!";
 		if (miscToggle.equals("1")){
@@ -51,10 +51,10 @@ public class MiscCommands extends ListenerAdapter {
 			Main.output = new FileOutputStream("server_config.cfg");
 			boolean wasNull = false;
 			boolean wasChanged = false;
-			String toggle = Main.config.getProperty("miscCmds" + event.getGuild().getId());
+			String toggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
 			if (toggle == null) {
 				toggle = "1";
-				Main.config.setProperty("miscCmds" + event.getGuild().getId(), toggle);
+				Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 				Main.config.store(Main.output, null);
 				wasNull = true;
 				wasChanged = true;
@@ -64,19 +64,19 @@ public class MiscCommands extends ListenerAdapter {
 				if (toggle.equals("0") && !wasChanged) {
 					toggle = "1";
 					wasChanged = true;
-					Main.config.setProperty("miscCmds" + event.getGuild().getId(), toggle);
+					Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 					Main.config.store(Main.output, null);
 					event.getChannel().sendMessage("Turned on misc commands such as \"send nudes.\"").queue();
 				}
 				if (toggle.equals("1") && !wasChanged) {
 					toggle = "0";
 					wasChanged = false;
-					Main.config.setProperty("miscCmds" + event.getGuild().getId(), toggle);
+					Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 					Main.config.store(Main.output, null);
 					event.getChannel().sendMessage("Turned off misc commands such as \"send nudes.\"").queue();
 				}		
 			}
-			Main.config.setProperty("miscCmds" + event.getGuild().getId(), toggle);
+			Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 		}
 		} catch (Exception e) { Main.logger.info("WARN: Exception in Misc Commands: Insufficient permissions?\n" + e);e.printStackTrace(); } 
 	} 	

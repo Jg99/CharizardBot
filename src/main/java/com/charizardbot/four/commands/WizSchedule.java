@@ -12,13 +12,13 @@ public class WizSchedule extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
             try {
             Random rand = new Random();
-            String prefix = Main.config.getProperty(event.getGuild().getId());
+            String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
                 prefix = "!";
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "schedule") && !event.getAuthor().isBot()) {
                     String isEnabled = "1";
-                    if (Main.config.getProperty("wizCmds" + event.getGuild().getId()) != null) {
-                        isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId());
+                    if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+                        isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                         }
                     if (isEnabled.equals("1")) {
                     String updatedTable = Main.table; //rename because KI's website is trash and doesn't use the actual names of the tournaments

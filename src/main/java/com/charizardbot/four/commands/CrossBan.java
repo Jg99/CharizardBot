@@ -18,7 +18,7 @@ public class CrossBan extends ListenerAdapter {
          One admin can ban a scammer using this command on both servers at once.
          */
         try {
-            String prefix = Main.config.getProperty(event.getGuild().getId());
+            String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             String admins = Main.XBAN_ADMINS;
             if (prefix == null)
                 prefix = "!";
@@ -29,7 +29,7 @@ public class CrossBan extends ListenerAdapter {
              * !cpastban - ban all previously banned
              **/
             if (event.getMessage().getContentRaw().startsWith(prefix + "addcsv") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                String svID = event.getGuild().getId();
+                String svID = event.getGuild().getId().toString();
                 String svrs = Main.XBAN_SERVERS;
                 if (svrs.contains(svID)) {
                     event.getChannel().sendMessage("Server is already in the cross-ban system.").queue();
@@ -46,7 +46,7 @@ public class CrossBan extends ListenerAdapter {
                 String svrs = Main.XBAN_SERVERS;
                 String[] lines = svrs.split("\n");
                 for (int i = 0; i < lines.length; i++) {
-                    if (lines[i].contains(event.getGuild().getId())) {
+                    if (lines[i].contains(event.getGuild().getId().toString())) {
                         lines[i] = "";
                     }
                 }
@@ -186,7 +186,7 @@ public class CrossBan extends ListenerAdapter {
                 event.getChannel().sendMessage(Main.XBAN_ADMINS).queue();
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cpastban") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                String svID = event.getGuild().getId();
+                String svID = event.getGuild().getId().toString();
                 String banned = Main.XBAN_BANSDB;
                 String[] lines = banned.split("\n");
                 for (int i = 0; i < lines.length; i++) {

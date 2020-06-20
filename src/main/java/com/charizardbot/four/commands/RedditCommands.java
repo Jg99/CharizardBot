@@ -15,16 +15,16 @@ import com.charizardbot.four.Main;
 public class RedditCommands extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         try {
-            String prefix = Main.config.getProperty(event.getGuild().getId());
+            String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
                 prefix = "!";
             String redditCommands = "1";
-            if (Main.config.getProperty("redditCmds" + event.getGuild().getId()) != null) {
-                redditCommands = Main.config.getProperty("redditCmds" + event.getGuild().getId());
+            if (Main.config.getProperty("redditCmds" + event.getGuild().getId().toString()) != null) {
+                redditCommands = Main.config.getProperty("redditCmds" + event.getGuild().getId().toString());
             }
             String redditNsfw = "0";
-            if (Main.config.getProperty("redditNsfw" + event.getGuild().getId()) != null) {
-                redditNsfw = Main.config.getProperty("redditNsfw" + event.getGuild().getId());
+            if (Main.config.getProperty("redditNsfw" + event.getGuild().getId().toString()) != null) {
+                redditNsfw = Main.config.getProperty("redditNsfw" + event.getGuild().getId().toString());
             }
             /**
              * Random post using a specified subreddit. If not, will get from r/all from today.
@@ -280,10 +280,10 @@ public class RedditCommands extends ListenerAdapter {
                 Main.output = new FileOutputStream("server_config.cfg");
                 boolean wasNull = false;
                 boolean wasChanged = false;
-                String toggle = Main.config.getProperty("redditCmds" + event.getGuild().getId());
+                String toggle = Main.config.getProperty("redditCmds" + event.getGuild().getId().toString());
                 if (toggle == null) {
                     toggle = "1";
-                    Main.config.setProperty("redditCmds" + event.getGuild().getId(), toggle);
+                    Main.config.setProperty("redditCmds" + event.getGuild().getId().toString(), toggle);
                     Main.config.store(Main.output, null);
                     wasNull = true;
                     wasChanged = true;
@@ -293,28 +293,28 @@ public class RedditCommands extends ListenerAdapter {
                     if (toggle.equals("0") && !wasChanged) {
                         toggle = "1";
                         wasChanged = true;
-                        Main.config.setProperty("redditCmds" + event.getGuild().getId(), toggle);
+                        Main.config.setProperty("redditCmds" + event.getGuild().getId().toString(), toggle);
                         Main.config.store(Main.output, null);
                         event.getChannel().sendMessage("Turned on Reddit commands.").queue();
                     }
                     if (toggle.equals("1") && !wasChanged) {
                         toggle = "0";
                         wasChanged = false;
-                        Main.config.setProperty("redditCmds" + event.getGuild().getId(), toggle);
+                        Main.config.setProperty("redditCmds" + event.getGuild().getId().toString(), toggle);
                         Main.config.store(Main.output, null);
                         event.getChannel().sendMessage("Turned off Reddit commands.").queue();
                     }  			
                 }  
-                Main.config.setProperty("redditCmds" + event.getGuild().getId(), toggle);
+                Main.config.setProperty("redditCmds" + event.getGuild().getId().toString(), toggle);
                 }
                 if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "redditnsfw") && !event.getAuthor().isBot() && (event.getAuthor().equals(event.getJDA().getUserById(Main.OWNER_ID)) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
                     Main.output = new FileOutputStream("server_config.cfg");
                     boolean wasNull = false;
                     boolean wasChanged = false;
-                    String toggle = Main.config.getProperty("redditNsfw" + event.getGuild().getId());
+                    String toggle = Main.config.getProperty("redditNsfw" + event.getGuild().getId().toString());
                     if (toggle == null) {
                         toggle = "1";
-                        Main.config.setProperty("redditNsfw" + event.getGuild().getId(), toggle);
+                        Main.config.setProperty("redditNsfw" + event.getGuild().getId().toString(), toggle);
                         Main.config.store(Main.output, null);
                         wasNull = true;
                         wasChanged = true;
@@ -324,19 +324,19 @@ public class RedditCommands extends ListenerAdapter {
                         if (toggle.equals("0") && !wasChanged) {
                             toggle = "1";
                             wasChanged = true;
-                            Main.config.setProperty("redditNsfw" + event.getGuild().getId(), toggle);
+                            Main.config.setProperty("redditNsfw" + event.getGuild().getId().toString(), toggle);
                             Main.config.store(Main.output, null);
                             event.getChannel().sendMessage("Turned on Reddit NSFW. Only works in NSFW-enabled channels.").queue();
                         }
                         if (toggle.equals("1") && !wasChanged) {
                             toggle = "0";
                             wasChanged = false;
-                            Main.config.setProperty("redditNsfw" + event.getGuild().getId(), toggle);
+                            Main.config.setProperty("redditNsfw" + event.getGuild().getId().toString(), toggle);
                             Main.config.store(Main.output, null);
                             event.getChannel().sendMessage("Turned off Reddit NSFW.").queue();
                         }  			
                     }  
-                    Main.config.setProperty("redditNsfw" + event.getGuild().getId(), toggle);
+                    Main.config.setProperty("redditNsfw" + event.getGuild().getId().toString(), toggle);
                     }
         } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java");}
     }

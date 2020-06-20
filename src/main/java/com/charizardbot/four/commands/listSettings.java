@@ -9,7 +9,7 @@ import java.util.Random;
 public class listSettings extends ListenerAdapter {
 public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "settings") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
@@ -23,14 +23,14 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         	String tenor = "Default";
         	String suggestions = "Default";
         	try {
-        	 serverFilter = Main.config.getProperty("filter" + event.getGuild().getId());
+        	 serverFilter = Main.config.getProperty("filter" + event.getGuild().getId().toString());
         	 chanFilter = Main.config.getProperty("chanfilter" + event.getChannel().getId());
         	 gtpVerification = Main.config.getProperty("verification" + "468440854886088714");
         	 empVerification = Main.config.getProperty("verification" + "458451155522027521");
-        	 imgur = Main.config.getProperty("imgurCmd" + event.getGuild().getId());
-        	 wizCommands = Main.config.getProperty("wizCmds" + event.getGuild().getId());
-        	 tenor = Main.config.getProperty("tenorCmd" + event.getGuild().getId());
-        	 suggestions = Main.config.getProperty("suggCmd" + event.getGuild().getId());
+        	 imgur = Main.config.getProperty("imgurCmd" + event.getGuild().getId().toString());
+        	 wizCommands = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
+        	 tenor = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
+        	 suggestions = Main.config.getProperty("suggCmd" + event.getGuild().getId().toString());
         	} catch (Exception e) {}
           	embed.setTitle("Server settings for this server & channel.");
           	embed.addField("Prefix: ", prefix, true);
@@ -39,13 +39,13 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         	embed.addField("Imgur/tenor Search (1 = on): ", imgur + "/" + tenor, false);
         	embed.addField("Wizard101 commands (1 = on): ", wizCommands, false);
         	embed.addField("Suggestions commands (1 = on):", suggestions, false);
-        	if (event.getGuild().getId().equals("468440854886088714"))
+        	if (event.getGuild().getId().toString().equals("468440854886088714"))
         	{
         		EmbedBuilder embed2 = new EmbedBuilder();
         		embed2.addField("GTP Verification (CharizardBot): ", gtpVerification, false);
         		event.getChannel().sendMessage(embed2.build()).queue();
         	}
-        	if (event.getGuild().getId().equals("458451155522027521"))
+        	if (event.getGuild().getId().toString().equals("458451155522027521"))
         	{
         		EmbedBuilder embed2 = new EmbedBuilder();
         		embed2.addField("Emporium Verification (CharizardBot): ", empVerification, false);

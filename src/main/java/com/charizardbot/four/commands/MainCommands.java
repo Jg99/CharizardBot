@@ -28,9 +28,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MainCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-    String prefix = Main.config.getProperty(event.getGuild().getId());
+    String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     Random rand = new Random();
-    prefix = Main.config.getProperty(event.getGuild().getId()); 
+    prefix = Main.config.getProperty(event.getGuild().getId().toString()); 
     if (prefix == null)
         prefix = "!";
     try {
@@ -57,7 +57,7 @@ public class MainCommands extends ListenerAdapter {
 					Main.logger.info("Left server " + leave.getName() + ", ID:" + leave.getId());
         			leave.leave();
         			} else {
-						Main.logger.info("Left server " + event.getGuild().getName() + ", ID:" + event.getGuild().getId());
+						Main.logger.info("Left server " + event.getGuild().getName() + ", ID:" + event.getGuild().getId().toString());
 						event.getGuild().leave();
         			}
             	}
@@ -244,10 +244,10 @@ public class MainCommands extends ListenerAdapter {
             	Main.output = new FileOutputStream("server_config.cfg");
             	boolean wasNull = false;
             	boolean wasChanged = false;
-            	String toggle = Main.config.getProperty("wizCmds" + event.getGuild().getId());
+            	String toggle = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
             	if (toggle == null) {
             		toggle = "1";
-            		Main.config.setProperty("wizCmds" + event.getGuild().getId(), toggle);
+            		Main.config.setProperty("wizCmds" + event.getGuild().getId().toString(), toggle);
                     Main.config.store(Main.output, null);
             		wasNull = true;
             		wasChanged = true;
@@ -257,19 +257,19 @@ public class MainCommands extends ListenerAdapter {
             		if (toggle.equals("0") && !wasChanged) {
             			toggle = "1";
             			wasChanged = true;
-                		Main.config.setProperty("wizCmds" + event.getGuild().getId(), toggle);
+                		Main.config.setProperty("wizCmds" + event.getGuild().getId().toString(), toggle);
                 		Main.config.store(Main.output, null);
             			event.getChannel().sendMessage("Turned on Wiz commands such as \"petstats.\"").queue();
             		}
             		if (toggle.equals("1") && !wasChanged) {
             			toggle = "0";
             			wasChanged = false;
-                		Main.config.setProperty("wizCmds" + event.getGuild().getId(), toggle);
+                		Main.config.setProperty("wizCmds" + event.getGuild().getId().toString(), toggle);
                 		Main.config.store(Main.output, null);
             			event.getChannel().sendMessage("Turned off Wiz commands such as \"petstats.\"").queue();
             		}
             	}
-            	Main.config.setProperty("wizCmds" + event.getGuild().getId(), toggle);
+            	Main.config.setProperty("wizCmds" + event.getGuild().getId().toString(), toggle);
             }
             if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "setprefix") && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
             	try {
@@ -278,10 +278,10 @@ public class MainCommands extends ListenerAdapter {
             		if (ptest.equals("~") || ptest.equals("!") || ptest.equals("$") || ptest.equals("%") 
             				|| ptest.equals("^") || ptest.equals("&") || ptest.equals("*") || ptest.equals("+")
             				|| ptest.equals("-")) {            			
-            		Main.config.remove(event.getGuild().getId());
-            		Main.config.setProperty(event.getGuild().getId(), event.getMessage().getContentRaw().substring(11, 12));
+            		Main.config.remove(event.getGuild().getId().toString());
+            		Main.config.setProperty(event.getGuild().getId().toString(), event.getMessage().getContentRaw().substring(11, 12));
             		Main.config.store(Main.output, null);
-            		event.getChannel().sendMessage("Set server prefix to " + Main.config.getProperty(event.getGuild().getId())).queue();
+            		event.getChannel().sendMessage("Set server prefix to " + Main.config.getProperty(event.getGuild().getId().toString())).queue();
             		}
             	} catch (Exception e) {
             		//do nothing as it's probably an invaldi length or something.

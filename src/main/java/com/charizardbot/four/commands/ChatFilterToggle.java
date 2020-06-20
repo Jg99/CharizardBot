@@ -11,14 +11,14 @@ public class ChatFilterToggle extends ListenerAdapter {
 	public String channelID = "";
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		try {
-    	String prefix = Main.config.getProperty(event.getGuild().getId());
+    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "chatfilter on") && !event.getAuthor().isBot() && ( event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");        			
-        		Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        		Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         		Main.config.store(Main.output, null);
         		event.getChannel().sendMessage("Chat filter for your server is on.").queue();
         	} catch (IOException io) {
@@ -34,10 +34,10 @@ public class ChatFilterToggle extends ListenerAdapter {
         	}
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "chatfilter off") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");        			
-        		Main.config.setProperty("filter" + event.getGuild().getId(), "0");
+        		Main.config.setProperty("filter" + event.getGuild().getId().toString(), "0");
         		Main.config.store(Main.output, null);
         		event.getChannel().sendMessage("Chat filter for your server is off.").queue();
         	} catch (IOException io) {
@@ -53,7 +53,7 @@ public class ChatFilterToggle extends ListenerAdapter {
         	}
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "channelfilter on") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         	try {
 				Main.output = new FileOutputStream("server_config.cfg");  
 				      			
@@ -73,7 +73,7 @@ public class ChatFilterToggle extends ListenerAdapter {
         	}
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "channelfilter off") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-        	Main.config.setProperty("filter" + event.getGuild().getId(), "1");
+        	Main.config.setProperty("filter" + event.getGuild().getId().toString(), "1");
         	try {
         		Main.output = new FileOutputStream("server_config.cfg");        			
         		Main.config.setProperty("chanfilter" + event.getChannel().getId(), "0");
@@ -97,10 +97,10 @@ public class ChatFilterToggle extends ListenerAdapter {
         	Main.output = new FileOutputStream("logConfig.cfg");
         	boolean wasNull = false;
         	boolean wasChanged = false;
-        	String toggle = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());
+        	String toggle = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId().toString());
         	if (toggle == null) {
         		toggle = "1";
-        		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId(), toggle);
+        		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId().toString(), toggle);
         		Main.logging_config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
@@ -110,29 +110,29 @@ public class ChatFilterToggle extends ListenerAdapter {
         		if (toggle.equals("0") && !wasChanged) {
         			toggle = "1";
         			wasChanged = true;
-            		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId().toString(), toggle);
             		Main.logging_config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned on logging.").queue();
         		}
         		if (toggle.equals("1") && !wasChanged) {
         			toggle = "0";
         			wasChanged = false;
-            		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId().toString(), toggle);
             		Main.logging_config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned off logging.").queue();
         		}		
         	}
-        	Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId(), toggle);
+        	Main.logging_config.setProperty("isLoggingEnabled" + event.getGuild().getId().toString(), toggle);
 		}
 		//toggle message logging
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "msglogs") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
         	Main.output = new FileOutputStream("logConfig.cfg");
         	boolean wasNull = false;
         	boolean wasChanged = false;
-        	String toggle = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
+        	String toggle = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString());
         	if (toggle == null) {
         		toggle = "1";
-        		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+        		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), toggle);
         		Main.logging_config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
@@ -142,19 +142,19 @@ public class ChatFilterToggle extends ListenerAdapter {
         		if (toggle.equals("0") && !wasChanged) {
         			toggle = "1";
         			wasChanged = true;
-            		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), toggle);
             		Main.logging_config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned on logging.").queue();
         		}
         		if (toggle.equals("1") && !wasChanged) {
         			toggle = "0";
         			wasChanged = false;
-            		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+            		Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), toggle);
             		Main.logging_config.store(Main.output, null);
         			event.getChannel().sendMessage("Turned off logging.").queue();
         		}		
         	}
-        	Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId(), toggle);
+        	Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), toggle);
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "ignorechannel") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
         	Main.output = new FileOutputStream("logConfig.cfg");
@@ -199,7 +199,7 @@ public class ChatFilterToggle extends ListenerAdapter {
 			if (event.getGuild().getTextChannelById(channelID).canTalk()) {
         	try {
         		Main.output = new FileOutputStream("logConfig.cfg");        			
-        		Main.logging_config.setProperty("logchannel" + event.getGuild().getId().toString(), channelID);
+        		Main.logging_config.setProperty("logchannel" + event.getGuild().getId().toString().toString(), channelID);
         		Main.logging_config.store(Main.output, null);
         		event.getChannel().sendMessage("Successfully set the channel for logging.").queue();
         	} catch (IOException io) {
