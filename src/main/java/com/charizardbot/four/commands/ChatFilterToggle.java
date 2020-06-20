@@ -199,7 +199,7 @@ public class ChatFilterToggle extends ListenerAdapter {
 			if (event.getGuild().getTextChannelById(channelID).canTalk()) {
         	try {
         		Main.output = new FileOutputStream("logConfig.cfg");        			
-        		Main.logging_config.setProperty("logchannel" + event.getGuild().getId(), channelID);
+        		Main.logging_config.setProperty("logchannel" + event.getGuild().getId().toString(), channelID);
         		Main.logging_config.store(Main.output, null);
         		event.getChannel().sendMessage("Successfully set the channel for logging.").queue();
         	} catch (IOException io) {

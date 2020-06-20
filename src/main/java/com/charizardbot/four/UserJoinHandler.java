@@ -26,7 +26,7 @@ public class UserJoinHandler extends ListenerAdapter {
     	}
 		if (verificationToggle.equals("1")) {
 		try {
-		logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());	
+		logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());	
 		System.out.println(logChan);
 		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId());	
 		banDur = Main.config.getProperty("banDuration" + event.getGuild().getId());

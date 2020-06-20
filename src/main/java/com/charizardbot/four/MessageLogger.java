@@ -22,7 +22,7 @@ public class MessageLogger extends ListenerAdapter {
         } else {
             svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
         }
-        logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+        logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
           if (Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
             isChannelIgnored = "0";
             Main.logging_config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
@@ -89,7 +89,7 @@ public class MessageLogger extends ListenerAdapter {
             } else {
                 svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId());
             }
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
               if (Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
                 isChannelIgnored = "0";
                 Main.logging_config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
@@ -98,7 +98,7 @@ public class MessageLogger extends ListenerAdapter {
               } else {
                 isChannelIgnored = Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId());
               }    
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
             if (event.getJDA().getTextChannelById(logChan).canTalk() && logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
                 EmbedBuilder logEmbed = new EmbedBuilder();
                 logEmbed.setTitle("Edited Message");

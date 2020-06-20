@@ -19,7 +19,7 @@ public class BulkDelete extends ListenerAdapter {
         try {
         String logChan = "";
         try {
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId());
+            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString());
         } catch(Exception e) {};
         if (event.getMessage().getContentRaw().startsWith(prefix + "msgclr") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
             String[] arguments = event.getMessage().getContentRaw().split("\\s+");
