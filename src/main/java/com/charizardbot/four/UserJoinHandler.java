@@ -50,6 +50,7 @@ public class UserJoinHandler extends ListenerAdapter {
 		}
 	}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in the user join handler:\n" + e);
+		e.printStackTrace();
 		} 
 	}
 }
