@@ -117,7 +117,13 @@ public class CrossBan extends ListenerAdapter {
                         String svID = scan.nextLine();
                         if (!svID.equals("")) {
                             try {
-                                event.getJDA().getGuildById(svID).unban(userID).complete();
+                                Timer banDelay = new Timer();
+                                banDelay.schedule(new TimerTask() {
+                                    public void run() {
+                                event.getJDA().getGuildById(svID).unban(userID).queue();
+                            }
+                        }, 1000, 1800000);
+                        banDelay.cancel();
                             } catch (Exception e) {
                                 Main.logger.info("Invalid unban");
                             }
