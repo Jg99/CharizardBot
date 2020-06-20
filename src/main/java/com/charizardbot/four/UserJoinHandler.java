@@ -36,7 +36,7 @@ public class UserJoinHandler extends ListenerAdapter {
 		if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
     	//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
 		
-		if (!logChan.equals("") || logChan != null){
+		if (logChan != null){
 		try {
 			if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
 			EmbedBuilder embed = new EmbedBuilder();

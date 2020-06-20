@@ -1,4 +1,5 @@
 package com.charizardbot.four;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -281,8 +282,8 @@ public class Main {
 				// load a properties file
 				config.load(input);
 				//load logging config
-				input = new FileInputStream("logConfig.cfg");
-				logging_config.load(input);
+				logging_config.load(new FileInputStream("logConfig.cfg"));
+				logging_config.list(System.out);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			} finally {
