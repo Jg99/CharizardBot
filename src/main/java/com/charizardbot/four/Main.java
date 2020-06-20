@@ -62,7 +62,7 @@ public class Main {
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static String filterFile = "chatfilter.txt";
-	public static final String OWNER_ID = "372906993519689728";
+	public static final String OWNER_ID = "184534810369196032";
 	public static ChatFilter filter;
 	public static String ownerNick = "James, Meme Man 2020#0820";
 	public static String table = "";
@@ -225,7 +225,7 @@ public class Main {
 				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
 				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
 				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
-				//reddit = OAuthHelper.automatic(networkAdapter, credentials);
+				reddit = OAuthHelper.automatic(networkAdapter, credentials);
 
 			} else {
 				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
