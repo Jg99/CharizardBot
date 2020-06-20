@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class UserJoinHandler extends ListenerAdapter {
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+		String serverID = event.getGuild().getId().toString();
 		String logChan = "";
 		String svrLogging = "";
 		String banDur = "";
@@ -14,9 +15,9 @@ public class UserJoinHandler extends ListenerAdapter {
 		try {
     	String verificationToggle = "0"; //default value if getting property fails
     	try {
-			 verificationToggle = Main.config.getProperty("verification" + event.getGuild().getId().toString());
-			 if (Main.config.getProperty("verification" + event.getGuild().getId().toString()) == null) {
-				Main.config.setProperty("verification" + event.getGuild().getId().toString(), "0");
+			 verificationToggle = Main.config.getProperty("verification" + serverID);
+			 if (Main.config.getProperty("verification" + serverID) == null) {
+				Main.config.setProperty("verification" + serverID, "0");
 				Main.output = new FileOutputStream("server_config.cfg");
 				Main.config.store(Main.output, null);
 			 }
@@ -26,10 +27,10 @@ public class UserJoinHandler extends ListenerAdapter {
     	}
 		if (verificationToggle.equals("1")) {
 		try {
-		logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());	
+		logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());	
 		System.out.println(logChan);
-		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + event.getGuild().getId().toString());	
-		banDur = Main.config.getProperty("banDuration" + event.getGuild().getId().toString());
+		svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
+		banDur = Main.config.getProperty("banDuration" + serverID);
 		banDuration = Long.parseLong(banDur);
 		} catch (Exception e) {e.printStackTrace();}
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds

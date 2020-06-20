@@ -10,19 +10,20 @@ public class MessageLogger extends ListenerAdapter {
      * CharizardBot's Message Logger. Logs deleted messages (if they are in the cache) and edited messages.
      */
     public void onGuildMessageDelete(GuildMessageDeleteEvent event) { 
+        String serverID = event.getGuild().getId().toString();
         try {
         String svrLogging = "0"; //disabled by default
         String isChannelIgnored = "0";
         String logChan = "";
-        if (Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString()) == null) {
+        if (Main.logging_config.getProperty("isMsgLoggingEnabled" + serverID) == null) {
             svrLogging = "0";
-            Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), "0");
+            Main.logging_config.setProperty("isMsgLoggingEnabled" + serverID, "0");
             Main.output = new FileOutputStream("logConfig.cfg");
             Main.logging_config.store(Main.output, null);
         } else {
-            svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString());
+            svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + serverID);
         }
-        logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
+        logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());
           if (Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
             isChannelIgnored = "0";
             Main.logging_config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
@@ -78,18 +79,19 @@ public class MessageLogger extends ListenerAdapter {
     public void onGuildMessageUpdate(GuildMessageUpdateEvent event)
     {
         try {
+            String serverID = event.getGuild().getId().toString();
             String svrLogging = "0"; //disabled by default
             String isChannelIgnored = "0";
             String logChan = "";
-            if (Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString()) == null) {
+            if (Main.logging_config.getProperty("isMsgLoggingEnabled" + serverID) == null) {
                 svrLogging = "0";
-                Main.logging_config.setProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString(), "0");
+                Main.logging_config.setProperty("isMsgLoggingEnabled" + serverID, "0");
                 Main.output = new FileOutputStream("logConfig.cfg");
                 Main.logging_config.store(Main.output, null);
             } else {
-                svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + event.getGuild().getId().toString());
+                svrLogging = Main.logging_config.getProperty("isMsgLoggingEnabled" + serverID);
             }
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
+            logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());
               if (Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId()) == null) {
                 isChannelIgnored = "0";
                 Main.logging_config.setProperty("isChannelIgnored" + event.getChannel().getId(), "0");
@@ -98,7 +100,7 @@ public class MessageLogger extends ListenerAdapter {
               } else {
                 isChannelIgnored = Main.logging_config.getProperty("isChannelIgnored" + event.getChannel().getId());
               }    
-            logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
+            logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());
             if (event.getJDA().getTextChannelById(logChan).canTalk() && logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
                 EmbedBuilder logEmbed = new EmbedBuilder();
                 logEmbed.setTitle("Edited Message");
