@@ -18,32 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import javax.security.auth.login.LoginException;
-import com.charizardbot.four.commands.AnimeList;
-import com.charizardbot.four.commands.AutobanCommands;
-import com.charizardbot.four.commands.BulkDelete;
-import com.charizardbot.four.commands.ChatFilterToggle;
-import com.charizardbot.four.commands.CoCCmds;
-import com.charizardbot.four.commands.CommandsList;
-import com.charizardbot.four.commands.CrossBan;
-import com.charizardbot.four.commands.ImgurSearch;
-import com.charizardbot.four.commands.ImgurToggle;
-import com.charizardbot.four.commands.JoinDate;
-import com.charizardbot.four.commands.MainCommands;
-import com.charizardbot.four.commands.MiscCommands;
-import com.charizardbot.four.commands.PetStats;
-import com.charizardbot.four.commands.PingCommand;
-import com.charizardbot.four.commands.PokedexCommand;
-import com.charizardbot.four.commands.PokemonQuoteCommand;
-import com.charizardbot.four.commands.RandomJoke;
-import com.charizardbot.four.commands.RedditCommands;
-import com.charizardbot.four.commands.RngCommand;
-import com.charizardbot.four.commands.RpsCommand;
-import com.charizardbot.four.commands.ServersCommand;
-import com.charizardbot.four.commands.SuggestionCommand;
-import com.charizardbot.four.commands.TenorSearch;
-import com.charizardbot.four.commands.WizSchedule;
-import com.charizardbot.four.commands.enlargeEmote;
-import com.charizardbot.four.commands.listSettings;
+
+import com.charizardbot.four.commands.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.JDA;
@@ -368,6 +344,7 @@ public class Main {
 				api.addEventListener(new RedditCommands());
 				api.addEventListener(new CrossBan());
 				api.addEventListener(new enlargeEmote());
+				api.addEventListener(new CheckServers());
 				// join server listener. Listens for when the bot joins a new server.
 				api.addEventListener(new JoinServerStuff());
 				/**join listener for that sweet autoban stuff. GTP only (my server).
