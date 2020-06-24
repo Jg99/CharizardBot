@@ -67,7 +67,7 @@ public class CrossBan extends ListenerAdapter {
                 event.getChannel().sendMessage("Removed your server from the cross-ban system if it was in.").queue();
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-                if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
+                    if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
                      userID = event.getMessage().getContentRaw().substring(6);
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();

@@ -15,7 +15,8 @@ public class CheckServers extends ListenerAdapter {
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());
         if (prefix == null)
             prefix = "!";
-        if (event.getMessage().getContentRaw().startsWith(prefix + "svrcheck") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
+        String admins = Main.XBAN_ADMINS;
+        if (event.getMessage().getContentRaw().startsWith(prefix + "svrcheck") && (event.getAuthor().getId().equals(Main.OWNER_ID) || admins.contains(event.getAuthor().getId()))){
             String svrs = Main.XBAN_SERVERS;
             String[] lines = svrs.split("\n");
             for (int i = 0; i < lines.length; i++) {
