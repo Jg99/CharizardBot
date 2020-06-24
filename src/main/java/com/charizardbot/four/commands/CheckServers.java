@@ -1,15 +1,10 @@
 package com.charizardbot.four.commands;
-
 import com.charizardbot.four.Main;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-
 public class CheckServers extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());
@@ -47,8 +42,6 @@ public class CheckServers extends ListenerAdapter {
 
             event.getChannel().sendMessage("Removed all invalid servers from crossban list").queue();
             Main.logger.info("Removed all invalid servers from crossban list");
-
-
 
         }
     }
