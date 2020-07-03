@@ -29,8 +29,6 @@ public class UserJoinHandler extends ListenerAdapter {
 			} catch (Exception e) {e.printStackTrace();}
 			long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 			long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
-			System.out.println( "joinTime: " + userJoinTimestamp);
-			System.out.println("Creation Date: " + userCreationDate);
 			if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
 				event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 				try {
