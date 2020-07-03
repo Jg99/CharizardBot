@@ -191,26 +191,30 @@ public class MainCommands extends ListenerAdapter {
             		{
             			Main.filterDB += "\n" + fileScan.nextLine();
             		}
-            		Main.filter = new ChatFilter(event.getMessage().getContentRaw().toLowerCase(), Main.filterDB.toLowerCase());
+					Main.filter = new ChatFilter(event.getMessage().getContentRaw().toLowerCase(), Main.filterDB.toLowerCase());
+					fileScan.close();
             		}
 			}
 			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "reloadnickbl") && event.getAuthor().getId().equals(Main.OWNER_ID))
             {
             	if (Main.nicknameFile.exists())
             	{
-					Main.logger.info("Username Blacklist reloaded");
-            		Scanner fileScan = null;
-        							try {
-        								fileScan = new Scanner(Main.nicknameFile);
-        							} catch (FileNotFoundException e) {
-        								e.printStackTrace();
-        							}
-                                    Main.NICK_BL = "";
+        			try {
+        				Scanner fileScan = new Scanner(Main.nicknameFile);
+                        Main.NICK_BL = "";
             		while (fileScan.hasNextLine())
             		{
-            			Main.NICK_BL += "\n" + fileScan.nextLine();
+							String token = fileScan.nextLine();
+						if (!token.equals("")) {
+							Main.NICK_BL += token + "\n";
+						}
 					}
-            		}
+						fileScan.close();
+						Main.logger.info("Username Blacklist reloaded");
+					} catch (Exception e) {
+					e.printStackTrace();
+					}
+            	}
             }
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "filterlist") && (event.getMember().hasPermission(Permission.ADMINISTRATOR)))
             {

@@ -36,14 +36,15 @@ public class UserJoinHandler extends ListenerAdapter {
 		} catch (Exception e){e.printStackTrace();}
 		//Autoban blacklisted nicknames. Meant for Wiz servers.
 		if (nickBanToggle.equals("1")) {
-			String nicks = Main.NICK_BL.toLowerCase();
+			System.out.println(Main.NICK_BL);
 			String joinNick = event.getUser().getName().toLowerCase();
-			Scanner scan = new Scanner(nicks);
+			Scanner scan = new Scanner(Main.NICK_BL.toLowerCase());
 			while (scan.hasNextLine()) {
 				String token = scan.nextLine();
 				if (joinNick.contains(token)){
 				if (!event.getUser().isBot()) {
 					event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
+					verificationToggle = "0";
 					try {
 						logChan = Main.logging_config.getProperty("logchannel" + serverID);	
 						svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
@@ -58,10 +59,10 @@ public class UserJoinHandler extends ListenerAdapter {
          					embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 							embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 							event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
-					}
+						}
 					} catch (Exception e) {e.printStackTrace();}
+					}
 				}
-			}
 		}
 	}
 	scan.close();
@@ -84,7 +85,7 @@ public class UserJoinHandler extends ListenerAdapter {
 					if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
 						EmbedBuilder embed = new EmbedBuilder();
       			   		embed.setTitle("New account detected");
-      			   		embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " is a new 	account, created less than an hour ago."), true);
+      			   		embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " is an account younger than the set threshold."), true);
       	   				Random rand = new Random();
          				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 						embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
