@@ -37,7 +37,7 @@ public class UserJoinHandler extends ListenerAdapter {
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
 		if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
     	//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
-		
+		event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		if (logChan != null){
 		try {
 			if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
@@ -51,10 +51,10 @@ public class UserJoinHandler extends ListenerAdapter {
 				}
 			} catch (Exception e) {e.printStackTrace();}
 		//	event.getMember().ban(0, "Auto-banned for account age.").queue();
-			event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
+		//	event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		}
     	} else {
-			event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue(); //ban even if logging channel is null
+		//	event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue(); //ban even if logging channel is null
 		}
 	
 	}
