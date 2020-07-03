@@ -18,7 +18,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import javax.security.auth.login.LoginException;
-
 import com.charizardbot.four.commands.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +26,8 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.NetworkAdapter;
 import net.dean.jraw.http.OkHttpNetworkAdapter;
@@ -304,11 +305,12 @@ public class Main {
 				} else {
 					activity = config.getProperty("gamestatus");
 				}
-				JDA api = JDABuilder.createDefault(discordtoken)
-						.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS)
-						.setChunkingFilter(ChunkingFilter.NONE)
-						.setActivity(Activity.playing(activity))
-						.build();
+				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS)
+							.setChunkingFilter(ChunkingFilter.NONE)
+							.setMemberCachePolicy(MemberCachePolicy.ALL)
+							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS)
+							.setActivity(Activity.playing(activity))
+							.build();
 				/**
 				 * Message Cache for CharizardBot. Used for logging deleted messages unless
 				 * the messages are older than 4 days, or the bot has been restarted since the message was posted.
