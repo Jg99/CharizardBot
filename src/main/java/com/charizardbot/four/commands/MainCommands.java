@@ -193,6 +193,24 @@ public class MainCommands extends ListenerAdapter {
             		}
             		Main.filter = new ChatFilter(event.getMessage().getContentRaw().toLowerCase(), Main.filterDB.toLowerCase());
             		}
+			}
+			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "reloadnickBL") && event.getAuthor().getId().equals(Main.OWNER_ID))
+            {
+            	if (Main.chatFilter.exists())
+            	{
+					Main.logger.info("Username Blacklist reloaded");
+            		Scanner fileScan = null;
+        							try {
+        								fileScan = new Scanner(Main.nicknameFile);
+        							} catch (FileNotFoundException e) {
+        								e.printStackTrace();
+        							}
+                                    Main.NICK_BL = "";
+            		while (fileScan.hasNextLine())
+            		{
+            			Main.NICK_BL += "\n" + fileScan.nextLine();
+					}
+            		}
             }
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "filterlist") && (event.getMember().hasPermission(Permission.ADMINISTRATOR)))
             {

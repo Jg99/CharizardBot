@@ -119,7 +119,7 @@ public class AutobanCommands extends ListenerAdapter {
         		Main.config.store(Main.output, null);
         		wasNull = true;
         		wasChanged = true;
-        		event.getChannel().sendMessage("No toggle was set for Imgur Commands. Set to on by default. Please run again to turn off.").queue();
+        		event.getChannel().sendMessage("No toggle was set for Nickname blacklist autoban. Set to on by default. Please run again to turn off.").queue();
         	}
         	if (!wasNull ) {
         		if (toggle.equals("0") && !wasChanged) {

@@ -38,6 +38,7 @@ public class Main {
 	public static final String VERSION = "4.5.0";
 	public static String filterDB = "";
 	public static File chatFilter;
+	public static File nicknameFile = new File("nick_blacklist.txt");
 	public static String filterFile = "chatfilter.txt";
 	public static final String OWNER_ID = "184534810369196032";
 	public static ChatFilter filter;
@@ -132,7 +133,6 @@ public class Main {
 				logger.info("xbanservers.txt does not exist");
 			}
 			/**NICKNAME BLACKLIST FILE*/
-			File nicknameFile = new File("nick_blacklist.txt");
 			if (xbanserver.exists()) {
 				Scanner fileScan = new Scanner(xbanserver);
 				while (fileScan.hasNextLine()) {
