@@ -7,7 +7,6 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class UserJoinHandler extends ListenerAdapter {
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-		System.out.println("NEW MEMBER JOIN: " + event.getUser().getId());
 		String serverID = event.getGuild().getId().toString();
 		String logChan = "";
 		String svrLogging = "0";
@@ -33,21 +32,19 @@ public class UserJoinHandler extends ListenerAdapter {
 		} catch (Exception e) {e.printStackTrace();}
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
-		System.out.println("Log channel: " + logChan);
-		System.out.println("isLoggingEnabled: " + svrLogging + "banDuration: " + banDur);
 		System.out.println( "joinTime: " + userJoinTimestamp);
 		System.out.println("Creation Date: " + userCreationDate);
 		if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
-		//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
-	//	event.getMember().ban(0, "Auto-banned for account age.").queue();
 		event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		try {
-			logChan = Main.logging_config.getProperty("logchannel" + serverID.toString());	
+			logChan = Main.logging_config.getProperty("logchannel" + serverID);	
 			svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		System.out.println("Log channel: " + logChan);
+		System.out.println("isLoggingEnabled: " + svrLogging + "banDuration: " + banDur);
 		if (logChan != null){
 		try {
 			if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
@@ -60,11 +57,8 @@ public class UserJoinHandler extends ListenerAdapter {
 			event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
 				}
 			} catch (Exception e) {e.printStackTrace();}
-		//	event.getMember().ban(0, "Auto-banned for account age.").queue();
-		//	event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		}
     	} else {
-		//	event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue(); //ban even if logging channel is null
 		}
 	
 	}
