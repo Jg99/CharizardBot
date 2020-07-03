@@ -37,6 +37,7 @@ public class UserJoinHandler extends ListenerAdapter {
 		//Autoban blacklisted nicknames. Meant for Wiz servers.
 		if (nickBanToggle.equals("1")) {
 			String nicks = Main.NICK_BL.toLowerCase();
+			System.out.println("Nick BL: " + nicks);
 			String joinNick = event.getUser().getName().toLowerCase();
 			boolean isBL = false;
 			Scanner scan = new Scanner(nicks);
@@ -46,6 +47,7 @@ public class UserJoinHandler extends ListenerAdapter {
 					isBL = true;
 				}
 			}
+			scan.close();
 			if (isBL && !event.getUser().isBot()) {
 				event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
 				try {
