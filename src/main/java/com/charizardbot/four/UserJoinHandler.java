@@ -1,7 +1,10 @@
 package com.charizardbot.four;
+
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
+import java.util.Scanner;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -35,7 +38,15 @@ public class UserJoinHandler extends ListenerAdapter {
 		if (nickBanToggle.equals("1")) {
 			String nicks = Main.NICK_BL.toLowerCase();
 			String joinNick = event.getUser().getName().toLowerCase();
-			if (nicks.contains(joinNick) && !event.getUser().isBot()) {
+			boolean isBL = false;
+			Scanner scan = new Scanner(nicks);
+			while (scan.hasNextLine()) {
+				String token = scan.nextLine();
+				if (joinNick.contains(token)){
+					isBL = true;
+				}
+			}
+			if (isBL && !event.getUser().isBot()) {
 				event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
 				try {
 					logChan = Main.logging_config.getProperty("logchannel" + serverID);	
