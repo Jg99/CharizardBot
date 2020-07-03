@@ -133,8 +133,8 @@ public class Main {
 				logger.info("xbanservers.txt does not exist");
 			}
 			/**NICKNAME BLACKLIST FILE*/
-			if (xbanserver.exists()) {
-				Scanner fileScan = new Scanner(xbanserver);
+			if (nicknameFile.exists()) {
+				Scanner fileScan = new Scanner(nicknameFile);
 				while (fileScan.hasNextLine()) {
 					NICK_BL += fileScan.nextLine() + "\n";
 				}
