@@ -35,10 +35,13 @@ public class UserJoinHandler extends ListenerAdapter {
 		} catch (Exception e) {e.printStackTrace();}
 		long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 		long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
-		System.out.println("Log channel: " + logChan + "\nisLoggingEnabled: " + svrLogging + "\nbanDuration: " + banDur +
-		"\njoinTime: " + userJoinTimestamp + "\nCreation Date: " + userCreationDate);
+		System.out.println("Log channel: " + logChan);
+		System.out.println("isLoggingEnabled: " + svrLogging + "banDuration: " + banDur);
+		System.out.println( "joinTime: " + userJoinTimestamp);
+		System.out.println("Creation Date: " + userCreationDate);
 		if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
-    	//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
+		//	Main.logger.info("USER " + event.getUser().getName() + ", ID:  " + event.getMember().getId() +  " IS UNDER 1 HOUR OLD, BANNING. AGE: "+ (userJoinTimestamp - userCreationDate));
+		event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		if (logChan != null){
 		try {
 			if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
