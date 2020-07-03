@@ -116,6 +116,11 @@ public class JoinServerStuff extends ListenerAdapter{
 				Main.output = new FileOutputStream("server_config.cfg");
 				Main.config.store(Main.output, null);
 			}
+			if (Main.config.getProperty("nickBL" + serverID) == null) {
+				Main.config.setProperty("nickBL" + event.getGuild().getId().toString(), "0");
+				Main.output = new FileOutputStream("server_config.cfg");
+				Main.config.store(Main.output, null);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -63,6 +63,7 @@ public class Main {
 	public static String XBAN_ADMINS = "";
 	public static String XBAN_BANSDB = "";
 	public static String LOGGING_CFG = "";
+	public static String NICK_BL = "";
 	public static MessageCache msgCache;
 	public static boolean isChatFilterDeleted = false;
 	public static boolean isBulkDeleted = false;
@@ -130,6 +131,18 @@ public class Main {
 			} else {
 				logger.info("xbanservers.txt does not exist");
 			}
+			/**NICKNAME BLACKLIST FILE*/
+			File nicknameFile = new File("nick_blacklist.txt");
+			if (xbanserver.exists()) {
+				Scanner fileScan = new Scanner(xbanserver);
+				while (fileScan.hasNextLine()) {
+					NICK_BL += fileScan.nextLine() + "\n";
+				}
+				logger.info("Loading blacklisted nicknames");
+				fileScan.close();
+			} else {
+				logger.info("nick_blacklist.txt does not exist");
+			}			
 			/**Cross ban admin list. People who can ban/unban members from servers in the system. */
 			File xbanadmins = new File("xbanadmins.txt");
 			if (xbanadmins.exists()) {
@@ -234,6 +247,10 @@ public class Main {
 			{
 				logger.info("Config file does not exist, creating server_config.cfg");
 				new FileOutputStream("server_config.cfg", false).close();
+			}
+			if (!nicknameFile.exists()) {
+				logger.info("Nickname blacklist does not exist, creating nick_blacklist.txt");
+				new FileOutputStream("nick_blacklist.txt", false).close();
 			}
 			File loggingConfig = new File("logConfig.cfg");
 			if (!loggingConfig.exists())

@@ -107,6 +107,38 @@ public class AutobanCommands extends ListenerAdapter {
 				event.getChannel().sendMessage("No auto-ban time is set; default is 3600s (1 hour).").queue();
 			}
 		}
+		//AUTOBAN NICKNAME BLIST CHECK TOGGLE
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "nickautoban") && !event.getAuthor().isBot() && (event.getAuthor().getId().equals(Main.OWNER_ID) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
+        	Main.output = new FileOutputStream("server_config.cfg");
+        	boolean wasNull = false;
+        	boolean wasChanged = false;
+        	String toggle = Main.config.getProperty("nickBL" + event.getGuild().getId().toString());
+        	if (toggle == null) {
+        		toggle = "1";
+        		Main.config.setProperty("nickBL" + event.getGuild().getId().toString(), toggle);
+        		Main.config.store(Main.output, null);
+        		wasNull = true;
+        		wasChanged = true;
+        		event.getChannel().sendMessage("No toggle was set for Imgur Commands. Set to on by default. Please run again to turn off.").queue();
+        	}
+        	if (!wasNull ) {
+        		if (toggle.equals("0") && !wasChanged) {
+        			toggle = "1";
+        			wasChanged = true;
+            		Main.config.setProperty("nickBL" + event.getGuild().getId().toString(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Turned on blacklisted nickname autoban.").queue();
+        		}
+        		if (toggle.equals("1") && !wasChanged) {
+        			toggle = "0";
+        			wasChanged = false;
+            		Main.config.setProperty("nickBL" + event.getGuild().getId().toString(), toggle);
+            		Main.config.store(Main.output, null);
+        			event.getChannel().sendMessage("Turned off blacklisted nickname autoban.").queue();
+        		}
+        	}
+        	Main.config.setProperty("nickBL" + event.getGuild().getId().toString(), toggle);
+        }
 		} catch (Exception e) { Main.logger.info("WARN: Exception in AutoBanToggle command.\n" + e);e.printStackTrace();}
 	}
 }

@@ -13,7 +13,8 @@ public class UserJoinHandler extends ListenerAdapter {
 		String banDur = "";
 		long banDuration = 3600; //seconds, default
 		try {
-    	String verificationToggle = "0"; //default value if getting property fails
+		String verificationToggle = "0"; //default value if getting property fails
+		String nickBanToggle = "0"; // default value if getting property fails
     	try {
 			 verificationToggle = Main.config.getProperty("verification" + serverID);
 			 if (Main.config.getProperty("verification" + serverID) == null) {
@@ -21,7 +22,38 @@ public class UserJoinHandler extends ListenerAdapter {
 				Main.output = new FileOutputStream("server_config.cfg");
 				Main.config.store(Main.output, null);
 			 }
-    	} catch (Exception e){e.printStackTrace();}
+			 nickBanToggle = Main.config.getProperty("nickBL" + serverID);
+			 if (Main.config.getProperty("nickBL" + serverID) == null) {
+				Main.config.setProperty("nickBL" + serverID, "0");
+				Main.output = new FileOutputStream("server_config.cfg");
+				Main.config.store(Main.output, null);
+			 }
+		} catch (Exception e){e.printStackTrace();}
+		//Autoban blacklisted nicknames. Meant for Wiz servers.
+		if (nickBanToggle.equals("1")) {
+			String nicks = Main.NICK_BL.toLowerCase();
+			String joinNick = event.getUser().getName().toLowerCase();
+			if (nicks.contains(joinNick) && !event.getUser().isBot()) {
+				event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
+				try {
+					logChan = Main.logging_config.getProperty("logchannel" + serverID);	
+					svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
+				} catch (Exception e){e.printStackTrace();}
+				if (logChan != null){
+				try {
+					if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
+						EmbedBuilder embed = new EmbedBuilder();
+      			   		embed.setTitle("Blacklisted username detected");
+      			   		embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " has a blacklisted username."), true);
+      	   				Random rand = new Random();
+         				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+						embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord		.png");
+						event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
+					}
+				} catch (Exception e) {e.printStackTrace();}
+			}
+			}
+		}
 		if (verificationToggle.equals("1")) {
 			try {
 				banDur = Main.config.getProperty("banDuration" + serverID);
