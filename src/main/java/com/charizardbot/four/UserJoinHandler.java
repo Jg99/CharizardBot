@@ -22,6 +22,8 @@ public class UserJoinHandler extends ListenerAdapter {
 				Main.output = new FileOutputStream("server_config.cfg");
 				Main.config.store(Main.output, null);
 			 }
+			} catch (Exception e){e.printStackTrace();}
+			try {
 			 nickBanToggle = Main.config.getProperty("nickBL" + serverID);
 			 if (Main.config.getProperty("nickBL" + serverID) == null) {
 				Main.config.setProperty("nickBL" + serverID, "0");
