@@ -190,26 +190,23 @@ public class ChatFilterToggle extends ListenerAdapter {
 		//set logging channel
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "logchannel") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
 			if (event.getMessage().getContentRaw().substring(11, 12).equals("#")) {
-		//	List<TextChannel> chList = server.getChannelsByName(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()));
-			List<TextChannel> chList = event.getGuild().getTextChannelsByName(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()), true);
-			channelID = chList.get(0).getId();
+				List<TextChannel> chList = event.getGuild().getTextChannelsByName(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()), true);
+				channelID = chList.get(0).getId();
 			} else {
-			channelID = event.getMessage().getContentRaw().replaceAll("[^\\d]", "");
+				channelID = event.getMessage().getContentRaw().replaceAll("[^\\d]", "");
 			}
 			if (event.getGuild().getTextChannelById(channelID).canTalk()) {
-        	try {
-        		Main.output = new FileOutputStream("logConfig.cfg");        			
-        		Main.logging_config.setProperty("logchannel" + event.getGuild().getId().toString().toString(), channelID);
-        		Main.logging_config.store(Main.output, null);
-        		event.getChannel().sendMessage("Successfully set the channel for logging.").queue();
-        	} catch (IOException io) {
-        		io.printStackTrace();
-        	} finally {
-        		if (Main.output != null) {
-        			try {
-        				Main.output.close();
-        			} catch (IOException e) {
-        				e.printStackTrace();
+        		try {
+        			Main.output = new FileOutputStream("logConfig.cfg");        			
+        			Main.logging_config.setProperty("logchannel" + event.getGuild().getId().toString().toString(), channelID);
+        			Main.logging_config.store(Main.output, null);
+        			event.getChannel().sendMessage("Successfully set the channel for logging.").queue();
+        		} catch (IOException io) {io.printStackTrace();
+        		} finally {
+        			if (Main.output != null) {
+        				try {
+        					Main.output.close();
+        				} catch (IOException e) {e.printStackTrace();
         			}
         		}
 			}

@@ -39,7 +39,6 @@ public class KITableCrawler {
         		count++;
         	}
         }
-   //     System.out.println(table);
         lineScan.close();
         doc.clearAttributes();
 	}

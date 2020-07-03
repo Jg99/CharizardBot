@@ -13,7 +13,7 @@ public class enlargeEmote extends ListenerAdapter {
             List<Emote> emotes = event.getMessage().getEmotes();
             String urls = "";
             for (Emote a : emotes) {
-             urls += a.getImageUrl() + "\n";
+                urls += a.getImageUrl() + "\n";
             }
             event.getChannel().sendMessage(urls).queue();
         }

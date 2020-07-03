@@ -22,7 +22,7 @@ public class ImgurToggle extends ListenerAdapter{
         		wasNull = true;
         		wasChanged = true;
         		event.getChannel().sendMessage("No toggle was set for Imgur Commands. Set to on by default. Please run again to turn off.").queue();
-        		}
+        	}
         	if (!wasNull ) {
         		if (toggle.equals("0") && !wasChanged) {
         			toggle = "1";

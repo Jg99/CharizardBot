@@ -69,12 +69,12 @@ public class ChatFilterHandler extends ListenerAdapter {
                         });                        //Log to channel
                          if (svrLogging.equals("1") && logChannel != ""){
                               if (event.getJDA().getTextChannelById(logChannel).canTalk()) {
-                              EmbedBuilder logEmbed = new EmbedBuilder();
-                              logEmbed.setTitle("CharizardBot Chat Filter Logging");
-                              logEmbed.addField("CharizardBot Filter has removed the following message for bad language from @" + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + ":", event.getMessage().getContentRaw(), false);
-                              logEmbed.setAuthor(event.getAuthor().getAsTag());
-                              logEmbed.setFooter("User ID: " + event.getMember().getId());
-                              event.getJDA().getTextChannelById(logChannel).sendMessage(logEmbed.build()).queue();
+                                EmbedBuilder logEmbed = new EmbedBuilder();
+                                logEmbed.setTitle("CharizardBot Chat Filter Logging");
+                                logEmbed.addField("CharizardBot Filter has removed the following message for bad language from @" + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + ":", event.getMessage().getContentRaw(), false);
+                                logEmbed.setAuthor(event.getAuthor().getAsTag());
+                                logEmbed.setFooter("User ID: " + event.getMember().getId());
+                                event.getJDA().getTextChannelById(logChannel).sendMessage(logEmbed.build()).queue();
                               }
                          }
                      }

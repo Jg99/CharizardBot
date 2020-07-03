@@ -119,31 +119,5 @@ public class JoinServerStuff extends ListenerAdapter{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-/*		try {
-    	URL url = new URL("https://discordbotlist.com/api/bots/428634701771702282/stats");
-    	String token = "";
-    	HttpURLConnection con = (HttpURLConnection)url.openConnection();
-    	con.setRequestMethod("POST");
-    	con.setRequestProperty("Authorization", token);
-    	con.setRequestProperty("Content-Type", "application/json; utf-8");
-    	con.setRequestProperty("Accept", "application/json");
-    	con.setDoOutput(true);
-    	con.setDoInput(true);
-    	String jsonInputString = "{\"shard_id\":\"0\",\"guilds\":\"" + event.getJDA().getGuilds().size() + "\",\"users\":\"" + event.getJDA().getUsers().size() +"\",\"voice_connections\":\"0\"}";          
-    	try(OutputStream os = con.getOutputStream()) {
-    	    byte[] input1 = jsonInputString.getBytes("utf-8");
-    	    os.write(input1, 0, input1.length); 
-    	}
-    	try(BufferedReader br = new BufferedReader(
-    			  new InputStreamReader(con.getInputStream(), "utf-8"))) {
-    			    StringBuilder response = new StringBuilder();
-    			    String responseLine = null;
-    			    while ((responseLine = br.readLine()) != null) {
-    			        response.append(responseLine.trim());
-    			    }
-    			    Main.logger.info(response.toString());
-    			}
-		} catch (Exception e){};*/
-		//end void
 	}
 }

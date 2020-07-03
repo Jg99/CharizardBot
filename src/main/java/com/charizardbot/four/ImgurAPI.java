@@ -30,29 +30,28 @@ public class ImgurAPI {
 	public void searchImage (String searchTerm) {
 		try {
 		if (rateLimitCount > 10) {
-		this.isError = false;
-		Sort sort = Sort.Top;
-		Window window = Window.All;
-		TagGallery gallery = mClient.galleryService().getTagGallery(searchTerm, sort, window, 0);
-		GalleryItem firstImage = gallery.getItems().get(0);
-		this.image = firstImage;
-		rateLimitCount = mClient.getQuota().getUserCreditsAvailable();
+			this.isError = false;
+			Sort sort = Sort.Top;
+			Window window = Window.All;
+			TagGallery gallery = mClient.galleryService().getTagGallery(searchTerm, sort, window, 0);
+			GalleryItem firstImage = gallery.getItems().get(0);
+			this.image = firstImage;
+			rateLimitCount = mClient.getQuota().getUserCreditsAvailable();
 		}
 		} catch (Exception e) { this.isError = true;}
 	}
 	public void searchRandImage (String searchTerm) { //first 10 pages/first 5 images
 		try {
 		if (rateLimitCount > 10) {
-		this.isError = false;
-		Sort sort = Sort.Top;
-		Window window = Window.All;
-		Random rand = new Random();
-		TagGallery gallery = mClient.galleryService().getTagGallery(searchTerm, sort, window, 0);
-		int randImage = rand.nextInt(gallery.getItems().size()); // randomizes the number of images on the first page.
-		GalleryItem randImg = gallery.getItems().get(randImage);
-		
-		this.image = randImg;
-		rateLimitCount = mClient.getQuota().getUserCreditsAvailable();
+			this.isError = false;
+			Sort sort = Sort.Top;
+			Window window = Window.All;
+			Random rand = new Random();
+			TagGallery gallery = mClient.galleryService().getTagGallery(searchTerm, sort, window, 0);
+			int randImage = rand.nextInt(gallery.getItems().size()); // randomizes the number of images on the first page.
+			GalleryItem randImg = gallery.getItems().get(randImage);
+			this.image = randImg;
+			rateLimitCount = mClient.getQuota().getUserCreditsAvailable();
 		}
 		} catch (Exception e) { this.isError = true;}	
 	}

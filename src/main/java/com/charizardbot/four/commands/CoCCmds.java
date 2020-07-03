@@ -70,15 +70,15 @@ public class CoCCmds extends ListenerAdapter {
 			EmbedBuilder embed = new EmbedBuilder();
         	embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
         	for (int i = 0;i < clan.size(); i++) {
-        	embed.addField("Clan Name", clan.get(i).getName(), false);
-        	embed.addField("Tag:", clan.get(i).getTag(), false);
-        	embed.addField("Members:", clan.get(i).getClanMembers() + "/50", false);
-        	embed.addField("War frequency:" , clan.get(i).getClanWarFrequency(), false);
+        		embed.addField("Clan Name", clan.get(i).getName(), false);
+        		embed.addField("Tag:", clan.get(i).getTag(), false);
+        		embed.addField("Members:", clan.get(i).getClanMembers() + "/50", false);
+        		embed.addField("War frequency:" , clan.get(i).getClanWarFrequency(), false);
         	}
         	embed.setTitle("Clash of Clans Search");
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	event.getChannel().sendMessage(embed.build()).queue();
-        		}
+        }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "clanplayers") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
         	API.setToken(API_TOKEN);
 			String clanTag = event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length());
@@ -97,7 +97,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.setThumbnail(clan1.getClanIconLarge());
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	event.getChannel().sendMessage(embed.build()).queue();
-        	}
+        }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "playerinfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
 			API.setToken(API_TOKEN);
 			String memberTag = event.getMessage().getContentRaw().substring(12, event.getMessage().getContentRaw().length());
@@ -114,7 +114,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.setThumbnail(member.getLeagueIconLarge());
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	event.getChannel().sendMessage(embed.build()).queue();
-        	}
+        }
 		//TOGGLE CMDS
         if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "togglecoc") && !event.getAuthor().isBot() && (event.getAuthor().equals(event.getJDA().getUserById(Main.OWNER_ID)) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
         	Main.output = new FileOutputStream("server_config.cfg");

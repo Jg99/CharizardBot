@@ -17,7 +17,6 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         	
         	if (event.getMessage().getContentRaw().toLowerCase().contains("rock")) {
         		int result = rand.nextInt(2);
-        		
         		if (result == 0)
         			response = "It's a tie!";
         		else if (result == 1)

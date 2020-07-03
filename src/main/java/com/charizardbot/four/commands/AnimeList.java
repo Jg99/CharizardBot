@@ -24,7 +24,7 @@ public class AnimeList extends ListenerAdapter {
         try {
             String miscToggle = "1";
             if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
-            miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
+                miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
             }
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
@@ -58,8 +58,7 @@ public class AnimeList extends ListenerAdapter {
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                 embed.setTitle("Results for your Anime search");
                 embed.setThumbnail(completableFuture.get().imageURL);
-               try {embed.addField("Title:", completableFuture.get().title_english, false);} catch (Exception e){embed.addField("Title:", completableFuture.get().title, false);}
-                
+                try {embed.addField("Title:", completableFuture.get().title_english, false);} catch (Exception e){embed.addField("Title:", completableFuture.get().title, false);}
                 embed.addField("Description:", desc, false);
                 embed.addField("Number of episodes:", "" + completableFuture.get().episodes, true);
                 try {embed.addField("Premiered:", completableFuture.get().premiered, true);}catch (Exception e){embed.addField("Year:", "Unknown", true);}
