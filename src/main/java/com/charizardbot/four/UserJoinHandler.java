@@ -37,37 +37,34 @@ public class UserJoinHandler extends ListenerAdapter {
 		//Autoban blacklisted nicknames. Meant for Wiz servers.
 		if (nickBanToggle.equals("1")) {
 			String nicks = Main.NICK_BL.toLowerCase();
-			System.out.println("Nick BL: " + nicks);
 			String joinNick = event.getUser().getName().toLowerCase();
-			boolean isBL = false;
 			Scanner scan = new Scanner(nicks);
 			while (scan.hasNextLine()) {
 				String token = scan.nextLine();
 				if (joinNick.contains(token)){
-					isBL = true;
+				if (!event.getUser().isBot()) {
+					event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
+					try {
+						logChan = Main.logging_config.getProperty("logchannel" + serverID);	
+						svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
+					} catch (Exception e){e.printStackTrace();}
+					if (logChan != null){
+					try {
+						if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
+							EmbedBuilder embed = new EmbedBuilder();
+      			   			embed.setTitle("Blacklisted username detected");
+      			   			embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " 	has a blacklisted username."), true);
+      	   					Random rand = new Random();
+         					embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+							embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+							event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
+					}
+					} catch (Exception e) {e.printStackTrace();}
 				}
 			}
-			scan.close();
-			if (isBL && !event.getUser().isBot()) {
-				event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
-				try {
-					logChan = Main.logging_config.getProperty("logchannel" + serverID);	
-					svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
-				} catch (Exception e){e.printStackTrace();}
-				if (logChan != null){
-				try {
-					if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {
-						EmbedBuilder embed = new EmbedBuilder();
-      			   		embed.setTitle("Blacklisted username detected");
-      			   		embed.addField("Auto-ban triggered", ("User " + event.getUser().getName() + ", ID: " + event.getMember().getId() + " has a blacklisted username."), true);
-      	   				Random rand = new Random();
-         				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-						embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-						event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
-					}
-				} catch (Exception e) {e.printStackTrace();}
-			}
-			}
+		}
+	}
+	scan.close();
 		}
 		if (verificationToggle.equals("1")) {
 			try {
