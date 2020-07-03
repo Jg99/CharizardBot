@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class UserJoinHandler extends ListenerAdapter {
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+		System.out.println("NEW MEMBER JOIN: " + event.getUser().getId());
 		String serverID = event.getGuild().getId().toString();
 		String logChan = "";
 		String svrLogging = "0";
@@ -49,9 +50,11 @@ public class UserJoinHandler extends ListenerAdapter {
 			event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
 				}
 			} catch (Exception e) {e.printStackTrace();}
-			event.getMember().ban(0, "Auto-banned for account age.").queue();
+		//	event.getMember().ban(0, "Auto-banned for account age.").queue();
+			event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
 		}
     	} else {
+			event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue(); //ban even if logging channel is null
 		}
 	
 	}
