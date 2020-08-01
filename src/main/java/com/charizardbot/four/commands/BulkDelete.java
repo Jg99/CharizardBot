@@ -22,6 +22,7 @@ public class BulkDelete extends ListenerAdapter {
             logChan = Main.logging_config.getProperty("logchannel" + event.getGuild().getId().toString().toString());
         } catch(Exception e) {};
         if (event.getMessage().getContentRaw().startsWith(prefix + "msgclr") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
+            event.getChannel().sendTyping().queue();
             String[] arguments = event.getMessage().getContentRaw().split("\\s+");
             //0 = command, 1 = # of messages, up to 100, 2 = User filter if any
             CompletableFuture<List<Message>> toDelete;

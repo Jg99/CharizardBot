@@ -30,6 +30,7 @@ public class AnimeList extends ListenerAdapter {
             if (prefix == null)
                 prefix = "!";
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime") && miscToggle.equals("1")) {
+                event.getChannel().sendTyping().queue();
                 String query = event.getMessage().getContentRaw().substring(7, event.getMessage().getContentRaw().length());
                 AnimeSearch search = new AnimeSearch();
                 search.setQuery(query).setLimit(2);

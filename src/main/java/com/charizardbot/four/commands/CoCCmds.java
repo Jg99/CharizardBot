@@ -25,7 +25,8 @@ public class CoCCmds extends ListenerAdapter {
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "claninfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
         	if (event.getMessage().getContentRaw().charAt(10) != '#') {
-        		API.setToken(API_TOKEN);
+				event.getChannel().sendTyping().queue();
+				API.setToken(API_TOKEN);
         		String clanName = event.getMessage().getContentRaw().substring(10, event.getMessage().getContentRaw().length());
 				Clan clan1 = ClanQuery.queryName(clanName).get(0);
 				Random rand = new Random();
@@ -43,7 +44,8 @@ public class CoCCmds extends ListenerAdapter {
         		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         		event.getChannel().sendMessage(embed.build()).queue();
         	} else {
-            	API.setToken(API_TOKEN);
+				event.getChannel().sendTyping().queue();
+				API.setToken(API_TOKEN);
             	String clanTag = event.getMessage().getContentRaw().substring(10, event.getMessage().getContentRaw().length());
 				Clan clan1 = new Clan(clanTag);
             	Random rand = new Random();
@@ -63,7 +65,8 @@ public class CoCCmds extends ListenerAdapter {
             }
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "searchclans") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
-        	API.setToken(API_TOKEN);
+			event.getChannel().sendTyping().queue();
+			API.setToken(API_TOKEN);
         	String clanName = event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length());
         	ArrayList<Clan> clan = new ArrayList<Clan>(ClanQuery.queryName(clanName));
         	Random rand = new Random();
@@ -80,7 +83,8 @@ public class CoCCmds extends ListenerAdapter {
         	event.getChannel().sendMessage(embed.build()).queue();
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "clanplayers") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
-        	API.setToken(API_TOKEN);
+			event.getChannel().sendTyping().queue();
+			API.setToken(API_TOKEN);
 			String clanTag = event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length());
         	Clan clan1 = new Clan(clanTag);
         	Random rand = new Random();
@@ -99,6 +103,7 @@ public class CoCCmds extends ListenerAdapter {
         	event.getChannel().sendMessage(embed.build()).queue();
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "playerinfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
+			event.getChannel().sendTyping().queue();
 			API.setToken(API_TOKEN);
 			String memberTag = event.getMessage().getContentRaw().substring(12, event.getMessage().getContentRaw().length());
         	Player member = new Player(memberTag);
@@ -117,7 +122,8 @@ public class CoCCmds extends ListenerAdapter {
         }
 		//TOGGLE CMDS
         if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "togglecoc") && !event.getAuthor().isBot() && (event.getAuthor().equals(event.getJDA().getUserById(Main.OWNER_ID)) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
-        	Main.output = new FileOutputStream("server_config.cfg");
+			event.getChannel().sendTyping().queue();
+			Main.output = new FileOutputStream("server_config.cfg");
         	boolean wasNull = false;
         	boolean wasChanged = false;
         	String toggle = Main.config.getProperty("cocCmd" + event.getGuild().getId().toString());

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.charizardbot.four</groupId>
   <artifactId>CharizardBotFour</artifactId>
-  <version>4.5.0</version>
+  <version>4.5.1</version>
 
   <name>CharizardBotFour</name>
   <url>http://www.charizardbot.com</url>
@@ -34,7 +34,7 @@
       <dependency>
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>
-          <version>4.2.0_172</version>
+          <version>4.2.0_183</version>
           <exclusions>
             <exclusion>
                 <groupId>club.minnced</groupId>

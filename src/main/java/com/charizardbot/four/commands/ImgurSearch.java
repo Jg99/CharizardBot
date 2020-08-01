@@ -13,7 +13,8 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "imgursearch") && !event.getAuthor().isBot() && imgurCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
-        		Main.imgur.searchImage(event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length()));
+			event.getChannel().sendTyping().queue();	
+			Main.imgur.searchImage(event.getMessage().getContentRaw().substring(13, event.getMessage().getContentRaw().length()));
         		String imgurlink = Main.imgur.returnImageInfo();
         		if (Main.imgur.isError == false) {
         			event.getChannel().sendMessage("Here's the first image from your search term:\n" + imgurlink).queue();
@@ -22,7 +23,8 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         		}
         	}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "randimgur") && !event.getAuthor().isBot() && imgurCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
-    		Main.imgur.searchRandImage(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()));
+			event.getChannel().sendTyping().queue();
+			Main.imgur.searchRandImage(event.getMessage().getContentRaw().substring(11, event.getMessage().getContentRaw().length()));
     		String imagelink = Main.imgur.returnImageInfo();
     		if (Main.imgur.isError == false) {
     			event.getChannel().sendMessage("Here's a random image from your search term:\n" + imagelink).queue();

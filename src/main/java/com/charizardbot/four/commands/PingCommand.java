@@ -10,6 +10,7 @@ public class PingCommand extends ListenerAdapter {
     		prefix = "!";
         try {
         if (event.getMessage().getContentRaw().toLowerCase().equals(prefix + "ping")) {
+            event.getChannel().sendTyping().queue();
             MessageChannel channel = event.getChannel();
             long time = System.currentTimeMillis();
             channel.sendMessage("Pong! Charizardbot version " + Main.VERSION) /* => RestAction<Message> */

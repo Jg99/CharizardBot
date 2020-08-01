@@ -30,6 +30,7 @@ public class RedditCommands extends ListenerAdapter {
              * Random post using a specified subreddit. If not, will get from r/all from today.
              */
             if (event.getMessage().getContentRaw().startsWith(prefix + "randpost") && redditCommands.equals("1")) {
+            event.getChannel().sendTyping().queue();
             String[] arguments = event.getMessage().getContentRaw().split("\\s+");
             String subreddit = "all"; // r/all by default
             SubredditSort subSort = SubredditSort.TOP;
@@ -139,6 +140,7 @@ public class RedditCommands extends ListenerAdapter {
             * Randomly pick a meme from Reddit - to do
             */
             if (event.getMessage().getContentRaw().startsWith(prefix + "randmeme") && redditCommands.equals("1")) {
+                event.getChannel().sendTyping().queue();
                 String[] memeSubs = {"memes", "dankmemes", "dank_meme", "animemes", "memes_of_the_dank"};
                 String[] arguments = event.getMessage().getContentRaw().split("\\s+");
                 SubredditSort subSort = SubredditSort.TOP;
@@ -209,6 +211,7 @@ public class RedditCommands extends ListenerAdapter {
             * Randomly pick some totally not nsfw stuff.
             */
             if (event.getMessage().getContentRaw().startsWith(prefix + "hentai") && redditCommands.equals("1")) {
+                event.getChannel().sendTyping().queue();
                 String[] nsfwSubs = {"hentai", "HENTAI_GIF", "hentai_paradise", "pokeporn", "waifusgonewild"};
                 String[] arguments = event.getMessage().getContentRaw().split("\\s+");
                 SubredditSort subSort = SubredditSort.TOP;

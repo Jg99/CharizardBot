@@ -36,7 +36,6 @@ public class UserJoinHandler extends ListenerAdapter {
 		} catch (Exception e){e.printStackTrace();}
 		//Autoban blacklisted nicknames. Meant for Wiz servers.
 		if (nickBanToggle.equals("1")) {
-			System.out.println(Main.NICK_BL);
 			String joinNick = event.getUser().getName().toLowerCase();
 			Scanner scan = new Scanner(Main.NICK_BL.toLowerCase());
 			while (scan.hasNextLine()) {

@@ -65,7 +65,8 @@ public class TenorSearch extends ListenerAdapter {
     	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
     	}
     	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "gif") && tenorCmd.equals("1") && !event.getAuthor().isBot()) {
-    		String searchTerm = event.getMessage().getContentRaw().substring(5, event.getMessage().getContentRaw().length()).replace(" ", "%20");
+			event.getChannel().sendTyping().queue();
+			String searchTerm = event.getMessage().getContentRaw().substring(5, event.getMessage().getContentRaw().length()).replace(" ", "%20");
     		JSONObject searchResult = getSearchResults(searchTerm, 1);
     	      String url = "";
     	      ArrayList<String> list = new ArrayList<String>();
@@ -80,7 +81,8 @@ public class TenorSearch extends ListenerAdapter {
     	tenorCmd = Main.config.getProperty("tenorCmd" + event.getGuild().getId().toString());
     	}
     	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "randgif") && tenorCmd.equals("1") && !event.getAuthor().isBot()) {
-    		String searchTerm = event.getMessage().getContentRaw().substring(9, event.getMessage().getContentRaw().length()).replace(" ", "%20");
+			event.getChannel().sendTyping().queue();
+			String searchTerm = event.getMessage().getContentRaw().substring(9, event.getMessage().getContentRaw().length()).replace(" ", "%20");
     		JSONObject searchResult = getSearchResults(searchTerm, 50);
     		Random rand = new Random();
     	    String url = "";

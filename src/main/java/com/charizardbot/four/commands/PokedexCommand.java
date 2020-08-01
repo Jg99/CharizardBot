@@ -20,7 +20,8 @@ public class PokedexCommand extends ListenerAdapter {
     		prefix = "!";
     	try {
 			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "pokedex") && !event.getAuthor().isBot()) {
-            	EmbedBuilder embed = new EmbedBuilder();
+				event.getChannel().sendTyping().queue();
+				EmbedBuilder embed = new EmbedBuilder();
             	Random rand = new Random();
             	String inMon = event.getMessage().getContentRaw().toLowerCase();
 				String parsedMon = inMon.substring(9, inMon.length());

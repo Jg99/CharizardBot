@@ -68,6 +68,7 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                     if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
+                        event.getChannel().sendTyping().queue();
                      userID = event.getMessage().getContentRaw().substring(6);
                     if (!event.getMessage().getMentionedUsers().isEmpty()) {
                         userID = event.getMessage().getMentionedUsers().get(0).getId();
@@ -112,6 +113,7 @@ public class CrossBan extends ListenerAdapter {
             if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 admins = Main.XBAN_ADMINS;
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
+                    event.getChannel().sendTyping().queue();
                      userID = event.getMessage().getContentRaw().substring(8);
                     Scanner scan = new Scanner(Main.XBAN_SERVERS);
                     while (scan.hasNextLine()) {
@@ -208,6 +210,7 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cpastban") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 String svID = event.getGuild().getId().toString();
+                event.getChannel().sendTyping().queue();
                 String banned = Main.XBAN_BANSDB;
                 String[] lines = banned.split("\n");
                 for (int i = 0; i < lines.length; i++) {
