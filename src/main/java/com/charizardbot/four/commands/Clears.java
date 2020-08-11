@@ -16,8 +16,7 @@ public class Clears extends ListenerAdapter {
 
     //TODO: Write Clear commands for MM, AS, ES, and Mods+, Reading from a file where the roles can be stored
     // Include required channels for each of the roles except Mods+,
-    // Limit it to GTP only so people on the list can not use in other servers the bot is in
-    // only James + Admins can add to these lists?
+    // only Admins can add to these lists?
     // useable by checking the role. Roles will determine if can be used
     public void onGuildMessageReceived(GuildMessageReceivedEvent event)
     {
