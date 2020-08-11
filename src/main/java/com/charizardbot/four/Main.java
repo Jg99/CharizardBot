@@ -71,6 +71,7 @@ public class Main {
 	public static int bulkCount = 0;
 	public static int curMsgLog = 0;
 	public static RedditClient reddit;
+	public static String CLEAR_MODS = "";
 	public static void main(String[] args) {
 		try {
 			File logFileConfig = new File("log4j2.xml");
@@ -212,10 +213,10 @@ public class Main {
 				/**
 				 * Reddit client setup
 				 */
-				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
+				/*UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
 				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
 				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
-				reddit = OAuthHelper.automatic(networkAdapter, credentials);
+				reddit = OAuthHelper.automatic(networkAdapter, credentials);*/
 
 			} else {
 				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
@@ -369,6 +370,8 @@ public class Main {
 				/**join listener for that sweet autoban stuff. GTP only (my server).
 				 * May add user Join options in the future such as a welcome message.
 				 */
+				api.addEventListener(new Clears());
+				/**join listener for clear commands, only for use in GTP atm*/
 				api.addEventListener(new UserJoinHandler());
 				api.addEventListener(new MessageLogger());
 			} catch (LoginException e) {
