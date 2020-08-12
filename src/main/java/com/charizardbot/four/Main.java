@@ -72,6 +72,12 @@ public class Main {
 	public static int curMsgLog = 0;
 	public static RedditClient reddit;
 	public static String CLEAR_MODS = "";
+	public static String CLEAR_AUCTIONS = "";
+	public static String CLEAR_EVENTS = "";
+	public static String CLEAR_MM = "";
+	public static String AUCTION_CHANNELS = "";
+	public static String EVENT_CHANNELS = "";
+	public static String MM_CHANNELS = "";
 	public static void main(String[] args) {
 		try {
 			File logFileConfig = new File("log4j2.xml");
@@ -249,6 +255,7 @@ public class Main {
 				logger.info("Config file does not exist, creating server_config.cfg");
 				new FileOutputStream("server_config.cfg", false).close();
 			}
+
 			if (!nicknameFile.exists()) {
 				logger.info("Nickname blacklist does not exist, creating nick_blacklist.txt");
 				new FileOutputStream("nick_blacklist.txt", false).close();
