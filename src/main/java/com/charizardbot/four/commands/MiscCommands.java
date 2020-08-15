@@ -78,6 +78,12 @@ public class MiscCommands extends ListenerAdapter {
 			}
 			Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 		}
+		/*PATREON DONOR COMMANDS*/
+		
+		//PrankingYou's command ($15 patreon)
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "prank") && event.getAuthor().getId().equals("203244890618855424")) {
+			event.getChannel().sendMessage("https://tenor.com/view/just-got-pranked-got-pranked-jerk-off-masterbate-gif-5623249").queue();
+		}
 		} catch (Exception e) { Main.logger.info("WARN: Exception in Misc Commands: Insufficient permissions?\n" + e);e.printStackTrace(); } 
 	} 	
 }
