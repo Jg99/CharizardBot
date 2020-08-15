@@ -85,7 +85,7 @@ public class MiscCommands extends ListenerAdapter {
 			if (event.getMessage().getMentionedUsers().isEmpty())
 				event.getChannel().sendMessage("https://tenor.com/view/just-got-pranked-got-pranked-jerk-off-masterbate-gif-5623249").queue();
 			else {
-				event.getChannel().sendMessage(event.getMessage().getMentionedMembers().get(0).getAsMention() + " has been pranked by " + event.getAuthor().getAsMention() +
+				event.getChannel().sendMessage(event.getAuthor().getAsMention() + " just pranked " + event.getMessage().getMentionedMembers().get(0).getAsMention() +
 				"\nhttps://tenor.com/view/just-got-pranked-got-pranked-jerk-off-masterbate-gif-5623249").queue();
 
 			}
