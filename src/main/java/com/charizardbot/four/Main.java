@@ -219,10 +219,10 @@ public class Main {
 				/**
 				 * Reddit client setup
 				 */
-				/*UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
+				UserAgent userAgent = new UserAgent("bot", "com.charizardbot.four", VERSION, "jamesgryffindor99");
 				NetworkAdapter networkAdapter = new OkHttpNetworkAdapter(userAgent);
 				Credentials credentials = Credentials.userless(REDDIT_ID, REDDIT_SECRET, UUID.randomUUID());
-				reddit = OAuthHelper.automatic(networkAdapter, credentials);*/
+				reddit = OAuthHelper.automatic(networkAdapter, credentials);
 
 			} else {
 				logger.info("Please provide a valid Reddit client id and secret (client ID on first line, secret on second) and place it in reddit_token.txt.");
