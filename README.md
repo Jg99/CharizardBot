@@ -1,6 +1,8 @@
 # CharizardBot4
 CharizardBot version 4.0 Discord bot. 
 
+If you enjoy my work and wish to donate, my Patreon is https://patreon.com/jamesgryffindor99
+
 This bot is a java-based Discord bot that has a few features. Yes, it is now open source! Do whatever the heck you want with the code, but please contribute and keep any changes open source.
 It uses the JDA Discord wrapper. Version 3 and below used Javacord, and is not open source.
 ```
