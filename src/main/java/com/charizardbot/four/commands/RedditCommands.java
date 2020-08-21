@@ -141,7 +141,7 @@ public class RedditCommands extends ListenerAdapter {
             */
             if (event.getMessage().getContentRaw().startsWith(prefix + "randmeme") && redditCommands.equals("1")) {
                 event.getChannel().sendTyping().queue();
-                String[] memeSubs = {"memes", "dankmemes", "dank_meme", "animemes", "memes_of_the_dank"};
+                String[] memeSubs = {"memes", "dankmemes", "goodanimemes", "memes_of_the_dank"};
                 String[] arguments = event.getMessage().getContentRaw().split("\\s+");
                 SubredditSort subSort = SubredditSort.TOP;
                 String sortMsg = "Random top meme from r/";

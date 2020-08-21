@@ -79,7 +79,7 @@ public class MiscCommands extends ListenerAdapter {
 			Main.config.setProperty("miscCmds" + event.getGuild().getId().toString(), toggle);
 		}
 		/*PATREON DONOR COMMANDS*/
-
+			
 		//PrankingYou's command ($15 patreon)
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "prank") && (event.getAuthor().getId().equals("203244890618855424") || event.getAuthor().getId().equals(Main.OWNER_ID))) {
 			if (event.getMessage().getMentionedUsers().isEmpty())
