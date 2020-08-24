@@ -227,7 +227,7 @@ public class RedditCommands extends ListenerAdapter {
                         break;
                     case "hot":
                         subSort = SubredditSort.HOT;
-                        sortMsg = "Random hot meme from r/";
+                        sortMsg = "Random hot hentai post from r/";
                         break;
                     case "new":
                         subSort = SubredditSort.NEW;
