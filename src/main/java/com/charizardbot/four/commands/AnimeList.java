@@ -78,6 +78,7 @@ public class AnimeList extends ListenerAdapter {
         }
     } catch (Exception e) {
         Main.logger.info("WARN: Exception in AnimeList command." + e);
+        e.printStackTrace();
     }
     }
 }

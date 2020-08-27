@@ -41,3 +41,4 @@ after the subreddit on the randpost command. On the meme command, specify right 
 4.4.5 - JDA: 4.1.1_165, !enlarge - Enlarge your emotes!
 4.5.0 - Update dependencies to newer versions, JDA to 4.2.0_172, more coming
 4.5.1 - Typing statuses are cool, JDA to 4.2.0_183
+4.5.2 - Update dependencies, Update JDA to 4.2.0_198, upcoming (4.6): purge/clear
