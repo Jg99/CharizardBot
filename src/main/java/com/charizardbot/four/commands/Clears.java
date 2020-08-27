@@ -5,17 +5,12 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.internal.requests.Route;
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
-import java.nio.channels.Channel;
 import java.util.List;
 
 import static com.charizardbot.four.Main.*;
 
 public class Clears extends ListenerAdapter {
-    private Object User;
 
     //TODO: Write Clear commands for MM, AS, ES, and Mods+, Reading from a file where the roles can be stored
     // Include required channels for each of the roles except Mods+,
