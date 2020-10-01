@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.TimeZone;
@@ -19,6 +21,8 @@ import java.util.TimerTask;
 import java.util.UUID;
 import javax.security.auth.login.LoginException;
 import com.charizardbot.four.commands.*;
+
+import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.dv8tion.jda.api.JDA;
@@ -44,6 +48,7 @@ public class Main {
 	public static ChatFilter filter;
 	public static String ownerNick = "James, Meme Man 2020#0820";
 	public static String table = "";
+	public static File VALUE_CSV;
 	public static String lastUpdated = "";
 	public static String PREFIX = "!";
 	public static InputStream input = null;
@@ -240,6 +245,21 @@ public class Main {
 				fileScan.close();
 			} else {
 				logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
+			}
+			VALUE_CSV = new File("value_guides.csv");
+			if (VALUE_CSV.exists()) {
+				System.out.println("CSV exists!");
+			//	List<CSVRecord> csvmap = CSVParse.getCSVResults(VALUE_CSV, "^[\\W]+");
+				List<CSVRecord> csvmap = CSVParse.getCSVResults(VALUE_CSV);
+				int i = csvmap.size();
+				String o = "";
+				for (int a = 0; a < i; a++) {
+				String[] value = csvmap.get(a).toString().split("values=");
+				o += value[1] + "\n";
+				}
+				System.out.println(o);
+			} else {
+				logger.info("No CSV for Value Guides is provided.");
 			}
 			if (discordtoken.equals("")) {
 				System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
