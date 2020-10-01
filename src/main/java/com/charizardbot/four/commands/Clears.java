@@ -24,20 +24,20 @@ public class Clears extends ListenerAdapter {
                 prefix = "!";
             String args[] = event.getMessage().getContentRaw().split(" ");
             if (args[0].equalsIgnoreCase(prefix + "addMod") && (event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
-                String[] roles = new String[10];
+      //          String[] roles = new String[10];
 
                 for (int i = 1; args[i] != null; i++) {
-                      String role = args[i];
+ //                     String role = args[i];
 //                    roles[i-1] = role;
                     CLEAR_MODS += args[i] + ",";
                     event.getChannel().sendMessage(args[i]).queue();
                 }
             }
             if (args[0].equalsIgnoreCase(prefix + "auctionAddChannel") && (event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
-                String[] roles = new String[10];
+   //             String[] roles = new String[10];
 
                 for (int i = 1; args[i] != null; i++) {
-                    String role = args[i];
+ //                   String role = args[i];
 //                    roles[i-1] = role;
                     AUCTION_CHANNELS += args[i] + ",";
                     event.getChannel().sendMessage(args[i]).queue();
@@ -56,9 +56,8 @@ public class Clears extends ListenerAdapter {
                 event.getChannel().sendMessage("Cleared " + num + " messages").queue();
             }
             if (args[0].equalsIgnoreCase(prefix + "asclear")) {
-                String userID = event.getAuthor().getId();
                 Role[] allowedRoles = new Role[10];
-                String[] allowedChannels = new String [200];
+         //       String[] allowedChannels = new String [200];
                 String[] ch = AUCTION_CHANNELS.split(",");
                 String[] roles = CLEAR_MODS.split(",");
                 String ch2 = "";
@@ -68,7 +67,6 @@ public class Clears extends ListenerAdapter {
                 }
                 TextChannel ch1 = event.getGuild().getTextChannelById(ch2);
                 TextChannel channel = event.getChannel();
-                Member member = event.getGuild().getMemberById(userID);
                 List<Role> memberRoles = event.getMember().getRoles();
                 String temp = "";
                 Role temp2;

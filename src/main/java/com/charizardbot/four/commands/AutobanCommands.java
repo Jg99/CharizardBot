@@ -100,6 +100,9 @@ public class AutobanCommands extends ListenerAdapter {
 			Random rand = new Random();
 			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 			embed.setTitle("Auto-ban duration on your server");
+			if (Main.config.getProperty("banDuration" + event.getGuild().getId().toString()) == null) {
+				Main.config.setProperty("banDuration" + event.getGuild().getId().toString(), "3600");
+			}
 			embed.addField("The bot will ban any account younger than:", Main.config.getProperty("banDuration" + event.getGuild().getId().toString()) + " seconds.", false);
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			event.getChannel().sendMessage(embed.build()).queue();

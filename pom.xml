@@ -115,6 +115,12 @@
     <artifactId>log4j-slf4j-impl</artifactId>
     <version>2.13.3</version>
  </dependency>
+<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-csv</artifactId>
+  <version>1.8</version>
+</dependency>
+
   </dependencies>
 
   <build>
