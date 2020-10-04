@@ -21,6 +21,11 @@ public class ValueGuides extends ListenerAdapter {
 	    	if (prefix == null)
 	    		prefix = "!";
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "value")) {
+                String isEnabled = "1";
+                if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+                    isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
+                    }
+                if (isEnabled.equals("1")) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "value ");
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 String final_item = "";
@@ -52,8 +57,14 @@ public class ValueGuides extends ListenerAdapter {
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessage(embed.build()).queue();
             }
+            }
             //SEARCH command - Searches for multiple values with the same name.
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "search")) {
+                String isEnabled = "1";
+                if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+                    isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
+                    }
+                if (isEnabled.equals("1")) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "search ");
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 EmbedBuilder embed = new EmbedBuilder();
@@ -84,6 +95,7 @@ public class ValueGuides extends ListenerAdapter {
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessage(embed.build()).queue();
+            }
             }
         } catch (Exception e) {
             Main.logger.info("WARN: Exception in the ValueGuides command.");
