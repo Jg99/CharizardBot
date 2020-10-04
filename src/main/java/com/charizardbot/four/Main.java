@@ -249,7 +249,6 @@ public class Main {
 			VALUE_CSV = new File("value_guides.csv");
 			if (VALUE_CSV.exists()) {
 				System.out.println("CSV exists!");
-			//	List<CSVRecord> csvmap = CSVParse.getCSVResults(VALUE_CSV, "^[\\W]+");
 				List<CSVRecord> csvmap = CSVParse.getCSVResults(VALUE_CSV);
 				int i = csvmap.size();
 				String o = "";
@@ -258,7 +257,6 @@ public class Main {
 				o += value[1] + "\n";
 				}
 				o = o.replaceAll("[\\[\\]]","");
-				System.out.println(o);
 				VALUE_TABLE = o;
 			} else {
 				logger.info("No CSV for Value Guides is provided.");
