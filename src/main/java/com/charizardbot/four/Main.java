@@ -12,7 +12,6 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.TimeZone;
@@ -39,7 +38,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "4.5.2";
+	public static final String VERSION = "4.6.0";
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
@@ -257,6 +256,7 @@ public class Main {
 				String[] value = csvmap.get(a).toString().split("values=");
 				o += value[1] + "\n";
 				}
+				o = o.replaceAll("[\\[\\]]","");
 				System.out.println(o);
 			} else {
 				logger.info("No CSV for Value Guides is provided.");
@@ -331,7 +331,8 @@ public class Main {
 							formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 							lastUpdated = formatter.format(date) + " UTC";
 						}
-					} catch (IOException e) {
+					} catch (Exception e) {
+						e.printStackTrace();
 						// just keep trying again every 30 seconds. If it's down, it'll eventually succeed when it's back up.
 						run();
 					}
