@@ -48,6 +48,7 @@ public class Main {
 	public static String ownerNick = "James, Meme Man 2020#0820";
 	public static String table = "";
 	public static File VALUE_CSV;
+	public static String VALUE_TABLE = "";
 	public static String lastUpdated = "";
 	public static String PREFIX = "!";
 	public static InputStream input = null;
@@ -258,6 +259,7 @@ public class Main {
 				}
 				o = o.replaceAll("[\\[\\]]","");
 				System.out.println(o);
+				VALUE_TABLE = o;
 			} else {
 				logger.info("No CSV for Value Guides is provided.");
 			}
@@ -392,6 +394,7 @@ public class Main {
 				api.addEventListener(new CrossBan());
 				api.addEventListener(new enlargeEmote());
 				api.addEventListener(new CheckServers());
+				api.addEventListener(new ValueGuides());
 				// join server listener. Listens for when the bot joins a new server.
 				api.addEventListener(new JoinServerStuff());
 				/**join listener for that sweet autoban stuff. GTP only (my server).
