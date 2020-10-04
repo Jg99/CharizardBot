@@ -66,6 +66,9 @@ public class ValueGuides extends ListenerAdapter {
                     }
                 if (isEnabled.equals("1")) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "search ");
+                if (item[1].length() < 2) {
+                    event.getChannel().sendMessage("Error, please specify 2 or more letters in your query.").queue();
+                 } else {
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle("Wizard101 Value Guides");
@@ -74,12 +77,13 @@ public class ValueGuides extends ListenerAdapter {
                 while (lineScan.hasNextLine()) {
                     String token = lineScan.nextLine();
                     String[] tokenSpl = token.split(",");
-                    if (tokenSpl[0].toLowerCase().startsWith(item[1].toLowerCase())) {
+                    if (tokenSpl[0].toLowerCase().contains(item[1].toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
                         embed.addField("Item:", item_split[0], true);
                         if (item_split.length == 2) {
-                        embed.addField("Value:", item_split[1], true);
+                        embed.addField("Value (empowers):", item_split[1], true);
+                        embed.addBlankField(true);
                         }
                         if (item_split.length == 3) {
                             if (item_split[1].matches(".*[a-z].*")) {
@@ -96,9 +100,11 @@ public class ValueGuides extends ListenerAdapter {
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessage(embed.build()).queue();
             }
+        }
             }
         } catch (Exception e) {
             Main.logger.info("WARN: Exception in the ValueGuides command.");
+            e.printStackTrace();
         }
     }
 }
