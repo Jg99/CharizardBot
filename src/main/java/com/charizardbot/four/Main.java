@@ -68,6 +68,7 @@ public class Main {
 	public static String XBAN_SERVERS = "";
 	public static String XBAN_ADMINS = "";
 	public static String XBAN_BANSDB = "";
+	public static String VG_WHITELIST = "";
 	public static String LOGGING_CFG = "";
 	public static String NICK_BL = "";
 	public static MessageCache msgCache;
@@ -168,6 +169,17 @@ public class Main {
 				logger.info("xbanadmins.txt does not exist");
 			}
 			/**Cross ban list. saving all of the previous bans and reloading */
+			File vgwl = new File("vgwhitelist.txt");
+			if (vgwl.exists()) {
+				Scanner fileScan = new Scanner(vgwl);
+				while (fileScan.hasNextLine()) {
+					VG_WHITELIST+= fileScan.nextLine() + "\n";
+				}
+				logger.info("Loading vgwhitelist.txt");
+				fileScan.close();
+			} else {
+				logger.info("vgwhitelist.txt does not exist");
+			}
 			File pastbans = new File("pastBans.txt");
 			if (pastbans.exists()) {
 				Scanner fileScan = new Scanner(pastbans);

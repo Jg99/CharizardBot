@@ -5,6 +5,8 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -25,7 +27,11 @@ public class ValueGuides extends ListenerAdapter {
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-                if (isEnabled.equals("1")) {
+                boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
+                if (!isWhitelisted) {
+                    event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
+                }
+                if (isEnabled.equals("1") && isWhitelisted) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "value ");
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 String final_item = "";
@@ -64,7 +70,11 @@ public class ValueGuides extends ListenerAdapter {
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-                if (isEnabled.equals("1")) {
+                boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
+                if (!isWhitelisted) {
+                    event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
+                }
+                if (isEnabled.equals("1") && isWhitelisted) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "search ");
                 if (item[1].length() < 2) {
                     event.getChannel().sendMessage("Error, please specify 2 or more letters in your query.").queue();
@@ -99,8 +109,52 @@ public class ValueGuides extends ListenerAdapter {
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessage(embed.build()).queue();
+                }
             }
         }
+            if (event.getMessage().getContentRaw().contains(prefix + "addvgserver")) {
+                String whitelistedUsers = "475170798454177805\n184534810369196032\n431634709693333535\n308060090739720195";
+                if (whitelistedUsers.contains(event.getAuthor().getId())) {
+                    String[] split = event.getMessage().getContentRaw().split(prefix + "addvgserver ");
+                    String serverID = split[1];
+                    String servers = Main.VG_WHITELIST;
+                    if (servers.contains(serverID)) {
+                        event.getChannel().sendMessage("Server is already whitelisted for value guides").queue();
+                    } else {
+                        servers += serverID + "\n";
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("vgwhitelist.txt"));
+                        writer.write(servers);
+                        writer.close();
+                        Main.VG_WHITELIST= servers;
+                        event.getChannel().sendMessage("Added the server to the value guides whitelist").queue();
+                    }
+                }
+            }
+            if (event.getMessage().getContentRaw().startsWith(prefix + "remvgserver")) {
+                String whitelistedUsers = "475170798454177805\n184534810369196032\n431634709693333535\n308060090739720195";
+                if (whitelistedUsers.contains(event.getAuthor().getId())) {
+                    String[] split = event.getMessage().getContentRaw().split(prefix + "remvgserver ");
+                    String serverID = split[1];
+                    String servers = Main.VG_WHITELIST;
+                    String[] lines = servers.split("\n");
+                    for (int i = 0; i < lines.length; i++) {
+                        if (lines[i].contains(serverID)) {
+                            lines[i] = "";
+                        }
+                    }
+                    StringBuilder svList = new StringBuilder();
+                    for (String s : lines) {
+                        if (!s.equals("")) {
+                            svList.append(s).append("\n");
+                        }
+                    }
+                    servers = svList.toString();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("vgwhitelist.txt"));
+                    writer.write(servers);
+                    writer.close();
+                    Main.VG_WHITELIST = servers;
+                    event.getChannel().sendMessage("Removed the server from the value guides whitelist.").queue();
+                }
             }
         } catch (Exception e) {
             Main.logger.info("WARN: Exception in the ValueGuides command.");
