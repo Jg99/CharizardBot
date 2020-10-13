@@ -34,7 +34,7 @@
       <dependency>
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>
-          <version>4.2.0_198</version>
+          <version>4.2.0_209</version>
           <exclusions>
             <exclusion>
                 <groupId>club.minnced</groupId>
@@ -120,9 +120,7 @@
   <artifactId>commons-csv</artifactId>
   <version>1.8</version>
 </dependency>
-
   </dependencies>
-
   <build>
     <plugins>
       <plugin>
