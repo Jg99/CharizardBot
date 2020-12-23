@@ -55,7 +55,8 @@ public class PokedexCommand extends ListenerAdapter {
     				event.getChannel().sendMessage(embed.build()).queue();
 			}
 		}
-    	} catch (Exception e) {Main.logger.info("WARN: Exception in the Pokedex Command. Insufficient permissions or API server is down?\n" + e);}
+		} catch (Exception e) {Main.logger.info("WARN: Exception in the Pokedex Command. Insufficient permissions or API server is down?\n" + e);
+	}
     		try {
     			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "pokeapi") && !event.getAuthor().isBot()) {
 					InetAddress pokeapi = java.net.InetAddress.getByName("charizardbot.com");
