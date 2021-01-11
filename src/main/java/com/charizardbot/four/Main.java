@@ -45,7 +45,7 @@ public class Main {
 	public static String filterFile = "chatfilter.txt";
 	public static final String OWNER_ID = "184534810369196032";
 	public static ChatFilter filter;
-	public static String ownerNick = "James, Meme Man 2020#0820";
+	public static String ownerNick = "James, Meme Man 2021#0820";
 	public static String table = "";
 	public static File VALUE_CSV;
 	public static String VALUE_TABLE = "";
@@ -110,7 +110,7 @@ public class Main {
 			logger = LogManager.getLogger(Main.class);
 			/**
 			 * CharizardBot version 4
-			 * Copyright 2020 James, Meme Man 2020#0820 aka charmander / bakugo
+			 * Copyright 2021 James, Meme Man 2021#0820
 			 * This is a super dank bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
 			 * license: GNU GPL version 2
 			 * Credit: Dewey (website design), Ultra Blue (hosting, email)

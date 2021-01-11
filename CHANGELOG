@@ -42,4 +42,8 @@ after the subreddit on the randpost command. On the meme command, specify right 
 4.5.0 - Update dependencies to newer versions, JDA to 4.2.0_172, more coming
 4.5.1 - Typing statuses are cool, JDA to 4.2.0_183
 4.5.2 - Update dependencies, Update JDA to 4.2.0_198, upcoming (4.6): purge/clear
-4.6.0 [WIP] Value Guides command, thanks to CSV parsing, JDA 4.2.0_209, clear commands [WIP], update deps.
+** 4.6.0 - January 11, 2021**
+-Value Guides command, thanks to CSV parsing, 
+JDA 4.2.0_227
+clear commands [WIP]
+updated all dependencies.

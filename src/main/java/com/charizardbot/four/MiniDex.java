@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.JSONObject;
 /**MiniDex aka "Midoriya Dex" - Simple PokeAPI Query for basic information, mainly used for CharizardBot.
-*Copyleft 2020 James, Meme Man 2020#0820
+*Copyleft 2021 James, Meme Man 2021#0820
 */
 public class MiniDex {
 private static String pokeurl = "https://charizardbot.com:8443/api/v2/pokemon/";
