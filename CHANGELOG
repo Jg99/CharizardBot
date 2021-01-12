@@ -47,3 +47,4 @@ after the subreddit on the randpost command. On the meme command, specify right 
 JDA 4.2.0_227
 clear commands [WIP]
 updated all dependencies.
+4.6.1 - fix !randmeme command array out of bounds error

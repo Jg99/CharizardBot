@@ -141,7 +141,7 @@ public class RedditCommands extends ListenerAdapter {
             */
             if (event.getMessage().getContentRaw().startsWith(prefix + "randmeme") && redditCommands.equals("1")) {
                 event.getChannel().sendTyping().queue();
-                String[] memeSubs = {"memes", "dankmemes", "goodanimemes", "memes_of_the_dank"};
+                String[] memeSubs = {"memes", "dankmemes", "goodanimemes", "memes_of_the_dank", "animemes"};
                 String[] arguments = event.getMessage().getContentRaw().split("\\s+");
                 SubredditSort subSort = SubredditSort.TOP;
                 String sortMsg = "Random top meme from r/";
@@ -341,6 +341,6 @@ public class RedditCommands extends ListenerAdapter {
                     }  
                     Main.config.setProperty("redditNsfw" + event.getGuild().getId().toString(), toggle);
                     }
-        } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java");}
+        } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java"); e.printStackTrace();}
     }
 }
