@@ -31,9 +31,24 @@ public class MiscCommands extends ListenerAdapter {
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "d20") && !event.getAuthor().isBot()) {
 			event.getChannel().sendMessage("Rolling a d20...").queue();
-			event.getChannel().sendTyping();
+			event.getChannel().sendTyping().queue();
+			String cont = event.getMessage().getContentRaw();
+			int randVal = 20;
+			int modVal = 0;
+			if (cont.length() > 4 && (cont.contains("-") | cont.contains("+"))){
+				modVal = Integer.parseInt(cont.substring(5,cont.length()));
+			}
+			if (cont.contains("+"))
+				randVal += modVal;
+			if (cont.contains("-")) 
+				randVal -= modVal;
 			Random rand = new Random();
-			event.getChannel().sendMessage("You rolled: " + rand.nextInt(20)).queueAfter(3, TimeUnit.SECONDS);
+			rand.setSeed(rand.nextInt(99999) + System.currentTimeMillis());
+			if (randVal > 0) {
+			event.getChannel().sendMessage("You rolled: " + (rand.nextInt(randVal) + 1)).queueAfter(3, TimeUnit.SECONDS);
+			} else {
+			event.getChannel().sendMessage("Dice can't have negative numbers or be 0 you dingus.").queue();
+			}
 		}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith("send nudes") && !event.getAuthor().isBot())
         {
