@@ -8,6 +8,7 @@ import com.charizardbot.four.sendNudes;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 public class MiscCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -27,6 +28,12 @@ public class MiscCommands extends ListenerAdapter {
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith("!cachesize") && event.getMember().getId().equals(Main.OWNER_ID)) {
 			event.getChannel().sendMessage("Message cache size: " + Main.msgCache.getCacheSize()).queue();
+		}
+		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "d20") && !event.getAuthor().isBot()) {
+			event.getChannel().sendMessage("Rolling a d20...").queue();
+			event.getChannel().sendTyping();
+			Random rand = new Random();
+			event.getChannel().sendMessage("You rolled: " + rand.nextInt(20)).queueAfter(3, TimeUnit.SECONDS);
 		}
         if (event.getMessage().getContentRaw().toLowerCase().startsWith("send nudes") && !event.getAuthor().isBot())
         {
