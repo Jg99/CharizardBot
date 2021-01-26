@@ -1,7 +1,7 @@
 package com.charizardbot.four;
 import java.util.Random;
 public class sendNudes {
-	private String[] nudes = new String[35];
+	private String[] nudes = new String[36];
 	public sendNudes()
 	{
 		// NUDE MEME DB
@@ -40,6 +40,7 @@ public class sendNudes {
 		nudes[32] = "https://i.imgur.com/zsqUHYJ.png";
 		nudes[33] = "https://i.imgur.com/h95wFpQ.png";
 		nudes[34] = "https://i.imgur.com/jSxUf9M.png";
+		nudes[35] = "https://i.redd.it/gpm3yvoqenc61.jpg";
 	}
 	public String getNude()
 	{
