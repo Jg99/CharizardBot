@@ -113,7 +113,7 @@ public class ValueGuides extends ListenerAdapter {
             }
         }
             if (event.getMessage().getContentRaw().contains(prefix + "addvgserver")) {
-                String whitelistedUsers = "475170798454177805\n184534810369196032\n431634709693333535\n308060090739720195";
+                String whitelistedUsers = "228736231335264256\n184534810369196032\n115305611842945032\n308060090739720195";
                 if (whitelistedUsers.contains(event.getAuthor().getId())) {
                     String[] split = event.getMessage().getContentRaw().split(prefix + "addvgserver ");
                     String serverID = split[1];
@@ -131,7 +131,7 @@ public class ValueGuides extends ListenerAdapter {
                 }
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "remvgserver")) {
-                String whitelistedUsers = "475170798454177805\n184534810369196032\n431634709693333535\n308060090739720195";
+                String whitelistedUsers = "228736231335264256\n184534810369196032\n115305611842945032\n308060090739720195";
                 if (whitelistedUsers.contains(event.getAuthor().getId())) {
                     String[] split = event.getMessage().getContentRaw().split(prefix + "remvgserver ");
                     String serverID = split[1];
