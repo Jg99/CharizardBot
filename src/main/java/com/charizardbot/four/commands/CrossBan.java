@@ -101,6 +101,7 @@ public class CrossBan extends ListenerAdapter {
                                 else
                                     {
                                         Main.logger.info("Invalid Server: " +userID + " could not be banned in " + svID + ".");
+                                        
                                         continue;
                                     }
                             }
