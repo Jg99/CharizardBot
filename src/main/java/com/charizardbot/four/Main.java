@@ -364,8 +364,9 @@ public class Main {
 				}
 				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS)
 							.setChunkingFilter(ChunkingFilter.NONE)
-							.setMemberCachePolicy(MemberCachePolicy.ALL)
-							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS)
+							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_PRESENCES)
+							.setMemberCachePolicy(MemberCachePolicy.OWNER)
+							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS, CacheFlag.ROLE_TAGS, CacheFlag.MEMBER_OVERRIDES, CacheFlag.EMOTE)
 							.setActivity(Activity.playing(activity))
 							.build();
 				/**
