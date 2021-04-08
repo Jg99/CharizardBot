@@ -70,7 +70,8 @@ public class UserJoinHandler extends ListenerAdapter {
 			try {
 				banDur = Main.config.getProperty("banDuration" + serverID);
 				System.out.println("Server that doesn't know how to set ban duration so i can yell at them: " + event.getGuild().getName() + "\t" + serverID);
-				banDuration = Long.parseLong(banDur);
+			//	banDuration = Long.parseLong(banDur);
+				banDuration = Long.valueOf(banDur);
 			} catch (Exception e) {e.printStackTrace();}
 			long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 			long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
