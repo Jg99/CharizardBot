@@ -49,3 +49,4 @@ clear commands [WIP]
 updated all dependencies.
 4.6.1 - fix !randmeme command array out of bounds error
 4.6.2 - !d20 - self explanatory
+4.6.3 - Huge dependency update, remove bintray repo as it's shutting down. JDA updated to 4.2.1, will work on slash commands once 4.3 comes out.
