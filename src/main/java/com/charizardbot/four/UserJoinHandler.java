@@ -57,7 +57,7 @@ public class UserJoinHandler extends ListenerAdapter {
       	   					Random rand = new Random();
          					embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 							embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-							event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
+							event.getGuild().getTextChannelById(logChan).sendMessageEmbeds(embed.build()).queue();
 						}
 					} catch (Exception e) {e.printStackTrace();}
 					}
@@ -90,7 +90,7 @@ public class UserJoinHandler extends ListenerAdapter {
       	   				Random rand = new Random();
          				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 						embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-						event.getGuild().getTextChannelById(logChan).sendMessage(embed.build()).queue();
+						event.getGuild().getTextChannelById(logChan).sendMessageEmbeds(embed.build()).queue();
 					}
 				} catch (Exception e) {e.printStackTrace();}
 			}

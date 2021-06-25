@@ -91,7 +91,7 @@ public class AutobanCommands extends ListenerAdapter {
 			embed.setTitle("Set auto-ban duration on your server");
 			embed.addField("The bot will ban any account younger than:",timevalue + " " + unitString + ".", false);
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			Main.config.store(Main.output, null);
 		}
 		if (event.getMessage().getContentRaw().startsWith(prefix + "getautobantime") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
@@ -105,7 +105,7 @@ public class AutobanCommands extends ListenerAdapter {
 			}
 			embed.addField("The bot will ban any account younger than:", Main.config.getProperty("banDuration" + event.getGuild().getId().toString()) + " seconds.", false);
 			embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			} catch (Exception e) {
 				event.getChannel().sendMessage("No auto-ban time is set; default is 3600s (1 hour).").queue();
 			}

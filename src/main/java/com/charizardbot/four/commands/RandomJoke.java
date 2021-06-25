@@ -38,7 +38,7 @@ public class RandomJoke extends ListenerAdapter {
                 	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     			    embed.addField("Joke type: " + jokeType,jokeText, false);
             	    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-    			    event.getChannel().sendMessage(embed.build()).queue();
+    			    event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			}
 		}
     	} catch (Exception e) {Main.logger.info("WARN: Exception in the Random Joke Command. Insufficient permissions or API server is down?\n" + e);}

@@ -18,7 +18,7 @@ public class PokemonQuoteCommand extends ListenerAdapter{
         	embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
         	embed.addField("Here's a random Pokémon quote for you!", pkQuote, false);
-        	event.getChannel().sendMessage(embed.build()).queue();
+        	event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 	} catch (Exception e){Main.logger.info("Warn: Exception in PokemonQuote Command. Insufficient permissions?");}
 	}

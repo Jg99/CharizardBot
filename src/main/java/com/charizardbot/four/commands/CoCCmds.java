@@ -42,7 +42,7 @@ public class CoCCmds extends ListenerAdapter {
         		embed.addField("Tag", clan1.getTag(), false);
         		embed.setThumbnail(clan1.getClanIconLarge());
         		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-        		event.getChannel().sendMessage(embed.build()).queue();
+        		event.getChannel().sendMessageEmbeds(embed.build()).queue();
         	} else {
 				event.getChannel().sendTyping().queue();
 				API.setToken(API_TOKEN);
@@ -61,7 +61,7 @@ public class CoCCmds extends ListenerAdapter {
             	embed.addField("Tag", clan1.getTag(), false);
             	embed.setThumbnail(clan1.getClanIconLarge());
             	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-            	event.getChannel().sendMessage(embed.build()).queue();
+            	event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "searchclans") && !event.getAuthor().isBot() && cocCmd.equals("1")) {//&& event.getGuild().getId().toString().equals("468440854886088714")) { 
@@ -80,7 +80,7 @@ public class CoCCmds extends ListenerAdapter {
         	}
         	embed.setTitle("Clash of Clans Search");
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-        	event.getChannel().sendMessage(embed.build()).queue();
+        	event.getChannel().sendMessageEmbeds(embed.build()).queue();
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "clanplayers") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
 			event.getChannel().sendTyping().queue();
@@ -100,7 +100,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.addField("Players", pList, false);
         	embed.setThumbnail(clan1.getClanIconLarge());
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-        	event.getChannel().sendMessage(embed.build()).queue();
+        	event.getChannel().sendMessageEmbeds(embed.build()).queue();
         }
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "playerinfo") && !event.getAuthor().isBot() && cocCmd.equals("1")) {// && event.getGuild().getId().toString().equals("468440854886088714")) {
 			event.getChannel().sendTyping().queue();
@@ -118,7 +118,7 @@ public class CoCCmds extends ListenerAdapter {
         	embed.addField("TownHall:", "" + member.getTownHallLevel(), false);
         	embed.setThumbnail(member.getLeagueIconLarge());
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-        	event.getChannel().sendMessage(embed.build()).queue();
+        	event.getChannel().sendMessageEmbeds(embed.build()).queue();
         }
 		//TOGGLE CMDS
         if (event.getMessage().getContentRaw().toLowerCase().contains(prefix + "togglecoc") && !event.getAuthor().isBot() && (event.getAuthor().equals(event.getJDA().getUserById(Main.OWNER_ID)) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {

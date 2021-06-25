@@ -139,7 +139,7 @@ public class MainCommands extends ListenerAdapter {
                         embed.addField("List of channels in specificed Server ID ", channelArray, true);
                         embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                      	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                        event.getChannel().sendMessage(embed.build()).queue();
+                        event.getChannel().sendMessageEmbeds(embed.build()).queue();
 					}
 				} catch (Exception e) {event.getChannel().sendMessage("Error in listing channel.");e.printStackTrace();}
             	}
@@ -154,7 +154,7 @@ public class MainCommands extends ListenerAdapter {
                 	embed.setTitle("CharizardBot");
                 	embed.addField("Current game set by command: ", game, true);
                 	embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                	event.getChannel().sendMessage(embed.build()).queue();
+                	event.getChannel().sendMessageEmbeds(embed.build()).queue();
             	}
             	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "restartbot") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
             		String shdir = new File("").getAbsolutePath();
@@ -224,7 +224,7 @@ public class MainCommands extends ListenerAdapter {
                 embed.addField("Word list:" , mReply, true);
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
              	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 embed.clear();
             }
             if (event.getMessage().getContentRaw().toLowerCase().startsWith("!reloadsettings") && event.getAuthor().getId().equals(Main.OWNER_ID)|| event.getMember().hasPermission(Permission.ADMINISTRATOR))

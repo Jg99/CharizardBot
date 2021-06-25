@@ -29,7 +29,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         		embed.addField("Computer's choice:", choices[result], true);
         		embed.addField("Results:", response, true);
         		embed.setImage("https://i.kym-cdn.com/photos/images/newsfeed/000/521/406/f08.png");
-        		event.getChannel().sendMessage(embed.build()).queue();
+        		event.getChannel().sendMessageEmbeds(embed.build()).queue();
         	}
         	if (event.getMessage().getContentRaw().toLowerCase().contains("paper")) {
         		int result = rand.nextInt(2);
@@ -45,7 +45,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         		embed.addField("Computer's choice:", choices[result], true);
         		embed.addField("Results:", response, true);
         		embed.setImage("https://i.kym-cdn.com/photos/images/newsfeed/000/521/406/f08.png");
-        		event.getChannel().sendMessage(embed.build()).queue();
+        		event.getChannel().sendMessageEmbeds(embed.build()).queue();
         	}
         	if (event.getMessage().getContentRaw().toLowerCase().contains("scissors")) {
         		int result = rand.nextInt(2);
@@ -61,7 +61,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         		embed.addField("Computer's choice:", choices[result], true);
         		embed.addField("Results:", response, true);
         		embed.setImage("https://i.kym-cdn.com/photos/images/newsfeed/000/521/406/f08.png");
-        		event.getChannel().sendMessage(embed.build()).queue();
+        		event.getChannel().sendMessageEmbeds(embed.build()).queue();
         	}
         }
 		} catch (Exception e) {Main.logger.info("WARN: Exception in RPS command: Insufficient permissions?\n" + e);}

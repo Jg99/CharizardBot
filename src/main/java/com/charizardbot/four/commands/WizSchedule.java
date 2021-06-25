@@ -38,7 +38,7 @@ public class WizSchedule extends ListenerAdapter {
                     embed.addField("10 upcoming tourneys showing name and duration.", updatedTable, false);
                     embed.setFooter("Last updated: " + Main.lastUpdated);
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                     }
                 }
             } catch (Exception e){Main.logger.info("Warn: Exception in Wiz Tournament command. Insufficient permissions?\n" + e);}

@@ -44,7 +44,7 @@ public class BulkDelete extends ListenerAdapter {
                         EmbedBuilder logEmbed = new EmbedBuilder();
                         logEmbed.setTitle("Bulk Delete Event");
                         logEmbed.addField("A bulk delete message has been detected in " + event.getChannel().getName(), "Admin: " + event.getMessage().getAuthor().getAsMention(), false);
-                        event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
+                        event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue();
                     }
             } else if (arguments.length == 3) {
                 if (Integer.parseInt(arguments[1]) > 100) {

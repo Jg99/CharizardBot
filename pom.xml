@@ -34,7 +34,7 @@
       <dependency>
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>
-          <version>4.2.1_266</version>
+          <version>4.3.0_283</version>
           <exclusions>
             <exclusion>
                 <groupId>club.minnced</groupId>
@@ -97,7 +97,7 @@
   <dependency>
     <groupId>org.jetbrains.kotlin</groupId>
     <artifactId>kotlin-stdlib</artifactId>
-    <version>1.5.10</version>
+    <version>1.5.20</version>
 </dependency>
       <dependency>
     <!-- jsoup HTML parser library @ https://jsoup.org/ -->

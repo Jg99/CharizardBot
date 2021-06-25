@@ -61,7 +61,7 @@ public class ValueGuides extends ListenerAdapter {
                 }
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
             }
             //SEARCH command - Searches for multiple values with the same name.
@@ -108,7 +108,7 @@ public class ValueGuides extends ListenerAdapter {
                 lineScan.close();
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
             }
         }

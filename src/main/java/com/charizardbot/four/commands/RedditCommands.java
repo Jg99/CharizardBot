@@ -106,7 +106,7 @@ public class RedditCommands extends ListenerAdapter {
                     }
                 }
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                event.getChannel().sendMessage(embed.build()).queue();            
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();            
             }
             else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                 event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
@@ -133,7 +133,7 @@ public class RedditCommands extends ListenerAdapter {
                     }
                 }
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                event.getChannel().sendMessage(embed.build()).queue();            
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();            
             }
         }
              /**
@@ -193,7 +193,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                     event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
                 } else {
@@ -204,7 +204,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
             }
             /**
@@ -264,7 +264,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                     event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
                 } else {
@@ -275,7 +275,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                    event.getChannel().sendMessage(embed.build()).queue();
+                    event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
             }
         	//TOGGLE CMDS

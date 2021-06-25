@@ -49,13 +49,13 @@ public class MessageLogger extends ListenerAdapter {
                 logEmbed.addField("Attachments:", attUrls, true);
             }
             logEmbed.setFooter("User ID: " + msg.getAuthor().getId());
-            event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
+            event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue();
         }
         if (event.getJDA().getTextChannelById(logChan).canTalk() && msg == null && !Main.isChatFilterDeleted && !Main.isBulkDeleted && isChannelIgnored.equals("0")){
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
             logEmbed.addField("A deleted message has been detected in " + event.getChannel().getName(), "Message is not in cache.", false);
-            event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue();
+            event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue();
         }
         if (Main.isChatFilterDeleted)
         {
@@ -106,7 +106,7 @@ public class MessageLogger extends ListenerAdapter {
                 logEmbed.setTitle("Edited Message");
                 logEmbed.addField("from: " + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nNew content:", event.getMessage().getContentRaw(), false);
                 logEmbed.setFooter("User ID: " + event.getAuthor().getId());
-                event.getJDA().getTextChannelById(logChan).sendMessage(logEmbed.build()).queue(); 
+                event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue(); 
             }
         } catch(Exception e) { /*Main.logger.info("Exception in MessageLogger (Edited message event). Insufficient permissions or no cache?" + e);*/}
 }

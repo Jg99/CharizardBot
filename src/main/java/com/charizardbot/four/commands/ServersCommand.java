@@ -24,7 +24,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
                 Random rand = new Random();
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-                event.getChannel().sendMessage(embed.build()).queue();
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
 	}
 	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "exportserverlist") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
 		Iterator<Guild> serverList = event.getJDA().getGuilds().iterator();

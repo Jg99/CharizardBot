@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 public class CommandsList extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 			try {
@@ -15,8 +16,12 @@ public class CommandsList extends ListenerAdapter {
 				prefix = "!";
             if ((event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "charizard") || event.getMessage().getContentRaw().startsWith(prefix + "help")) && !event.getAuthor().isBot())
             {
+				//event.getChannel().sendMessage("Click the link for commands.").setActionRow(Button.link("https://charizardbot.com", "CharizardBot's website")).queue();
+
+
+				
             	EmbedBuilder embed = new EmbedBuilder();
-                embed.setTitle("CharizardBot Bot commands. Visit https://charizardbot.com for more commands.");
+                embed.setTitle("CharizardBot Bot commands.");
             	String cmdListStrB = "";
             	String cmdListStr = new String(prefix + 
             			"rng <max number>,\n" + prefix + "joindate @user,\n" + prefix + "rps <rock, paper, or scissors>" +
@@ -55,7 +60,7 @@ public class CommandsList extends ListenerAdapter {
 				event.getChannel().sendMessage("Check your DMs! If you don't receive a message, please enable DMs!").queue();
 				event.getAuthor().openPrivateChannel().queue(channel ->{
 					try {
-					channel.sendMessage(embed.build()).queue();
+					channel.sendMessageEmbeds(embed.build()).setActionRow(Button.link("https://charizardbot.com", "CharizardBot's website")).queue();
 					} catch (Exception e) {/*DM is probably blocked or disabled.*/}
 				});
 			}

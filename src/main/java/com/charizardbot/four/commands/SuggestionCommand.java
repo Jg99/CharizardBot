@@ -29,7 +29,7 @@ public class SuggestionCommand extends ListenerAdapter{
 			embed.addField(("Suggestion ID: " + suggestion.getSuggestionID(serverID)), content, true);
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "listsuggestions") && suggCmd.equals("1") && !event.getAuthor().isBot())
 		{
@@ -42,7 +42,7 @@ public class SuggestionCommand extends ListenerAdapter{
 				embed.addField("Suggestion List for this server:", suggestionList, true);
 	        	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-				event.getChannel().sendMessage(embed.build()).queue();
+				event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			} else {
 				event.getChannel().sendMessage("List is too big for Discord, sending as a text file.").queue();
 				event.getChannel().sendFile(suggestion.getFile(serverID)).queue();;
@@ -58,7 +58,7 @@ public class SuggestionCommand extends ListenerAdapter{
 			embed.addField("Suggestion ID: ", sid, false);
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "getsuggestion ") && !event.getAuthor().isBot() && suggCmd.equals("1")) {
 			Suggestions suggestion = new Suggestions(serverID);
@@ -71,7 +71,7 @@ public class SuggestionCommand extends ListenerAdapter{
 			embed.addField("Status:", suggestion.getSuggestionStatus(sid, serverID), false);
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "approve ") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getMember().hasPermission(Permission.MANAGE_SERVER)) && suggCmd.equals("1")) {
 			Suggestions suggestion = new Suggestions(serverID);
@@ -82,7 +82,7 @@ public class SuggestionCommand extends ListenerAdapter{
 			embed.addField("Suggestion ID: " + sid, suggestion.getSuggestion(sid, serverID), false);
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			embed.setColor(Color.green);
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "deny ") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getMember().hasPermission(Permission.MANAGE_SERVER))&& suggCmd.equals("1")) {
 			Suggestions suggestion = new Suggestions(serverID);
@@ -93,7 +93,7 @@ public class SuggestionCommand extends ListenerAdapter{
 			embed.addField("Suggestion ID: " + sid, suggestion.getSuggestion(sid, serverID), false);
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 			embed.setColor(Color.red);
-			event.getChannel().sendMessage(embed.build()).queue();
+			event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		}
 		// SUGGESTIONS TOGGLE
 		try {

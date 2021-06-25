@@ -34,7 +34,7 @@ public class PokedexCommand extends ListenerAdapter {
             		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     				embed.addField("Pokémon information for " + pkName ,stats, true);
             		embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-    				event.getChannel().sendMessage(embed.build()).queue();
+    				event.getChannel().sendMessageEmbeds(embed.build()).queue();
     			} else {
     				event.getChannel().sendMessage("Please enter the correct Pokemon's name or national dex number.");
     			}
@@ -52,7 +52,7 @@ public class PokedexCommand extends ListenerAdapter {
             		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     				embed.addField("Pokémon information for " + pkName ,stats, false);
             		embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-    				event.getChannel().sendMessage(embed.build()).queue();
+    				event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			}
 		}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in the Pokedex Command. Insufficient permissions or API server is down?\n" + e);
@@ -71,7 +71,7 @@ public class PokedexCommand extends ListenerAdapter {
 		    			embed.addField("Status", "UP", false);
 		    			embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 		    	   		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-		    	   		event.getChannel().sendMessage(embed.build()).queue();
+		    	   		event.getChannel().sendMessageEmbeds(embed.build()).queue();
 		       		}
 		       		if (s.isClosed()) {
 		    		EmbedBuilder embed = new EmbedBuilder();
@@ -80,7 +80,7 @@ public class PokedexCommand extends ListenerAdapter {
 		    		embed.addField("Status", "Down", false);
 		    		embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 		    		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-		    		event.getChannel().sendMessage(embed.build()).queue();		       
+		    		event.getChannel().sendMessageEmbeds(embed.build()).queue();		       
 		    	   	} 
 		       		s.close(); 
     			} 
@@ -91,7 +91,7 @@ public class PokedexCommand extends ListenerAdapter {
 		    	   embed.addField("Status", "Down", false);
 		    	   embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 		    	   embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-		    	   event.getChannel().sendMessage(embed.build()).queue();		
+		    	   event.getChannel().sendMessageEmbeds(embed.build()).queue();		
     		}
 	}
 }

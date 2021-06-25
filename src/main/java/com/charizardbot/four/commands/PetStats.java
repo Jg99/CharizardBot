@@ -55,7 +55,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
             Random rand = new Random();
             embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
          	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-            event.getChannel().sendMessage(embed.build()).queue();
+            event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
         	} else { // german translated petstats
     		String[] contentSplit = event.getMessage().getContentRaw().split("\\W+");
@@ -93,7 +93,7 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
             Random rand = new Random();
             embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
          	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
-            event.getChannel().sendMessage(embed.build()).queue();
+            event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
         	}
         }

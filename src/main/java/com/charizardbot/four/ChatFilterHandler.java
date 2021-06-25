@@ -64,7 +64,7 @@ public class ChatFilterHandler extends ListenerAdapter {
                          event.getMember().getId(), "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                          Random rand = new Random();
                          embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-                         event.getChannel().sendMessage(embed.build()).queue(response -> {
+                         event.getChannel().sendMessageEmbeds(embed.build()).queue(response -> {
                             response.delete().queueAfter(5, TimeUnit.SECONDS);
                         });                        //Log to channel
                          if (svrLogging.equals("1") && logChannel != ""){
@@ -74,7 +74,7 @@ public class ChatFilterHandler extends ListenerAdapter {
                                 logEmbed.addField("CharizardBot Filter has removed the following message for bad language from @" + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + ":", event.getMessage().getContentRaw(), false);
                                 logEmbed.setAuthor(event.getAuthor().getAsTag());
                                 logEmbed.setFooter("User ID: " + event.getMember().getId());
-                                event.getJDA().getTextChannelById(logChannel).sendMessage(logEmbed.build()).queue();
+                                event.getJDA().getTextChannelById(logChannel).sendMessageEmbeds(logEmbed.build()).queue();
                               }
                          }
                      }

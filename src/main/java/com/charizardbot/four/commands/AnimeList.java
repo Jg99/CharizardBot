@@ -70,7 +70,7 @@ public class AnimeList extends ListenerAdapter {
                 if (event.getGuild().getTextChannelById(event.getChannel().getId()).canTalk()) {
                     String d = genre.toLowerCase();
                 if (!d.contains("hentai")) {
-                     event.getChannel().sendMessage(embed.build()).queue();
+                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
                   }  else {
                      event.getChannel().sendMessage("Contains NSFW content. Please try searching for something else you naughty person ;)").queue();
                 }
