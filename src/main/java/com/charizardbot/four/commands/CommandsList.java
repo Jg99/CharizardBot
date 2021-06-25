@@ -60,7 +60,7 @@ public class CommandsList extends ListenerAdapter {
 				event.getChannel().sendMessage("Check your DMs! If you don't receive a message, please enable DMs!").queue();
 				event.getAuthor().openPrivateChannel().queue(channel ->{
 					try {
-					channel.sendMessageEmbeds(embed.build()).setActionRow(Button.link("https://charizardbot.com", "CharizardBot's website")).queue();
+					channel.sendMessageEmbeds(embed.build()).setActionRow(Button.link("https://charizardbot.com", "CharizardBot website")).queue();
 					} catch (Exception e) {/*DM is probably blocked or disabled.*/}
 				});
 			}

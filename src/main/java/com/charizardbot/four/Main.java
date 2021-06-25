@@ -38,7 +38,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "4.6.3";
+	public static final String VERSION = "4.6.4";
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
