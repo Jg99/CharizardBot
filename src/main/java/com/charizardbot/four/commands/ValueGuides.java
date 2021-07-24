@@ -27,7 +27,7 @@ public class ValueGuides extends ListenerAdapter {
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-                boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
+     //           boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
      //           if (!isWhitelisted) {
      //               event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
      //           }
@@ -70,11 +70,11 @@ public class ValueGuides extends ListenerAdapter {
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-                boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
-                if (!isWhitelisted) {
-                    event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
-                }
-                if (isEnabled.equals("1") && isWhitelisted) {
+       //         boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
+       //         if (!isWhitelisted) {
+       //             event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
+       //         }
+                if (isEnabled.equals("1")) {// && isWhitelisted) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "search ");
                 if (item[1].length() < 2) {
                     event.getChannel().sendMessage("Error, please specify 2 or more letters in your query.").queue();
