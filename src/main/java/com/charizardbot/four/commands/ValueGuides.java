@@ -28,10 +28,10 @@ public class ValueGuides extends ListenerAdapter {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
                 boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
-                if (!isWhitelisted) {
-                    event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
-                }
-                if (isEnabled.equals("1") && isWhitelisted) {
+     //           if (!isWhitelisted) {
+     //               event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
+     //           }
+                if (isEnabled.equals("1")) {//&& isWhitelisted) {
                 String[] item = event.getMessage().getContentRaw().split(prefix + "value ");
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 String final_item = "";
