@@ -1,4 +1,4 @@
-# CharizardBot4
+# CharizardBot
 CharizardBot Discord bot. 
 
 Stable version: 4.6.4, bug fixes/dependency updates only until 5.0 is complete
