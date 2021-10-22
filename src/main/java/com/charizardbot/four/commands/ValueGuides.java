@@ -95,7 +95,7 @@ public class ValueGuides extends ListenerAdapter {
                     if (tokenSpl[0].toLowerCase().contains(item[1].toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
-                        embed.addField("Item:", item_split[0], true);
+                        embed.addField("Item:", item_split[0], false);
                         if (item_split.length == 2) {
                         embed.addField("Value (empowers):", item_split[1], true);
                         embed.addBlankField(true);
