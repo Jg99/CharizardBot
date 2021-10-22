@@ -60,7 +60,7 @@ public class ValueGuides extends ListenerAdapter {
                     embed.addField("Value (empowers):", item_split[2], false);
                 }
                 if (item_split.length == 4) {
-                    embed.addField("Summoning:", item_split[1], true);
+                    embed.addField("Summon:", item_split[1], true);
                     embed.addField("Expel: ", item_split[2], true);
                     embed.addField("Housing: ", item_split[3], true);
                 }
@@ -109,7 +109,7 @@ public class ValueGuides extends ListenerAdapter {
                             embed.addField("Value (empowers):", item_split[2], true);
                         }
                         if (item_split.length == 4) {
-                            embed.addField("Summoning:", item_split[1], true);
+                            embed.addField("Summon:", item_split[1], true);
                             embed.addField("Expel: ", item_split[2], true);
                             embed.addField("Housing: ", item_split[3], true);
                         }
