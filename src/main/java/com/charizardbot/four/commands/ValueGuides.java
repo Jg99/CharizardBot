@@ -52,6 +52,11 @@ public class ValueGuides extends ListenerAdapter {
                 embed.addField("Value:", item_split[1], false);
                 }
                 if (item_split.length == 3) {
+                    embed.addField("Summoning TC:", item_split[1], false);
+                    embed.addField("Expel TC: ", item_split[2], false);
+                    embed.addField("Housing Guest: ", item_split[3], false);
+                }
+                if (item_split.length == 4) {
                     if (item_split[1].matches(".*[a-z].*")) {
                         embed.addField("School:", item_split[1], false);
                     } else {
