@@ -32,3 +32,7 @@ If you have any questions, feel free to join the CharizardBot discord found on t
 **NOTE:**
 Only the bot source code is provided under the GNU GPL Licence version 2.0.
 Any images, avatars, etc are protected by copyright law and may not be used to impersonate the main bot.
+
+**PRIVACY**
+
+This bot does not store user data on its internal logging system. Only basic info is logged for finding issues. However, server moderators may enable moderation action logging via commands and they log as a message sent to the specified channel. 
