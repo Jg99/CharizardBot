@@ -1,10 +1,12 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import com.charizardbot.four.Main;
+
+import com.charizardbot.main.Main;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
@@ -12,7 +14,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BulkDelete extends ListenerAdapter {
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());

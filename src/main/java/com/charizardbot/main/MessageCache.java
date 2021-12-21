@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import net.dv8tion.jda.api.JDA;

@@ -27,7 +27,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 
-import com.charizardbot.four.Main;
+import com.charizardbot.main.Main;
 
 import org.json.JSONObject;
 

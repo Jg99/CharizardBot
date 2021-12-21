@@ -1,9 +1,10 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
+import com.charizardbot.main.Main;
+
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
 public class ImgurSearch extends ListenerAdapter {
-public void onGuildMessageReceived (MessageReceivedEvent event) {
+public void onMessageReceived (MessageReceivedEvent event) {
 	if (event.isFromGuild()) {
 
     	String imgurCmd = "1";

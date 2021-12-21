@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.Permission;
@@ -13,7 +13,7 @@ public class ChatFilterHandler extends ListenerAdapter {
     /**
      * Checks all guilds for any words against the chat filter, if it's enabled in a server.
      */
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
                 try {

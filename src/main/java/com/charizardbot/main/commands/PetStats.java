@@ -1,15 +1,17 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
-import com.charizardbot.four.Pet;
-import com.charizardbot.four.dePet;
+
 import java.awt.Color;
 import java.util.Random;
+
+import com.charizardbot.main.Main;
+import com.charizardbot.main.Pet;
+import com.charizardbot.main.dePet;
 public class PetStats extends ListenerAdapter {
 	final String DELIMITERS_PETCALC = "[" + Main.PREFIX + "petstats\\W]+"; //delimiters for petstats - digits only
-public void onGuildMessageReceived (MessageReceivedEvent event) {
+public void onMessageReceived (MessageReceivedEvent event) {
 	if (event.isFromGuild()) {
 
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());

@@ -1,14 +1,15 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 
-import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import static com.charizardbot.main.Main.*;
+
 import java.util.List;
 
-import static com.charizardbot.four.Main.*;
+import com.charizardbot.main.Main;
 
 public class Clears extends ListenerAdapter {
 
@@ -16,7 +17,7 @@ public class Clears extends ListenerAdapter {
     // Include required channels for each of the roles except Mods+,
     // only Admins can add to these lists?
     // useable by checking the role. Roles will determine if can be used
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
 

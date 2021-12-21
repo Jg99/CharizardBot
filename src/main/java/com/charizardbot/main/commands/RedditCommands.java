@@ -1,4 +1,4 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.SubredditSort;
@@ -11,7 +11,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
-import com.charizardbot.four.Main;
+
+import com.charizardbot.main.Main;
 public class RedditCommands extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {

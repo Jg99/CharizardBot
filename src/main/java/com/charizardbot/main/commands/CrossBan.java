@@ -1,11 +1,11 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import com.charizardbot.four.Main;
+import com.charizardbot.main.Main;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CrossBan extends ListenerAdapter {
     public static String userID = "";
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         /**

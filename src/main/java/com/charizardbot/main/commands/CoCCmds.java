@@ -1,4 +1,4 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -7,13 +7,14 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
+
 import com.charizardbot.clashofjava.API;
 import com.charizardbot.clashofjava.Clan;
 import com.charizardbot.clashofjava.ClanQuery;
 import com.charizardbot.clashofjava.Player;
+import com.charizardbot.main.Main;
 public class CoCCmds extends ListenerAdapter {
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
 		String cocCmd = "1";

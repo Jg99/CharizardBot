@@ -1,11 +1,12 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.util.Random;
-import com.charizardbot.four.Main;
+
+import com.charizardbot.main.Main;
 public class RpsCommand extends ListenerAdapter {
-public void onGuildMessageReceived (MessageReceivedEvent event) {
+public void onMessageReceived (MessageReceivedEvent event) {
 	if (event.isFromGuild()) {
 
 		try {

@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 
 import org.jsoup.nodes.Document;
 import java.io.IOException;

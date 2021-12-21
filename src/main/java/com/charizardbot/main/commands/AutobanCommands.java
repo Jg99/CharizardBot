@@ -1,15 +1,18 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
+
 import java.util.Random;
+
+import com.charizardbot.main.Main;
+
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 public class AutobanCommands extends ListenerAdapter {
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
 		try {

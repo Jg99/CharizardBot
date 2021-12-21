@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.util.Random;
 public class sendNudes {
 	private String[] nudes = new String[36];

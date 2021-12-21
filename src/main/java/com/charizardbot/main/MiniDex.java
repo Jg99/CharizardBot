@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;

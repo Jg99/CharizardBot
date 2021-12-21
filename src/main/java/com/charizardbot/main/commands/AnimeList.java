@@ -1,10 +1,10 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 
 import java.awt.Color;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
-import com.charizardbot.four.Main;
+import com.charizardbot.main.Main;
 import com.github.doomsdayrs.jikan4java.core.search.animemanga.AnimeSearch;
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime;
 import com.github.doomsdayrs.jikan4java.types.main.anime.Studios;
@@ -20,7 +20,7 @@ public class AnimeList extends ListenerAdapter {
      * from the user and returns some information about the anime.
      * Uses Jikan4Java library, modified to use CharizardBot server.
      */
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         try {

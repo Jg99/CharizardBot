@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.util.Random;
 import com.github.kskelm.baringo.BaringoClient;
 import com.github.kskelm.baringo.util.BaringoApiException;

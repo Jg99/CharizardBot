@@ -1,20 +1,22 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Random;
+
+import com.charizardbot.main.Main;
+import com.charizardbot.main.MiniDex;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
-import com.charizardbot.four.MiniDex;
 /**
  * Pokédex commands
  */
 public class PokedexCommand extends ListenerAdapter {
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());

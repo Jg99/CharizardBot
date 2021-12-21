@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;

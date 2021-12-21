@@ -1,15 +1,17 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
+import com.charizardbot.main.Main;
 public class ChatFilterToggle extends ListenerAdapter {
 	public String channelID = "";
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
 		try {

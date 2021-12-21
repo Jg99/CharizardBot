@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;

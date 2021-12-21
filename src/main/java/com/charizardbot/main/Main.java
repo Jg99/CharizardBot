@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,7 +19,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import javax.security.auth.login.LoginException;
-import com.charizardbot.four.commands.*;
+
+import com.charizardbot.main.commands.*;
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;

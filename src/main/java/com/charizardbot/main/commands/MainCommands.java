@@ -1,4 +1,4 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import com.charizardbot.four.ChatFilter;
-import com.charizardbot.four.Main;
+
+import com.charizardbot.main.ChatFilter;
+import com.charizardbot.main.Main;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
@@ -27,7 +29,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MainCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
     String prefix = Main.config.getProperty(event.getGuild().getId().toString());

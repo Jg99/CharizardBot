@@ -1,4 +1,4 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -16,13 +16,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import com.charizardbot.four.Main;
+
+import com.charizardbot.main.Main;
 /**
  * Tenor Search Commands
  */
 public class TenorSearch extends ListenerAdapter {
     private static final String API_KEY = Main.TENOR_TOKEN; //Tenor API Key
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
 	// TOGGLE COMMANDS

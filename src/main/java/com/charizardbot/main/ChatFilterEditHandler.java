@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;

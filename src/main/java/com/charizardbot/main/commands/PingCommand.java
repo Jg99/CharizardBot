@@ -1,10 +1,11 @@
-package com.charizardbot.four.commands;
-import com.charizardbot.four.Main;
+package com.charizardbot.main.commands;
+import com.charizardbot.main.Main;
+
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class PingCommand extends ListenerAdapter {
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());

@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.text.DecimalFormat;
 /**  Wizard101 PET STATS TRANSLATED INTO GERMAN.
  *  Thanks to Victoria#4139 from Spiralwander community for translation

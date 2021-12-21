@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.util.Random;
 public class pokeQuotes {
 	private String[] quotes = new String[36];

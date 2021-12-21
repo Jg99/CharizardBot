@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.text.DecimalFormat;
 public class Pet {
 	private double strength, intellect, agility, will, power; //values for the calculations

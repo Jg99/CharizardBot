@@ -1,4 +1,4 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -10,13 +10,13 @@ import java.io.FileWriter;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.charizardbot.four.Main;
+import com.charizardbot.main.Main;
 
 public class ValueGuides extends ListenerAdapter {
     /**
      * This command is what the user runs to get the value of an item [Wizard101].
      */
-    public void onGuildMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         try {

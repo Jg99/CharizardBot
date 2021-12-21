@@ -1,10 +1,13 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.util.Random;
+
+import com.charizardbot.main.Main;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +20,7 @@ import org.json.JSONObject;
  * Random Joke commands
  */
 public class RandomJoke extends ListenerAdapter {
-	public void onGuildMessageReceived(MessageReceivedEvent event) {
+	public void onMessageReceived(MessageReceivedEvent event) {
         if (event.isFromGuild()) {
 
         String miscToggle = "1";

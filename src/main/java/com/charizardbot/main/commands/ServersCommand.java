@@ -1,9 +1,9 @@
-package com.charizardbot.four.commands;
+package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import com.charizardbot.four.Main;
+
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,9 +11,12 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
+
+import com.charizardbot.main.Main;
+
 import java.util.Iterator;
 public class ServersCommand extends ListenerAdapter {
-public void onGuildMessageReceived (MessageReceivedEvent event) {
+public void onMessageReceived (MessageReceivedEvent event) {
 	if (event.isFromGuild()) {
 
 		try {

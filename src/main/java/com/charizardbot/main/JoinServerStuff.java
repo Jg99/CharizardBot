@@ -1,4 +1,4 @@
-package com.charizardbot.four;
+package com.charizardbot.main;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
