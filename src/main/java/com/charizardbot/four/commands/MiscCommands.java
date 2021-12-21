@@ -1,7 +1,7 @@
 package com.charizardbot.four.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.sendNudes;
@@ -11,7 +11,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 public class MiscCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 		String miscToggle = "1";
     	if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
 		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
@@ -114,4 +116,5 @@ public class MiscCommands extends ListenerAdapter {
 		}*/
 		} catch (Exception e) { Main.logger.info("WARN: Exception in Misc Commands: Insufficient permissions?\n" + e);e.printStackTrace(); } 
 	} 	
+}
 }

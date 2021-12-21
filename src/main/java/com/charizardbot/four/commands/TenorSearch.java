@@ -1,7 +1,7 @@
 package com.charizardbot.four.commands;
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +22,9 @@ import com.charizardbot.four.Main;
  */
 public class TenorSearch extends ListenerAdapter {
     private static final String API_KEY = Main.TENOR_TOKEN; //Tenor API Key
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 	// TOGGLE COMMANDS
 		try {
 	    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
@@ -97,6 +99,7 @@ public class TenorSearch extends ListenerAdapter {
 		} catch (Exception e){
 			event.getChannel().sendMessage("Error in searching. Either the rate limit was reached or no results were found.").queue();
 		}
+	}
 	}
 	/*JSON Functions */
     public static JSONObject getSearchResults(String searchTerm, int limit) {

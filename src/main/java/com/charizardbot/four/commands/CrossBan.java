@@ -8,12 +8,14 @@ import java.util.concurrent.TimeUnit;
 import com.charizardbot.four.Main;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CrossBan extends ListenerAdapter {
     public static String userID = "";
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         /**
          * This is a command that lets someone ban an account across multiple servers,
          *say if you want to share bans between servers easily.
@@ -235,4 +237,5 @@ public class CrossBan extends ListenerAdapter {
 
 
     }
+}
 }

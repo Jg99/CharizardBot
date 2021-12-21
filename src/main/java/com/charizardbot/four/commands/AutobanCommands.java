@@ -1,7 +1,7 @@
 package com.charizardbot.four.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import java.util.Random;
@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 public class AutobanCommands extends ListenerAdapter {
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 		try {
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
@@ -144,4 +146,5 @@ public class AutobanCommands extends ListenerAdapter {
         }
 		} catch (Exception e) { Main.logger.info("WARN: Exception in AutoBanToggle command.\n" + e);e.printStackTrace();}
 	}
+}
 }

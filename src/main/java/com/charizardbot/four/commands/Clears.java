@@ -3,7 +3,7 @@ package com.charizardbot.four.commands;
 import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
@@ -16,7 +16,9 @@ public class Clears extends ListenerAdapter {
     // Include required channels for each of the roles except Mods+,
     // only Admins can add to these lists?
     // useable by checking the role. Roles will determine if can be used
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
 
         try {
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
@@ -47,7 +49,7 @@ public class Clears extends ListenerAdapter {
 
 
             if (args[0].equalsIgnoreCase(prefix + "clear") && (event.getMember().hasPermission(Permission.MESSAGE_MANAGE) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
-                TextChannel channel = event.getChannel();
+                TextChannel channel = event.getTextChannel();
                 MessageHistory history = new MessageHistory(channel);
                 List<Message> msg;
                 int num = Integer.parseInt(args[1]);
@@ -66,7 +68,7 @@ public class Clears extends ListenerAdapter {
                     ch2 += ch[0].charAt(h);
                 }
                 TextChannel ch1 = event.getGuild().getTextChannelById(ch2);
-                TextChannel channel = event.getChannel();
+                TextChannel channel = event.getTextChannel();
                 List<Role> memberRoles = event.getMember().getRoles();
                 String temp = "";
                 Role temp2;
@@ -104,4 +106,4 @@ public class Clears extends ListenerAdapter {
             }
 
     }
-    
+}

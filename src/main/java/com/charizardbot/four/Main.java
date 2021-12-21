@@ -362,7 +362,7 @@ public class Main {
 				} else {
 					activity = config.getProperty("gamestatus");
 				}
-				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS)
+				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS, GatewayIntent.GUILD_MESSAGES)
 							.setChunkingFilter(ChunkingFilter.NONE)
 							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_PRESENCES)
 							.setMemberCachePolicy(MemberCachePolicy.OWNER)

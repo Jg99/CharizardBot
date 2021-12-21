@@ -5,7 +5,7 @@ VERSION 4.0.0 ** DEC 4, 2019 **
 -- Moved every command over to JDA.
 -- Fixed misc commands toggle.
 
-4.0.1 - changed "MessageReceivedEvent" to "GuildMessageReceivedEvent" due to exceptions 
+4.0.1 - changed "MessageReceivedEvent" to "MessageReceivedEvent" due to exceptions 
 4.0.2 - Added catch exception in Commands list because DMs might not be open. Also changed text. Updated JDA to 4.0.0_71 from 4.0.0_70
 4.0.2-1 Update JDA to 4.0.0_72, fixed a few mistakes i made, and changed token stuff to read from text file.
 4.0.3 - JDA to 4.0.0_73, fixed GTP autoban, added more comments

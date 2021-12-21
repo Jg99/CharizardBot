@@ -4,11 +4,13 @@ import java.util.Random;
 import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
 public class CommandsList extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 			try {
             Random rand = new Random();
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
@@ -66,4 +68,5 @@ public class CommandsList extends ListenerAdapter {
 			}
 		} catch (Exception e) {Main.logger.info("Exception in CommandsList. Insufficient permissions?\n" + e);}
     }
+}
 }

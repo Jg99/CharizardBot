@@ -6,14 +6,16 @@ import net.dean.jraw.models.TimePeriod;
 import net.dean.jraw.pagination.DefaultPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
 import com.charizardbot.four.Main;
 public class RedditCommands extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         try {
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
             if (prefix == null)
@@ -84,7 +86,7 @@ public class RedditCommands extends ListenerAdapter {
 	    	Random rand = new Random();
             Listing<Submission> posts = paginator.next();
             int rPost = rand.nextInt(posts.size());
-            if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+            if (event.getTextChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
                 EmbedBuilder embed = new EmbedBuilder();
                 embed.setTitle(sortMsg + subreddit, posts.get(rPost).getUrl());
                 embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
@@ -108,7 +110,7 @@ public class RedditCommands extends ListenerAdapter {
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();            
             }
-            else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
+            else if ((!event.getTextChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                 event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
             }
             else {
@@ -185,7 +187,7 @@ public class RedditCommands extends ListenerAdapter {
                 Random rand = new Random();
                 Listing<Submission> posts = paginator.next();
                 int rPost = rand.nextInt(posts.size());
-                if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+                if (event.getTextChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
                     embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
@@ -194,7 +196,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
-                } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
+                } else if ((!event.getTextChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                     event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
                 } else {
                     EmbedBuilder embed = new EmbedBuilder();
@@ -256,7 +258,7 @@ public class RedditCommands extends ListenerAdapter {
                 Random rand = new Random();
                 Listing<Submission> posts = paginator.next();
                 int rPost = rand.nextInt(posts.size());
-                if (event.getChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+                if (event.getTextChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
                     embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
@@ -265,7 +267,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.setImage(posts.get(rPost).getUrl());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
-                } else if ((!event.getChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
+                } else if ((!event.getTextChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                     event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
                 } else {
                     EmbedBuilder embed = new EmbedBuilder();
@@ -343,4 +345,5 @@ public class RedditCommands extends ListenerAdapter {
                     }
         } catch (Exception e) {Main.logger.info("Exception in RedditCommands.java"); e.printStackTrace();}
     }
+}
 }

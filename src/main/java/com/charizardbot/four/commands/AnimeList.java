@@ -11,7 +11,7 @@ import com.github.doomsdayrs.jikan4java.types.main.anime.Studios;
 import com.github.doomsdayrs.jikan4java.types.support.basic.meta.Genre;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class AnimeList extends ListenerAdapter {
@@ -20,7 +20,9 @@ public class AnimeList extends ListenerAdapter {
      * from the user and returns some information about the anime.
      * Uses Jikan4Java library, modified to use CharizardBot server.
      */
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         try {
             String miscToggle = "1";
             if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
@@ -81,4 +83,5 @@ public class AnimeList extends ListenerAdapter {
         e.printStackTrace();
     }
     }
+}
 }

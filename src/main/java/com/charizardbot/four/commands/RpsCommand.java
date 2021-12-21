@@ -1,11 +1,13 @@
 package com.charizardbot.four.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.util.Random;
 import com.charizardbot.four.Main;
 public class RpsCommand extends ListenerAdapter {
-public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
+public void onGuildMessageReceived (MessageReceivedEvent event) {
+	if (event.isFromGuild()) {
+
 		try {
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
@@ -66,4 +68,5 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         }
 		} catch (Exception e) {Main.logger.info("WARN: Exception in RPS command: Insufficient permissions?\n" + e);}
 	}
+}
 }

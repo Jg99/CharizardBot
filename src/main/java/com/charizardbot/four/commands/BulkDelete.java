@@ -8,11 +8,13 @@ import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BulkDelete extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());
         if (prefix == null)
             prefix = "!";
@@ -36,7 +38,7 @@ public class BulkDelete extends ListenerAdapter {
                     td = toDelete.get();
                     Main.bulkCount = td.size();
                     Main.isBulkDeleted = true;
-                    event.getChannel().deleteMessages(td).queue();
+                    event.getTextChannel().deleteMessages(td).queue();
                     event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
                         response.delete().queueAfter(5, TimeUnit.SECONDS);
                     }); 
@@ -59,7 +61,7 @@ public class BulkDelete extends ListenerAdapter {
                 td = toDelete.get();
                 Main.isBulkDeleted = true;
                 Main.bulkCount = td.size();
-                event.getChannel().deleteMessages(td).queue();
+                event.getTextChannel().deleteMessages(td).queue();
                 event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
                     response.delete().queueAfter(5, TimeUnit.SECONDS);
                 }); 
@@ -69,4 +71,5 @@ public class BulkDelete extends ListenerAdapter {
         }
     } catch (Exception e) {}
     }
+}
 }

@@ -73,12 +73,12 @@ public class MessageCache implements EventListener{
     }
     @Override
     @SubscribeEvent
-    public void onEvent(GenericEvent event)
-    {
+    public void onEvent(GenericEvent event) {
         if (event instanceof MessageReceivedEvent)
         {
             final Message message = ((MessageReceivedEvent) event).getMessage();
-            this.messageMap.put(message.getId(), message);
+            if (message.isFromGuild()) {
+            this.messageMap.put(message.getId(), message); }
         }
 
         if (event instanceof MessageDeleteEvent)
@@ -90,7 +90,8 @@ public class MessageCache implements EventListener{
         if (event instanceof MessageUpdateEvent)
         {
             final Message message = ((MessageUpdateEvent) event).getMessage();
-            this.messageMap.put(message.getId(), message);
+            if (message.isFromGuild()) {
+            this.messageMap.put(message.getId(), message); }
         }
     }
 }

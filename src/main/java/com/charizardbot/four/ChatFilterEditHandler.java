@@ -8,13 +8,14 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
+import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class ChatFilterEditHandler extends ListenerAdapter {
     /**
      * Checks for edited messages in any guild against the chat filter.
      */
-	public void onGuildMessageUpdate(GuildMessageUpdateEvent event) {
+	public void onMessageUpdate(MessageUpdateEvent event) {
+        if (event.isFromGuild()) {
                 try {
                             String serverID = event.getGuild().getId().toString();
                             String normalizedText = Normalizer
@@ -84,5 +85,6 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                     }
                         }
                    } catch (Exception e) {Main.logger.info("WARN: Exception in MessageEditListener: \n" + e);}
+                }
         }
 }

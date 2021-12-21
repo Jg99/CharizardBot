@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.MiniDex;
@@ -14,7 +14,9 @@ import com.charizardbot.four.MiniDex;
  * Pokédex commands
  */
 public class PokedexCommand extends ListenerAdapter {
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
@@ -94,4 +96,5 @@ public class PokedexCommand extends ListenerAdapter {
 		    	   event.getChannel().sendMessageEmbeds(embed.build()).queue();		
     		}
 	}
+}
 }

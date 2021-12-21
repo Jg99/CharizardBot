@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.clashofjava.API;
@@ -13,7 +13,9 @@ import com.charizardbot.clashofjava.Clan;
 import com.charizardbot.clashofjava.ClanQuery;
 import com.charizardbot.clashofjava.Player;
 public class CoCCmds extends ListenerAdapter {
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 		String cocCmd = "1";
 		String API_TOKEN = Main.COC_TOKEN;
 		if (Main.config.getProperty("cocCmd" + event.getGuild().getId().toString()) != null) {
@@ -156,4 +158,5 @@ public class CoCCmds extends ListenerAdapter {
 		} catch (Exception e) {Main.logger.info("Warn: Exception in CoC Commands\n" + e);}
 	
 	}
+}
 }

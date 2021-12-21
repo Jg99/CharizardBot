@@ -2,7 +2,7 @@ package com.charizardbot.four.commands;
 import java.awt.Color;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import java.io.BufferedInputStream;
@@ -17,7 +17,9 @@ import org.json.JSONObject;
  * Random Joke commands
  */
 public class RandomJoke extends ListenerAdapter {
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         String miscToggle = "1";
     	if (Main.config.getProperty("miscCmds" + event.getGuild().getId().toString()) != null) {
 		miscToggle = Main.config.getProperty("miscCmds" + event.getGuild().getId().toString());
@@ -43,6 +45,7 @@ public class RandomJoke extends ListenerAdapter {
 		}
     	} catch (Exception e) {Main.logger.info("WARN: Exception in the Random Joke Command. Insufficient permissions or API server is down?\n" + e);}
     }
+}
     public static JSONObject getJoke() {
         // Requests a random joke from the URL below
         final String url = String.format("https://official-joke-api.appspot.com/random_joke");

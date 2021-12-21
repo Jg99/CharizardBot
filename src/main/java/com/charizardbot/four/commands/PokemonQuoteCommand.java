@@ -2,12 +2,14 @@ package com.charizardbot.four.commands;
 import java.awt.Color;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.pokeQuotes;
 public class PokemonQuoteCommand extends ListenerAdapter{
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 		try {
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "pokequote") && !event.getAuthor().isBot()) {
@@ -22,4 +24,5 @@ public class PokemonQuoteCommand extends ListenerAdapter{
 		}
 	} catch (Exception e){Main.logger.info("Warn: Exception in PokemonQuote Command. Insufficient permissions?");}
 	}
+}
 }

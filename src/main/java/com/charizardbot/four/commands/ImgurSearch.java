@@ -1,9 +1,11 @@
 package com.charizardbot.four.commands;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 public class ImgurSearch extends ListenerAdapter {
-public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
+public void onGuildMessageReceived (MessageReceivedEvent event) {
+	if (event.isFromGuild()) {
+
     	String imgurCmd = "1";
     	if (Main.config.getProperty("imgurCmd" + event.getGuild().getId().toString()) != null) {
     	imgurCmd = Main.config.getProperty("imgurCmd" + event.getGuild().getId().toString());
@@ -33,4 +35,5 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         	}
 		} catch (Exception e) { Main.logger.info("WARN: Exception in the Imgur Search command.\n" + e);}
 	}
+}
 }

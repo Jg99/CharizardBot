@@ -2,14 +2,15 @@ package com.charizardbot.four;
 import java.io.FileOutputStream;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
+import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
+import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MessageLogger extends ListenerAdapter {
     /**
      * CharizardBot's Message Logger. Logs deleted messages (if they are in the cache) and edited messages.
      */
-    public void onGuildMessageDelete(GuildMessageDeleteEvent event) { 
+    public void onGuildMessageDelete(MessageDeleteEvent event) { 
+        if (event.isFromGuild()) {
         String serverID = event.getGuild().getId().toString();
         try {
         String svrLogging = "0"; //disabled by default
@@ -76,8 +77,10 @@ public class MessageLogger extends ListenerAdapter {
           //  e.printStackTrace();
         }
     }
-    public void onGuildMessageUpdate(GuildMessageUpdateEvent event)
+    }
+    public void onMessageUpdate(MessageUpdateEvent event)
     {
+        if (event.isFromGuild()) {
         try {
             String serverID = event.getGuild().getId().toString();
             String svrLogging = "0"; //disabled by default
@@ -109,5 +112,6 @@ public class MessageLogger extends ListenerAdapter {
                 event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue(); 
             }
         } catch(Exception e) { /*Main.logger.info("Exception in MessageLogger (Edited message event). Insufficient permissions or no cache?" + e);*/}
-}
+        }
+    }
 }

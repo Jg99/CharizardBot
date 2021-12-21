@@ -1,7 +1,7 @@
 package com.charizardbot.four.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.Color;
@@ -16,7 +16,9 @@ public class ValueGuides extends ListenerAdapter {
     /**
      * This command is what the user runs to get the value of an item [Wizard101].
      */
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived(MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         try {
             String VALUE_TABLE = Main.VALUE_TABLE;
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
@@ -171,5 +173,6 @@ public class ValueGuides extends ListenerAdapter {
             Main.logger.info("WARN: Exception in the ValueGuides command.");
             e.printStackTrace();
         }
+    }
     }
 }

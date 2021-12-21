@@ -1,7 +1,7 @@
 package com.charizardbot.four.commands;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import java.io.FileOutputStream;
@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.List;
 public class ChatFilterToggle extends ListenerAdapter {
 	public String channelID = "";
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
 		try {
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
@@ -214,4 +216,5 @@ public class ChatFilterToggle extends ListenerAdapter {
 		}
 		} catch (Exception e) { Main.logger.info("WARN: Exception in ChatFilterToggle command: Insufficient permissions?\n" + e); }
 	}
+}
 }

@@ -1,6 +1,6 @@
 package com.charizardbot.four.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.Pet;
@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.util.Random;
 public class PetStats extends ListenerAdapter {
 	final String DELIMITERS_PETCALC = "[" + Main.PREFIX + "petstats\\W]+"; //delimiters for petstats - digits only
-public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
+public void onGuildMessageReceived (MessageReceivedEvent event) {
+	if (event.isFromGuild()) {
+
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	String wizCmd = "1";
     	if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
@@ -99,4 +101,5 @@ public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
         }
 		} catch (Exception e) {Main.logger.info("WARN: Exception in Petstats command: Insufficient permissions?\n" + e);}
 	}
+}
 }

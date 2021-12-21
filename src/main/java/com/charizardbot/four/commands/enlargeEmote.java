@@ -2,10 +2,12 @@ package com.charizardbot.four.commands;
 import java.util.List;
 import com.charizardbot.four.Main;
 import net.dv8tion.jda.api.entities.Emote;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class enlargeEmote extends ListenerAdapter {
-    public void onGuildMessageReceived (GuildMessageReceivedEvent event) {
+    public void onGuildMessageReceived (MessageReceivedEvent event) {
+        if (event.isFromGuild()) {
+
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
             prefix = "!";  
@@ -19,4 +21,5 @@ public class enlargeEmote extends ListenerAdapter {
         }
     }
     
+}
 }

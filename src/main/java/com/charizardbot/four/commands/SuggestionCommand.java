@@ -4,12 +4,14 @@ import java.io.FileOutputStream;
 import java.util.Random;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.charizardbot.four.Main;
 import com.charizardbot.four.Suggestions;
 public class SuggestionCommand extends ListenerAdapter{
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(MessageReceivedEvent event) {
+		if (event.isFromGuild()) {
+
     	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
     		prefix = "!";
@@ -129,4 +131,5 @@ public class SuggestionCommand extends ListenerAdapter{
         	}
 		} catch (Exception e) {Main.logger.info("WARN: Exception in Suggestions Toggle. Insufficient permissions?\n" + e);};
 	}
+}
 }
