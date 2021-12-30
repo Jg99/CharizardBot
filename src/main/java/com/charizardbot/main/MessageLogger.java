@@ -9,7 +9,7 @@ public class MessageLogger extends ListenerAdapter {
     /**
      * CharizardBot's Message Logger. Logs deleted messages (if they are in the cache) and edited messages.
      */
-    public void onGuildMessageDelete(MessageDeleteEvent event) { 
+    public void onMessageDelete(MessageDeleteEvent event) { 
         if (event.isFromGuild()) {
         String serverID = event.getGuild().getId().toString();
         try {
