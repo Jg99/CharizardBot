@@ -32,7 +32,7 @@ public class WizSchedule extends ListenerAdapter {
                     updatedTable = updatedTable.replaceAll("MythAndStormName", "Myth & Storm Perk Tournament");
                     updatedTable = updatedTable.replaceAll("LifeAndDeathName", "Life & Death Perk Tournament");
                     updatedTable = updatedTable.replaceAll("BalanceName", "Balance Perk Tournament");
-                    updatedTable = updatedTable.replaceAll("10 - 130", "-"); // be sure to change when wiz raises the level cap
+                    updatedTable = updatedTable.replaceAll("10 - 150", "-"); // be sure to change when wiz raises the level cap
                     //done changing bad names to good ones and removing level because every tourney is 10-130
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setTitle("Tournament Schedule");
