@@ -3,15 +3,12 @@ package com.charizardbot.main.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Random;
 import java.util.Scanner;
-
 import com.charizardbot.main.Main;
-
 public class ValueGuides extends ListenerAdapter {
     /**
      * This command is what the user runs to get the value of an item [Wizard101].
@@ -94,6 +91,7 @@ public class ValueGuides extends ListenerAdapter {
                 while (lineScan.hasNextLine()) {
                     String token = lineScan.nextLine();
                     String[] tokenSpl = token.split(",");
+                    
                     if (tokenSpl[0].toLowerCase().contains(item[1].toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
@@ -115,7 +113,10 @@ public class ValueGuides extends ListenerAdapter {
                             embed.addField("Expel: ", item_split[2], true);
                             embed.addField("Housing: ", item_split[3], true);
                         }
-                        
+                        if (embed.getFields().size() >= 7) {
+                            embed.addField("For more results", "Please refine your search if your item isn't on this list.", false);
+                            break;
+                        }
                     }
                 }
                 lineScan.close();

@@ -10,7 +10,7 @@ public class CSVParse {
     public static List<CSVRecord> getCSVResults(File spreadsheet) {//String regex){
         List<CSVRecord> list;
         try {
-            CSVParser parser = CSVFormat.EXCEL.withHeader("Name").withIgnoreEmptyLines().withTrim().parse(new FileReader(spreadsheet));
+            CSVParser parser = CSVFormat.EXCEL.builder().setHeader("Name").setIgnoreEmptyLines(true).setTrim(true).build().parse(new FileReader(spreadsheet));
              list = parser.getRecords();
              return list;
         } catch (Exception e) {
