@@ -7,7 +7,7 @@
   <artifactId>CharizardBot</artifactId>
   <version>5.0.0a</version>
 
-  <name>CharizardBotFour</name>
+  <name>CharizardBot</name>
   <url>http://www.charizardbot.com</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -138,7 +138,7 @@
         <configuration>
           <transformers>
               <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                <mainClass>com.charizardbot.Main</mainClass>
+                <mainClass>com.charizardbot.main.Main</mainClass>
                 <manifestEntries>
                   <Multi-Release>true</Multi-Release>
                 </manifestEntries>
@@ -152,7 +152,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>com.charizardbot.Main</mainClass>
+            <mainClass>com.charizardbot.main.Main</mainClass>
           </manifest>
           </archive>
         </configuration>
