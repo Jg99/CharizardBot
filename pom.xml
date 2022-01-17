@@ -152,7 +152,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>com.charizardbot.four.Main</mainClass>
+            <mainClass>com.charizardbot.Main</mainClass>
           </manifest>
           </archive>
         </configuration>
