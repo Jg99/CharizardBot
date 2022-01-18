@@ -416,6 +416,7 @@ public class Main {
 				/**join listener for clear commands, only for use in GTP atm*/
 				api.addEventListener(new UserJoinHandler());
 				api.addEventListener(new MessageLogger());
+				api.addEventListener(new Giveaways());
 			} catch (LoginException e) {
 				e.printStackTrace();
 			}

@@ -47,7 +47,7 @@ public class UserJoinHandler extends ListenerAdapter {
 					try {
 						logChan = Main.logging_config.getProperty("logchannel" + serverID);	
 						svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
-					} catch (Exception e){e.printStackTrace();}
+					} catch (Exception e){System.out.println("Exception in UserJoinHandler: Nickname blacklist");}
 					if (logChan != null){
 					try {
 						if (svrLogging.equals("1") && event.getJDA().getTextChannelById(logChan).canTalk()) {

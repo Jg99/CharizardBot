@@ -55,3 +55,5 @@ updated all dependencies.
 1. update JDA to v5, currently alpha
 2. update dependencies, such as log4j again
 3. item limit on value guides search command
+4. GIVEAWAYS - Code adapted from https://github.com/jagrosh/GiveawayBot, modified for use. Note: it doesn't save anything so if the bot is
+restarted, you will have to manually keep track and then do a reroll.
