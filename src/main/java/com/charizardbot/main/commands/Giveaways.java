@@ -158,7 +158,6 @@ public class Giveaways extends ListenerAdapter {
 
     begin Giveaway class */
     public class Giveaway {
-        
         int seconds;
         Message message;
         String item;
@@ -197,11 +196,11 @@ public class Giveaways extends ListenerAdapter {
                             }
                         message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\nREQUIRED ROLES: " + reqRoles + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
                         seconds-=5;
-                        try{Thread.sleep(5000);}catch(Exception e){}
+                        try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
                         } else {
                                 message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
                                 seconds-=5;
-                                try{Thread.sleep(5000);}catch(Exception e){}
+                                try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
                         
                     }
                 }
@@ -216,11 +215,11 @@ public class Giveaways extends ListenerAdapter {
                             }
                         message.editMessage("**G I V E A W A Y!**\nLAST CHANCE TO ENTER!!!\nGIVEAWAY HOST: " + host + "\nREQUIRED ROLES: " + reqRoles + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
                         seconds--;
-                        try{Thread.sleep(1000);}catch(Exception e){}
+                        try{Thread.sleep(1000);}catch(Exception e){Thread.currentThread().interrupt();}
                     } else {
                         message.editMessage("**G I V E A W A Y!**\nLAST CHANCE TO ENTER!!!\nGIVEAWAY HOST: " + host + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
                         seconds--;
-                        try{Thread.sleep(1000);}catch(Exception e){}
+                        try{Thread.sleep(1000);}catch(Exception e){Thread.currentThread().interrupt();}
                     }
                     }
                     message.getChannel().retrieveMessageById(message.getId()).complete().getReactions()
@@ -268,8 +267,9 @@ public class Giveaways extends ListenerAdapter {
                                     message.getChannel().sendMessage("No qualifying users reacted for the giveaway :(").queue();
                                 }
                             });
-                        } catch (Exception e) {System.out.println("EXCEPTION in Giveaways.java - thread handler");}
-                }
+                
+                     } catch (Exception e) {Thread.currentThread().interrupt();}
+                 }
             }.start();
         }
     }
