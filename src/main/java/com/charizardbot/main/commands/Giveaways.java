@@ -25,7 +25,7 @@ public class Giveaways extends ListenerAdapter {
         {
             event.getChannel().sendMessage("CharizardBot giveaway help:\n"
                     + "`!giveawayhelp` - this message\n"
-                    + "`!giveaway <time>,<item>,<giveaway host>,[roleReqID1],[roleID2]` - starts a giveway. Ex: `!gstart 180 s,free game,John,530619324587835393,513100537818775589` for a 3 minute giveaway\n"
+                    + "`!giveaway <time>,<item>,<giveaway host>,[roleReqID1],[roleID2]` - starts a giveway. Ex: `!giveaway 180 s,free game,John,530619324587835393,513100537818775589` for a 3 minute giveaway\n"
                     + "\n Units: s, m, h, d. Please use a space after the time. such as \"180 s\"\n"
                     + "`!rerollgiveaway <messageid>` - rerolls a winner for the giveaway on the provided message\n\n"
                     + "Commands require Manage Server permission to use\n"
