@@ -76,13 +76,13 @@ public class Giveaways extends ListenerAdapter {
                     }
                 }
                 if (rolestoMention != "") {
-                    event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST:" + parts[2] + "\nREQUIRED ROLES: " + rolestoMention + "\n" +(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
+                    event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST: " + parts[2] + "\nREQUIRED ROLES: " + rolestoMention + "\n" +(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
                         m.addReaction("\uD83C\uDF89").queue();
                         new Giveaway(sec,m,parts.length>1 ? parts[1] : null,parts[2], roleIds).start();
                     });
                     event.getMessage().delete().queue();
                 } else {
-                event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST:" + parts[2] + "\n"+(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
+                event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST: " + parts[2] + "\n"+(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
                     m.addReaction("\uD83C\uDF89").queue();
                     new Giveaway(sec,m,parts.length>1 ? parts[1] : null, parts[2]).start();
                 });
@@ -165,14 +165,14 @@ public class Giveaways extends ListenerAdapter {
         String host;
         public Giveaway(int time, Message message, String item, String host)
         {
-            seconds = time;
+            this.seconds = time;
             this.message = message;
             this.item = item;
             this.host = host;
         }
         public Giveaway(int time, Message message, String item, String host, List<String> roles)
         {
-            seconds = time;
+            this.seconds = time;
             this.message = message;
             this.item = item;
             this.roles = roles;
@@ -194,13 +194,13 @@ public class Giveaways extends ListenerAdapter {
                                 reqRoles += "<@&" + roles.get(i) + ">, ";
                                 i++;
                             }
-                        message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\nREQUIRED ROLES: " + reqRoles + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
-                        seconds-=5;
-                        try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
-                        } else {
-                                message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
-                                seconds-=5;
-                                try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
+                            message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\nREQUIRED ROLES: " + reqRoles + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
+                            seconds-=5;
+                            try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
+                        } else {    
+                            message.editMessage("**GIVEAWAY!**\nGIVEAWAY HOST: " + host + "\n" +(item!=null ? "\u25AB*`"+item+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!\nTime remaining: "+secondsToTime(seconds)).queue();
+                            seconds-=5;
+                            try{Thread.sleep(5000);}catch(Exception e){Thread.currentThread().interrupt();}
                         
                     }
                 }

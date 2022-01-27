@@ -31,13 +31,13 @@ public class ValueGuides extends ListenerAdapter {
      //               event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
      //           }
                 if (isEnabled.equals("1")) {//&& isWhitelisted) {
-                String[] item = event.getMessage().getContentRaw().split(prefix + "value ");
+                String item = event.getMessage().getContentRaw().substring(7, event.getMessage().getContentRaw().length());
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 String final_item = "";
                 while (lineScan.hasNextLine()) {
                     String token = lineScan.nextLine();
                     String[] tokenSpl = token.split(",");
-                    if (tokenSpl[0].toLowerCase().equals(item[1].toLowerCase())) {
+                    if (tokenSpl[0].toLowerCase().equals(item.toLowerCase())) {
                         final_item = token;
                     }
                 }
@@ -79,8 +79,8 @@ public class ValueGuides extends ListenerAdapter {
        //             event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
        //         }
                 if (isEnabled.equals("1")) {// && isWhitelisted) {
-                String[] item = event.getMessage().getContentRaw().split(prefix + "search ");
-                if (item[1].length() < 2) {
+                    String item = event.getMessage().getContentRaw().substring(8, event.getMessage().getContentRaw().length());
+                    if (item.length() < 2) {
                     event.getChannel().sendMessage("Error, please specify 2 or more letters in your query.").queue();
                  } else {
                 Scanner lineScan = new Scanner(VALUE_TABLE);
@@ -92,7 +92,7 @@ public class ValueGuides extends ListenerAdapter {
                     String token = lineScan.nextLine();
                     String[] tokenSpl = token.split(",");
                     
-                    if (tokenSpl[0].toLowerCase().contains(item[1].toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
+                    if (tokenSpl[0].toLowerCase().contains(item.toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
                         embed.addField("Item:", item_split[0], false);
