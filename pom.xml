@@ -35,7 +35,7 @@
           <groupId>net.dv8tion</groupId>
           <artifactId>JDA</artifactId>
          <!-- <version>4.4.0_350</version>-->
-          <version>5.0.0-alpha.4</version>
+          <version>5.0.0-alpha.5</version>
           <exclusions>
             <exclusion>
                 <groupId>club.minnced</groupId>
