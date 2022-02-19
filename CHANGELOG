@@ -57,3 +57,4 @@ updated all dependencies.
 3. item limit on value guides search command
 4. GIVEAWAYS - Code adapted from https://github.com/jagrosh/GiveawayBot, modified for use. Note: it doesn't save anything so if the bot is
 restarted, you will have to manually keep track and then do a reroll.
+5. - Greek translation for petstats.
