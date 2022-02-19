@@ -9,6 +9,7 @@ import java.util.Random;
 import com.charizardbot.main.Main;
 import com.charizardbot.main.Pet;
 import com.charizardbot.main.dePet;
+import com.charizardbot.main.grPet;
 public class PetStats extends ListenerAdapter {
 	final String DELIMITERS_PETCALC = "[" + Main.PREFIX + "petstats\\W]+"; //delimiters for petstats - digits only
 public void onMessageReceived (MessageReceivedEvent event) {
@@ -68,8 +69,8 @@ public void onMessageReceived (MessageReceivedEvent event) {
 				String[] stats = new String[5];
 				if (contentSplit.length != 7)
 				{
-					event.getChannel().sendMessage("Error in calculating stats.\nThe correct format is " + prefix + "petstats strength " +
-							"intellect agility will power");
+					event.getChannel().sendMessage("Πρόβλημα υπολογισμού ταλέντων.\nΗ σωστή φόρμα είναι: " + 
+					prefix + "petstats Δύναμη Νούς Σβελτάδα Θέληση Ισχύς");
 				} else {
 				int n = 0;
 				for (int t = 0; t < contentSplit.length; t++)
@@ -85,16 +86,15 @@ public void onMessageReceived (MessageReceivedEvent event) {
 				double agility = Integer.parseInt(stats[2]);
 				double will = Integer.parseInt(stats[3]);
 				double power = Integer.parseInt(stats[4]);
-				Pet mainPet = new Pet(strength, intellect, agility, will, power);
+				grPet mainPet = new grPet(strength, intellect, agility, will, power);
 				EmbedBuilder embed = new EmbedBuilder();
 				embed.setAuthor(event.getAuthor().getAsTag());
 				embed.setTitle("Wizard101 Pet stats calculator");
 				embed.setImage("https://i.imgur.com/phKD1u6.png");
-				embed.setDescription("If the value is over x.5 on most stats, it rounds up.\nFor example, 10.5 rounds to 11 in most cases.");
-				embed.addField("Input values:", strength + ", " + intellect + ", " + agility + ", " + 
-				will + ", " + power, false);
-				embed.addField("Main pet stats", mainPet.calculate(), true);
-				embed.addField("More pet stats", mainPet.continuedStats(), true);
+				embed.setDescription("Εάν η τιμή είναι πάνω απο x.5 γίνεται στρογγυλοποίηση προς τα πάνω.\nΓια παράδειγμα, το 10.5 στρογγυλοποιείται στο 11.");				
+				embed.addField("Τιμές στατιστικών:", strength + ", " + intellect + ", " + agility + ", " + will + ", " + power, false);
+				embed.addField("Βασικά ταλέντα κατοικιδίου", mainPet.calculate(), true);
+				embed.addField("Περισσότερα ταλέντα κατοικιδίου", mainPet.continuedStats(), true);
 				Random rand = new Random();
 				embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
 				 embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");

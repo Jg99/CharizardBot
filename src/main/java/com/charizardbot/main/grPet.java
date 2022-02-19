@@ -1,6 +1,6 @@
 package com.charizardbot.main;
 import java.text.DecimalFormat;
-public class Pet {
+public class grPet {
 	private double strength, intellect, agility, will, power; //values for the calculations
 	private String stats = ""; //final built string part 1
 	private String continued = ""; // part 2
@@ -13,7 +13,7 @@ public class Pet {
 	 * @param will
 	 * @param power
 	 */
-	public Pet(double strength, double intellect, double agility, double will, double power)
+	public grPet(double strength, double intellect, double agility, double will, double power)
 	{
 		//setup the pet object
 		this.strength = strength;
