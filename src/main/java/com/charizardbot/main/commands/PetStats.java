@@ -24,7 +24,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
     		prefix = "!";
 		try {
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "petstats") && !event.getAuthor().isBot() && wizCmd.equals("1")) { 
-        	if (event.getGuild().getId().toString().equals("370132368163340289")) { // german server translation
+        	if (event.getGuild().getId().toString().equals("370132368163340289") || event.getGuild().getId().toString().equals("948663997241126912")) { // german server translation
 				String[] contentSplit = event.getMessage().getContentRaw().split("\\W+");
 				String[] stats = new String[5];
 				if (contentSplit.length != 7)
