@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.charizardbot.main.Main;
 
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -92,7 +93,8 @@ public class CrossBan extends ListenerAdapter {
                             if (!svID.equals("")) {
                                 if(event.getJDA().getGuildById(svID) != null) {
                                     try {
-                                        event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                                        UserSnowflake toBan = UserSnowflake.fromId(userID);
+                                        event.getJDA().getGuildById(svID).ban(toBan, 0, "X-ban by CharizardBot.").queue();
                                         Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
                                     } catch (Exception e) {
                                         String invalidBan = svID;
@@ -124,7 +126,8 @@ public class CrossBan extends ListenerAdapter {
                         if (!svID.equals("")) {
                             if(event.getJDA().getGuildById(svID)!= null){
                             try {
-                                event.getJDA().getGuildById(svID).unban(userID).queue();
+                                UserSnowflake toUnBan = UserSnowflake.fromId(userID);
+                                event.getJDA().getGuildById(svID).unban(toUnBan).queue();
                                 Main.logger.info(userID + " unbanned in " + event.getJDA().getGuildById(svID).getName() + ".");
                             } catch (Exception e) {
                                 Main.logger.info("Invalid unban. Server: " + event.getJDA().getGuildById(svID).getName());
@@ -220,7 +223,8 @@ public class CrossBan extends ListenerAdapter {
                      userID = lines[i];
                     System.out.println(userID);
                     try {
-                        event.getJDA().getGuildById(svID).ban(userID, 0, "X-ban by CharizardBot.").queue();
+                        UserSnowflake toBan = UserSnowflake.fromId(userID);
+                        event.getJDA().getGuildById(svID).ban(toBan, 0, "X-ban by CharizardBot.").queue();
                         Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
                     } catch (Exception e) {
                         Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());
