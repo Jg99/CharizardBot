@@ -9,8 +9,10 @@ import com.charizardbot.main.Main;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.UserSnowflake;
+import net.dv8tion.jda.api.entities.Guild.Ban;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.RestAction;
 
 public class CrossBan extends ListenerAdapter {
     public static String userID = "";
@@ -127,10 +129,15 @@ public class CrossBan extends ListenerAdapter {
                             if(event.getJDA().getGuildById(svID)!= null){
                             try {
                                 UserSnowflake toUnBan = UserSnowflake.fromId(userID);
+                                 Ban ban = event.getJDA().getGuildById(svID).retrieveBan(toUnBan).complete();
+                                 String reason = ban.getReason();
+                                if (reason.equals("X-ban by CharizardBot.")) {
                                 event.getJDA().getGuildById(svID).unban(toUnBan).queue();
-                                Main.logger.info(userID + " unbanned in " + event.getJDA().getGuildById(svID).getName() + ".");
+                                Main.logger.info("User " + userID + " was banned by CharizardBot in " + event.getJDA().getGuildById(svID).getName() + ".\n Unbanning.");
+                                } else {
+                                Main.logger.info("User " + userID + " was banned by another person in " + event.getJDA().getGuildById(svID).getName() + ".\n Skipping unban.");
+                                }
                             } catch (Exception e) {
-                                Main.logger.info("Invalid unban. Server: " + event.getJDA().getGuildById(svID).getName());
                                 continue;
                             }
                             }
