@@ -17,7 +17,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
     	if (prefix == null)
     		prefix = "!";
         if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "joindate") && !event.getAuthor().isBot()) {
-        	if (event.getMessage().getMentionedUsers().size() == 0) {
+        	if (event.getMessage().getMentions().getUsers().size() == 0) {
         //	String joinDate = event.getMessageAuthor().asUser().get().getJoinedAtTimestamp(event.getGuild()).toString();
 			String joinDate = event.getMember().getTimeJoined().toString();
 			EmbedBuilder embed = new EmbedBuilder();
@@ -28,7 +28,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
         	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
           	event.getChannel().sendMessageEmbeds(embed.build()).queue();
         	} else {
-				Member member = event.getGuild().getMember(event.getMessage().getMentionedMembers().get(0).getUser());
+				Member member = event.getGuild().getMember(event.getMessage().getMentions().getMembers().get(0).getUser());
             	String joinDate = member.getTimeJoined().toString();
              	EmbedBuilder embed = new EmbedBuilder();
               	embed.setTitle("User join date");

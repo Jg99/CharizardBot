@@ -116,9 +116,9 @@ public class Giveaways extends ListenerAdapter {
                 .stream().filter(mr -> mr.getReactionEmote().getName().equals("\uD83C\uDF89"))
                 .findAny().ifPresent(mr -> {
                     List<User> users = new LinkedList<>(mr.retrieveUsers().complete());
-                    List<Role> roleList = m.getMentionedRoles();
+                    List<Role> roleList = m.getMentions().getRoles();
                     //check roles
-                    List<Role> roles = new LinkedList<>(m.getMentionedRoles());
+                    List<Role> roles = new LinkedList<>(m.getMentions().getRoles());
                     List<String> roleIds1 = new ArrayList<String>();
                     for (Role role: roleList) {
                         roleIds1.add(role.getId());
@@ -228,7 +228,7 @@ public class Giveaways extends ListenerAdapter {
                                 String reqRoles = "";
                                 List<User> users = new LinkedList<>(mr.retrieveUsers().complete());
                                 /*check for any role requirements*/
-                                List<Role> roleList = message.getMentionedRoles();
+                                List<Role> roleList = message.getMentions().getRoles();
                                 for (Role role : roleList) {
                                     reqRoles += role.getAsMention()+ ", ";
                                 }

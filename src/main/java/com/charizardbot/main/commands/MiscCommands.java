@@ -25,8 +25,8 @@ public class MiscCommands extends ListenerAdapter {
 	    	if (prefix == null)
 	    		prefix = "!";
 		if (miscToggle.equals("1")){
-        if (event.getMessage().getContentRaw().toLowerCase().startsWith("no u") && event.getMessage().getMentionedUsers().size() > 0 && event.getAuthor().getId().equals(Main.OWNER_ID))    {
-       	 if (event.getMessage().getMentionedMembers().get(0).getId().equals(BOT_ID)) {
+        if (event.getMessage().getContentRaw().toLowerCase().startsWith("no u") && event.getMessage().getMentions().getUsers().size() > 0 && event.getAuthor().getId().equals(Main.OWNER_ID))    {
+       	 if (event.getMessage().getMentions().getMembers().get(0).getId().equals(BOT_ID)) {
        	 	event.getChannel().sendMessage("u can't no u me!").queue(); 
        	 	}
 		}
@@ -108,7 +108,7 @@ public class MiscCommands extends ListenerAdapter {
 			
 		//PrankingYou's command ($15 patreon) - unsubscribed
 		/*if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "prank") && (event.getAuthor().getId().equals("203244890618855424") || event.getAuthor().getId().equals(Main.OWNER_ID))) {
-			if (event.getMessage().getMentionedUsers().isEmpty())
+			if (event.getMessage().getMentions().getUsers().isEmpty())
 				event.getChannel().sendMessage("https://tenor.com/view/just-got-pranked-got-pranked-jerk-off-masterbate-gif-5623249").queue();
 			else {
 				event.getChannel().sendMessageEmbeds(event.getAuthor().getAsMention() + " just pranked " + event.getMessage().getMentionedMembers().get(0).getAsMention() +

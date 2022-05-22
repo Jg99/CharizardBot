@@ -74,8 +74,9 @@ public class CrossBan extends ListenerAdapter {
                     if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
                         event.getChannel().sendTyping().queue();
                      userID = event.getMessage().getContentRaw().substring(6);
-                    if (!event.getMessage().getMentionedUsers().isEmpty()) {
-                        userID = event.getMessage().getMentionedUsers().get(0).getId();
+                    if (!event.getMessage().getMentions().getUsers().isEmpty()) {
+                        
+                        userID = event.getMessage().getMentions().getUsers().get(0).getId();
                     }
                     String banned = Main.XBAN_BANSDB;
                     if (banned.contains(userID)) {
@@ -176,8 +177,8 @@ public class CrossBan extends ListenerAdapter {
                 String msg = event.getMessage().getContentRaw();
                 admins = Main.XBAN_ADMINS;
                 String adminID = msg.substring(11);
-                if (!event.getMessage().getMentionedUsers().isEmpty()) {
-                    adminID = event.getMessage().getMentionedUsers().get(0).getId();
+                if (!event.getMessage().getMentions().getUsers().isEmpty()) {
+                    adminID = event.getMessage().getMentions().getUsers().get(0).getId();
                 }
                 if (!admins.contains(adminID)) {
                     admins += adminID + "\n";
@@ -193,8 +194,8 @@ public class CrossBan extends ListenerAdapter {
             if (event.getMessage().getContentRaw().startsWith(prefix + "remcadmin") && Main.XBAN_ADMINS.contains(event.getAuthor().getId())) {
                 String msg = event.getMessage().getContentRaw();
                 String adminID = msg.substring(11);
-                if (!event.getMessage().getMentionedUsers().isEmpty()) {
-                    adminID = event.getMessage().getMentionedUsers().get(0).getId();
+                if (!event.getMessage().getMentions().getUsers().isEmpty()) {
+                    adminID = event.getMessage().getMentions().getUsers().get(0).getId();
                 }
                 admins = Main.XBAN_ADMINS;
                 // String[] lines = admins.split(System.getProperty("line.separator"));

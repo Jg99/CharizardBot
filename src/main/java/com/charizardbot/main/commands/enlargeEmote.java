@@ -13,8 +13,8 @@ public class enlargeEmote extends ListenerAdapter {
         String prefix = Main.config.getProperty(event.getGuild().getId().toString());
     	if (prefix == null)
             prefix = "!";  
-        if (!event.getMessage().getEmotes().isEmpty() && event.getMessage().getContentRaw().startsWith(prefix + "enlarge")) {
-            List<Emote> emotes = event.getMessage().getEmotes();
+        if (!event.getMessage().getMentions().getEmotes().isEmpty() && event.getMessage().getContentRaw().startsWith(prefix + "enlarge")) {
+            List<Emote> emotes = event.getMessage().getMentions().getEmotes();
             String urls = "";
             for (Emote a : emotes) {
                 urls += a.getImageUrl() + "\n";
