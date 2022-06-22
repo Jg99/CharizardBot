@@ -64,7 +64,7 @@ public class ValueGuides extends ListenerAdapter {
                     embed.addField("Housing: ", item_split[3], true);
                 }
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.\nPlease note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
             }
@@ -121,7 +121,7 @@ public class ValueGuides extends ListenerAdapter {
                 }
                 lineScan.close();
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.\nPlease note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
             }
