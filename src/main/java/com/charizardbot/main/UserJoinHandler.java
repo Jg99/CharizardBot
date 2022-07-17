@@ -95,7 +95,7 @@ public class UserJoinHandler extends ListenerAdapter {
 					String gtpModlogChan = "468502270171021312";
 					if (event.getGuild().getId().equals("468440854886088714") && event.getJDA().getTextChannelById(gtpModlogChan).canTalk()) { //GTP Moderation Log for AutoBan
 						event.getGuild().getTextChannelById(gtpModlogChan).sendMessage("User: <@" + event.getMember().getId() + "> / " + event.getMember().getId() +
-						"\nAction Taken: Auto-banned by CharizardBot for being too new. \nPlease note that his moderation log is automatic.").queue();
+						"\nAction Taken: Auto-banned by CharizardBot for being under the minimum account age threshold. \nPlease note that this moderation log is automatic.").queue();
 					}
 				} catch (Exception e) {e.printStackTrace();}
 			}
