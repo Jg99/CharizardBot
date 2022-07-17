@@ -52,9 +52,10 @@ updated all dependencies.
 4.6.3 - Huge dependency update, remove bintray repo as it's shutting down. JDA updated to 4.2.1, possible work on slash commands once 4.3 comes out.
 4.6.4 - Updated to JDA 4.3, added a button on the command list for the website, changed some code around due to deprecated stuff.
 5.0.0 ---- in development -----
-1. update JDA to v5, currently alpha
-2. update dependencies, such as log4j again
+1. update JDA to v5, currently alpha -- MAJOR code refactoring.
+2. update dependencies regularly.
 3. item limit on value guides search command
 4. GIVEAWAYS - Code adapted from https://github.com/jagrosh/GiveawayBot, modified for use. Note: it doesn't save anything so if the bot is
 restarted, you will have to manually keep track and then do a reroll.
 5. - Greek translation for petstats.
+6. modlog autoban cases for gtp
