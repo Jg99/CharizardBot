@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 /* **** Original code credit: https://github.com/jagrosh/, Apache license 2.0. code adapted for CharizardBot's giveaway system. ****
 */
@@ -76,14 +77,16 @@ public class Giveaways extends ListenerAdapter {
                     }
                 }
                 if (rolestoMention != "") {
+                    Emoji tada = Emoji.fromUnicode("\uD83C\uDF89");
                     event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST: " + parts[2] + "\nREQUIRED ROLES: " + rolestoMention + "\n" +(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
-                        m.addReaction("\uD83C\uDF89").queue();
+                        m.addReaction(tada).queue();
                         new Giveaway(sec,m,parts.length>1 ? parts[1] : null,parts[2], roleIds).start();
                     });
                     event.getMessage().delete().queue();
                 } else {
+                    Emoji tada = Emoji.fromUnicode("\uD83C\uDF89");
                 event.getChannel().sendMessage("**GIVEAWAY!** \nGIVEAWAY HOST: " + parts[2] + "\n"+(parts.length>1 ? "\u25AB*`"+parts[1]+"`*\u25AB\n" : "")+"React with \uD83C\uDF89 to enter!").queue(m -> {
-                    m.addReaction("\uD83C\uDF89").queue();
+                    m.addReaction(tada).queue();
                     new Giveaway(sec,m,parts.length>1 ? parts[1] : null, parts[2]).start();
                 });
                 event.getMessage().delete().queue();
@@ -113,7 +116,7 @@ public class Giveaways extends ListenerAdapter {
                 return;
             }
             m.getReactions()
-                .stream().filter(mr -> mr.getReactionEmote().getName().equals("\uD83C\uDF89"))
+                .stream().filter(mr -> mr.getEmoji().getName().equals(Emoji.fromUnicode("\uD83C\uDF89").getName()))
                 .findAny().ifPresent(mr -> {
                     List<User> users = new LinkedList<>(mr.retrieveUsers().complete());
                     List<Role> roleList = m.getMentions().getRoles();
@@ -223,7 +226,7 @@ public class Giveaways extends ListenerAdapter {
                     }
                     }
                     message.getChannel().retrieveMessageById(message.getId()).complete().getReactions()
-                            .stream().filter(mr -> mr.getReactionEmote().getName().equals("\uD83C\uDF89"))
+                            .stream().filter(mr -> mr.getEmoji().getName().equals(Emoji.fromUnicode("\uD83C\uDF89").getName()))
                             .findAny().ifPresent(mr -> {
                                 String reqRoles = "";
                                 List<User> users = new LinkedList<>(mr.retrieveUsers().complete());

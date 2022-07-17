@@ -40,7 +40,7 @@ public class BulkDelete extends ListenerAdapter {
                     td = toDelete.get();
                     Main.bulkCount = td.size();
                     Main.isBulkDeleted = true;
-                    event.getTextChannel().deleteMessages(td).queue();
+                    event.getChannel().asTextChannel().deleteMessages(td).queue();
                     event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
                         response.delete().queueAfter(5, TimeUnit.SECONDS);
                     }); 
@@ -63,7 +63,7 @@ public class BulkDelete extends ListenerAdapter {
                 td = toDelete.get();
                 Main.isBulkDeleted = true;
                 Main.bulkCount = td.size();
-                event.getTextChannel().deleteMessages(td).queue();
+                event.getChannel().asTextChannel().deleteMessages(td).queue();
                 event.getChannel().sendMessage("Deleted " + arguments[1]  + " messages in bulk.").queue(response -> {
                     response.delete().queueAfter(5, TimeUnit.SECONDS);
                 }); 

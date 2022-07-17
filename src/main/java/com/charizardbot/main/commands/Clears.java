@@ -50,7 +50,7 @@ public class Clears extends ListenerAdapter {
 
 
             if (args[0].equalsIgnoreCase(prefix + "clear") && (event.getMember().hasPermission(Permission.MESSAGE_MANAGE) || event.getMember().hasPermission(Permission.ADMINISTRATOR))) {
-                TextChannel channel = event.getTextChannel();
+                TextChannel channel = event.getChannel().asTextChannel();
                 MessageHistory history = new MessageHistory(channel);
                 List<Message> msg;
                 int num = Integer.parseInt(args[1]);
@@ -69,7 +69,7 @@ public class Clears extends ListenerAdapter {
                     ch2 += ch[0].charAt(h);
                 }
                 TextChannel ch1 = event.getGuild().getTextChannelById(ch2);
-                TextChannel channel = event.getTextChannel();
+                TextChannel channel = event.getChannel().asTextChannel();
                 List<Role> memberRoles = event.getMember().getRoles();
                 String temp = "";
                 Role temp2;
