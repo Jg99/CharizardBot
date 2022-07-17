@@ -23,6 +23,7 @@ server_config.cfg (created automatically
 log4j2.xml (created automatically) - Logging configuration
 chatfilter.txt - blank file created, specify words one per line. Use "," instead of a space.
 ```
+
 Log location: log/charbotlogs.log It is a rotating logfile by default (editable in log4j2.xml).
 
 Uses Maven for sources.
@@ -38,3 +39,6 @@ Any images, avatars, etc are protected by copyright law and may not be used to i
 **PRIVACY**
 
 This bot does not store user data on its internal logging system. Only basic info is logged for finding issues. However, server moderators may enable moderation action logging via commands and they log basic information such as the User ID, action, and reason, as a message sent to the specified channel. 
+
+**PRIVILEGED INTENT REQUIREMENTS**
+This bot REQUIRES use of several privileged intents in order to function, including MESSAGE_CONTENT (Moderation tools and responding to commands until migration to slash), GUILD_MEMBERS(get info of a member), GUILD_MESSAGES(messages), GUILD_BANS(ban and unban users), and GUILD_MESSAGES (messages in a Server).
