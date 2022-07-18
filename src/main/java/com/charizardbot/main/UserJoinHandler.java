@@ -92,10 +92,9 @@ public class UserJoinHandler extends ListenerAdapter {
 						embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
 						event.getGuild().getTextChannelById(logChan).sendMessageEmbeds(embed.build()).queue();
 					}
-					String gtpModlogChan = "468502270171021312";
-					if (event.getGuild().getId().equals("468440854886088714") && event.getJDA().getTextChannelById(gtpModlogChan).canTalk()) { //GTP Moderation Log for AutoBan
-						event.getGuild().getTextChannelById(gtpModlogChan).sendMessage("User: <@" + event.getMember().getId() + "> / " + event.getMember().getId() +
-						"\nAction Taken: Auto-banned by CharizardBot for being under the minimum account age threshold. \nPlease note that this moderation log is automatic.").queue();
+					if (event.getGuild().getId().equals("468440854886088714")) { //GTP Moderation Log for AutoBan
+						event.getGuild().getTextChannelById("468502270171021312").sendMessage("User: <@" + event.getMember().getId() + "> / " + event.getMember().getId() +
+						"\nAction Taken: Auto-banned by CharizardBot for being under the minimum account age threshold.").queue();
 					}
 				} catch (Exception e) {e.printStackTrace();}
 			}
