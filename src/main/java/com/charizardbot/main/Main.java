@@ -18,10 +18,7 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-import javax.security.auth.login.LoginException;
-
 import com.charizardbot.main.commands.*;
-
 import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -417,7 +414,7 @@ public class Main {
 				api.addEventListener(new UserJoinHandler());
 				api.addEventListener(new MessageLogger());
 				api.addEventListener(new Giveaways());
-			} catch (LoginException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {logger.info("Exception in Main");}

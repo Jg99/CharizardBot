@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -24,9 +25,10 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 public class MainCommands extends ListenerAdapter {
 	final String BOT_ID = "428634701771702282";
 	public void onMessageReceived(MessageReceivedEvent event) {
@@ -132,7 +134,8 @@ public class MainCommands extends ListenerAdapter {
 						  Main.logger.info("Error, could not write to file channels.txt");
 						}
 					}
-					event.getChannel().sendFile(file, "channels.txt").queue();
+					FileUpload fileToUp = FileUpload.fromData(file, "channels.txt");
+					event.getChannel().sendFiles(Collections.singleton(fileToUp)).queue();
         	    	} else {
             	    	for (int i = 0; i < channels.size(); i++)
             	    	{

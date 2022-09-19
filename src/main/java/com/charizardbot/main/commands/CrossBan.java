@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.charizardbot.main.Main;
 
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.MessageType;
 import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.entities.Guild.Ban;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -72,17 +73,21 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                     if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
-                        event.getChannel().sendTyping().queue();
                      userID = event.getMessage().getContentRaw().substring(6);
-                    if (!event.getMessage().getMentions().getUsers().isEmpty()) {
-                        
-                        userID = event.getMessage().getMentions().getUsers().get(0).getId();
+                    if (!event.getMessage().getMentions().getUsers().isEmpty() && userID != "") {
+                        if (!event.getMessage().getType().equals(MessageType.INLINE_REPLY)) {
+                            userID = event.getMessage().getMentions().getUsers().get(0).getId();
+                        } else {
+                            event.getChannel().sendMessage("Do not run this command as a reply.").queue();
+                            return;
+                        }
                     }
                     String banned = Main.XBAN_BANSDB;
-                    if (banned.contains(userID)) {
+                    if (banned.contains(userID)) {  
                         event.getChannel().sendMessage("<@" + userID + ">  is already in ban list").queue();
                         return;
-                    } else {
+                    } else {    
+                        event.getChannel().sendTyping().queue();
                         banned += userID + "\n";
                         BufferedWriter writer = new BufferedWriter(new FileWriter("pastBans.txt"));
                         writer.write(banned);
@@ -96,7 +101,7 @@ public class CrossBan extends ListenerAdapter {
                                 if(event.getJDA().getGuildById(svID) != null) {
                                     try {
                                         UserSnowflake toBan = UserSnowflake.fromId(userID);
-                                        event.getJDA().getGuildById(svID).ban(toBan, 0, "X-ban by CharizardBot.").queue();
+                                        event.getJDA().getGuildById(svID).ban(toBan, 0, TimeUnit.SECONDS).reason("X-ban by CharizardBot.").queue();
                                         Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
                                     } catch (Exception e) {
                                         String invalidBan = svID;
@@ -119,6 +124,10 @@ public class CrossBan extends ListenerAdapter {
             }
             if (event.getMessage().getContentRaw().startsWith(prefix + "cunban") && (admins.contains(event.getAuthor().getId()) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 admins = Main.XBAN_ADMINS;
+                if (event.getMessage().getType().equals(MessageType.INLINE_REPLY)) {
+                    event.getChannel().sendMessage("Do not run this command as a reply.");
+                    return;
+                }
                 if (event.getGuild().getSelfMember().hasPermission(Permission.BAN_MEMBERS)) {
                     event.getChannel().sendTyping().queue();
                      userID = event.getMessage().getContentRaw().substring(8);
@@ -231,7 +240,7 @@ public class CrossBan extends ListenerAdapter {
                     System.out.println(userID);
                     try {
                         UserSnowflake toBan = UserSnowflake.fromId(userID);
-                        event.getJDA().getGuildById(svID).ban(toBan, 0, "X-ban by CharizardBot.").queue();
+                        event.getJDA().getGuildById(svID).ban(toBan, 0, TimeUnit.SECONDS).reason("X-ban by CharizardBot.").queue();
                         Main.logger.info(userID + " banned in " + event.getJDA().getGuildById(svID).getName() + ".");
                     } catch (Exception e) {
                         Main.logger.info("Invalid ban. Server: " + event.getJDA().getGuildById(svID).getName());

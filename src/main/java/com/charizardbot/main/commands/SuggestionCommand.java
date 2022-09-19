@@ -1,6 +1,7 @@
 package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.io.FileOutputStream;
+import java.util.Collections;
 import java.util.Random;
 
 import com.charizardbot.main.Main;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 public class SuggestionCommand extends ListenerAdapter{
 	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
@@ -49,7 +51,8 @@ public class SuggestionCommand extends ListenerAdapter{
 				event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			} else {
 				event.getChannel().sendMessage("List is too big for Discord, sending as a text file.").queue();
-				event.getChannel().sendFile(suggestion.getFile(serverID)).queue();;
+				FileUpload file = FileUpload.fromData(suggestion.getFile(serverID), "image.png");
+				event.getChannel().sendFiles(Collections.singleton(file)).queue();
 			}
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "removesuggestion ") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getMember().hasPermission(Permission.MANAGE_SERVER)) && suggCmd.equals("1")) {

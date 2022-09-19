@@ -3,6 +3,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
@@ -14,6 +15,7 @@ import java.util.Random;
 
 import com.charizardbot.main.Main;
 
+import java.util.Collections;
 import java.util.Iterator;
 public class ServersCommand extends ListenerAdapter {
 public void onMessageReceived (MessageReceivedEvent event) {
@@ -58,7 +60,8 @@ public void onMessageReceived (MessageReceivedEvent event) {
 		   Main.logger.info("Error, could not write to file servers.txt");
 	    }
 		}
-		event.getChannel().sendFile(file).queue();
+		FileUpload fileToUp = FileUpload.fromData(file, "servers.txt");
+		event.getChannel().sendFiles(Collections.singleton(fileToUp)).queue();
 	 }
 	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "serverinfo") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
 //253313100613156864

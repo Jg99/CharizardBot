@@ -59,3 +59,4 @@ updated all dependencies.
 restarted, you will have to manually keep track and then do a reroll.
 5. - Greek translation for petstats.
 6. modlog autoban cases for gtp
+7. Cban bugfix, disallow using cban as a reply.

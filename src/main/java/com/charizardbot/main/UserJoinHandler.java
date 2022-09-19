@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -42,7 +43,7 @@ public class UserJoinHandler extends ListenerAdapter {
 				String token = scan.nextLine();
 				if (joinNick.contains(token)){
 				if (!event.getUser().isBot()) {
-					event.getGuild().ban(event.getUser(), 0, "Auto-banned for blacklisted username.").queue();
+					event.getGuild().ban(event.getUser(), 0, TimeUnit.SECONDS).reason("Auto-banned for blacklisted username.").queue();
 					verificationToggle = "0";
 					try {
 						logChan = Main.logging_config.getProperty("logchannel" + serverID);	
@@ -76,7 +77,7 @@ public class UserJoinHandler extends ListenerAdapter {
 			long userJoinTimestamp = event.getMember().getTimeJoined().toEpochSecond(); //seconds
 			long userCreationDate = event.getUser().getTimeCreated().toEpochSecond();
 			if (((userJoinTimestamp - userCreationDate) < banDuration) && !event.getUser().isBot()) {
-				event.getGuild().ban(event.getUser(), 0, "Auto-banned for account age.").queue();
+				event.getGuild().ban(event.getUser(), 0, TimeUnit.SECONDS).reason("Auto-banned for account age.").queue();
 				try {
 					logChan = Main.logging_config.getProperty("logchannel" + serverID);	
 					svrLogging = Main.logging_config.getProperty("isLoggingEnabled" + serverID);	
