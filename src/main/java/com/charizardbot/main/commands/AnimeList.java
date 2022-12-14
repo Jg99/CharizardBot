@@ -1,19 +1,12 @@
 package com.charizardbot.main.commands;
 
 import java.awt.Color;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import com.charizardbot.main.Main;
 import net.sandrohc.jikan.*;
 import net.sandrohc.jikan.model.anime.Anime;
-import net.sandrohc.jikan.model.anime.AnimeEpisode;
-import net.sandrohc.jikan.model.anime.AnimeOrderBy;
-import net.sandrohc.jikan.model.anime.AnimeStatus;
 import net.sandrohc.jikan.model.anime.AnimeType;
-import net.sandrohc.jikan.model.enums.SortOrder;
-import net.sandrohc.jikan.query.anime.AnimeQuery;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
