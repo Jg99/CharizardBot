@@ -36,7 +36,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "5.0.0";
+	public static final String VERSION = "5.0.0b1";
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
@@ -364,7 +364,7 @@ public class Main {
 							.setChunkingFilter(ChunkingFilter.NONE)
 							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_PRESENCES)
 							.setMemberCachePolicy(MemberCachePolicy.OWNER)
-							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS, CacheFlag.ROLE_TAGS, CacheFlag.MEMBER_OVERRIDES, CacheFlag.EMOJI, CacheFlag.ONLINE_STATUS)
+							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS, CacheFlag.ROLE_TAGS, CacheFlag.MEMBER_OVERRIDES, CacheFlag.EMOJI, CacheFlag.ONLINE_STATUS, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
 							.setActivity(Activity.playing(activity))
 							.build();
 				/**

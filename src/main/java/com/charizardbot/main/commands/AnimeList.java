@@ -1,15 +1,19 @@
 package com.charizardbot.main.commands;
 
 import java.awt.Color;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-
 import com.charizardbot.main.Main;
-import com.github.doomsdayrs.jikan4java.core.search.animemanga.AnimeSearch;
-import com.github.doomsdayrs.jikan4java.types.main.anime.Anime;
-import com.github.doomsdayrs.jikan4java.types.main.anime.Studios;
-import com.github.doomsdayrs.jikan4java.types.support.basic.meta.Genre;
-
+import net.sandrohc.jikan.*;
+import net.sandrohc.jikan.model.anime.Anime;
+import net.sandrohc.jikan.model.anime.AnimeEpisode;
+import net.sandrohc.jikan.model.anime.AnimeOrderBy;
+import net.sandrohc.jikan.model.anime.AnimeStatus;
+import net.sandrohc.jikan.model.anime.AnimeType;
+import net.sandrohc.jikan.model.enums.SortOrder;
+import net.sandrohc.jikan.query.anime.AnimeQuery;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -34,40 +38,48 @@ public class AnimeList extends ListenerAdapter {
             if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "anime") && miscToggle.equals("1")) {
                 event.getChannel().sendTyping().queue();
                 String query = event.getMessage().getContentRaw().substring(7, event.getMessage().getContentRaw().length());
-                AnimeSearch search = new AnimeSearch();
-                search.setQuery(query).setLimit(2);
-                CompletableFuture<Anime> completableFuture = search.getFirst();
-                int a = 0;
-                while (!completableFuture.isDone()) {
-                    a++;
-                }
+                Jikan search = new Jikan();
                 Random rand = new Random();
                 EmbedBuilder embed = new EmbedBuilder();
-                String desc = completableFuture.get().synopsis;
-                if (desc.length() > 500) {
-                    desc = desc.substring(0, 500);
-                    desc += "...";
-                }
                 String genre = "";
-                for (Genre genres : completableFuture.get().genres) {
-                    genre += genres.name + ", ";
-                }
-                genre = genre.substring(0, genre.length() - 2);
+                String title = "";
+                String desc = "";
                 String studiolist = "";
-                for (Studios studio : completableFuture.get().studios) {
-                    studiolist += studio.name + ", ";
+                String imageURL = "";
+                String datePremiered = "";
+                int episodeCount = 0;
+                String url = "";
+                //Get list, genre, studio, description
+                Collection<Anime> results = search.query().anime().search()
+                .query(query)
+                .type(AnimeType.TV)             
+                .limit(5)
+                .safeForWork(true)
+                .execute()
+                .collectList()
+                .block();
+                Anime firstResult = results.iterator().next();
+                genre = firstResult.getGenres().iterator().next().getName().displayName() != null ? firstResult.getGenres().iterator().next().getName().displayName : "";
+                studiolist = firstResult.getStudios().iterator().next().name != null ? firstResult.getStudios().iterator().next().name : "Unknown";
+                title = firstResult.getTitle() != null ? firstResult.getTitle() : "Unknown";
+                desc = firstResult.getSynopsis() != null ? firstResult.getSynopsis() : "Unknown";
+                if (desc.length() > 500) {
+                    desc = desc.substring(0, 500) + "...";
                 }
-                studiolist = studiolist.substring(0, studiolist.length() - 2);
+                imageURL = firstResult.getImages().getPreferredImageUrl()!= null ? firstResult.getImages().getPreferredImageUrl() : "Unknown";
+                episodeCount = firstResult.getEpisodes() != null ? firstResult.getEpisodes() : 0;
+                datePremiered = firstResult.aired.toString() != null ? firstResult.aired.toString() : "";
+                url = firstResult.getUrl();
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                 embed.setTitle("Results for your Anime search");
-                embed.setThumbnail(completableFuture.get().imageURL);
-                try {embed.addField("Title:", completableFuture.get().title_english, false);} catch (Exception e){embed.addField("Title:", completableFuture.get().title, false);}
+                embed.setThumbnail(imageURL);
+                try {embed.addField("Title:", title, false);} catch (Exception e){embed.addField("Title:", title, false);}
                 embed.addField("Description:", desc, false);
-                embed.addField("Number of episodes:", "" + completableFuture.get().episodes, true);
-                try {embed.addField("Premiered:", completableFuture.get().premiered, true);}catch (Exception e){embed.addField("Year:", "Unknown", true);}
+                embed.addField("Number of episodes:", "" + episodeCount, true);
+                try {embed.addField("Premiered:", datePremiered, true);}catch (Exception e){embed.addField("Year:", "Unknown", true);}
                 embed.addField("Genres:", genre, false);
                 embed.addField("Studios", studiolist, false);
-                embed.addField("Source:", completableFuture.get().url, false);
+                embed.addField("URL:", url, false);
                 embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 if (event.getGuild().getTextChannelById(event.getChannel().getId()).canTalk()) {
                     String d = genre.toLowerCase();
