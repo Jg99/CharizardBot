@@ -187,19 +187,18 @@ public class MainCommands extends ListenerAdapter {
             	if (Main.chatFilter.exists())
             	{
 					Main.logger.info("Chat filter reloaded");
-            		Scanner fileScan = null;
-        							try {
-        								fileScan = new Scanner(Main.chatFilter);
-        							} catch (FileNotFoundException e) {
-        								e.printStackTrace();
-        							}
-                                    Main.filterDB = "";
+					try {
+            			Scanner fileScan = new Scanner(Main.chatFilter);
+                        Main.filterDB = "";
             		while (fileScan.hasNextLine())
             		{
             			Main.filterDB += "\n" + fileScan.nextLine();
             		}
 					Main.filter = new ChatFilter(event.getMessage().getContentRaw().toLowerCase(), Main.filterDB.toLowerCase());
 					fileScan.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
             		}
 			}
 			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "reloadnickbl") && event.getAuthor().getId().equals(Main.OWNER_ID))
