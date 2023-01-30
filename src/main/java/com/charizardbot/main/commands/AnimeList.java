@@ -79,7 +79,7 @@ public class AnimeList extends ListenerAdapter {
                 if (!d.contains("hentai")) {
                      event.getChannel().sendMessageEmbeds(embed.build()).queue();
                   }  else {
-                     event.getChannel().sendMessage("Contains NSFW content. Please try searching for something else you naughty person ;)").queue();
+                     event.getChannel().sendMessage("You're a very naughty person aren't you ;)").queue();
                 }
             }
         }

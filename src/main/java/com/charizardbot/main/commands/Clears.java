@@ -13,7 +13,7 @@ import com.charizardbot.main.Main;
 
 public class Clears extends ListenerAdapter {
 
-    //TODO: Write Clear commands for MM, AS, ES, and Mods+, Reading from a file where the roles can be stored
+    //TO DO: Write Clear commands for MM, AS, ES, and Mods+, Reading from a file where the roles can be stored
     // Include required channels for each of the roles except Mods+,
     // only Admins can add to these lists?
     // useable by checking the role. Roles will determine if can be used
