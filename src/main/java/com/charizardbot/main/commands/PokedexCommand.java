@@ -31,8 +31,14 @@ public class PokedexCommand extends ListenerAdapter {
 				String parsedMon = inMon.substring(9, inMon.length());
 				String stats = MiniDex.getPokemonInfo(parsedMon);
 				String pkName = MiniDex.getPokemonName();
-    			if (pkName != null) {
-    				embed.setThumbnail(MiniDex.getSprite());
+				System.out.println("Input:\n" + parsedMon);
+    			if (!pkName.equals(null)) {
+					// this checks for entries without a sprite yet, replaces with a pokeball.
+					if (!MiniDex.getSprite().equals("null")) {
+					embed.setThumbnail(MiniDex.getSprite()); 
+					} else {
+					embed.setThumbnail("https://charizardbot.com/pokeball.png");
+				 	}
 					embed.setAuthor(event.getAuthor().getAsTag());
     				embed.setTitle("CharizardBot's Pokédex");
             		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
@@ -59,7 +65,9 @@ public class PokedexCommand extends ListenerAdapter {
     				event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			}
 		}
-		} catch (Exception e) {Main.logger.info("WARN: Exception in the Pokedex Command. Insufficient permissions or API server is down?\n" + e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Main.logger.info("WARN: Exception in the Pokedex Command. Insufficient permissions or API server is down?\n" + e);
 	}
     		try {
     			if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "pokeapi") && !event.getAuthor().isBot()) {
