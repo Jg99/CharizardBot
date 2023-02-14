@@ -36,7 +36,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "5.0.0b2";
+	public static final String VERSION = "5.0.0b3";
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
@@ -55,7 +55,8 @@ public class Main {
 	public static Properties logging_config = new Properties();
 	public static ImgurAPI imgur = new ImgurAPI();
 	public static String messageID_deletehandler = "";
-	private static String discordtoken = ""; //Tokens are blank so we can read from tokenfile, or specify in args.
+	//Tokens are blank so we can read from tokenfile, or specify in args. This is a security feature.
+	private static String discordtoken = ""; 
 	public static Logger logger;
 	public static String COC_TOKEN = "";
 	public static String IMGUR_ID = "";
@@ -108,13 +109,13 @@ public class Main {
 			logger = LogManager.getLogger(Main.class);
 			/**
 			 * CharizardBot version 4
-			 * Copyright 2021 James, Meme Man 2021#0820
+			 * Copyleft James the Meme Man.
 			 * This is a super dank bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
 			 * license: GNU GPL version 2
-			 * Credit: Dewey (website design), Ultra Blue (hosting, email)
-			 * Jikan4Java project - MyAnimeList Jikan (https://github.com/Doomsdayrs/Jikan4java)
+			 * Credit: Dewey (website design), Mr. Blue (previous hosting), Gamma's Trading Post Patreon Supporters for helping fund hosting.
+			 * Products with their full source used in this bot:
 			 * Snubiss - ClashOfJava project (https://github.com/Snubiss/Snubs-Clash-of-Java)
-			 * Various other open source projects used in this bot
+			 * Various other open source projects used in this bot via jar libraries.
 			 */
 			//Uncomment this out if you want to use a token based off args. NOTE: TOKEN ARGS GO FIRST!
 			// if (args.length > 0) {

@@ -52,7 +52,7 @@ public class PokedexCommand extends ListenerAdapter {
     		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "randpokemon") && !event.getAuthor().isBot()) {	
             	EmbedBuilder embed = new EmbedBuilder();
             	Random rand = new Random();
-            	int randPk = rand.nextInt(807);
+            	int randPk = rand.nextInt(1007);
 				String stats = MiniDex.getPokemonInfo(Integer.toString(randPk));
 				String pkName = MiniDex.getPokemonName();
     			if (pkName != null) {
