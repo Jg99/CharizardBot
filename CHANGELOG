@@ -72,4 +72,4 @@ restarted, you will have to manually keep track and then do a reroll.
 5.0.0.b3 - 2023-x-x
 - Edit comments in Main
 - Tournament command update the level part to use regex instead
-- 
+- update dependencies, JDA 5.0b8 and others.

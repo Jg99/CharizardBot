@@ -41,9 +41,9 @@ public class Main {
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
 	public static String filterFile = "chatfilter.txt";
-	public static final String OWNER_ID = "184534810369196032";
+	public static final String OWNER_ID = "184534810369196032"; 
 	public static ChatFilter filter;
-	public static String ownerNick = "James, Meme Man 2021#0820";
+	public static String ownerNick = ".jems";
 	public static String table = "";
 	public static File VALUE_CSV;
 	public static String VALUE_TABLE = "";
@@ -361,7 +361,7 @@ public class Main {
 				} else {
 					activity = config.getProperty("gamestatus");
 				}
-				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_BANS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
+				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MODERATION, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
 							.setChunkingFilter(ChunkingFilter.NONE)
 							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_PRESENCES)
 							.setMemberCachePolicy(MemberCachePolicy.OWNER)
