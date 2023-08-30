@@ -38,7 +38,7 @@ public class RandomJoke extends ListenerAdapter {
                 String jokeType = joke.getString("type");
                 String jokeText = joke.getString("setup") + "\n" + joke.getString("punchline");
     			if (jokeText != null) {
-    			    embed.setAuthor(event.getAuthor().getAsTag());
+    			    embed.setAuthor(event.getAuthor().getName());
     			    embed.setTitle("Enjoy the random joke!");
                 	embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     			    embed.addField("Joke type: " + jokeType,jokeText, false);

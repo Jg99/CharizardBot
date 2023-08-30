@@ -39,7 +39,7 @@ public class PokedexCommand extends ListenerAdapter {
 					} else {
 					embed.setThumbnail("https://charizardbot.com/pokeball.png");
 				 	}
-					embed.setAuthor(event.getAuthor().getAsTag());
+					embed.setAuthor(event.getAuthor().getName());
     				embed.setTitle("CharizardBot's Pokédex");
             		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     				embed.addField("Pokémon information for " + pkName ,stats, true);
@@ -57,7 +57,7 @@ public class PokedexCommand extends ListenerAdapter {
 				String pkName = MiniDex.getPokemonName();
     			if (pkName != null) {
     				embed.setThumbnail(MiniDex.getSprite());
-    				embed.setAuthor(event.getAuthor().getAsTag());
+    				embed.setAuthor(event.getAuthor().getName());
     				embed.setTitle("CharizardBot's Pokédex");
             		embed.setFooter("CharizardBot Team", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
     				embed.addField("Pokémon information for " + pkName ,stats, false);

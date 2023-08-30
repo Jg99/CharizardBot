@@ -58,7 +58,7 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                               if (svrfilter.equals("1") && chfilter.equals("1")) {
                         if (event.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE)) {
                          EmbedBuilder embed = new EmbedBuilder();
-                         embed.setTitle("Inappropriate language detected from: " + event.getAuthor().getAsTag());
+                         embed.setTitle("Inappropriate language detected from: " + event.getAuthor().getName());
                          embed.addField("Watch your language!", "The filter has deleted the " +
                          "message containing the bad word or a malicious URL. Do not try to bypass the filter", true);
                          embed.setFooter("User ID: " +
@@ -75,8 +75,8 @@ public class ChatFilterEditHandler extends ListenerAdapter {
                             if (event.getJDA().getTextChannelById(logChannel).canTalk()) {
                             EmbedBuilder logEmbed = new EmbedBuilder();
                             logEmbed.setTitle("CharizardBot Chat Filter Logging");
-                            logEmbed.addField("CharizardBot Filter has removed the following edited message for bad language from @" + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + ":", event.getMessage().getContentRaw(), false);
-                            logEmbed.setAuthor(event.getAuthor().getAsTag());
+                            logEmbed.addField("CharizardBot Filter has removed the following edited message for bad language from @" + event.getAuthor().getName() + " in #" + event.getChannel().getName() + ":", event.getMessage().getContentRaw(), false);
+                            logEmbed.setAuthor(event.getAuthor().getName());
                             logEmbed.setFooter("User ID: " + event.getMember().getId());
                             event.getJDA().getTextChannelById(logChannel).sendMessageEmbeds(logEmbed.build()).queue();                            
                         }

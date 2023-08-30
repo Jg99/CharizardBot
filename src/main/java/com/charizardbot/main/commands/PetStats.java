@@ -49,7 +49,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
 				double power = Integer.parseInt(stats[4]); 
 				dePet mainPet = new dePet(strength, intellect, agility, will, power);
 				EmbedBuilder embed = new EmbedBuilder();
-				embed.setAuthor(event.getAuthor().getAsTag());
+				embed.setAuthor(event.getAuthor().getName());
 				embed.setTitle("Wizard101 Pet Stats Berechnung");
 				embed.setImage("https://i.imgur.com/phKD1u6.png");
 				embed.setDescription("Wenn der Wert über x,5 ist, wird er meistens aufgerundet.\nZum Beispiel: 10,5 wird als 11 angezeigt");
@@ -88,7 +88,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
 				double power = Integer.parseInt(stats[4]);
 				grPet mainPet = new grPet(strength, intellect, agility, will, power);
 				EmbedBuilder embed = new EmbedBuilder();
-				embed.setAuthor(event.getAuthor().getAsTag());
+				embed.setAuthor(event.getAuthor().getName());
 				embed.setTitle("Wizard101 Pet stats calculator");
 				embed.setImage("https://i.imgur.com/phKD1u6.png");
 				embed.setDescription("Εάν η τιμή είναι πάνω απο x.5 γίνεται στρογγυλοποίηση προς τα πάνω.\nΓια παράδειγμα, το 10.5 στρογγυλοποιείται στο 11.");				
@@ -125,7 +125,7 @@ public void onMessageReceived (MessageReceivedEvent event) {
 				double power = Integer.parseInt(stats[4]);
 				Pet mainPet = new Pet(strength, intellect, agility, will, power);
 				EmbedBuilder embed = new EmbedBuilder();
-				embed.setAuthor(event.getAuthor().getAsTag());
+				embed.setAuthor(event.getAuthor().getName());
 				embed.setTitle("Wizard101 Pet stats calculator");
 				embed.setImage("https://i.imgur.com/phKD1u6.png");
 				embed.setDescription("If the value is over x.5 on most stats, it rounds up.\nFor example, 10.5 rounds to 11 in most cases.");

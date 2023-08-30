@@ -40,7 +40,7 @@ public class MessageLogger extends ListenerAdapter {
         if (event.getJDA().getTextChannelById(logChan).canTalk() && msg != null && !msg.getAuthor().isBot() && !Main.isChatFilterDeleted && !Main.isBulkDeleted && isChannelIgnored.equals("0")) {
             EmbedBuilder logEmbed = new EmbedBuilder();
             logEmbed.setTitle("Deleted Message");
-            logEmbed.addField("from: " + msg.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nMessage:", msg.getContentRaw(), false);
+            logEmbed.addField("from: " + msg.getAuthor().getName() + " in #" + event.getChannel().getName() + "\nMessage:", msg.getContentRaw(), false);
             String attUrls = "";
             if (!msg.getAttachments().isEmpty()) {
                 for (int i = 0; i < msg.getAttachments().size(); i++)
@@ -107,7 +107,7 @@ public class MessageLogger extends ListenerAdapter {
             if (event.getJDA().getTextChannelById(logChan).canTalk() && logChan != null && !logChan.isEmpty() && svrLogging.equals("1") && isChannelIgnored.equals("0")) {
                 EmbedBuilder logEmbed = new EmbedBuilder();
                 logEmbed.setTitle("Edited Message");
-                logEmbed.addField("from: " + event.getAuthor().getAsTag() + " in #" + event.getChannel().getName() + "\nNew content:", event.getMessage().getContentRaw(), false);
+                logEmbed.addField("from: " + event.getAuthor().getName() + " in #" + event.getChannel().getName() + "\nNew content:", event.getMessage().getContentRaw(), false);
                 logEmbed.setFooter("User ID: " + event.getAuthor().getId());
                 event.getJDA().getTextChannelById(logChan).sendMessageEmbeds(logEmbed.build()).queue(); 
             }
