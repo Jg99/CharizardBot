@@ -38,7 +38,7 @@ public class CrossBan extends ListenerAdapter {
              **/
             if (event.getMessage().getContentRaw().startsWith(prefix + "addcsv") && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getAuthor().getId().equals(Main.OWNER_ID))) {
                 String svID = event.getGuild().getId().toString();
-                String svrs = Main.XBAN_SERVERS;
+                String svrs = Main.XBAN_SERVERS;    
                 if (svrs.contains(svID)) {
                     event.getChannel().sendMessage("Server is already in the cross-ban system.").queue();
                 } else {
