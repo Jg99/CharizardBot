@@ -134,8 +134,13 @@ public class MainCommands extends ListenerAdapter {
 						  Main.logger.info("Error, could not write to file channels.txt");
 						}
 					}
-					FileUpload fileToUp = FileUpload.fromData(file, "channels.txt");
-					event.getChannel().sendFiles(Collections.singleton(fileToUp)).queue();
+					event.getChannel().sendFiles(Collections.singleton(
+						FileUpload.fromStreamSupplier("channels.txt", () -> {
+							try {
+								return new FileInputStream("channels.txt");
+							} catch (Exception e) {return null;}
+					})
+					)).queue();
         	    	} else {
             	    	for (int i = 0; i < channels.size(); i++)
             	    	{

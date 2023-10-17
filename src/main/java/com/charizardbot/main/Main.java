@@ -366,7 +366,7 @@ public class Main {
 							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_PRESENCES)
 							.setMemberCachePolicy(MemberCachePolicy.OWNER)
 							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS, CacheFlag.ROLE_TAGS, CacheFlag.MEMBER_OVERRIDES, CacheFlag.EMOJI, CacheFlag.ONLINE_STATUS, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
-							.setActivity(Activity.playing(activity))
+							.setActivity(Activity.customStatus(activity))
 							.build();
 				/**
 				 * Message Cache for CharizardBot. Used for logging deleted messages unless

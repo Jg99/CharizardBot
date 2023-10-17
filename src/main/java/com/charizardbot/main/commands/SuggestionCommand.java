@@ -1,6 +1,7 @@
 package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Random;
 
@@ -51,8 +52,12 @@ public class SuggestionCommand extends ListenerAdapter{
 				event.getChannel().sendMessageEmbeds(embed.build()).queue();
 			} else {
 				event.getChannel().sendMessage("List is too big for Discord, sending as a text file.").queue();
-				FileUpload file = FileUpload.fromData(suggestion.getFile(serverID), "image.png");
+				FileUpload file = FileUpload.fromData(suggestion.getFile(serverID), "suggestions.txt");
 				event.getChannel().sendFiles(Collections.singleton(file)).queue();
+				try {
+					file.close();
+				} catch (IOException e) {
+				}
 			}
 		}
 		if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "removesuggestion ") && !event.getAuthor().isBot() && (event.getMember().hasPermission(Permission.ADMINISTRATOR) || event.getMember().hasPermission(Permission.MANAGE_SERVER)) && suggCmd.equals("1")) {

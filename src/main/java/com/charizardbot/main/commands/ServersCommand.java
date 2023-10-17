@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.utils.FileUpload;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,8 +61,13 @@ public void onMessageReceived (MessageReceivedEvent event) {
 		   Main.logger.info("Error, could not write to file servers.txt");
 	    }
 		}
-		FileUpload fileToUp = FileUpload.fromData(file, "servers.txt");
-		event.getChannel().sendFiles(Collections.singleton(fileToUp)).queue();
+					event.getChannel().sendFiles(Collections.singleton(
+						FileUpload.fromStreamSupplier("servers.txt", () -> {
+							try {
+								return new FileInputStream("servers.txt");
+							} catch (Exception e) {return null;}
+					})
+					)).queue();
 	 }
 	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "serverinfo") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
 //253313100613156864
