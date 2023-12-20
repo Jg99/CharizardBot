@@ -36,7 +36,7 @@ import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 public class Main {
-	public static final String VERSION = "5.0.0b3";
+	public static final String VERSION = "5.0.0.20231220";
 	public static String filterDB = "";
 	public static File chatFilter;
 	public static File nicknameFile = new File("nick_blacklist.txt");
@@ -46,7 +46,9 @@ public class Main {
 	public static String ownerNick = ".jems";
 	public static String table = "";
 	public static File VALUE_CSV;
+	public static File MONSTRO_VALUE_CSV;
 	public static String VALUE_TABLE = "";
+	public static String MONSTRO_VALUE_TABLE = "";
 	public static String lastUpdated = "";
 	public static String PREFIX = "!";
 	public static InputStream input = null;
@@ -67,7 +69,6 @@ public class Main {
 	public static String XBAN_SERVERS = "";
 	public static String XBAN_ADMINS = "";
 	public static String XBAN_BANSDB = "";
-	public static String VG_WHITELIST = "";
 	public static String LOGGING_CFG = "";
 	public static String NICK_BL = "";
 	public static MessageCache msgCache;
@@ -108,9 +109,9 @@ public class Main {
 			System.setProperty("log4j2.configurationFile", logFileConfig.toPath().toString());
 			logger = LogManager.getLogger(Main.class);
 			/**
-			 * CharizardBot version 4
+			 * CharizardBot version 5
 			 * Copyleft James the Meme Man.
-			 * This is a super dank bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
+			 * This is a bot that includes Wizard101 specific stuff, Pokemon, Clash of Clans, GIF searching, and more!
 			 * license: GNU GPL version 2
 			 * Credit: Dewey (website design), Mr. Blue (previous hosting), Gamma's Trading Post Patreon Supporters for helping fund hosting.
 			 * Products with their full source used in this bot:
@@ -168,17 +169,7 @@ public class Main {
 				logger.info("xbanadmins.txt does not exist");
 			}
 			/**Cross ban list. saving all of the previous bans and reloading */
-			File vgwl = new File("vgwhitelist.txt");
-			if (vgwl.exists()) {
-				Scanner fileScan = new Scanner(vgwl);
-				while (fileScan.hasNextLine()) {
-					VG_WHITELIST+= fileScan.nextLine() + "\n";
-				}
-				logger.info("Loading vgwhitelist.txt");
-				fileScan.close();
-			} else {
-				logger.info("vgwhitelist.txt does not exist");
-			}
+
 			File pastbans = new File("pastBans.txt");
 			if (pastbans.exists()) {
 				Scanner fileScan = new Scanner(pastbans);
@@ -259,7 +250,7 @@ public class Main {
 			}
 			VALUE_CSV = new File("value_guides.csv");
 			if (VALUE_CSV.exists()) {
-				System.out.println("CSV exists!");
+				System.out.println("Value Guide CSV exists!");
 				List<CSVRecord> csvmap = CSVParse.getCSVResults(VALUE_CSV);
 				int i = csvmap.size();
 				String o = "";
@@ -271,6 +262,21 @@ public class Main {
 				VALUE_TABLE = o;
 			} else {
 				logger.info("No CSV for Value Guides is provided.");
+			}
+			MONSTRO_VALUE_CSV = new File("monstro_values.csv");
+			if (MONSTRO_VALUE_CSV.exists()) {
+				System.out.println("Monstrology Value Guide CSV exists!");
+				List<CSVRecord> csvmap = CSVParse.getCSVResults(MONSTRO_VALUE_CSV);
+				int i = csvmap.size();
+				String o = "";
+				for (int a = 0; a < i; a++) {
+				String[] value = csvmap.get(a).toString().split("values=");
+				o += value[1] + "\n";
+				}
+				o = o.replaceAll("[\\[\\]]","");
+				MONSTRO_VALUE_TABLE = o;
+			} else {
+				logger.info("No CSV for Monstrology Value Guides is provided.");
 			}
 			if (discordtoken.equals("")) {
 				System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");

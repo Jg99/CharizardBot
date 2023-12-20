@@ -4,8 +4,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.awt.Color;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.util.Random;
 import java.util.Scanner;
 import com.charizardbot.main.Main;
@@ -18,19 +16,17 @@ public class ValueGuides extends ListenerAdapter {
 
         try {
             String VALUE_TABLE = Main.VALUE_TABLE;
+            String MONSTRO_VALUE_TABLE = Main.MONSTRO_VALUE_TABLE;
             String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 	    	if (prefix == null)
 	    		prefix = "!";
-            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "value")) {
+            //Look up the first value that matches the search
+            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "value") && !VALUE_TABLE.isEmpty()) {
                 String isEnabled = "1";
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-     //           boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
-     //           if (!isWhitelisted) {
-     //               event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
-     //           }
-                if (isEnabled.equals("1")) {//&& isWhitelisted) {
+                if (isEnabled.equals("1")) {
                 String item = event.getMessage().getContentRaw().substring(7, event.getMessage().getContentRaw().length());
                 Scanner lineScan = new Scanner(VALUE_TABLE);
                 String final_item = "";
@@ -64,21 +60,71 @@ public class ValueGuides extends ListenerAdapter {
                     embed.addField("Housing: ", item_split[3], true);
                 }
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.\nPlease note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+            	embed.setFooter("CharizardBot Team, Gamma's Trading Post, Anima Chambers.\n" + //
+            	        " https://gtp.gg or https://www.animachambers.org/.\n" + //
+            	        "Please note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
             }
-            //SEARCH command - Searches for multiple values with the same name.
-            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "search")) {
+            // MONSTRO VG command - Monstrology is more detailed, so a separate command and separate CSV will be used
+            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "monstro") && !MONSTRO_VALUE_TABLE.isEmpty()) {
                 String isEnabled = "1";
                 if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
                     isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
                     }
-       //         boolean isWhitelisted = Main.VG_WHITELIST.contains(event.getGuild().getId());//check the whitelist for value guides
-       //         if (!isWhitelisted) {
-       //             event.getChannel().sendMessage("Server is not whitelisted. Please contact the bot's owner for details.").queue();
-       //         }
-                if (isEnabled.equals("1")) {// && isWhitelisted) {
+                if (isEnabled.equals("1")) {
+                String item = event.getMessage().getContentRaw().substring(9, event.getMessage().getContentRaw().length());
+                Scanner lineScan = new Scanner(MONSTRO_VALUE_TABLE);
+                String final_item = "";
+                while (lineScan.hasNextLine()) {
+                    String token = lineScan.nextLine();
+                    String[] tokenSpl = token.split(",");
+                    if (tokenSpl[0].toLowerCase().startsWith(item.toLowerCase())) {
+                        final_item = token;
+                    }
+                }
+                lineScan.close();
+                String[] item_split = final_item.split(",");
+                EmbedBuilder embed = new EmbedBuilder();
+                embed.setTitle("Wizard101 Monstrology Value Guides");
+                Random rand = new Random();
+                embed.addField("Creature:", item_split[0], false);
+                if (item_split.length > 1) { 
+                embed.addField("World:", item_split[1], false);
+                embed.addField("Location:", item_split[2], true);
+                embed.addField("Rank:", item_split[3], true);
+                embed.addField("School:", item_split[4], true);
+                embed.addField("Summon:", item_split[5], true);
+                embed.addField("House Guest: ", item_split[6], true);
+                embed.addField("Identical Guest Options: ", item_split[7], true);
+                embed.addField("Expel:", item_split[8], true);
+                embed.addField("Extract Type:", item_split[9], true);
+                embed.addField("Tag:", item_split[10], true);
+                
+                        if (item_split[10].contains("Seasonal")) {
+                             embed.addField("Additional Notes","The left value is the seasonal value, the right value is the normal value.", false);
+                        } else if (item_split[10].contains("NoTome")) {
+                            embed.addField("Additional Notes", "This creature can have its animus extracted, but no items can be made yet as the tome entry is not properly implemented in the game.", false);
+                        }  else if (item_split[10].contains("AEB")) {
+                            embed.addField("Additional Notes", "Some or all of this creature's items cannot be made due to a bug. The tome will take your animus and produce no item.", false);
+                        }  else if (item_split[10].contains("Upcoming")) {
+                            embed.addField("Additional Notes", "This creature is slated to be extractable in an upcoming update that is currently on Test Realm. These items cannot be created in Live Realm at this time and prices are preliminary, and HIGHLY subject to change based on community data.", false);
+                        }
+                }
+                embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+            	embed.setFooter("CharizardBot Team, Gamma's Trading Post, Anima Chambers.\n" + //
+            	        " https://gtp.gg or https://www.animachambers.org/.\n" + //
+            	        "Please note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
+            }
+            }
+            //SEARCH command - Searches for multiple values with the same name.
+            if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "search") && !VALUE_TABLE.isEmpty()) {
+                String isEnabled = "1";
+                if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
+                    isEnabled = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());
+                    }
+                if (isEnabled.equals("1")) {
                     String item = event.getMessage().getContentRaw().substring(8, event.getMessage().getContentRaw().length());
                     if (item.length() < 2) {
                     event.getChannel().sendMessage("Error, please specify 2 or more letters in your query.").queue();
@@ -121,55 +167,11 @@ public class ValueGuides extends ListenerAdapter {
                 }
                 lineScan.close();
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-            	embed.setFooter("CharizardBot Team, Gamma's Trading Post. https://gtp.gg.\nPlease note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
+            	embed.setFooter("CharizardBot Team, Gamma's Trading Post, Anima Chambers.\n https://gtp.gg or https://www.animachambers.org/.\nPlease note some values may not be up-to-date with constantly changing supply/demand and may be undergoing an audit. For more info and a list of these items, see the main VG spreadsheet located in #value-guides", "https://cdn.discordapp.com/attachments/382377954908569600/463038441547104256/angery_cherizord.png");
                 event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
             }
         }
-            if (event.getMessage().getContentRaw().contains(prefix + "addvgserver")) {
-                String whitelistedUsers = "228736231335264256\n184534810369196032\n115305611842945032\n308060090739720195";
-                if (whitelistedUsers.contains(event.getAuthor().getId())) {
-                    String[] split = event.getMessage().getContentRaw().split(prefix + "addvgserver ");
-                    String serverID = split[1];
-                    String servers = Main.VG_WHITELIST;
-                    if (servers.contains(serverID)) {
-                        event.getChannel().sendMessage("Server is already whitelisted for value guides").queue();
-                    } else {
-                        servers += serverID + "\n";
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("vgwhitelist.txt"));
-                        writer.write(servers);
-                        writer.close();
-                        Main.VG_WHITELIST= servers;
-                        event.getChannel().sendMessage("Added the server to the value guides whitelist").queue();
-                    }
-                }
-            }
-            if (event.getMessage().getContentRaw().startsWith(prefix + "remvgserver")) {
-                String whitelistedUsers = "228736231335264256\n184534810369196032\n115305611842945032\n308060090739720195";
-                if (whitelistedUsers.contains(event.getAuthor().getId())) {
-                    String[] split = event.getMessage().getContentRaw().split(prefix + "remvgserver ");
-                    String serverID = split[1];
-                    String servers = Main.VG_WHITELIST;
-                    String[] lines = servers.split("\n");
-                    for (int i = 0; i < lines.length; i++) {
-                        if (lines[i].contains(serverID)) {
-                            lines[i] = "";
-                        }
-                    }
-                    StringBuilder svList = new StringBuilder();
-                    for (String s : lines) {
-                        if (!s.equals("")) {
-                            svList.append(s).append("\n");
-                        }
-                    }
-                    servers = svList.toString();
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("vgwhitelist.txt"));
-                    writer.write(servers);
-                    writer.close();
-                    Main.VG_WHITELIST = servers;
-                    event.getChannel().sendMessage("Removed the server from the value guides whitelist.").queue();
-                }
-            }
         } catch (Exception e) {
             Main.logger.info("WARN: Exception in the ValueGuides command.");
             e.printStackTrace();

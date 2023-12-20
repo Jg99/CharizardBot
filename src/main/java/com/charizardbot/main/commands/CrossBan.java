@@ -106,13 +106,13 @@ public class CrossBan extends ListenerAdapter {
                                     } catch (Exception e) {
                                         String invalidBan = svID;
                                         System.out.println("Invalid ban. Server: " + event.getJDA().getGuildById(invalidBan).getName());
-                                        continue;
+                                        continue; 
                                     }
                                 }
                                 else
                                     {
                                         Main.logger.info("Invalid Server: " +userID + " could not be banned in " + svID + ".");
-                                        
+                                            
                                         continue;
                                     }
                             }

@@ -69,7 +69,13 @@ restarted, you will have to manually keep track and then do a reroll.
 - Update dependencies, JDA 5.0b3 and okio3
 - Fix pokedex command, some newer pokemon don't have sprite data yet and return as "null" which would make the command fail.
 
-5.0.0.b3 - 2023-x-x
+5.0.0.b3 - 2023
 - Edit comments in Main
 - Tournament command update the level part to use regex instead
 - update dependencies, JDA 5.0b8 and others.
+
+5.0.0.20231220
+- Update dependencies, JDA 5 beta 18
+- Value Guides - Monstrology command for Wizard101 Value Guides
+- Remove unused code
+- 
