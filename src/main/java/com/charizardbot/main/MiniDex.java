@@ -87,7 +87,6 @@ private static String sprURL = "";
         HttpURLConnection connection = null;
         try {
             // Get request
-          //  connection = (HttpURLConnection) new URL(url).openConnection();
             connection = (HttpURLConnection) new URI(url).toURL().openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);

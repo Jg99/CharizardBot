@@ -399,7 +399,7 @@ public class Main {
 				api.addEventListener(new TenorSearch());
 				api.addEventListener(new SuggestionCommand());
 				api.addEventListener(new CoCCmds());
-				api.addEventListener(new WizSchedule());
+		//		api.addEventListener(new WizSchedule()); //currently no longer used
 				api.addEventListener(new ChatFilterHandler());
 				api.addEventListener(new MainCommands());
 				api.addEventListener(new MiscCommands());
