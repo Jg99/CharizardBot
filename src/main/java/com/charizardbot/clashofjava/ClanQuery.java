@@ -16,6 +16,7 @@ package com.charizardbot.clashofjava;
 import Exceptions.BadRequestException;
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import org.json.JSONObject;
 
@@ -24,7 +25,7 @@ public abstract class ClanQuery {
     
     private static int maxResults = 3;
     
-    public static ArrayList<Clan> queryName(String clanName) throws ClashException, IOException{
+    public static ArrayList<Clan> queryName(String clanName) throws ClashException, IOException, URISyntaxException {
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -46,7 +47,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryWarFrequency(String clanWarFrequency) throws ClashException, IOException{
+    public static ArrayList<Clan> queryWarFrequency(String clanWarFrequency) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -68,7 +69,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryLocationID(String locationID) throws ClashException, IOException{
+    public static ArrayList<Clan> queryLocationID(String locationID) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -87,7 +88,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryMinimumMembers(String minMembers) throws ClashException, IOException{
+    public static ArrayList<Clan> queryMinimumMembers(String minMembers) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -106,7 +107,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryMaximumMembers(String maxMembers) throws ClashException, IOException{
+    public static ArrayList<Clan> queryMaximumMembers(String maxMembers) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -125,7 +126,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryMinimumClanTrophies(String minTrophies) throws ClashException, IOException{
+    public static ArrayList<Clan> queryMinimumClanTrophies(String minTrophies) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();
@@ -144,7 +145,7 @@ public abstract class ClanQuery {
     return resultList;
     }
     
-    public static ArrayList<Clan> queryMinimumClanLevel(String minClanLevel) throws ClashException, IOException{
+    public static ArrayList<Clan> queryMinimumClanLevel(String minClanLevel) throws ClashException, IOException, URISyntaxException{
         
         JSONObject data = null;
         ArrayList<Clan> resultList = new ArrayList<Clan>();

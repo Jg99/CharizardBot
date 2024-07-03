@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,7 +26,7 @@ public class TenorSearch extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
 
-	// TOGGLE COMMANDS
+	// TOGGLE COMMANDS	
 		try {
 	    	String prefix = Main.config.getProperty(event.getGuild().getId().toString());
 	    	if (prefix == null)
@@ -117,7 +117,8 @@ public class TenorSearch extends ListenerAdapter {
         HttpURLConnection connection = null;
         try {
             // Get request
-            connection = (HttpURLConnection) new URL(url).openConnection();
+           // connection = (HttpURLConnection) new URL(url).openConnection();
+			connection = (HttpURLConnection) new URI(url).toURL().openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("GET");

@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import org.json.JSONObject;
 /**MiniDex aka "Midoriya Dex" - Simple PokeAPI Query for basic information, mainly used for CharizardBot.
 *Copyleft 2021 James, Meme Man 2021#0820
@@ -87,7 +87,8 @@ private static String sprURL = "";
         HttpURLConnection connection = null;
         try {
             // Get request
-            connection = (HttpURLConnection) new URL(url).openConnection();
+          //  connection = (HttpURLConnection) new URL(url).openConnection();
+            connection = (HttpURLConnection) new URI(url).toURL().openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("GET");

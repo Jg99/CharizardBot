@@ -14,6 +14,7 @@ package com.charizardbot.clashofjava;
 
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class Clan {
     private String clanDescription;
     private ArrayList<ClanMember> clanMemberList = new ArrayList<ClanMember>();
     
-    public Clan(String clanTag) throws IOException, ClashException{
+    public Clan(String clanTag) throws IOException, ClashException, URISyntaxException{
         
         JSONObject data = API.performAPIRequest("clans/%s", clanTag);
         
@@ -88,7 +89,7 @@ public class Clan {
         
     }
     
-    Clan(JSONObject obData) throws IOException, ClashException{
+    Clan(JSONObject obData) throws IOException, ClashException, URISyntaxException{
         
         JSONObject data = API.performAPIRequest("clans/%s", obData.getString("tag"));
         

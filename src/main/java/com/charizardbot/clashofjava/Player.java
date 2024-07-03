@@ -17,6 +17,7 @@ package com.charizardbot.clashofjava;
 
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,7 +58,7 @@ public class Player {
     private ArrayList<PlayerHero> heroes = new ArrayList<PlayerHero>();
     private ArrayList<PlayerSpell> spells = new ArrayList<PlayerSpell>();
     
-    public Player(String playerTag) throws IOException, ClashException{
+    public Player(String playerTag) throws IOException, ClashException, URISyntaxException{
     
         try{
             data = API.performAPIRequest("players/%s", playerTag);

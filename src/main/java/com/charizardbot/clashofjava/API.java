@@ -23,7 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 
@@ -51,7 +52,7 @@ public abstract class API {
         return new String(out.toByteArray());
     }
     
-    public static JSONObject performAPIRequest(String format, String... arguments) throws IOException, ClashException {
+    public static JSONObject performAPIRequest(String format, String... arguments) throws IOException, ClashException, URISyntaxException {
     	String arguments2 = "";
         for (int i = 0; i < arguments.length; i++) {
             arguments[i] = URLEncoder.encode(arguments[0], "UTF-8");
@@ -60,7 +61,7 @@ public abstract class API {
         String suffix = String.format(format, arguments2);
         suffix = suffix.replace(" ", "%20");
         try {
-        	HttpURLConnection connection = (HttpURLConnection) new URL(API_BASE + API_VERSION + "/" + suffix).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URI(API_BASE + API_VERSION + "/" + suffix).toURL().openConnection();
             //System.out.println("URL: " + API_BASE + API_VERSION + "/" + suffix);
             connection.setRequestMethod("GET");
             connection.addRequestProperty("Accept", "application/json");

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,7 +71,7 @@ public class MainCommands extends ListenerAdapter {
             	if (event.getMessage().getContentRaw().equals(prefix + "updatestats") && event.getAuthor().getId().equals(Main.OWNER_ID))
             	{
             		// let's make our own json post to discordbotlist.com
-            		URL url = new URL("https://discordbotlist.com/api/bots/428634701771702282/stats");
+            		URL url = new URI("https://discordbotlist.com/api/bots/428634701771702282/stats").toURL();
             		String token = "Bot 5ea56c2a32344d8f880c6559575ce4f03cd3cb3411fe857550c6e7469ab6f824";
             		HttpURLConnection con = (HttpURLConnection)url.openConnection();
             		con.setRequestMethod("POST");
@@ -171,7 +172,9 @@ public class MainCommands extends ListenerAdapter {
             	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "restartbot") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
             		String shdir = new File("").getAbsolutePath();
             	 	try {
-                     	Process proc = Runtime.getRuntime().exec(shdir + "/restartbot.sh /"); //Bot restart script file.
+                     //	Process proc = Runtime.getRuntime().exec(shdir + "/restartbot.sh /"); //Bot restart script file.
+						Process proc = new ProcessBuilder(shdir + "/restartbot.sh /", "").start();
+
                      	BufferedReader read = new BufferedReader(new InputStreamReader(
                              proc.getInputStream()));
                      	try {

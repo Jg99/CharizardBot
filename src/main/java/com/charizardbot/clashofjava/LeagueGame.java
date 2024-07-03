@@ -13,6 +13,7 @@ package com.charizardbot.clashofjava;
 
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import org.json.JSONObject;
 
@@ -68,7 +69,7 @@ public class LeagueGame {
     private ArrayList<LeagueWar> roundList = new ArrayList<LeagueWar>();
     
     
-    LeagueGame(String tag) throws IOException, ClashException{
+    LeagueGame(String tag) throws IOException, ClashException, URISyntaxException{
         
         try{
         JSONObject data = API.performAPIRequest("clans/%s/currentwar/leaguegroup", tag);

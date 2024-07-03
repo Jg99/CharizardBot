@@ -13,6 +13,7 @@ package com.charizardbot.clashofjava;
 
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ClanWar {
     
     
     
-    ClanWar(String clanTagData) throws IOException, ClashException{
+    ClanWar(String clanTagData) throws IOException, ClashException, URISyntaxException{
         
         data = API.performAPIRequest("clans/%s/currentwar", clanTagData);
         

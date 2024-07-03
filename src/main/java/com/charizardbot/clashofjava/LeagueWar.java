@@ -14,6 +14,7 @@ package com.charizardbot.clashofjava;
 
 import Exceptions.ClashException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class LeagueWar {
         
     }
     
-    LeagueWar(String warTag) throws IOException, ClashException{
+    LeagueWar(String warTag) throws IOException, ClashException, URISyntaxException{
         
         data = API.performAPIRequest("clanwarleagues/wars/%s", warTag);
         state = data.getString("state");

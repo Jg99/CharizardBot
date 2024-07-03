@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import org.json.JSONObject;
 /**
  * Random Joke commands
@@ -62,7 +62,7 @@ public class RandomJoke extends ListenerAdapter {
         HttpURLConnection connection = null;
         try {
             // Get request
-            connection = (HttpURLConnection) new URL(url).openConnection();
+            connection = (HttpURLConnection) new URI(url).toURL().openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("GET");
