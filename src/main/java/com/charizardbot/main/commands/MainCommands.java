@@ -172,7 +172,6 @@ public class MainCommands extends ListenerAdapter {
             	if (event.getMessage().getContentRaw().toLowerCase().startsWith(prefix + "restartbot") && event.getAuthor().getId().equals(Main.OWNER_ID)) {
             		String shdir = new File("").getAbsolutePath();
             	 	try {
-                     //	Process proc = Runtime.getRuntime().exec(shdir + "/restartbot.sh /"); //Bot restart script file.
 						Process proc = new ProcessBuilder(shdir + "/restartbot.sh", "").start();
 
                      	BufferedReader read = new BufferedReader(new InputStreamReader(
