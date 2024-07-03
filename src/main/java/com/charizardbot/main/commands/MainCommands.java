@@ -173,7 +173,7 @@ public class MainCommands extends ListenerAdapter {
             		String shdir = new File("").getAbsolutePath();
             	 	try {
                      //	Process proc = Runtime.getRuntime().exec(shdir + "/restartbot.sh /"); //Bot restart script file.
-						Process proc = new ProcessBuilder(shdir + "/restartbot.sh /", "").start();
+						Process proc = new ProcessBuilder(shdir + "/restartbot.sh", "").start();
 
                      	BufferedReader read = new BufferedReader(new InputStreamReader(
                              proc.getInputStream()));
