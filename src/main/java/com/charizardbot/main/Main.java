@@ -8,15 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.sql.Date;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
-import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
+//import java.util.TimeZone;
+//import java.util.Timer;
+//import java.util.TimerTask;
 import java.util.UUID;
 import com.charizardbot.main.commands.*;
 import org.apache.commons.csv.CSVRecord;
@@ -282,7 +282,7 @@ public class Main {
 				System.out.println("Please specify a token by placing it in \"token.txt\" in the main directory.");
 				System.exit(0);
 			}
-			KITableCrawler crawler = new KITableCrawler(); //scrapes the Wizard101 PvP tournament website
+		//	KITableCrawler crawler = new KITableCrawler(); //scrapes the Wizard101 PvP tournament website
 			//Chat Filter & Config File
 			chatFilter = new File(filterFile);
 			File configFile = new File("server_config.cfg");
@@ -334,6 +334,7 @@ public class Main {
 				}
 			}
 			//Crawl KI Wizard101 PvP every 30 minutes.
+			/*
 			Timer crawltimer = new Timer();
 			crawltimer.schedule(new TimerTask() {
 				public void run() {
@@ -354,7 +355,7 @@ public class Main {
 					}
 				}
 			}, 5000, 1800000); //We crawl every 30 minutes because we don't need to update it very frequently.
-
+*/
 			//JDA API setup
 			try {
 				String activity = "";
