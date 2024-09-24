@@ -194,7 +194,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
                     embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
-                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setImage(posts.get(rPost).getThumbnail());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 } else if ((!event.getChannel().asTextChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
@@ -254,19 +254,21 @@ public class RedditCommands extends ListenerAdapter {
                 .posts()
                 .limit(200)
                 .sorting(subSort) // sorted posts
-                .timePeriod(TimePeriod.ALL) // of all time
+                .timePeriod(TimePeriod.WEEK) // of all time
                 .build();
                 Random rand = new Random();
                 Listing<Submission> posts = paginator.next();
+                
                 int rPost = rand.nextInt(posts.size());
                 if (event.getChannel().asTextChannel().isNSFW() == true && posts.get(rPost).isNsfw() && redditNsfw.equals("1")) {
+                    
                     EmbedBuilder embed = new EmbedBuilder();
                     embed.setTitle(sortMsg + posts.get(rPost).getSubreddit(), posts.get(rPost).getUrl());
                     embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
                     embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
-                    embed.setImage(posts.get(rPost).getUrl());
-                    embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+                    embed.setImage(posts.get(rPost).getThumbnail());
+                    embed.setColor(new Color(rand.nextInt(  255), rand.nextInt(255), rand.nextInt(255)));
                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 } else if ((!event.getChannel().asTextChannel().isNSFW() || redditNsfw.equals("0")) && posts.get(rPost).isNsfw()) {
                     event.getChannel().sendMessage("Post is NSFW, channel is not NSFW or nsfw flag is set to disable.").queue();
@@ -276,7 +278,7 @@ public class RedditCommands extends ListenerAdapter {
                     embed.addField(posts.get(rPost).getTitle(), "By: u/" + posts.get(rPost).getAuthor(), false);
                     embed.addField("Comments: ", posts.get(rPost).getCommentCount() + "", false);
                     embed.addField("Comments Link:", "https://reddit.com" + posts.get(rPost).getPermalink(), false);
-                    embed.setImage(posts.get(rPost).getUrl());
+                    embed.setImage(posts.get(rPost).getThumbnail());
                     embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                     event.getChannel().sendMessageEmbeds(embed.build()).queue();
                 }
