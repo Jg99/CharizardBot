@@ -370,7 +370,7 @@ public class Main {
 				}
 				JDA api = JDABuilder.create(discordtoken, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MODERATION, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
 							.setChunkingFilter(ChunkingFilter.NONE)
-							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_PRESENCES)
+							.setDisabledIntents(GatewayIntent.GUILD_MESSAGE_TYPING, GatewayIntent.GUILD_INVITES, GatewayIntent.GUILD_EXPRESSIONS, GatewayIntent.GUILD_PRESENCES)
 							.setMemberCachePolicy(MemberCachePolicy.OWNER)
 							.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS, CacheFlag.ROLE_TAGS, CacheFlag.MEMBER_OVERRIDES, CacheFlag.EMOJI, CacheFlag.ONLINE_STATUS, CacheFlag.STICKER, CacheFlag.SCHEDULED_EVENTS)
 							.setActivity(Activity.customStatus(activity))
