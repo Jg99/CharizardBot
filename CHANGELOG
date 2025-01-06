@@ -92,3 +92,5 @@ restarted, you will have to manually keep track and then do a reroll.
 5.0.0.20240923
 - JDA 5.1.1
 - Update other dependencies
+5.0.0.20250106
+- Update dependencies
