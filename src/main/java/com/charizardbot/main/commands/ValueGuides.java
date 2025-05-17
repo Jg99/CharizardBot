@@ -90,16 +90,16 @@ public class ValueGuides extends ListenerAdapter {
                 Random rand = new Random();
                 embed.addField("Creature:", item_split[0], false);
                 if (item_split.length > 1) { 
-                embed.addField("World:", item_split[1], false);
-                embed.addField("Location:", item_split[2], true);
-                embed.addField("Rank:", item_split[3], true);
-                embed.addField("School:", item_split[4], true);
-                embed.addField("Summon:", item_split[5], true);
-                embed.addField("House Guest: ", item_split[6], true);
-                embed.addField("Identical Guest Options: ", item_split[7], true);
-                embed.addField("Expel:", item_split[8], true);
-                embed.addField("Extract Type:", item_split[9], true);
-                embed.addField("Tag:", item_split[10], true);
+                embed.addField("World:", item_split[1].toString(), false);
+                embed.addField("Location:", item_split[2].toString(), true);
+                embed.addField("Rank:", item_split[3].toString(), true);
+                embed.addField("School:", item_split[4].toString(), true);
+                embed.addField("Summon:", item_split[5].toString(), true);
+                embed.addField("House Guest: ", item_split[6].toString(), true);
+                embed.addField("Identical Guest Options: ", item_split[7].toString(), true);
+                embed.addField("Expel:", item_split[8].toString(), true);
+                embed.addField("Extract Type:", item_split[9].toString(), true);
+                embed.addField("Tag:", item_split[10].toString(), true);
                 
                         if (item_split[10].contains("Seasonal")) {
                              embed.addField("Additional Notes","The left value is the seasonal value, the right value is the normal value.", false);
@@ -138,27 +138,29 @@ public class ValueGuides extends ListenerAdapter {
                     String token = lineScan.nextLine();
                     String[] tokenSpl = token.split(",");
                     
-                    if (tokenSpl[0].toLowerCase().contains(item.toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table")) {
+                    if (tokenSpl[0].toLowerCase().contains(item.toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table 1")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
-                        embed.addField("Item:", item_split[0], false);
-                        if (item_split.length == 2) {
-                        embed.addField("Value (empowers):", item_split[1], true);
+                        embed.addField("Item:", item_split[0].toString(), false);
+                        if (item_split.length == 3) {
+                        embed.addField("Value (empowers):", item_split[1].toString(), true);
                         embed.addBlankField(true);
                         }
-                        if (item_split.length == 3) {
+                        if (item_split.length == 4) {
                             if (item_split[1].matches(".*[a-z].*")) {
-                                embed.addField("School:", item_split[1], true);
+                                embed.addField("School:", item_split[1].toString(), true);
                             } else {
-                                embed.addField("Rank:", item_split[1], true);
+                                embed.addField("Rank:", item_split[1].toString(), true);
                             }
                             embed.addField("Value (empowers):", item_split[2], true);
                         }
-                        if (item_split.length == 4) {
-                            embed.addField("Summon:", item_split[1], true);
-                            embed.addField("Expel: ", item_split[2], true);
-                            embed.addField("Housing: ", item_split[3], true);
+                        if (item_split.length == 5) {
+                            embed.addField("Summon:", item_split[1].toString(), true);
+                            embed.addField("Expel: ", item_split[2].toString(), true);
+                            embed.addField("Housing: ", item_split[3].toString(), true);
                         }
+                            embed.addField("Tag:", item_split[item_split.length - 1].toString(), true);
+                            
                         if (embed.getFields().size() >= 7) {
                             embed.addField("For more results", "Please refine your search if your item isn't on this list.", false);
                             break;

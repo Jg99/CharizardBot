@@ -94,3 +94,8 @@ restarted, you will have to manually keep track and then do a reroll.
 - Update other dependencies
 5.0.0.20250106
 - Update dependencies
+5.0.0.20250226
+- Update dependencies
+5.0.0.20250516
+- Update dependencies
+- Add tag to Value Guides regular (such as adding an outdated tag to an item)
