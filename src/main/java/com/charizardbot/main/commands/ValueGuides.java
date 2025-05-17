@@ -43,10 +43,10 @@ public class ValueGuides extends ListenerAdapter {
                 embed.setTitle("Wizard101 Value Guides");
                 Random rand = new Random();
                 embed.addField("Item:", item_split[0], false);
-                if (item_split.length == 2) {
-                embed.addField("Value:", item_split[1], false);
-                }
                 if (item_split.length == 3) {
+                    embed.addField("Value:", item_split[1], false);
+                }
+                if (item_split.length == 4) {
                     if (item_split[1].matches(".*[a-z].*")) {
                         embed.addField("School:", item_split[1], false);
                     } else {
@@ -54,11 +54,13 @@ public class ValueGuides extends ListenerAdapter {
                     }
                     embed.addField("Value (empowers):", item_split[2], false);
                 }
-                if (item_split.length == 4) {
+                if (item_split.length == 5) {
                     embed.addField("Summon:", item_split[1], true);
                     embed.addField("Expel: ", item_split[2], true);
                     embed.addField("Housing: ", item_split[3], true);
                 }
+                embed.addField("Tag:", item_split[item_split.length - 1].toString(), true);
+
                 embed.setColor(new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
             	embed.setFooter("CharizardBot Team, Gamma's Trading Post, Anima Chambers.\n" + //
             	        " https://gtp.gg or https://www.animachambers.org/.\n" + //
@@ -141,6 +143,7 @@ public class ValueGuides extends ListenerAdapter {
                     if (tokenSpl[0].toLowerCase().contains(item.toLowerCase()) && embed.getFields().size() < 23 && !token.contains("Table 1")) {
                         final_item = token;
                         String[] item_split = final_item.split(",");
+                        System.out.println(item_split.length);
                         embed.addField("Item:", item_split[0].toString(), false);
                         if (item_split.length == 3) {
                         embed.addField("Value (empowers):", item_split[1].toString(), true);
@@ -159,7 +162,7 @@ public class ValueGuides extends ListenerAdapter {
                             embed.addField("Expel: ", item_split[2].toString(), true);
                             embed.addField("Housing: ", item_split[3].toString(), true);
                         }
-                            embed.addField("Tag:", item_split[item_split.length - 1].toString(), true);
+                        embed.addField("Tag:", item_split[item_split.length - 1].toString(), true);
                             
                         if (embed.getFields().size() >= 7) {
                             embed.addField("For more results", "Please refine your search if your item isn't on this list.", false);
