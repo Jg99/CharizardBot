@@ -35,6 +35,8 @@ import net.dean.jraw.http.OkHttpNetworkAdapter;
 import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 public class Main {
 	public static final String VERSION = "5.0.0.20250516";
 	public static String filterDB = "";
@@ -333,6 +335,8 @@ public class Main {
 					}
 				}
 			}
+			// Make db directory if it doesn't exist
+			Files.createDirectories(Paths.get("db/"));
 			//Crawl KI Wizard101 PvP every 30 minutes.
 			/*
 			Timer crawltimer = new Timer();
