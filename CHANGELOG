@@ -99,3 +99,7 @@ restarted, you will have to manually keep track and then do a reroll.
 5.0.0.20250516
 - Update dependencies
 - Add tag to Value Guides regular (such as adding an outdated tag to an item)
+
+5.0.0.20250611
+- Update dependencies
+- Move suggestions DB text files into db/
