@@ -25,10 +25,10 @@ private  Properties statusDB = new Properties();
  */
 	public Suggestions (String serverID)
 	{
-	this.dbFile = new File(serverID + "_suggestiondb.txt");
-	this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-	this.fileName = serverID + "_suggestiondb.txt";
-	this.statusFileName = serverID + "_status_suggestiondb.txt";
+	this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+	this.statusdbFile = new File ("db/" + serverID + "_status_suggestiondb.txt");
+	this.fileName = "db/" + serverID + "_suggestiondb.txt";
+	this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 	if (!dbFile.exists())
 	{
 		System.out.println("Suggestion Database for server id: " + serverID + " does not exist. Creating it now.");
@@ -50,7 +50,7 @@ private  Properties statusDB = new Properties();
 	}
 	public void loadDatabase(String serverID) {
 		try {
-			this.fileName = serverID + "_suggestiondb.txt";
+			this.fileName = "db/" + serverID + "_suggestiondb.txt";
 			input = new FileInputStream(fileName);
 
 			// load a properties file
@@ -68,7 +68,7 @@ private  Properties statusDB = new Properties();
 		}
 		//suggestions (approve/deny/none) DB
 		try {
-			this.statusFileName = serverID + "_status_suggestiondb.txt";
+			this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 			input = new FileInputStream(statusFileName);
 
 		// load a properties file
@@ -88,10 +88,10 @@ private  Properties statusDB = new Properties();
 	public String getSuggestion(String suggestionID, String serverID) {
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		String suggestions = "";
 		suggestions += suggestionDB.getProperty(suggestionID);
@@ -100,10 +100,10 @@ private  Properties statusDB = new Properties();
 	public void addSuggestion(String suggestionText, String serverID) {
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		try {
 			Random rand = new Random();
@@ -127,10 +127,10 @@ private  Properties statusDB = new Properties();
 	public void removeSuggestion(String suggestionID, String serverID) {
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		try {
 			output = new FileOutputStream(fileName);
@@ -149,10 +149,10 @@ private  Properties statusDB = new Properties();
 	public String listSuggestions(String serverID) {
 		suggestionDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		String suggestions = "";
 	    Enumeration<String> suggestionsList = (Enumeration<String>) suggestionDB.propertyNames();
@@ -167,15 +167,15 @@ private  Properties statusDB = new Properties();
 		return sugID;
 	}
 	public File getFile(String serverID) {
-		return new File(serverID + "_suggestiondb.txt");
+		return new File("db/" + serverID + "_suggestiondb.txt");
 	}
 	public void approveSuggestion(String suggestionID, String serverID) {
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		try {
 			output = new FileOutputStream(statusFileName);
@@ -190,10 +190,10 @@ private  Properties statusDB = new Properties();
 	public void denySuggestion(String suggestionID, String serverID){
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		try {
 			output = new FileOutputStream(statusFileName);
@@ -206,10 +206,10 @@ private  Properties statusDB = new Properties();
 	public String getSuggestionStatus(String suggestionID, String serverID) {
 		statusDB.clear();
 		suggestionDB.clear();
-		this.dbFile = new File(serverID + "_suggestiondb.txt");
-		this.statusdbFile = new File (serverID + "_status_suggestiondb.txt");
-		this.fileName = serverID + "_suggestiondb.txt";
-		this.statusFileName = serverID + "_status_suggestiondb.txt";
+		this.dbFile = new File("db/" + serverID + "_suggestiondb.txt");
+		this.statusdbFile = new File ("db/" + serverID + "_suggestiondb.txt");
+		this.fileName = "db/" + serverID + "_suggestiondb.txt";
+		this.statusFileName = "db/" + serverID + "_status_suggestiondb.txt";
 		loadDatabase(serverID);
 		return statusDB.getProperty(suggestionID);
 	}
