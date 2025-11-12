@@ -103,3 +103,7 @@ restarted, you will have to manually keep track and then do a reroll.
 5.0.0.20250611
 - Update dependencies
 - Move suggestions DB text files into db/
+5.0.0.20251111
+- Update JDA to v6
+- Refactor some code to reflect JDA 6
+- update deps

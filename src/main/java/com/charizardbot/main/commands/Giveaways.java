@@ -19,7 +19,10 @@ public class Giveaways extends ListenerAdapter {
        
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        String prefix = Main.config.getProperty(event.getGuild().getId().toString());
+        String prefix = "!";
+        if (event.isFromGuild()) {
+        prefix = Main.config.getProperty(event.getGuild().getId().toString());
+        }
     	if (prefix == null)
             prefix = "!";  
         if(event.getMessage().getContentRaw().split(" ")[0].equals(prefix + "giveawayhelp"))

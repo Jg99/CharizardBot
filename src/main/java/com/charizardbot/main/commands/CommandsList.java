@@ -1,14 +1,13 @@
 package com.charizardbot.main.commands;
 import java.awt.Color;
 import java.util.Random;
-
 import com.charizardbot.main.Main;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 public class CommandsList extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
 		if (event.isFromGuild()) {
@@ -64,7 +63,9 @@ public class CommandsList extends ListenerAdapter {
 				event.getChannel().sendMessage("Check your DMs! If you don't receive a message, please enable DMs!").queue();
 				event.getAuthor().openPrivateChannel().queue(channel ->{
 					try {
-					channel.sendMessageEmbeds(embed.build()).setActionRow(Button.link("https://charizardbot.com", "CharizardBot website")).queue();
+				//	channel.sendMessageEmbeds(embed.build()).setActionRow(Button.link("https://charizardbot.com", "CharizardBot website")).queue();
+					channel.sendMessageEmbeds(embed.build()).setComponents(
+						ActionRow.of(Button.link("https://charizardbot.com", "CharizardBot website"))).queue();
 					} catch (Exception e) {/*DM is probably blocked or disabled.*/}
 				});
 			}
