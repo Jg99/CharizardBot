@@ -107,3 +107,6 @@ restarted, you will have to manually keep track and then do a reroll.
 - Update JDA to v6
 - Refactor some code to reflect JDA 6
 - update deps
+
+5.0.0.20251209
+- Update dependencies
