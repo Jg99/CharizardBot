@@ -240,7 +240,7 @@ public class Main {
 			 * Tenor GIF token
 			 * Very high ratelimit, very few limits to API.
 			 * https://tenor.com/developer/
-			 */
+			 
 			File tenorToken = new File("tenor_token.txt");
 			if (tenorToken.exists()) {
 				Scanner fileScan = new Scanner(tenorToken);
@@ -249,7 +249,7 @@ public class Main {
 				fileScan.close();
 			} else {
 				logger.info("Please provide a valid Tenor token and place it in tenor_token.txt.");
-			}
+			}*/
 			VALUE_CSV = new File("value_guides.csv");
 			if (VALUE_CSV.exists()) {
 				System.out.println("Value Guide CSV exists!");
