@@ -110,3 +110,6 @@ restarted, you will have to manually keep track and then do a reroll.
 
 5.0.0.20251209
 - Update dependencies
+5.0.0.20260819
+- Update dependencies 
+- Remove Tenor GIF command due to API being removed

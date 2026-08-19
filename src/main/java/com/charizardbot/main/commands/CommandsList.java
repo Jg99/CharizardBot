@@ -32,9 +32,9 @@ public class CommandsList extends ListenerAdapter {
             			prefix + "pokequotes - Random pokemon quote from the bot.";
         		cmdListStr += "\n" + prefix + "imgursearch - Searches imgur for the top image from your query" +
         	", " + prefix + "randimgur - Randomly pick an image on imgur from a query." +
-        				",\n" + prefix + "gif - Searches Tenor for the top image from your query." + 
-        				", " + prefix + "randgif - Searches Tenor and returns a random image from the top 50 results." +
-        				", " + prefix + "suggest/ - Adds a suggestion for the Discord server if enabled.";
+        				//",\n" + prefix + "gif - Searches Tenor for the top image from your query." + 
+        				//",\n " + prefix + "randgif - Searches Tenor and returns a random image from the top 50 results." +
+        				",\n" + prefix + "suggest/ - Adds a suggestion for the Discord server if enabled.";
             	String wizCmd = "1";
             	if (Main.config.getProperty("wizCmds" + event.getGuild().getId().toString()) != null) {
             	wizCmd = Main.config.getProperty("wizCmds" + event.getGuild().getId().toString());

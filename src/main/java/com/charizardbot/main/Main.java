@@ -401,7 +401,6 @@ public class Main {
 				api.addEventListener(new PokemonQuoteCommand());
 				api.addEventListener(new ImgurSearch());
 				api.addEventListener(new ImgurToggle());
-				api.addEventListener(new TenorSearch());
 				api.addEventListener(new SuggestionCommand());
 				api.addEventListener(new CoCCmds());
 		//		api.addEventListener(new WizSchedule()); //currently no longer used
