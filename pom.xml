@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.charizardbot</groupId>
   <artifactId>CharizardBot</artifactId>
-  <version>5.0.0.20251209</version>
+  <version>5.0.0.20260823</version>
   <name>CharizardBot</name>
   <url>http://www.charizardbot.com</url>
   <properties>
@@ -62,7 +62,7 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.26.1</version>
     </dependency>
-  <dependency>
+ <!-- <dependency>
   <groupId>com.fasterxml.jackson.core</groupId>
   <artifactId>jackson-core</artifactId>
   <version>2.22.2</version>
@@ -76,7 +76,7 @@
   <groupId>com.fasterxml.jackson.core</groupId>
   <artifactId>jackson-databind</artifactId>
   <version>2.22.2</version>
-</dependency>
+</dependency>-->
 <dependency>
   <groupId>com.googlecode.json-simple</groupId>
   <artifactId>json-simple</artifactId>
